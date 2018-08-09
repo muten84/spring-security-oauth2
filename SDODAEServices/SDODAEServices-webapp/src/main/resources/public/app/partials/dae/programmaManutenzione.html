@@ -1,0 +1,59 @@
+<div id="programma{{$index}}" uib-accordion-group is-open="$last" ng-hide="prog.deleted">
+	<uib-accordion-heading>
+		<i class="fa fa-calendar  white"></i>
+		<span class="areas-accordion-heading"> Programma {{prog.tipoManutenzione}} scadenza ({{formatDate(prog.scadenzaDopo)}}) </span>
+		<span class="label label-danger-accordion-lighter span1" ng-hide="checkChildren('programma{{$index}}')">
+			<i class="fa fa-exclamation" aria-hidden="true"></i>
+		</span>
+		<span class="label label-warning-accordion-lighter span1" ng-show="prog.invalid">
+			<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+		</span>
+		<i class="pull-right fa fa-list-alt" uib-tooltip="Visualizza lo storico modifiche" ng-click="showHistoryProgramma(prog, $index)"
+		    style="font-size: 20px;" aria-hidden="true"></i>
+		<i class="pull-right fa fa-trash-o white" uib-tooltip="Elimina" ng-click="removeProgramma(prog, $index)" style="font-size: 20px;"></i>
+	</uib-accordion-heading>
+	<div class="row ">
+		<div class=" col-md-6">
+			<!--        <label-validated label="Intervallo tra Interventi" class="{'form-group': false, 'has-error':prog.intervallotraInterventi.$invalid}" name="intervallotraInterventi"></label-validated>
+            <input name="intervallotraInterventi" class="form-control" ng-model="prog.intervallotraInterventi" placeholder="Intervallo tra Interventi" ui-validate="{required: 'validate($value)'}"/>
+
+            <label-validated label="Durata" class="{'form-group': false, 'has-error':prog.durata.$invalid}" name="durata"></label-validated>
+            <input name="durata" class="form-control" ng-model="prog.durata" placeholder="Durata" ui-validate="{required: 'validate($value)'}"/>
+
+            <label-validated label="Stato" class="{'form-group': false, 'has-error':prog.stato.$invalid}" name="stato"></label-validated>
+            <input name="stato" class="form-control" ng-model="prog.stato" placeholder="Stato" ui-validate="{required: 'validate($value)'}"/>
+-->
+			<label>Tipo Manutenzione</label>
+			<label>{{prog.tipoManutenzione}}</label>
+		</div>
+		<div class=" col-md-6">
+
+			<label-validated label="Data Prossima Scadenza" class="{'form-group': false, 'has-error':prog.scadenzaDopo.$invalid}" name="scadenzaDopo"></label-validated>
+			<div class="input-group">
+				<input uib-datepicker-popup="dd/MM/yyyy" type="text" class="form-control" is-open="prog.popup.opened" datepicker-options="options"
+				    ng-model="prog.scadenzaDopo" placeholder="Inserisci data" name="scadenzaDopo" close-text="Chiudi" clear-text="Annulla"
+				    current-text="Oggi" alt-input-formats="altInputFormats" ui-validate="{required: 'validate($value)'}" />
+				<span class="input-group-btn">
+					<button class="btn btn-primary btn-calendar collapsed" type="button" ng-click="prog.popup.opened = true">
+						<span class="sr-only"></span>
+						<i class="fa fa-calendar-o"></i>
+					</button>
+				</span>
+			</div>
+			<!--           <label-validated label="Nota" class="{'form-group': false, 'has-error':prog.nota.$invalid}" name="nota"></label-validated>
+            <input name="nota" class="form-control" ng-model="prog.nota" placeholder="Nota" ui-validate="{required: 'validate($value)'}"/>
+    -->
+		</div>
+	</div>
+	<!--  <div class="row ">
+        <h3>Responsabile</h3>
+    </div>
+    <responsabile model="prog.responsabile" open="true" prefix="prog{{$index}}"></responsabile> -->
+
+	<div class="row ">
+		<div class=" col-md-12">
+			<label>Note Manutenzione</label>
+			<textarea class="form-control" rows="5" ng-model="prog.nota" placeholder="Note"></textarea>
+		</div>
+	</div>
+</div>

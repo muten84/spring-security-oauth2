@@ -1,0 +1,32 @@
+<div class="infowindow" ng-non-bindable="">
+    <div class="row no-padding navigation">
+        <div class="col">
+            <h3>{{vm.selectedDae.nomeSede}}</h3>
+            <h2>{{ vm.selectedDae.gpsLocation.indirizzo.name }}{{vm.selectedDae.gpsLocation.civico? ", " :
+                ""}}{{vm.selectedDae.gpsLocation.civico}} </h2>
+            <h2>{{ vm.selectedDae.gpsLocation.comune.codiceIstat }}
+                {{vm.selectedDae.gpsLocation.comune.nomeComune? ", "
+                : ""}}{{ vm.selectedDae.gpsLocation.comune.nomeComune
+                }}
+                {{ vm.selectedDae.gpsLocation.localita? "- " + vm.selectedDae.gpsLocation.localita.name: ""}}
+                {{vm.selectedDae.gpsLocation.comune.provincia.nomeProvincia? " (" : ""}}{{
+                vm.selectedDae.gpsLocation.comune.provincia.nomeProvincia
+                }}{{vm.selectedDae.gpsLocation.comune.provincia.nomeProvincia? ")" : ""}}</h2>
+            <h2>{{ vm.selectedDae.ubicazione }}</h2>
+            <h2>{{vm.selectedDae.notediAccessoallaSede}}</h2>
+        </div>
+        <div class="col col-25">
+            <div class="row no-padding">
+                <div class="col no-padding">
+                    <div style="margin-bottom: 15px">
+                        <i ng-click="vm.goToState('app.daeDetail', vm.selectedDae)" class="dae-credits"></i>
+                    </div>
+                    <div style="margin-bottom: 15px">
+                        <i ng-click="vm.openMap(vm.selectedDae.gpsLocation.latitudine, vm.selectedDae.gpsLocation.longitudine)"
+                           class="dae-navigation"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

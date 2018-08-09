@@ -1,0 +1,75 @@
+<div class="modal-demo">
+	<script type="text/ng-template" id="modalSummary.html">
+        <!--<div class="modal-header">
+            <h3 class="modal-title" id="modal-title">Modifica giudizio di sintesi</h3>
+        </div>-->
+        <div class="modal-body" id="modal-body">            
+            <div class="wrapper">  
+                <!--scale="page-fit" -->
+               <div class="container">
+                 
+               <form editable-form name="editableForm" shown="true" oncancel="$ctrl.cancel()" onshow="$ctrl.setCurrentForm(editableForm)" onaftersave="$ctrl.saveSummary($data)">
+                 <fieldset class="form-group row">
+                	<div class="form-group row">      
+                    <label class="col-sm-1 col-form-label">Luogo: </span>                    
+                    <span  class="col-sm-2" editable-ui-select="$ctrl.ev.place" data-e-name="place" name="place" data-e-ng-model="$ctrl.ev.place"
+                        data-e-style="min-width:200px;">
+                        {{ev.pathology | limitTo: 3}}
+                        <editable-ui-select-match placeholder="{{$ctrl.ev.place | limitTo: 1}}">
+                          {{($select.selected.name || $ctrl.ev.place ) | limitTo: 1 }}
+                        </editable-ui-select-match>
+                        <editable-ui-select-choices repeat="l.name as l in $ctrl.places | filter: $select.search">
+                          <div ng-bind-html="l.name | highlight: $select.search.name"></div>
+                        </editable-ui-select-choices>
+                      </span>                      
+                  </div> 
+   	              <div class="form-group row">                  
+                  <label class="col-sm-1  col-form-label">Patologia: </span>
+                  <span  class="col-sm-2" editable-ui-select="$ctrl.ev.pathology" data-e-name="pathology" name="pathology" data-e-ng-model="$ctrl.ev.pathology"
+                      data-e-style="min-width:200px;">
+                      {{ev.pathology | limitTo: 3}}
+                      <editable-ui-select-match placeholder="{{$ctrl.ev.pathology | limitTo: 3}}">
+                        {{($select.selected.name || $ctrl.ev.pathology ) | limitTo: 3 }}
+                      </editable-ui-select-match>
+                      <editable-ui-select-choices repeat="p.name as p in $ctrl.pathologies | filter: $select.search">
+                        <div ng-bind-html="p.name | highlight: $select.search.name"></div>
+                      </editable-ui-select-choices>
+                    </span>
+                </div>   
+                <div class="form-group row">                
+                <label class="col-sm-1 col-form-label">Criticita: </span>
+                <span class="col-sm-2" editable-ui-select="$ctrl.ev.criticity" data-e-name="criticity" name="criticity" data-e-ng-model="$ctrl.ev.criticity"
+                    data-e-style="min-width:200px;">
+                    {{ev.criticity | limitTo: 1}}
+                    <editable-ui-select-match placeholder="{{$ctrl.ev.criticity | limitTo: 1}}">
+                      {{($select.selected.name || $ctrl.ev.criticity ) | limitTo: 1 }}
+                    </editable-ui-select-match>
+                    <editable-ui-select-choices repeat="c.name as c in $ctrl.criticities | filter: $select.search">
+                      <div ng-bind-html="c.name | highlight: $select.search.name"></div>
+                    </editable-ui-select-choices>
+                  </span>
+              </div>  
+              </fieldset>
+              <div class="buttons">
+                <!-- button to show form -->
+                <!--<button type="button" class="btn btn-default" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
+                  Edit
+                </button>-->
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editableForm.$visible">
+                  <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
+                    Ok
+                  </button>
+                  <button type="button" class="btn btn-warning" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
+                    Annulla
+                  </button>
+                </span>
+              </div>
+          </form>         
+     	</div>
+   </div>   
+</div>                
+</script>
+	<div class="modal-parent">
+	</div>
+</div>

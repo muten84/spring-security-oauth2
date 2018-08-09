@@ -1,0 +1,21 @@
+<ion-view id="settings" title="Impostazioni">
+    <!--left button on navigation bar-->
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons><!--end left button on navigation bar-->
+    <ion-content class="overflow-scroll" qy-toggle-overflow-scroll overflow-scroll="false">
+        <md-card class="detail-card">
+            <md-card-content>
+                <form name="vm.settingsForm" novalidate>
+                    <formly-form model="vm.settings" fields="vm.settingsFields" form="vm.settingsForm" options="vm.options">
+                        <!--<div class="text-center">-->
+                            <!--<md-button ng-click="vm.saveSettings()" type="button" ng-disabled="!vm.settingsModified" class="md-raised md-primary">Salva</md-button>-->
+                        <!--</div>-->
+                    </formly-form>
+                </form>
+            </md-card-content>
+        </md-card>
+    </ion-content>
+</ion-view>

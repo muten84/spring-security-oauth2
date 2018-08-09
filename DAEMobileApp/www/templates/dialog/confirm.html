@@ -1,0 +1,14 @@
+<md-dialog id="exitApp" aria-label="confirm-dialog">
+    <form>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <h2>{{displayOption.title}}</h2>
+                <p>{{displayOption.content}}</p>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="cancel()">{{'CANCEL' | translate}}</md-button>
+            <md-button class="md-accent" ng-click="ok()">{{'CONFIRM' | translate}}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

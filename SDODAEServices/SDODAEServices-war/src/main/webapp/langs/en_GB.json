@@ -1,0 +1,29 @@
+{
+    "CANCEL": "Annulla",
+    "CHANGE_PASSWORD": "Modifica password",
+
+    "GO_LOGIN": "Accedi",
+
+    "LOGIN": "Login",
+    "LOGIN_UNAUTHORIZED": "Email e/o password non corretti",
+
+    "MANDATORY_FIELD": "Campo obbligatorio",
+
+    "NEW_PASSWORD": "Inserisci nuova Password",
+    "NEW_PASSWORD_CONFIRM": "Conferma nuova Password",
+
+    "OFFLINE_ACTION_NOT_COMPLETED": "Dispositivo offline: impossibile completare l'operazione",
+    "PASSWORD": "Password",
+    "PASSWORD_IS_REQUIRED": "Password obbligatoria",
+    "PASSWORDS_DO_NOT_MATCH": "Le password non corrispondono",
+    "PASSWORD_SENDED_VIA_EMAIL": "Ti abbiamo inviato una email con la nuova password",
+
+    "RECOVER": "Recupera",
+    "RECOVER_PASSWORD": "Recupera password",
+    "REMEMBER_ME": "Ricordami",
+
+    "YOU_ARENT_REGISTERED": "Non sei ancora registrato",
+
+    "WRONG_PASSWORD": "Password errata",
+    "WRONG_PASSWORD_RECOVER_IT": "Password errata. Vuoi recuperarla?"
+}

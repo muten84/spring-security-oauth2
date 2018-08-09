@@ -1,0 +1,15 @@
+<div class="infowindow" ng-non-bindable="">
+    <p>{{vm.event.comune}}{{vm.event.provincia? ", ": ""}}{{vm.event.provincia}}</p>
+    <p>{{vm.event.indirizzo}}{{vm.event.civico? ", ": ""}}{{vm.event.civico}}{{vm.event.coRiferimento?
+        " - ": ""}}{{vm.event.coRiferimento}}</p>
+    <p>{{vm.event.distance}}</p>
+    <div class="row no-padding navigation">
+        <div class="col no-padding">
+
+        </div>
+        <div class="col col-30 text-right no-padding">
+            <i ng-click="vm.openMap(vm.event.coordinate.latitudine, vm.event.coordinate.longitudine)" class="dae-navigation"></i>
+        </div>
+
+    </div>
+</div>

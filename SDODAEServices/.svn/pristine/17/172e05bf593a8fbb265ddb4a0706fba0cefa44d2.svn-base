@@ -1,0 +1,1 @@
+dozer.mappingFiles=classpath:META-INF/dto-test.xml

@@ -1,0 +1,18 @@
+{
+    "globalstrict": true,
+    "jquery": false,
+    "node": false,
+    "globals": {
+        "angular": false,
+        "jasmine": false,
+        "$": false,
+        "_": false,
+        "module": false,
+        "require": false,
+        "define": false,
+        "window": false,
+        "document": false,
+        "console": false,
+        "Promise": false
+    }
+}

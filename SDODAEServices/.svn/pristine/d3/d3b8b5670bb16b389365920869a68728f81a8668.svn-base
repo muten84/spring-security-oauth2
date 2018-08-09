@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="RuoloDO_Ruolo_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.RuoloDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Ruolo
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="RuoloDO_Ruolo_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.RuoloDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Ruolo
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Ruolo_RuoloDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Ruolo
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.RuoloDO
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Ruolo_RuoloDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Ruolo
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.RuoloDO
+		</class-b>
+
+	</mapping>
+
+</mappings>

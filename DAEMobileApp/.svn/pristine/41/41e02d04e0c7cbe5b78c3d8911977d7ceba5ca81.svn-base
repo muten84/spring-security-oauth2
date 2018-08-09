@@ -1,0 +1,17 @@
+#rhythm {
+
+  .rhythm-card {
+    background-color: $color_card;
+    img {
+      &.graph{
+        width: 60%;
+      }
+    }
+  }
+
+  .start-btn {
+    width: 300px;
+    height: 50px;
+    margin-bottom: 15px;
+  }
+}

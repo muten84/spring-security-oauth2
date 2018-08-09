@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="false"
+		map-id="DaeDO_Dae_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+			<field>
+		<a>matricola</a>
+		<b>matricola</b>
+	</field>
+	<field>
+		<a>modello</a>
+		<b>modello</b>
+	</field>
+	<field>
+		<a>tipo</a>
+		<b>tipo</b>
+	</field>
+	<field>
+		<a>alias</a>
+		<b>alias</b>
+	</field>
+	<field>
+		<a>nomeSede</a>
+		<b>nomeSede</b>
+	</field>
+	<field>
+		<a>notediAccessoallaSede</a>
+		<b>notediAccessoallaSede</b>
+	</field>
+	<field>
+		<a>ubicazione</a>
+		<b>ubicazione</b>
+	</field>
+	<field>
+		<a>noteGenerali</a>
+		<b>noteGenerali</b>
+	</field>
+	<field>
+		<a>tipologiaStruttura</a>
+		<b>tipologiaStruttura</b>
+	</field>
+	<field map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_BARE">
+		<a>responsabile</a>
+		<b>responsabile</b>
+	</field>
+	<field>
+		<a>scadenzaDae</a>
+		<b>scadenzaDae</b>
+	</field>
+	<field>
+		<a>immagine</a>
+		<b>immagine</b>
+	</field>
+	<field map-id="DaeDO_Dae_DEEP_CertificatoDaeDO_CertificatoDae_BARE">
+		<a>certificatoDae</a>
+		<b>certificatoDae</b>
+	</field>
+	<field>
+		<a>posizione</a>
+		<b>posizione</b>
+	</field>
+	</mapping>
+
+
+	
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ResponsabileDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Responsabile
+		</class-b>
+		<field-exclude>
+		<a>dae</a>
+		<b>dae</b>
+	</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_CertificatoDaeDO_CertificatoDae_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CertificatoDaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CertificatoDae
+		</class-b>
+		<field-exclude>
+		<a>dae</a>
+		<b>dae</b>
+	</field-exclude>
+	<field-exclude>
+		<a>immagine</a>
+		<b>immagine</b>
+	</field-exclude>
+	</mapping>
+	
+	
+	<mapping
+		wildcard="true"
+		map-id="Dae_DaeDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="false"
+		map-id="Dae_DaeDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-b>
+			<field>
+		<a>matricola</a>
+		<b>matricola</b>
+	</field>
+	<field>
+		<a>modello</a>
+		<b>modello</b>
+	</field>
+	<field>
+		<a>tipo</a>
+		<b>tipo</b>
+	</field>
+	<field>
+		<a>alias</a>
+		<b>alias</b>
+	</field>
+	<field>
+		<a>nomeSede</a>
+		<b>nomeSede</b>
+	</field>
+	<field>
+		<a>notediAccessoallaSede</a>
+		<b>notediAccessoallaSede</b>
+	</field>
+	<field>
+		<a>ubicazione</a>
+		<b>ubicazione</b>
+	</field>
+	<field>
+		<a>noteGenerali</a>
+		<b>noteGenerali</b>
+	</field>
+	<field>
+		<a>tipologiaStruttura</a>
+		<b>tipologiaStruttura</b>
+	</field>
+	<field>
+		<a>responsabile</a>
+		<b>responsabile</b>
+	</field>
+	<field>
+		<a>scadenzaDae</a>
+		<b>scadenzaDae</b>
+	</field>
+	<field>
+		<a>immagine</a>
+		<b>immagine</b>
+	</field>
+	
+		</mapping>
+	
+	
+</mappings>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="FRPositionToCODO_FRPositionToCO_BASIC">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FRPositionToCODO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FRPositionToCO
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_BASIC_NUMBER">
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field>
+	</mapping>
+	
+	<mapping
+		wildcard="true"
+		map-id="FRPositionToCODO_FRPositionToCO_BASIC_NUMBER">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FRPositionToCODO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FRPositionToCO
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_BASIC_NUMBER">
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field>
+	</mapping>
+</mappings>

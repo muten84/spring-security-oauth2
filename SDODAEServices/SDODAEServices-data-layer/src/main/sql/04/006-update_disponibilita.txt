@@ -1,0 +1,14 @@
+UPDATE dae_dae a
+   SET A.TIPOLOGIA_DISPONIBILITA = 'DA PROGRAMMA'
+ WHERE a.id IN (SELECT distinct d.id
+                  FROM dae_dae d,
+                       DAE_DISPONIBILITA dd,
+                       DAE_DISPONIBILITA_GIORNALIERA dg,
+                       DAE_DISPONIBILITA_SPECIFICA ds
+                 WHERE d.id = DD.DAE AND DS.DISPONIBILITA = dd.id AND DG.DISPONIBILITA_SPECIFICA = ds.id);
+				 
+UPDATE dae_dae a
+   SET A.NOTE_DI_ACCESSO_ALLA_SEDE = A.NOTE_DI_ACCESSO_ALLA_SEDE || ' Disponibilità non programmata. Verificare l''accessibilità del sito'
+ WHERE (A.TIPOLOGIA_DISPONIBILITA = 'NON DEFINITA' OR A.TIPOLOGIA_DISPONIBILITA IS NULL);
+
+commit; 

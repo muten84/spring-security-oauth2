@@ -1,0 +1,70 @@
+.platform-android{
+  #dae-map-detail{
+    .has-header {
+      top: 0;
+    }
+    ng-map {
+      &#customMap {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.platform-ios{
+  #dae-map-detail{
+    .has-header {
+      top: 0;
+    }
+    ng-map {
+      &#customMap {
+        height: 100%;
+      }
+    }
+  }
+}
+
+#dae-map-detail {
+  ng-map {
+    &#customMap {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .infowindow{
+    min-width: 200px;
+    h3 {
+      font-family: $font_roboto_draft;
+      font-size: 16px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    h2 {
+      font-family: $font_roboto_draft;
+      font-size: 12px;
+      font-weight: 300;
+      margin: 0;
+    }
+
+    p{
+      font-family: $font_roboto_draft;
+      font-size: 12px;
+      margin: 0;
+      &.disponibilitaText{
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+    .disponibilitaOrari{
+      font-family: $font_roboto_draft;
+      font-size: 12px;
+    }
+    .navigation{
+      i{
+        font-size: 34px;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<div class="availability">
+    <div class="repeatsection row" ng-repeat="element in options.data.availabilityDays">
+        <div class="col col-25 col-center no-padding">
+            {{element.giornoSettimana}}
+        </div>
+        <div class="col col-55 col-center no-padding text-center">
+            <div style="float: left; width: 50%" ng-repeat="item in element.intervals">
+                {{item.orarioDa}} - {{item.orarioA}}
+            </div>
+        </div>
+        <div class="col col-center text-right">
+            <md-button type="button" class="md-icon-button" ng-click="to.onRemove(options, $index)">
+                <md-icon class="clear-btn md-accent" md-font-icon="dae-clear"></md-icon>
+            </md-button>
+        </div>
+    </div>
+    <div ng-if="!options.data.availabilityDays || !options.data.availabilityDays.length < 7" md-ink-ripple="#FF0000" class="add-new" layout="layout-row" ng-click="to.onclick(model,options)">
+        <div class="add-icon flex-15">
+            <i class="dae-add"></i>
+        </div>
+        <div class="add-text flex-85">
+            <span>{{to.btnText}}</span>
+        </div>
+    </div>
+</div>

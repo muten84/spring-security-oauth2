@@ -1,0 +1,144 @@
+{
+  "name": "dae118er",
+  "description": "ionic-material-template: An Ionic project",
+  "main": "",
+  "authors": [
+    "Rolando Concarella rolando.concarella@eng.it"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.1",
+    "jquery": "^3.1.1",
+    "angular-local-storage": "^0.5.2",
+    "angular-translate": "^2.12.1",
+    "lodash": "^4.16.4",
+    "moment": "^2.15.1",
+    "animate.css": "^3.5.2",
+    "angular-dynamic-locale": "^0.1.32",
+    "angular-i18n": "^1.5.8",
+    "api-check": "^7.5.5",
+    "angular-formly": "^8.4.0",
+    "robotodraft": "^1.1.0",
+    "ngCordova": "^0.1.27-alpha",
+    "font-awesome": "^4.6.3",
+    "angular-material": "^1.1.3",
+    "ngmap": "^1.17.6",
+    "crypto-js": "^3.1.8",
+    "gmaps-marker-clusterer": "^1.2.1"
+  },
+  "resolutions": {
+    "angular": "1.5.3"
+  },
+  "overrides": {
+    "ionic": {
+      "main": [
+        "js/ionic.bundle.js",
+        "fonts/*",
+        "css/*"
+      ]
+    },
+    "angular-local-storage": {
+      "main": [
+        "dist/angular-local-storage.js"
+      ]
+    },
+    "angular-translate": {
+      "main": [
+        "angular-translate.js"
+      ]
+    },
+    "jquery": {
+      "main": [
+        "dist/jquery.js"
+      ]
+    },
+    "lodash": {
+      "main": [
+        "dist/lodash.js"
+      ]
+    },
+    "ngCordova": {
+      "main": [
+        "dist/ng-cordova.js"
+      ]
+    },
+    "moment": {
+      "main": [
+        "moment.js",
+        "locale/it.js",
+        "locale/en-gb.js"
+      ]
+    },
+    "animate.css": {
+      "main": [
+        "animate.css"
+      ]
+    },
+    "angular-dynamic-locale": {
+      "main": [
+        "dist/tmhDynamicLocale.js"
+      ]
+    },
+    "angular-i18n": {
+      "main": [
+        "angular-locale_it.js",
+        "angular-locale_en-gb.js"
+      ]
+    },
+    "api-check": {
+      "main": [
+        "dist/api-check.js"
+      ]
+    },
+    "angular-formly": {
+      "main": [
+        "dist/formly.js"
+      ]
+    },
+    "angular-material": {
+      "main": [
+        "layouts/*",
+        "modules/*/*/*",
+        "angular-material.js",
+        "angular-material.css"
+      ]
+    },
+    "robotodraft": {
+      "main": [
+        "robotodraft.css",
+        "robotodraft.css.map",
+        "fonts/*/*"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css",
+        "fonts/*"
+      ]
+    },
+    "ngmap": {
+      "main": [
+        "build/scripts/ng-map.js"
+      ]
+    },
+    "gmaps-marker-clusterer": {
+      "main": [
+        "src/markerclusterer.js"
+      ]
+    },
+    "crypto-js": {
+      "main": [
+        "crypto-js.js",
+        "sha256.js"
+      ]
+    },
+    "angular-auto-complete": {
+      "main": [
+        "angular-auto-complete.js",
+        "angular-auto-complete.css"
+      ]
+    }
+  }
+}

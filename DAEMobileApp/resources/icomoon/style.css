@@ -1,0 +1,191 @@
+@font-face {
+  font-family: 'dae';
+  src:  url('fonts/dae.eot?t8dzc3');
+  src:  url('fonts/dae.eot?t8dzc3#iefix') format('embedded-opentype'),
+    url('fonts/dae.ttf?t8dzc3') format('truetype'),
+    url('fonts/dae.woff?t8dzc3') format('woff'),
+    url('fonts/dae.svg?t8dzc3#dae') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="dae-"], [class*=" dae-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'dae' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dae-work:before {
+  content: "\e933";
+}
+.dae-map-marker:before {
+  content: "\e935";
+}
+.dae-favorite-locations-marker:before {
+  content: "\e936";
+}
+.dae-warning:before {
+  content: "\e932";
+}
+.dae-writing:before {
+  content: "\e92d";
+}
+.dae-file:before {
+  content: "\e92f";
+}
+.dae-edit:before {
+  content: "\e930";
+}
+.dae-time-arrival:before {
+  content: "\e92c";
+}
+.dae-time-accept:before {
+  content: "\e92e";
+}
+.dae-time-creation:before {
+  content: "\e931";
+}
+.dae-time-closing:before {
+  content: "\e934";
+}
+.dae-settings:before {
+  content: "\e92a";
+}
+.dae-event-list:before {
+  content: "\e92b";
+}
+.dae-password:before {
+  content: "\e928";
+}
+.dae-padlock:before {
+  content: "\e929";
+}
+.dae-damage:before {
+  content: "\e927";
+}
+.dae-ico_new_dae:before {
+  content: "\e926";
+}
+.dae-credits:before {
+  content: "\e925";
+}
+.dae-directions:before {
+  content: "\e921";
+}
+.dae-navigation-2:before {
+  content: "\e922";
+}
+.dae-map-location:before {
+  content: "\e923";
+}
+.dae-note:before {
+  content: "\e924";
+}
+.dae-navigation:before {
+  content: "\e920";
+}
+.dae-login:before {
+  content: "\e91f";
+}
+.dae-time:before {
+  content: "\e91d";
+}
+.dae-event:before {
+  content: "\e91e";
+}
+.dae-clear:before {
+  content: "\e91c";
+}
+.dae-angle-right:before {
+  content: "\e917";
+}
+.dae-add:before {
+  content: "\e918";
+}
+.dae-add-circle-outline:before {
+  content: "\e919";
+}
+.dae-add-circle:before {
+  content: "\e91a";
+}
+.dae-add-box:before {
+  content: "\e91b";
+}
+.dae-tragitto:before {
+  content: "\e909";
+}
+.dae-statoprofilo:before {
+  content: "\e90a";
+}
+.dae-localize:before {
+  content: "\e90b";
+}
+.dae-man:before {
+  content: "\e90c";
+}
+.dae-maps:before {
+  content: "\e90d";
+}
+.dae-maps2:before {
+  content: "\e90e";
+}
+.dae-phone-call:before {
+  content: "\e90f";
+}
+.dae-ruolo:before {
+  content: "\e910";
+}
+.dae-scadenza:before {
+  content: "\e911";
+}
+.dae-email:before {
+  content: "\e912";
+}
+.dae-datidinascita:before {
+  content: "\e913";
+}
+.dae-data:before {
+  content: "\e914";
+}
+.dae-cuore:before {
+  content: "\e915";
+}
+.dae-ambulance:before {
+  content: "\e916";
+}
+.dae-user:before {
+  content: "\e908";
+}
+.dae-faq:before {
+  content: "\e900";
+}
+.dae-guide:before {
+  content: "\e901";
+}
+.dae-news:before {
+  content: "\e902";
+}
+.dae-logout:before {
+  content: "\e903";
+}
+.dae-located:before {
+  content: "\e904";
+}
+.dae-heart:before {
+  content: "\e905";
+}
+.dae-home:before {
+  content: "\e906";
+}
+.dae-docs:before {
+  content: "\e907";
+}

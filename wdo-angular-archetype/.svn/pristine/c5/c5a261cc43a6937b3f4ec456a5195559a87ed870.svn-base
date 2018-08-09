@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Entry1",
+        "iconClass": "fa fa-info-circle",
+        "target": "dashboard",
+        "childs": [{
+            "text": "CHILD ENTRY",
+            "target": "dashboard"
+        },
+        {
+            "text": "CHILD ENTRY 2",
+            "target": "dashboard"
+        }        
+        ]
+    },
+    {
+        "title": "Entry2",
+        "iconClass": "fa fa-info-circle"
+    }
+]

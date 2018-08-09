@@ -1,0 +1,28 @@
+<ion-view id="rhythm" title="Ritmo">
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="has-toolbar">
+        <md-card class="rhythm-card">
+            <md-card-header>
+                <md-card-header-text class="text-center">
+                    <span class="md-title">Ritmo corretto per il massaggio</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content class="text-center">
+                <img class="graph" src="img/ico_grafico_big.png">
+            </md-card-content>
+            <md-card-content layout="row">
+                <md-icon md-svg-icon="volume_mute"></md-icon>
+                <md-slider flex="70" min="0" max="10" ng-model="vm.volume"></md-slider>
+                <md-icon md-svg-icon="volume_up"></md-icon>
+            </md-card-content>
+            <md-card-actions layout="column" layout-align="center center">
+                <md-button ng-if="!vm.started" ng-click="vm.play()" class="md-raised md-accent start-btn">START</md-button>
+                <md-button ng-if="vm.started" ng-click="vm.stop()" class="md-raised md-accent start-btn">STOP</md-button>
+            </md-card-actions>
+        </md-card>
+    </ion-content>
+</ion-view>

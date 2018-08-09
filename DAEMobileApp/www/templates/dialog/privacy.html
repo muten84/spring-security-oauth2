@@ -1,0 +1,25 @@
+
+<ion-modal-view id="privacy">
+    <div class="privacy-header row row-center">
+        <div class="col col-5"></div>
+        <div class="col">
+            <span class="title" translate>{{'PRIVACY_AGREEMENT' | translate}}</span>
+        </div>
+        <div ng-click="hidePrivacyModal()" class="col col-10">
+            <i class="ion-close"></i>
+        </div>
+    </div>
+    <ion-content class="privacy-content padding">
+
+        <div class="row row-center">
+            <!--<div class="col col-5"></div>-->
+            <div class="col">{{privacyText}}</div>
+            <!--<div class="col col-10"></div>-->
+        </div>
+
+    </ion-content>
+
+    <div class="privacy-footer text-center">
+        <md-button ng-click="accept()" type="button" class="md-raised privacy-btn">{{'ACCEPT' | translate}}</md-button>
+    </div>
+</ion-modal-view>

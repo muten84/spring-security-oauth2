@@ -1,0 +1,101 @@
+#profile {
+
+  .has-toolbar {
+    top: 230px;
+    margin: 10px;
+  }
+
+  .md-subheader {
+    font-size: 20px;
+    color: $color_black_80;
+    font-weight: normal;
+  }
+  .profile-icon{
+    font-size: x-large;
+    margin-top: auto;
+    margin-bottom: auto;
+    &.active{
+      color: green;
+    }
+    &.inactive{
+      color: red;
+    }
+  }
+  .md-list-item-text{
+    h3 {
+      font-family: $font_roboto_draft;
+      font-size: 18px;
+      font-weight: 500;
+      @media (max-width: 320px) {
+        font-size: 18px;
+      }
+    }
+    p{
+      color: rgba(0,0,0,0.9);
+      font-family: $font_roboto_draft;
+      font-size: 16px;
+      font-weight: 400;
+      @media (max-width: 320px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .availability{
+    span{
+      font-size: 16px;
+    }
+  }
+
+  .toolbar-medium {
+    max-height: 200px !important;
+    height: 200px !important;
+    box-shadow: 0 2px 6px $color_black_20;
+    display: block;
+    div {
+      &.default {
+        padding: 10px;
+        background-color: $color_celeste_approx;
+        text-align: center;
+        height: inherit !important;
+        &.header {
+          padding: 0;
+        }
+        img {
+          width: 40%;
+        }
+      }
+    }
+
+    div {
+      &.photo {
+        padding: 0;
+        background-color: #000;
+        text-align: center;
+        height: inherit !important;
+        &.header {
+          padding: 0;
+        }
+        img {
+          height: 100%;
+        }
+      }
+    }
+    h1 {
+      color: $color_white;
+      font-size: 34px;
+    }
+
+    h2 {
+      color: $color_white;
+      font-size: 18px;
+    }
+
+    h3 {
+      color: $color_white;
+      font-size: 28px !important;
+    }
+
+  }
+
+}

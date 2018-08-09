@@ -1,0 +1,16 @@
+<div class="layout">
+    <div ui-view="modals"></div>
+    <div ui-view="navbar"></div>
+
+    <div class="layout-app">
+        <!--    <areas-sidebar config="partials/sidebar.json"></areas-sidebar> -->
+        <!-- Mauro - spostato su servizio-->
+        <areas-sidebar config="../rest/portal/authenticationService/getSidebarJSON"></areas-sidebar>
+        <div id="content" class="layout-app-content dashboard clearfix">
+            <areas-header title="title" icon="icon"></areas-header>
+            <div class="bs-component container-fluid ">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+</div>

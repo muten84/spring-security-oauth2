@@ -1,0 +1,132 @@
+<ion-view id="dae-detail" title="Dettaglio DAE">
+    <!--left button on navigation bar-->
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons><!--end left button on navigation bar-->
+    <ion-content class="has-toolbar">
+
+        <md-card class="detail-card">
+            <md-card-header class="card-header">
+                <md-card-header-text>
+                    <div class="row no-padding">
+                        <div class="col no-padding">
+                            <span class="headline">{{ vm.dae.nomeSede }}</span>
+                        </div>
+                        <div class="col col-25"></div>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content class="no-padding">
+                <md-list class="md-dense no-padding">
+                    <md-list-item>
+                        <md-icon md-font-icon="dae-maps" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{ vm.dae.gpsLocation.indirizzo.name }}{{vm.dae.gpsLocation.civico? ", " :
+                                ""}}{{vm.dae.gpsLocation.civico}} </h3>
+                            <h3>{{ vm.dae.gpsLocation.comune.nomeComune }}
+                                {{ vm.dae.gpsLocation.localita? "- " + vm.dae.gpsLocation.localita.name: ""}}
+                                {{vm.dae.gpsLocation.comune.codiceIstat? ", "
+                                : ""}}{{ vm.dae.gpsLocation.comune.codiceIstat
+                                }}{{vm.dae.gpsLocation.comune.provincia.nomeProvincia? " (" : ""}}{{
+                                vm.dae.gpsLocation.comune.provincia.nomeProvincia
+                                }}{{vm.dae.gpsLocation.comune.provincia.nomeProvincia? ")" : ""}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon md-font-icon="dae-maps2" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3> {{ vm.dae.ubicazione }} </h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon md-font-icon="dae-phone-call" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3> {{ vm.dae.responsabile.telefono }} </h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon md-font-icon="dae-note" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3> {{ vm.dae.notediAccessoallaSede }} </h3>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+            <md-card-content class="no-padding">
+                <div class="availability"
+                     ng-if="vm.dae.disponibilita[0].disponibilitaSpecifica.disponibilitaGiornaliera.length > 0 && !vm.dae.disponibilitaPermanente">
+                    <div>
+                        <h3>Questo DAE è disponibile: </h3>
+                    </div>
+                    <div class="row no-padding">
+                        <div class="col col-50 no-padding">
+                            <span>da</span> <span style="text-transform: uppercase">{{vm.dae.disponibilita[0].da | date : 'MMMM'}}</span>
+                        </div>
+                        <div class="col no-padding">
+                            <span>a</span> <span style="text-transform: uppercase">{{vm.dae.disponibilita[0].a | date : 'MMMM'}}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>nei seguenti orari: </h3>
+                    </div>
+                    <div ng-repeat="disp in vm.dae.disponibilita[0].disponibilitaSpecifica.disponibilitaGiornaliera">
+                        <div class="row no-padding">
+                            <div class="col col-50 no-padding">
+                                <span>{{disp.giornoSettimana}}</span>
+                            </div>
+                            <div class="col no-padding">
+                                <span>{{disp.orarioDa}}{{disp.orarioA? " - ": ""}}{{disp.orarioA}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="availability" ng-if="vm.dae.disponibilitaPermanente == true">
+                    <div>
+                        <h3 class="forever">Questo DAE è sempre disponibile</h3>
+                    </div>
+                </div>
+            </md-card-content>
+            <div class="photo-detail">
+                <div ng-class="{'default': !vm.dae.immagine, 'photo': vm.dae.immagine  }">
+                    <img ng-if="!vm.dae.immagine" src="img/ico_telephone_2.png" class="md-card-image"/>
+                    <img ng-if="vm.dae.immagine" ng-src="{{config.imgUrl}}{{vm.dae.immagine.url}}"
+                         class="md-card-image"/>
+                </div>
+            </div>
+        </md-card>
+
+        <md-fab-speed-dial md-open="vm.isOpen" md-direction="down" class="md-fling md-fab-top-right">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-accent">
+                    <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+                </md-button>
+            </md-fab-trigger>
+
+            <md-fab-actions>
+                <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left" class="navigator" md-visible="vm.tooltipVisible">Apri il
+                        navigatore
+                    </md-tooltip>
+                    <md-icon class="detail" ng-click="vm.openMap()" md-font-icon="dae-directions"
+                             aria-label="Apri il navigatore"></md-icon>
+                </md-button>
+                <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left" class="map" md-visible="vm.tooltipVisible">Vai alla mappa
+                    </md-tooltip>
+                    <md-icon class="detail" ng-click="vm.goToState('app.daeMapDetail')" md-font-icon="dae-map-location"
+                             aria-label="Vai alla mappa"></md-icon>
+                </md-button>
+                <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
+                    <md-tooltip md-direction="left" class="damage" md-visible="vm.tooltipVisible">Segnala un problema
+                    </md-tooltip>
+                    <md-icon class="detail" ng-click="vm.goToState('app.damageReporting')" md-font-icon="dae-damage"
+                             aria-label="Segnalazione guasti"></md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+    </ion-content>
+
+
+</ion-view>

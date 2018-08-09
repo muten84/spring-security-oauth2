@@ -1,0 +1,211 @@
+<form name="firstResponder" ng-submit="saveFr()" validate>
+
+    <div uib-accordion>
+        <div class="row " uib-accordion-group is-open=true>
+            <uib-accordion-heading>
+                <i class="fa fa-user  white"></i>
+                <span class="areas-accordion-heading">                           
+                            Anagrafica
+                            </span>
+            </uib-accordion-heading>
+            <div class="col-md-6">
+                <label-validated label="Nome" class="{'form-group': false, 'has-error':firstResponder.nome.$invalid}" name="nome"></label-validated>
+                <input name="nome" class="form-control" ng-model="model.nome" placeholder="Nome" ui-validate="{required: 'validate($value)'}"
+                />
+
+                <label>Alias</label>
+                <input class="form-control" ng-model="model.logon" placeholder="Alias" />
+
+                <label-validated label="E-mail" class="{'form-group': false, 'has-error':firstResponder.email.$invalid}" name="email"></label-validated>
+                <input name="email" ui-validate="{required: 'validate($value)'}" class="form-control" ng-model="model.email" placeholder="E-mail"
+                />
+
+                <label>Professione</label>
+                <ui-select name="professione" ng-change="selectProfessione($select.selected)"
+                    ng-model="model.professione" theme="bootstrap">
+                    <ui-select-match allow-clear placeholder="Professione">{{$select.selected.descrizione}}</ui-select-match>
+                    <ui-select-choices repeat="p in professioni  track by $index" refresh="refreshProfessioni($select.search)" refresh-delay="500">
+                        <div ng-bind-html="p.descrizione | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+
+            <div class="col-md-6">
+                <label-validated label="Cognome" class="{'form-group': false, 'has-error':firstResponder.cognome.$invalid}" name="cognome"></label-validated>
+                <input name="cognome" class="form-control" ng-model="model.cognome" placeholder="Cognome" ui-validate="{required: 'validate($value)'}"
+                />
+
+                <label-validated label="Codice Fiscale" class="{'form-group': false, 'has-error':firstResponder.codiceFiscale.$invalid}"
+                    name="codiceFiscale"></label-validated>
+                <input name="codiceFiscale" class="form-control" ng-model="model.codiceFiscale" placeholder="Codice Fiscale" ui-validate="{required: 'validate($value)'}"
+                />
+
+                <label-validated label="Numero di Cellulare" class="{'form-group': false, 'has-error':firstResponder.numCellulare.$invalid}"
+                    name="numCellulare"></label-validated>
+                <input name="numCellulare" class="form-control" ng-model="model.numCellulare" placeholder="Cellulare" ui-validate="{required: 'validate($value)'}"
+                />
+            </div>
+            <!-- <div style="margin-top: 100px" class="btn-container pull-right">
+                    <button type="button" class="btn btn-warning pull-right">
+                        <i class="fa fa-times" aria-hidden="true">
+                        </i> Pulisci
+                    </button>
+                </div>-->
+        </div>
+
+
+        <div class="row " uib-accordion-group>
+            <uib-accordion-heading>
+
+                <i class="fa fa-address-book-o  white"></i>
+                <span class="areas-accordion-heading">                           
+                            Indirizzo
+                            </span>
+
+            </uib-accordion-heading>
+
+            <div class=" col-md-12">
+                <label>Indirizzo di Residenza</label>
+                <ui-select ng-change="selectStreet($select.selected)" ng-model="model.indirizzo" theme="bootstrap">
+                    <ui-select-match allow-clear placeholder="Indirizzo">{{$select.selected.name}} </ui-select-match>
+                    <ui-select-choices repeat="strada in strade  track by $index" refresh="refreshStrade($select.search)" refresh-delay="500">
+                        <div ng-bind-html="strada.name | highlight: $select.search"></div>
+                        <small>
+                                {{strada.comune.nomeComune}}
+                            </small>
+                    </ui-select-choices>
+                </ui-select>
+                <div class="row">
+                    <div class=" col-md-6">
+                        <label-validated label="Comune di Residenza" class="{'form-group': false, 'has-error':firstResponder.comuneResidenza.$invalid}"
+                            name="comuneResidenza"></label-validated>
+                        <!--<input ui-validate="{required: 'validate($value.nomeComune)'}" name="comuneResidenza" type="text" ng-model="model.comuneResidenza" placeholder="Inserire un comune da cercare" uib-typeahead="comune.nomeComune for comune in refreshComune($viewValue)"
+                            typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control" />-->
+                        <ui-select reset-search-input="true" ui-validate="{required: 'validate($value.nomeComune)'}" name="comuneResidenza" ng-blur="checkSelected('comune', 'model.comuneResidenza = null')"
+                            ng-model="model.comuneResidenza" theme="bootstrap">
+                            <ui-select-match allow-clear placeholder="Comune">{{$select.selected.nomeComune}}</ui-select-match>
+                            <ui-select-choices repeat="comune in comuni  track by $index" refresh="refreshComune($select.search)" refresh-delay="500">
+                                <div ng-bind-html="comune.nomeComune | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class=" col-md-6">
+                        <label-validated label="Provincia di Residenza" class="{'form-group': false, 'has-error':firstResponder.provincia.$invalid}"
+                            name="provincia"></label-validated>
+                        <input name="provincia" class="form-control" ng-model="model.comuneResidenza.provincia.nomeProvincia" placeholder="Provincia di Residenza">
+                    </div>
+                </div>
+                <!-- <label>Comune</label>
+                    <input class="form-control" ng-model="model.alias" placeholder="Alias">
+
+                    <label>Provincia</label>
+                    <input class="form-control" ng-model="model.alias" placeholder="Alias">-->
+            </div>
+        </div>
+
+
+        <div class="row " uib-accordion-group>
+
+            <uib-accordion-heading>
+
+                <i class="fa fa-id-card  white"></i>
+                <span class="areas-accordion-heading">                           
+                            Profilo e Certificato
+                            </span>
+
+            </uib-accordion-heading>
+            <div class="col-md-12">
+                <div class="row ">
+                    <h4>Dati profilo</h4>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <!--<div class="col-md-12">-->
+                        <label>Stato profilo abilitato</label>
+                    </div>
+                    <div class="row">
+                        <switch on="SI" off="NO" id="statoProfilo" name="statoProfilo" ng-model="statoProfilo" class="green"></switch>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label-validated label="Numero di iscrizione all'ordine" class="{'form-group': false, 'has-error':firstResponder.numIscrizioneOrdine.$invalid}"
+                        name="numIscrizioneOrdine"></label-validated>
+                    <input ui-validate-watch=" 'model.professione' " ui-validate="{required: 'validateForMedico($value)'}" name="numIscrizioneOrdine"
+                        class="form-control" ng-model="model.medicoFr.numIscrizioneOrdine" placeholder="Inserire numero di iscrizione all'ordine se medico">
+
+                    <label-validated label="Categoria" class="{'form-group': false, 'has-error':firstResponder.categoria.$invalid}" name="categoria"></label-validated>
+                    <ui-select name="categoria" ui-validate="{required: 'validate($value.descrizione)'}" ng-model="model.categoriaFr" theme="bootstrap">
+                        <ui-select-match allow-clear placeholder="Categoria">{{$select.selected.descrizione}}</ui-select-match>
+                        <ui-select-choices repeat="c as c in categorie" refresh="refreshCategorie($select.search)" refresh-delay="500">
+                            <div ng-bind-html="c.descrizione | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="col-md-6">
+                    <label-validated label="Ordine" class="{'form-group': false, 'has-error':firstResponder.ordine.$invalid}" name="ordine"></label-validated>
+                    <input name="ordine" ui-validate="{required: 'validateForMedico($value)'}" class="form-control" ng-model="model.medicoFr.ordine"
+                        placeholder="Inserire ordine della provincia oppure universita">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row ">
+                    <h4>Dati certificato</h4>
+                </div>
+                <div class="col-md-6">
+                    <!--<br>{{ statoProfilo === 'ATTIVO' }}-->
+                    <label>Tipologia attestato</label>
+                    <input class="form-control" ng-model="model.certificatoFr.descrizione" placeholder="Tipologia attestato">
+
+                    <label>Data di conseguimento </label>
+                    <!--<input class="form-control" ng-model="model.certificatoFr.dataConseguimento | date:'dd/MM/yyyy'" placeholder="Data conseguimento certificazione">-->
+                    <p class="input-group">
+                        <input uib-datepicker-popup="dd/MM/yyyy" type="text" class="form-control" id="dataConseg" is-open="dataConsegPopup.opened"
+                            datepicker-options="options" ng-model="model.certificatoFr.dataConseguimento" placeholder="Inserisci data conseguimento"
+                            name="conseguimento" close-text="Chiudi" clear-text="Annulla" current-text="Oggi" alt-input-formats="altInputFormats"
+                        />
+                        <span class="input-group-btn">
+                        <button class="btn btn-primary btn-calendar collapsed" type="button" ng-click="openConsegDate()">
+                            <span class="sr-only"></span>
+                        <i class="fa fa-calendar-o"></i>
+                        </button>
+                        </span>
+                    </p>
+
+
+                </div>
+                <div class="col-md-6">
+                    <label>Ente certificatore </label>
+                    <ui-select reset-search-input="true" name="rilasciatoDa"  ng-model="model.rilasciatoDa"
+                        theme="bootstrap">
+                        <ui-select-match allow-clear placeholder="Inserire ente certificatore">{{$select.selected.descrizione}}</ui-select-match>
+                        <ui-select-choices repeat="e in enti  track by $index" refresh="refreshEntiCertificatori($select.search)" refresh-delay="500">
+                            <div ng-bind-html="e.descrizione | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                    <label>Copia del certificato</label>
+                    <div>
+                        <img class="pull-left" style="max-width: 200px;margin-top: 0%;margin-left: 25%;" ng-src='{{model.immagine.url}}'></img>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col-md-6">
+                    <img ng-src='{{model.immagine.url}}'></img>
+                </div>
+            </div>-->
+        </div>
+
+    </div>
+
+    <div class="btn-container pull-right">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                Salva</button>
+            <button type="button" class="btn btn-danger" app-yesno title="Attenzione" message="Sei sicuro?" confirm-text="Si" cancel-text="No"
+                placement="left" on-confirm="reloadFr()" on-cancel="cancelClicked = true" confirm-button-type="danger" cancel-button-type="primary">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+                Annulla</button>
+        </div>
+    </div>
+</form>

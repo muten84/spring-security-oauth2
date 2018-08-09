@@ -1,0 +1,33 @@
+<div ng-repeat="conf in configurations track by $index">
+  <form ng-submit="saveConfiguration(conf,$index)">
+    <div class="row">
+      <div class=" col-md-4">
+        <h4>{{conf.parametro}}</h4>
+        <p>{{conf.descrizione}}</p>
+      </div>
+      <div class=" col-md-5">
+        <input class="form-control"
+          ng-model="conf.valore"
+          placeholder="Parametro"
+          ng-change="conf.modified = true">
+      </div>
+      <div class=" col-md-3">
+        <div ng-show="conf.modified">
+          <div class="btn-group">
+            <button type="submit"
+              class="btn btn-primary">
+              <i class="fa fa-floppy-o"
+                aria-hidden="true"></i>
+              Salva</button>
+            <button type="button"
+              class="btn btn-danger"
+              ng-click="pulisci($index)">
+              <i class="fa fa-undo"
+                aria-hidden="true"></i>
+              Annulla</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

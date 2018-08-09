@@ -1,0 +1,31 @@
+/* Formatted on 08/11/2017 13:14:28 (QP5 v5.256.13226.35538) */
+CREATE OR REPLACE FUNCTION getNewId (table_name IN VARCHAR, id IN VARCHAR)
+   RETURN VARCHAR
+IS
+   sqlString   VARCHAR (1000);
+   old_id      VARCHAR (64);
+   new_id      VARCHAR (64);
+   deleted     NUMBER := 1;
+BEGIN
+   old_id := id;
+
+   WHILE deleted = 1
+   LOOP
+      sqlString := 'select id, deleted from ' || table_name || ' where old_id = ''' || old_id || '''';
+      DBMS_OUTPUT.put_line (sqlString);
+
+      EXECUTE IMMEDIATE sqlString INTO new_id, deleted;
+
+      IF deleted = 1
+      THEN
+         old_id := new_id;
+      END IF;
+   END LOOP;
+
+   IF new_id IS NULL
+   THEN
+      new_id := old_id;
+   END IF;
+
+   RETURN new_id;
+END;

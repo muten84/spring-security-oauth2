@@ -1,0 +1,5450 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "API for SDODAEServices-war",
+    "version" : "v1",
+    "title" : "SDODAEServices-war REST API"
+  },
+  "host" : "161.27.213.60:9105",
+  "basePath" : "/SDODAEServices-war/rest",
+  "tags" : [ {
+    "name" : "anagraficheService",
+    "description" : "Servizio dedicato alla gestione delle Anagrafiche"
+  }, {
+    "name" : "authenticationService",
+    "description" : "Servizio di autenticazione utente"
+  }, {
+    "name" : "charts",
+    "description" : "Servizio dedicato alla gestione dei dati da inviare ai grafici"
+  }, {
+    "name" : "configurationService",
+    "description" : "Servizio dedicato alla modifica delle configurazioni"
+  }, {
+    "name" : "daeService",
+    "description" : "Servizio dedicato alla gestione dei DAE"
+  }, {
+    "name" : "emergencyService",
+    "description" : "Servizio dedicato alla gestione dei First Responder"
+  }, {
+    "name" : "emsService",
+    "description" : "Servizio di integrazione tra EMS e il DAE"
+  }, {
+    "name" : "frservice",
+    "description" : "Servizio dedicato alla gestione dei First Responder"
+  }, {
+    "name" : "mailService",
+    "description" : "Servizio dedicato alla gestione delle Mail"
+  }, {
+    "name" : "notificationService",
+    "description" : "Servizio dedicato all'invio delle notifiche verso i client"
+  }, {
+    "name" : "userService",
+    "description" : "Servizio dedicato alla gestione degli utenti"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/anagraficheService/getAllCategorie" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllCategorie",
+        "description" : "Metodo che restituisce la lista completa delle categorie di First Responder",
+        "operationId" : "getAllCategorie",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista  completa delle categorie di First Responder",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/CategoriaFr"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllCategory" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllCategory",
+        "description" : "Metodo che restituisce la lista completa delle categorie di First Responder",
+        "operationId" : "getAllCategory",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista  completa delle categorie di First Responder",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/CategoriaFr"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllEnteCertificatore" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllEnteCertificatore",
+        "description" : "Metodo che restituisce la lista completa degli Enti Certificatori",
+        "operationId" : "getAllEnteCertificatore",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti gli Enti Certificatori",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/EnteCertificatore"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllEnteCertificatoreForMedico" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllEnteCertificatoreForMedico",
+        "description" : "Metodo che restituisce la lista completa degli Enti Certificatori per i Medici",
+        "operationId" : "getAllEnteCertificatoreForMedico",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti gli Enti Certificatori",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/EnteCertificatore"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllGruppi" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllGruppi",
+        "description" : "Metodo che restituisce la lista dei Gruppi",
+        "operationId" : "getAllGruppi",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metodo che restituisce la lista dei Gruppi",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Gruppo"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllProfessione" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllProfessione",
+        "description" : "Metodo che restituisce la lista completa delle Professioni",
+        "operationId" : "getAllProfessione",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutte le professioni",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Professione"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllProvince" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllProvince",
+        "description" : "Metodo che restituisce la lista completa delle Province d'italia",
+        "operationId" : "getAllProvince",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutte le province",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Province"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllRuolo" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllRuolo",
+        "description" : "Metodo che restituisce la lista dei Ruoli disponibili",
+        "operationId" : "getAllRuolo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metodo che restituisce la lista dei Gruppi",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Ruolo"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllStato" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllStato",
+        "description" : "Metodo che restituisce la lista completa degli stati ",
+        "operationId" : "getAllStato",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti gli stati dei ",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Stato"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllStatoDae" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllStatoDae",
+        "description" : "Metodo che restituisce la lista completa degli stati dei DAE",
+        "operationId" : "getAllStatoDae",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti gli stati dei DAE",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/StatoDAE"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllTipoManutenzione" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllTipoManutenzione",
+        "description" : "Metodo che restituisce la lista delle tipologie di manutenzione ",
+        "operationId" : "getAllTipoManutenzione",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti gli stati dei ",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/TipoProgrammaManutenzione"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/getAllTipoStruttura" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "getAllTipoStruttura",
+        "description" : "Metodo che restituisce la lista delle tipologie di struttura",
+        "operationId" : "getAllTipoStruttura",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista delle tipologie di struttura",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/TipoStruttura"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/reverseGeocoding" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "a",
+        "description" : "Metodo che restituisce comune, provincia ed indirizzo più vicini alle coordinate passate",
+        "operationId" : "reverseGeocoding",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean con posizione di reverse Geocoding",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/GPSLocation"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista dei comuni filtrati",
+            "schema" : {
+              "$ref" : "#/definitions/ReverseGeocodingResult"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/searchComuniByFilter" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "searchComuniByFilter",
+        "description" : "Metodo che restituisce la lista dei comuni filtrati",
+        "operationId" : "getAllComuniByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di filtering dei comuni",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ComuneFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista dei comuni filtrati",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Comune"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/searchProfessioneByFilter" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "searchProfessioneByFilter",
+        "description" : "Metodo che restituisce la lista delle Professioni filtrate",
+        "operationId" : "searchProfessioneByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean contenente il filtro di ricerca",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ProfessioneFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista delle professioni",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Professione"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/anagraficheService/searchStradeByFilter" : {
+      "post" : {
+        "tags" : [ "anagraficheService" ],
+        "summary" : "searchStradeByFilter",
+        "description" : "Metodo che restituisce la lista delle strade filtrate",
+        "operationId" : "searchStradeByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di filtering delle strade",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/StradeFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista dei comuni filtrati",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Strade"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/allowReset/{token}" : {
+      "get" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "allowReset",
+        "description" : "Metodo usato dai client per autorizzare il reset della password",
+        "operationId" : "allowReset",
+        "produces" : [ "text/html" ],
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione avvenuta correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'operazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/authenticateUser" : {
+      "post" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "authenticateUser",
+        "description" : "Metodo di autenticazione utente. Restituisce il token da utilizzare per le comunicazioni sicure",
+        "operationId" : "authenticateUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean con credenziali utente",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CredentialsBean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Utente loggato correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/AppSession"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'autenticazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/authenticateUserPortal" : {
+      "post" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "authenticateUserPortal",
+        "description" : "Metodo di autenticazione utente per portale gestionale. Restituisce il token da utilizzare per le comunicazioni sicure",
+        "operationId" : "authenticateUserPortal",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean con credenziali utente",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CredentialsBean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Utente loggato correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/AppSession"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'autenticazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/denyReset/{token}" : {
+      "get" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "denyReset",
+        "description" : "Metodo usato dai client per annullare il reset della password",
+        "operationId" : "denyReset",
+        "produces" : [ "text/html" ],
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione avvenuta correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'operazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/getSidebarJSON" : {
+      "get" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "isAuthenticated",
+        "description" : "Metodo di controllo della validità del token di autenticazione",
+        "operationId" : "getSidebarJSON",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Utente loggato correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/SidebarMenu"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'autenticazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/isAuthenticated" : {
+      "get" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "isAuthenticated",
+        "description" : "Metodo di controllo della validità del token di autenticazione",
+        "operationId" : "isAuthenticated",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Utente loggato correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/AppSession"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'autenticazione"
+          }
+        }
+      }
+    },
+    "/authenticationService/logout" : {
+      "get" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "logout",
+        "description" : "Metodo per distruggere il token di autenticazione",
+        "operationId" : "logout",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Logout Utente avvenuto correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/AppSession"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante il logout"
+          }
+        }
+      }
+    },
+    "/authenticationService/resetPassword" : {
+      "post" : {
+        "tags" : [ "authenticationService" ],
+        "summary" : "resetPassword",
+        "description" : "Metodo per il reset della password dell'utente (First Responder)",
+        "operationId" : "resetPassword",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean contenente la mail dell'utente",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/ResetPasswordBean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Password resettata correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/GenericResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante il reset della password"
+          }
+        }
+      }
+    },
+    "/charts/daeActivationsByDay" : {
+      "get" : {
+        "tags" : [ "charts" ],
+        "summary" : "daeActivationsByDay",
+        "description" : "Restituisce i dati dell'andamento attivazioni dei dae giorno per giorno",
+        "operationId" : "listDAEActivationsByDay",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/ChartResult"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/charts/daeActivationsByProvince" : {
+      "get" : {
+        "tags" : [ "charts" ],
+        "summary" : "daeActivationsByProvince",
+        "description" : "Restituisce i dati dell'andamento attivazioni dei dae per provincia",
+        "operationId" : "listDAEActivationsByProvince",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/ChartResult"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/charts/daeSubscriptions" : {
+      "get" : {
+        "tags" : [ "charts" ],
+        "summary" : "daeSubscriptions",
+        "description" : "Restituisce i dati dell'andamento registrazioni dei dae",
+        "operationId" : "listDAESubscriptions",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/ChartResult"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/charts/frSubscriptions" : {
+      "get" : {
+        "tags" : [ "charts" ],
+        "summary" : "frSubscriptions",
+        "description" : "Restituisce i dati dell'andamento registrazioni dei fr",
+        "operationId" : "listFrSubscriptions",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/ChartResult"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/configurationService/getAllConfiguration" : {
+      "get" : {
+        "tags" : [ "configurationService" ],
+        "summary" : "getAllConfiguration",
+        "description" : "Metodo che consente di caricare tutte le configurazioni dal server",
+        "operationId" : "getAllConfiguration",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Config"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante il caricamento"
+          }
+        }
+      }
+    },
+    "/configurationService/saveConfiguration" : {
+      "post" : {
+        "tags" : [ "configurationService" ],
+        "summary" : "saveConfiguration",
+        "description" : "Metodo che consente di salvare una configurazione",
+        "operationId" : "saveConfiguration",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "configurazione da salvare",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Config"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Config"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante il salvataggio"
+          }
+        }
+      }
+    },
+    "/daeService/addNewDae" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "addNewDae",
+        "description" : "Metodo che consente di censire un nuovo Dae",
+        "operationId" : "addNewDae",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Dae che si vuole censire",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DAE"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "DAE censito correttmanete",
+            "schema" : {
+              "$ref" : "#/definitions/NewDAEResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/daeService/deleteDAE" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "deleteDAE",
+        "description" : "Metodo che consente di eliminare logicamente un DAE",
+        "operationId" : "deleteDAE",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Dae che si vuole eliminare",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DAE"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "DAE censito correttmanete",
+            "schema" : {
+              "$ref" : "#/definitions/GenericResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/daeService/getAllDAE" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "getAllDAE",
+        "description" : "Metodo che restituisce la lista completa dei DAE dislocati sul territorio",
+        "operationId" : "getAllDAE",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti i DAE",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DAE"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/daeService/getAllDAEForMap" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "getAllDAEForMap",
+        "description" : "Metodo che restituisce la lista completa dei DAE dislocati sul territorio priva di informazioni aggiuntive",
+        "operationId" : "getAllDAEForMap",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Ottiene la lista di tutti i DAE",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DAE"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/daeService/getDaeById" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "getDaeById",
+        "description" : "Metodo che consente di ottenere le info di uno specifico DAE ",
+        "operationId" : "getDaeById",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Filtro di ricerca - ",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DaeFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "DAE censito correttmanete",
+            "schema" : {
+              "$ref" : "#/definitions/DAE"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/daeService/reportFault" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "reportFault",
+        "description" : "Metodo che consente di segnalare e aggiornare un guasto al DAE",
+        "operationId" : "reportFault",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Filtro di ricerca",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DaeFault"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ricerca eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/DaeFault"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione della ricerca"
+          }
+        }
+      }
+    },
+    "/daeService/saveDae" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "saveDae",
+        "description" : "Metodo che consente di salvare un Dae",
+        "operationId" : "saveDae",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Dae che si vuole censire",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DAE"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "DAE censito correttmanete",
+            "schema" : {
+              "$ref" : "#/definitions/DAE"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/daeService/searchDAEByFilter" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "searchDAEByFilter",
+        "description" : "Metodo che consente di ricerca i Dae mediante un filtro",
+        "operationId" : "searchDAEByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Filtro di ricerca",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DaeFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Ricerca eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/DAE"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione della ricerca"
+          }
+        }
+      }
+    },
+    "/daeService/uploadDAEImage" : {
+      "post" : {
+        "tags" : [ "daeService" ],
+        "summary" : "uploadDAEImage",
+        "description" : "Metodo che consente di caricare un'immagine per un DAE",
+        "operationId" : "uploadDAEImage",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean che consente l'upload dell'immagine",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/DaeImageUpload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Esecuzione corretta del metodo",
+            "schema" : {
+              "$ref" : "#/definitions/DAE"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/abortEvent" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "abortEvent",
+        "description" : "Metodo che consente di comunicare che un'emergenza è stata chiusa/annullata",
+        "operationId" : "abortEvent",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Evento da abortire",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EventInfoRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/GenericResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/checkIntervention" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "checkIntervention",
+        "description" : "Metodo che consente di verificare se un particolare First Responder può intervenire per il soccorso ad un particolare evento",
+        "operationId" : "checkIntervention",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di verifica disponibilità intervento",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/CheckInterventionBean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/CheckInterventionResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/getEventById" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "getEventById",
+        "description" : "Metodo che consente di ottenere le info dell'evento",
+        "operationId" : "getEventById",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di ricerca evento per ID",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EventInfoRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Event"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/getEventInterventionDetails" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "getEventInterventionDetails",
+        "description" : "Metodo che consente di ottenere le info rispetto agli interventi attivi su un Evento",
+        "operationId" : "getEventInterventionDetails",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di ricerca evento per ID",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EventInfoRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Event"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/getMyEvents" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "getMyEvents",
+        "description" : "Metodo che consente di ottenere la lista degli eventi gestiti o di tutti gli eventi potenzialmente gestibili",
+        "operationId" : "getMyEvents",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Event"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/placeArrival" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "placeArrival",
+        "description" : "Metodo che consente di comunicare che un FR è arrivato nei pressi dell'emergenza",
+        "operationId" : "closeIntervention",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di arrivo nei pressi dell'emergenza",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FRPlaceArrivalBean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/FRPlaceArrivalBeanResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/rejectEvent" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "rejectEvent",
+        "description" : "Metodo che consente ad un First Responder di rifiutare l'evento",
+        "operationId" : "rejectEvent",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean informazioni evento",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EventInfoRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/GenericResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emergencyService/searchEventByFilter" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "searchEventByFilter",
+        "description" : "Metodo che consente di cercare gli eventi",
+        "operationId" : "searchEventByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Filtro",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/EventFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Event"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione della ricerca"
+          }
+        }
+      }
+    },
+    "/emergencyService/sendEmergencyEvent" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "sendEmergencyEvent",
+        "description" : "Metodo che consente di notificare ai First Responder una nuova emergenza",
+        "operationId" : "sendEmergencyEvent",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Evento",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Event"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Event"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione della ricerca"
+          }
+        }
+      }
+    },
+    "/emergencyService/sendNotificheEvento" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "sendNotificheEvento",
+        "description" : "Metodo che consente di notificare ai First Responder",
+        "operationId" : "sendEmergencyNotificheEvento",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "NotificheEvento",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Event"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Event"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione della ricerca"
+          }
+        }
+      }
+    },
+    "/emergencyService/updateEvent" : {
+      "post" : {
+        "tags" : [ "emergencyService" ],
+        "summary" : "updateEvent",
+        "description" : "Metodo che consente di comunicare che un'emergenza è stata modificata",
+        "operationId" : "updateEvent",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Evento da aggiornare",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Event"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/GenericResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emsService/getEmergencyEvent/{external_code}" : {
+      "get" : {
+        "tags" : [ "emsService" ],
+        "summary" : "getEmergencyEvent",
+        "description" : "Metodo per il prelievo delle attuali informazioni di un allertamento DAE in corso",
+        "operationId" : "getInfo",
+        "consumes" : [ "text/plain" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "external_code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/DaeResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emsService/sendEmergencyEvent" : {
+      "put" : {
+        "tags" : [ "emsService" ],
+        "summary" : "sendEmergencyEvent",
+        "description" : "Metodo per l'inserimento di un nuovo allertamento DAE",
+        "operationId" : "insert",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/DaeResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/emsService/updateEmergencyEvent/{external_code}" : {
+      "post" : {
+        "tags" : [ "emsService" ],
+        "summary" : "updateEmergencyEvent",
+        "description" : "Metodo per l'aggioranamento di un allertamento DAE",
+        "operationId" : "update",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "external_code",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/DaeResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/acceptPrivacyAgreement" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "acceptPrivacyAgreement",
+        "description" : "Metodo che consente di accettare il disclaimer",
+        "operationId" : "acceptPrivacyAgreement",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/PrivacyAgreement"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/addNewFirstResponder" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "addNewFirstResponder",
+        "description" : "Metodo che consente di registrare un nuovo First Responder",
+        "operationId" : "addNewFirstResponder",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "First Responder",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FirstResponder"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/FirstResponder"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/getAllFR" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "getAllFR",
+        "description" : "Metodo che consente di ottenere la lista di tutti i FirstResponder",
+        "operationId" : "getAllFR",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/FirstResponder"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione della ricerca"
+          }
+        }
+      }
+    },
+    "/frservice/getCurrentPrivacyAgreement" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "getCurrentPrivacyAgreement",
+        "description" : "Metodo che consente di ottenere il disclaimer attuale",
+        "operationId" : "getCurrentPrivacyAgreement",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/PrivacyAgreement"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/getLoggedFirstResponderDetails" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di ottenere le informazionoi relative al First Responder Loggato",
+        "operationId" : "getLoggedFirstResponderDetails",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/FirstResponder"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/searchFirstResponderByFilter" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "searchFirstResponderByFilter",
+        "description" : "Metodo che consente di ricercare i First Responder",
+        "operationId" : "searchFirstResponderByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "First Responder Filter",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FirstResponderFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/FirstResponder"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/updateAvailabilityFR" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "updateAvailabilityFR",
+        "description" : "Metodo che consente di modificare la disponibilità di un First Responder",
+        "operationId" : "updateAvailabilityFR",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di aggiornamento disponibilità",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/UpdateAvailabilityBean"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/UpdateAvailabilityResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/updateFRLocation" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "updateFRLocation",
+        "description" : "Metodo che consente di modificare la disponibilità di un First Responder",
+        "operationId" : "updateFRLocation",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Bean di aggiornamento posizione",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/GPSLocation"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/GenericResponse"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/updateFirstResponderProfileActivation" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di aggiornare",
+        "operationId" : "updateFirstResponderProfileActivation",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/FirstResponder"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/updateImageCertificato" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "updateImageCertificato",
+        "description" : "Metodo che consente di aggiornare l'immagine del certificato  un First Responder",
+        "operationId" : "updateImageCertificato",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "First Responder",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FirstResponderImageUpload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/FirstResponder"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/frservice/updateImageProfilo" : {
+      "post" : {
+        "tags" : [ "frservice" ],
+        "summary" : "updateImageProfilo",
+        "description" : "Metodo che consente di aggiornare l'immagine profilo  un First Responder",
+        "operationId" : "updateImageProfilo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "First Responder",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/FirstResponderImageUpload"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/FirstResponder"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/mailService/getAllMailTemplate" : {
+      "post" : {
+        "tags" : [ "mailService" ],
+        "summary" : "getAllMailTemplate",
+        "description" : "Metodo che restituisce la lista dei Template ",
+        "operationId" : "getAllMailTemplate",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Metodo che restituisce la lista dei Template",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/MailTemplate"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/mailService/saveMailTemplate" : {
+      "post" : {
+        "tags" : [ "mailService" ],
+        "summary" : "saveMailTemplate",
+        "description" : "Metodo per salvare un Template ",
+        "operationId" : "saveMailTemplate",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Template da salvare",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MailTemplate"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Salvataggio Template andato a buon fine",
+            "schema" : {
+              "$ref" : "#/definitions/MailTemplate"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/mailService/searchMailByFilter" : {
+      "post" : {
+        "tags" : [ "mailService" ],
+        "summary" : "searchMailByFilter",
+        "description" : "Metodo per cercare le mail inviate",
+        "operationId" : "searchMailByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "filtro di ricerca",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MailTraceFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "dati caricati dal db",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/MailTrace"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/mailService/sendMail" : {
+      "post" : {
+        "tags" : [ "mailService" ],
+        "summary" : "sendMail",
+        "description" : "Metodo per inviare una mail ",
+        "operationId" : "sendMail",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Dati della mail da inviare",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MailTest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Mail inviata correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/notificationService/deleteNotification/{id}" : {
+      "post" : {
+        "tags" : [ "notificationService" ],
+        "summary" : "deleteNotification",
+        "description" : "Metodo che consente di cancellare le notifiche inviate",
+        "operationId" : "deleteNotification",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante la ricerca"
+          }
+        }
+      }
+    },
+    "/notificationService/getNotificationFR/{messageId}" : {
+      "post" : {
+        "tags" : [ "notificationService" ],
+        "summary" : "getNotificationFR",
+        "description" : "Operazione utile ad ottenere il detaglio dei destinatari di un messaggio",
+        "operationId" : "getNotificationFR",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "messageId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/notificationService/searchNotificationByFilter" : {
+      "post" : {
+        "tags" : [ "notificationService" ],
+        "summary" : "searchNotificationByFilter",
+        "description" : "Metodo che consente di cercare le notifiche inviate",
+        "operationId" : "searchNotificationByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "filter",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/GruppoFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Messaggio"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante la ricerca"
+          }
+        }
+      }
+    },
+    "/notificationService/sendNotificationByFilter" : {
+      "post" : {
+        "tags" : [ "notificationService" ],
+        "summary" : "sendNotificationByFilter",
+        "description" : "Metodo che consente di inviare una notifica generia ai agli filtrati",
+        "operationId" : "sendNotificationByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "messaggio e filtro FR",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MessageFRFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'invio della notifica"
+          }
+        }
+      }
+    },
+    "/notificationService/sendNotificationToFirstResponderList" : {
+      "post" : {
+        "tags" : [ "notificationService" ],
+        "summary" : "sendNotificationToFirstResponderList",
+        "description" : "Metodo che consente di inviare una notifica generia agli FR",
+        "operationId" : "sendNotificationToFirstResponderList",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "messaggio e lista first responder",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MessageFRList"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'invio della notifica"
+          }
+        }
+      }
+    },
+    "/userService/changePassword" : {
+      "post" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente all'utente di cambiare la propria password",
+        "operationId" : "changePassword",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente"
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/getAllGruppi" : {
+      "get" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di caricare la lista dei Gruppi",
+        "operationId" : "getAllGruppi",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Ruolo"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/getAllRuoli" : {
+      "get" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di caricare la lista dei Ruoli",
+        "operationId" : "getAllRuoli",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Ruolo"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/getLoggedUtenteDetails" : {
+      "get" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di ottenere le informazionoi relative all'utente Loggato",
+        "operationId" : "getLoggedUtenteDetails",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Utente"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/saveGruppo" : {
+      "post" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di salvare i dati di un gruppo",
+        "operationId" : "saveGruppo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Gruppo"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/saveUtente" : {
+      "post" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di salvare i dati dell'utente",
+        "operationId" : "saveUtente",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Utente"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/saveUtenteProfilo" : {
+      "post" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di salvare i dati dell'utente loggato",
+        "operationId" : "saveUtenteProfilo",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "$ref" : "#/definitions/Utente"
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    },
+    "/userService/searchUtenteByFilter" : {
+      "post" : {
+        "tags" : [ "userService" ],
+        "summary" : "APPLICATION_JSON",
+        "description" : "Metodo che consente di cercare gli utenti tramite filtro",
+        "operationId" : "searchUtenteByFilter",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Operazione eseguita correttamente",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Utente"
+              }
+            }
+          },
+          "500" : {
+            "description" : "Errore durante l'elaborazione"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AppSession" : {
+      "type" : "object",
+      "properties" : {
+        "token" : {
+          "type" : "string"
+        },
+        "startSessionTime" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "available" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "updatePassword" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "privacyAccepted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "error" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+      "description" : "Bean utilizzato per restituire le informazioni di avvenuta autenticazione"
+    },
+    "CategoriaFr" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "chilometriMinuto" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "accettatiPerIntervento" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "accettaMinusKm" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "colore" : {
+          "type" : "string"
+        },
+        "creataDa" : {
+          "$ref" : "#/definitions/Utente"
+        },
+        "aggiornataDa" : {
+          "$ref" : "#/definitions/Utente"
+        },
+        "aggiornataIl" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "priority" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CategoriaFrDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "chilometriMinuto" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "accettatiPerIntervento" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "accettaMinusKm" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "colore" : {
+          "type" : "string"
+        },
+        "creataDa" : {
+          "$ref" : "#/definitions/UtenteDO"
+        },
+        "aggiornataDa" : {
+          "$ref" : "#/definitions/UtenteDO"
+        },
+        "aggiornataIl" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "visibleOnApp" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "priority" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "CertificatoDae" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DAE"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/Image"
+        },
+        "dataConseguimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "rilasciatoDa" : {
+          "type" : "string"
+        },
+        "dataScadenza" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailScadenza" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CertificatoDaeDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DaeDO"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/ImageDO"
+        },
+        "dataConseguimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "rilasciatoDa" : {
+          "type" : "string"
+        },
+        "dataScadenza" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailScadenza" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CertificatoFr" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/Image"
+        },
+        "dataConseguimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "rilasciatoDa" : {
+          "type" : "string"
+        },
+        "dataScadenza" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailScadenza" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CertificatoFrDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstResponder" : {
+          "$ref" : "#/definitions/FirstResponderDO"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/ImageDO"
+        },
+        "dataConseguimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "rilasciatoDa" : {
+          "type" : "string"
+        },
+        "dataScadenza" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "emailScadenza" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ChartResult" : {
+      "type" : "object",
+      "properties" : {
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "labels" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "dataSet" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "CheckInterventionBean" : {
+      "type" : "object",
+      "properties" : {
+        "event" : {
+          "$ref" : "#/definitions/Event"
+        }
+      },
+      "description" : "Modello dati utilizzato per verificare se un First Responder può effettivamente gestire un intervento"
+    },
+    "CheckInterventionResponse" : {
+      "type" : "object",
+      "properties" : {
+        "canManageIntervention" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "note" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati  di risposta  per verificare se un First Responder può effettivamente gestire un intervento"
+    },
+    "Comune" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nomeComune" : {
+          "type" : "string"
+        },
+        "codiceIstat" : {
+          "type" : "string"
+        },
+        "cap" : {
+          "type" : "string"
+        },
+        "provincia" : {
+          "$ref" : "#/definitions/Provincia"
+        }
+      }
+    },
+    "ComuneDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nomeComune" : {
+          "type" : "string"
+        },
+        "codiceIstat" : {
+          "type" : "string"
+        },
+        "provincia" : {
+          "$ref" : "#/definitions/ProvinciaDO"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "ComuneFilter" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nomeComune" : {
+          "type" : "string"
+        },
+        "codiceIstat" : {
+          "type" : "string"
+        },
+        "nomeProvincia" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati utile alla ricerca dei Comuni"
+    },
+    "Config" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "parametro" : {
+          "type" : "string"
+        },
+        "valore" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "CredentialsBean" : {
+      "type" : "object",
+      "properties" : {
+        "username" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "passwordHash" : {
+          "type" : "string"
+        },
+        "deviceInfo" : {
+          "$ref" : "#/definitions/Dispositivo"
+        }
+      },
+      "description" : "Bean utilizzato per l'autenticazione utente"
+    },
+    "DAE" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "operativo" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "matricola" : {
+          "type" : "string"
+        },
+        "modello" : {
+          "type" : "string"
+        },
+        "tipo" : {
+          "type" : "string"
+        },
+        "alias" : {
+          "type" : "string"
+        },
+        "certificatoDae" : {
+          "$ref" : "#/definitions/CertificatoDae"
+        },
+        "tipologiaStruttura" : {
+          "$ref" : "#/definitions/TipoStruttura"
+        },
+        "nomeSede" : {
+          "type" : "string"
+        },
+        "responsabile" : {
+          "$ref" : "#/definitions/Responsabile"
+        },
+        "ubicazione" : {
+          "type" : "string"
+        },
+        "disponibilita" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Disponibile"
+          }
+        },
+        "notediAccessoallaSede" : {
+          "type" : "string"
+        },
+        "gpsLocation" : {
+          "$ref" : "#/definitions/GPSLocation"
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/Image"
+        },
+        "scadenzaDae" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "programmiManutenzione" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/ProgrammaManutenzione"
+          }
+        },
+        "noteGenerali" : {
+          "type" : "string"
+        },
+        "currentStato" : {
+          "$ref" : "#/definitions/Stato"
+        },
+        "distance" : {
+          "$ref" : "#/definitions/Distance"
+        },
+        "creatoDA" : {
+          "$ref" : "#/definitions/Utente"
+        },
+        "statoValidazione" : {
+          "type" : "string",
+          "enum" : [ "DA_VALIDARE", "VALIDATO" ]
+        },
+        "dataInserimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "timestampInserimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "guasti" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DaeFaultDO"
+          }
+        }
+      },
+      "description" : "Modello dati che rappresenta un Defibrillatore Automatico Elettronico"
+    },
+    "DaeDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "operativo" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "matricola" : {
+          "type" : "string"
+        },
+        "modello" : {
+          "type" : "string"
+        },
+        "tipo" : {
+          "type" : "string"
+        },
+        "alias" : {
+          "type" : "string"
+        },
+        "certificatoDae" : {
+          "$ref" : "#/definitions/CertificatoDaeDO"
+        },
+        "tipologiaStruttura" : {
+          "$ref" : "#/definitions/TipoStrutturaDO"
+        },
+        "nomeSede" : {
+          "type" : "string"
+        },
+        "responsabile" : {
+          "$ref" : "#/definitions/ResponsabileDO"
+        },
+        "ubicazione" : {
+          "type" : "string"
+        },
+        "disponibilita" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DisponibileDO"
+          }
+        },
+        "notediAccessoallaSede" : {
+          "type" : "string"
+        },
+        "posizione" : {
+          "$ref" : "#/definitions/LocationDO"
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/ImageDO"
+        },
+        "scadenzaDae" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dataInserimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "timestampInserimento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "programmiManutenzione" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/ProgrammaManutenzioneDO"
+          }
+        },
+        "noteGenerali" : {
+          "type" : "string"
+        },
+        "creatoDA" : {
+          "$ref" : "#/definitions/UtenteDO"
+        },
+        "storicoStatoDAE" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/StatoDAEDO"
+          }
+        },
+        "guasti" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DaeFaultDO"
+          }
+        },
+        "currentStato" : {
+          "$ref" : "#/definitions/StatoDO"
+        },
+        "statoValidazione" : {
+          "type" : "string",
+          "enum" : [ "DA_VALIDARE", "VALIDATO" ]
+        }
+      }
+    },
+    "DaeEventAlert" : {
+      "type" : "object",
+      "properties" : {
+        "code_external" : {
+          "type" : "string"
+        },
+        "record_state" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "surname" : {
+          "type" : "string"
+        },
+        "place" : {
+          "type" : "string"
+        },
+        "street" : {
+          "type" : "string"
+        },
+        "floor" : {
+          "type" : "string"
+        },
+        "observation" : {
+          "type" : "string"
+        },
+        "estimated_time" : {
+          "type" : "string"
+        },
+        "ope_ins" : {
+          "type" : "string"
+        },
+        "area" : {
+          "type" : "string"
+        },
+        "groups" : {
+          "type" : "string"
+        },
+        "fr_category" : {
+          "type" : "string"
+        },
+        "latitude" : {
+          "type" : "string"
+        },
+        "longitude" : {
+          "type" : "string"
+        },
+        "first_responders" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/DaeResponder"
+          }
+        },
+        "accepted" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "civic_number" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DaeFault" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DAE"
+        },
+        "utente" : {
+          "$ref" : "#/definitions/Utente"
+        },
+        "tipologia" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        },
+        "dataSegnalazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "statoAttuale" : {
+          "type" : "string",
+          "enum" : [ "APERTA", "DA_VERIFICARE", "VERIFICATA", "ERRATA", "AZIONI_INTRAPRESE", "RISOLTA", "CHIUSA" ]
+        }
+      }
+    },
+    "DaeFaultDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DaeDO"
+        },
+        "utente" : {
+          "$ref" : "#/definitions/UtenteDO"
+        },
+        "tipologia" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        },
+        "dataSegnalazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "statoAttuale" : {
+          "type" : "string",
+          "enum" : [ "APERTA", "DA_VERIFICARE", "VERIFICATA", "ERRATA", "AZIONI_INTRAPRESE", "RISOLTA", "CHIUSA" ]
+        }
+      }
+    },
+    "DaeFilter" : {
+      "type" : "object",
+      "properties" : {
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        },
+        "fetchRule" : {
+          "type" : "string"
+        },
+        "orderBy" : {
+          "$ref" : "#/definitions/OrderBy"
+        },
+        "cacheable" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "cacheRegion" : {
+          "type" : "string"
+        },
+        "filter" : {
+          "type" : "string"
+        },
+        "maxResult" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "provinces" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "posizione" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "type" : "string"
+        },
+        "modello" : {
+          "type" : "string"
+        },
+        "tipo" : {
+          "type" : "string"
+        },
+        "scadenzaDae" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "tipologiaStruttura" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "type" : "string"
+        },
+        "nomeSede" : {
+          "type" : "string"
+        },
+        "location" : {
+          "$ref" : "#/definitions/LocationFilter"
+        },
+        "pageSize" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "fromIndex" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "distanceRange" : {
+          "type" : "string",
+          "enum" : [ "METRI", "CHILOMETRI" ]
+        },
+        "statoValidazione" : {
+          "type" : "string",
+          "enum" : [ "DA_VALIDARE", "VALIDATO" ]
+        },
+        "operativo" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "scadenzaManutenzioneDa" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "scadenzaManutenzioneA" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "tipoManutenzione" : {
+          "type" : "string",
+          "enum" : [ "MANUTENZIONE_ELETTRODI", "MANUTENZIONE_BATTERIE" ]
+        },
+        "isInFault" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "faultState" : {
+          "type" : "string",
+          "enum" : [ "APERTA", "DA_VERIFICARE", "VERIFICATA", "ERRATA", "AZIONI_INTRAPRESE", "RISOLTA", "CHIUSA" ]
+        }
+      },
+      "description" : "Modello dati utile alla ricerca dei DAE"
+    },
+    "DaeImageUpload" : {
+      "type" : "object",
+      "properties" : {
+        "daeID" : {
+          "type" : "string"
+        },
+        "base64Image" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Bean che consente di caricare un'immagine (Base64) ed associarlo ad un DAE"
+    },
+    "DaeResponder" : {
+      "type" : "object",
+      "properties" : {
+        "first_name" : {
+          "type" : "string"
+        },
+        "last_name" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "phone_number" : {
+          "type" : "string"
+        },
+        "fr_category" : {
+          "type" : "string"
+        },
+        "accepted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "request_time" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "started" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "start_time" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "onsite" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "onsite_time" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "update_time" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "latitude" : {
+          "type" : "string"
+        },
+        "longitude" : {
+          "type" : "string"
+        },
+        "altitude" : {
+          "type" : "string"
+        },
+        "speed" : {
+          "type" : "string"
+        },
+        "course" : {
+          "type" : "string"
+        },
+        "accuracy" : {
+          "type" : "string"
+        },
+        "distance" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DaeResponse" : {
+      "type" : "object",
+      "properties" : {
+        "data" : {
+          "$ref" : "#/definitions/DaeResponseData"
+        },
+        "error" : {
+          "$ref" : "#/definitions/DaeResponseError"
+        },
+        "success" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "time" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "DaeResponseData" : {
+      "type" : "object",
+      "properties" : {
+        "intervention" : {
+          "$ref" : "#/definitions/DaeEventAlert"
+        },
+        "errors" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "DaeResponseError" : {
+      "type" : "object",
+      "properties" : {
+        "developerMessage" : {
+          "type" : "string"
+        },
+        "userMessage" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Disponibile" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DAE"
+        },
+        "da" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "a" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "orarioDa" : {
+          "type" : "string"
+        },
+        "orarioA" : {
+          "type" : "string"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "disponibilitaSpecifica" : {
+          "$ref" : "#/definitions/DisponibilitaSpecifica"
+        },
+        "disponibilitaEccezioni" : {
+          "$ref" : "#/definitions/DisponibilitaEccezioni"
+        }
+      }
+    },
+    "DisponibileDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DaeDO"
+        },
+        "disponibilitaEccezioni" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DisponibilitaEccezioniDO"
+          }
+        },
+        "disponibilitaSpecifica" : {
+          "$ref" : "#/definitions/DisponibilitaSpecificaDO"
+        },
+        "da" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "a" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "orarioDa" : {
+          "type" : "string"
+        },
+        "orarioA" : {
+          "type" : "string"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "DisponibilitaEccezioni" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "idDisponibilita" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "motivazione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DisponibilitaEccezioniDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "disponibilita" : {
+          "$ref" : "#/definitions/DisponibileDO"
+        },
+        "data" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "motivazione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DisponibilitaGiornaliera" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "orarioDa" : {
+          "type" : "string"
+        },
+        "orarioA" : {
+          "type" : "string"
+        },
+        "giornoSettimana" : {
+          "type" : "string",
+          "enum" : [ "LUNEDI", "MARTEDI", "MERCOLEDI", "GIOVEDI", "VENERDI", "SABATO", "DOMENICA" ]
+        }
+      }
+    },
+    "DisponibilitaGiornalieraDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "disponibilitaSpecifica" : {
+          "$ref" : "#/definitions/DisponibilitaSpecificaDO"
+        },
+        "orarioDa" : {
+          "type" : "string"
+        },
+        "orarioA" : {
+          "type" : "string"
+        },
+        "giornoSettimana" : {
+          "type" : "string",
+          "enum" : [ "LUNEDI", "MARTEDI", "MERCOLEDI", "GIOVEDI", "VENERDI", "SABATO", "DOMENICA" ]
+        }
+      }
+    },
+    "DisponibilitaSpecifica" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "disponibilitaGiornaliera" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DisponibilitaGiornaliera"
+          }
+        }
+      }
+    },
+    "DisponibilitaSpecificaDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "disponibilita" : {
+          "$ref" : "#/definitions/DisponibileDO"
+        },
+        "disponibilitaGiornaliera" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DisponibilitaGiornalieraDO"
+          }
+        }
+      }
+    },
+    "DispositiviDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstResponder" : {
+          "$ref" : "#/definitions/FirstResponderDO"
+        },
+        "marca" : {
+          "type" : "string"
+        },
+        "modello" : {
+          "type" : "string"
+        },
+        "pushToken" : {
+          "type" : "string"
+        },
+        "os" : {
+          "type" : "string"
+        },
+        "ultimoAccesso" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "Dispositivo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "marca" : {
+          "type" : "string"
+        },
+        "modello" : {
+          "type" : "string"
+        },
+        "os" : {
+          "type" : "string"
+        },
+        "pushToken" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati che rappresenta un Dispositivo"
+    },
+    "Distance" : {
+      "type" : "object",
+      "properties" : {
+        "distance" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "unit" : {
+          "type" : "string",
+          "enum" : [ "METRI", "CHILOMETRI" ]
+        }
+      }
+    },
+    "DomandaQuestionario" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "domanda" : {
+          "type" : "string"
+        },
+        "tipoRisposta" : {
+          "type" : "string"
+        }
+      }
+    },
+    "DomandaQuestionarioDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "risposteQuestionarioFirstResponder" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/RispostaQuestionarioFirstResponderDO"
+          }
+        },
+        "questionario" : {
+          "$ref" : "#/definitions/QuestionarioDO"
+        },
+        "domanda" : {
+          "type" : "string"
+        },
+        "tipoRisposta" : {
+          "type" : "string"
+        }
+      }
+    },
+    "EnteCertificatore" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "onlyForMed" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "Event" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "telefono" : {
+          "type" : "string"
+        },
+        "info" : {
+          "type" : "string"
+        },
+        "coRiferimento" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "riferimento" : {
+          "type" : "string"
+        },
+        "coordinate" : {
+          "$ref" : "#/definitions/GPSLocation"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "type" : "string"
+        },
+        "provincia" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        },
+        "cartellino" : {
+          "type" : "string"
+        },
+        "tempoArrivoAmbulanza" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "categoria" : {
+          "$ref" : "#/definitions/CategoriaFr"
+        },
+        "interventi" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Intervento"
+          }
+        },
+        "notifiche" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Event"
+          }
+        },
+        "managementStatus" : {
+          "type" : "string",
+          "enum" : [ "SELF_MANAGED", "NOT_MANAGED" ]
+        },
+        "accettati" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "closed" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "abortDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "closeDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "description" : "Modello dati che rappresenta una emergenza di tipo cardiaco da poter asservire"
+    },
+    "EventDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "telefono" : {
+          "type" : "string"
+        },
+        "info" : {
+          "type" : "string"
+        },
+        "timestamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "data" : {
+          "type" : "string"
+        },
+        "closed" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "riferimento" : {
+          "type" : "string"
+        },
+        "coordinate" : {
+          "$ref" : "#/definitions/GPSLocationDO"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "type" : "string"
+        },
+        "provincia" : {
+          "type" : "string"
+        },
+        "notifiche" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/NotificheEventoDO"
+          }
+        },
+        "interventi" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/InterventoDO"
+          }
+        },
+        "note" : {
+          "type" : "string"
+        },
+        "tempoArrivoAmbulanza" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "coRiferimento" : {
+          "type" : "string"
+        },
+        "categoriaFr" : {
+          "$ref" : "#/definitions/CategoriaFrDO"
+        },
+        "closeDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "abortDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "cartellino" : {
+          "type" : "string"
+        },
+        "acceptedResponders" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "EventFilter" : {
+      "type" : "object",
+      "properties" : {
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        },
+        "fetchRule" : {
+          "type" : "string"
+        },
+        "orderBy" : {
+          "$ref" : "#/definitions/OrderBy"
+        },
+        "cacheable" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "cacheRegion" : {
+          "type" : "string"
+        },
+        "filter" : {
+          "type" : "string"
+        },
+        "maxResult" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "provinces" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "dataDA" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dataA" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "comune" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "type" : "string"
+        },
+        "cartellinoEvento" : {
+          "type" : "string"
+        },
+        "nomeFR" : {
+          "type" : "string"
+        },
+        "cognomeFR" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati utile alla ricerca degli Eventi"
+    },
+    "EventInfoRequest" : {
+      "type" : "object",
+      "properties" : {
+        "eventId" : {
+          "type" : "string"
+        },
+        "cartellino" : {
+          "type" : "string"
+        },
+        "coRiferimento" : {
+          "type" : "string"
+        }
+      }
+    },
+    "FRPlaceArrivalBean" : {
+      "type" : "object",
+      "properties" : {
+        "eventId" : {
+          "type" : "string"
+        },
+        "coordinate" : {
+          "$ref" : "#/definitions/GPSLocation"
+        }
+      }
+    },
+    "FRPlaceArrivalBeanResponse" : {
+      "type" : "object",
+      "properties" : {
+        "eventId" : {
+          "type" : "string"
+        },
+        "success" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "FirstResponder" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "$ref" : "#/definitions/Strade"
+        },
+        "comuneResidenza" : {
+          "$ref" : "#/definitions/Comune"
+        },
+        "codiceFiscale" : {
+          "type" : "string"
+        },
+        "language" : {
+          "type" : "string"
+        },
+        "logon" : {
+          "type" : "string"
+        },
+        "ruoli" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Ruolo"
+          }
+        },
+        "passwordHash" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "statoUtente" : {
+          "type" : "string"
+        },
+        "dataNascita" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "gruppi" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Gruppo"
+          }
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/Image"
+        },
+        "numCellulare" : {
+          "type" : "string"
+        },
+        "categoriaFr" : {
+          "$ref" : "#/definitions/CategoriaFr"
+        },
+        "statoProfilo" : {
+          "type" : "string",
+          "enum" : [ "ATTIVO", "IN_ATTESA_DI_ATTIVAZIONE" ]
+        },
+        "certificatoFr" : {
+          "$ref" : "#/definitions/CertificatoFr"
+        },
+        "richiesteEseguite" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "interventiEseguiti" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "profiloSanitario" : {
+          "$ref" : "#/definitions/ProfiloSanitario"
+        },
+        "lastPosition" : {
+          "$ref" : "#/definitions/GPSLocation"
+        },
+        "privacyAcceptedDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "disponibile" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "dataIscrizione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dispositivo" : {
+          "$ref" : "#/definitions/Dispositivo"
+        },
+        "medicoFr" : {
+          "$ref" : "#/definitions/MedicoFr"
+        },
+        "professione" : {
+          "$ref" : "#/definitions/Professione"
+        },
+        "questionarioFirstResponder" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/QuestionarioFirstResponder"
+          }
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati che rappresenta una First Responder"
+    },
+    "FirstResponderDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "utente" : {
+          "$ref" : "#/definitions/UtenteDO"
+        },
+        "categoriaFr" : {
+          "$ref" : "#/definitions/CategoriaFrDO"
+        },
+        "statoProfilo" : {
+          "type" : "string",
+          "enum" : [ "ATTIVO", "IN_ATTESA_DI_ATTIVAZIONE" ]
+        },
+        "certificatoFr" : {
+          "$ref" : "#/definitions/CertificatoFrDO"
+        },
+        "richiesteEseguite" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "interventiEseguiti" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "interventi" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/InterventoDO"
+          }
+        },
+        "numCellulare" : {
+          "type" : "string"
+        },
+        "disponibile" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "privacyAcceptedDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dispositivo" : {
+          "$ref" : "#/definitions/DispositiviDO"
+        },
+        "profiloSanitario" : {
+          "$ref" : "#/definitions/ProfiloSanitarioDO"
+        },
+        "lastPosition" : {
+          "$ref" : "#/definitions/LocationDO"
+        },
+        "questionarioFirstResponder" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/QuestionarioFirstResponderDO"
+          }
+        },
+        "dataIscrizione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "medicoFr" : {
+          "$ref" : "#/definitions/MedicoFrDO"
+        },
+        "professione" : {
+          "$ref" : "#/definitions/ProfessioneDO"
+        }
+      }
+    },
+    "FirstResponderFilter" : {
+      "type" : "object",
+      "properties" : {
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        },
+        "fetchRule" : {
+          "type" : "string"
+        },
+        "orderBy" : {
+          "$ref" : "#/definitions/OrderBy"
+        },
+        "cacheable" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "cacheRegion" : {
+          "type" : "string"
+        },
+        "filter" : {
+          "type" : "string"
+        },
+        "maxResult" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "provinces" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "categoriaFrIDS" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "daAttivare" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "coordinatesFromMinutes" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "categoriaDescription" : {
+          "type" : "string"
+        },
+        "location" : {
+          "$ref" : "#/definitions/GPSLocation"
+        },
+        "distanceRange" : {
+          "type" : "string",
+          "enum" : [ "METRI", "CHILOMETRI" ]
+        },
+        "isAvailable" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "notInIntervention" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "statoProfilo" : {
+          "type" : "string",
+          "enum" : [ "ATTIVO", "IN_ATTESA_DI_ATTIVAZIONE" ]
+        },
+        "comune" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati utile alla ricerca dei First Responder"
+    },
+    "FirstResponderImageUpload" : {
+      "type" : "object",
+      "properties" : {
+        "base64Image" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Bean che consente di caricare un'immagine (Base64) ed associarlo ad un FR o ad un certificato"
+    },
+    "GPSLocation" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "$ref" : "#/definitions/Comune"
+        },
+        "indirizzo" : {
+          "$ref" : "#/definitions/Strade"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "luogoPubblico" : {
+          "type" : "string"
+        },
+        "tipoLuogoPubblico" : {
+          "type" : "string"
+        },
+        "latitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "longitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "altitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "error" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "timeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "description" : "Modello dati che rappresenta una coordinata GPS"
+    },
+    "GPSLocationDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "location" : {
+          "$ref" : "#/definitions/LocationDO"
+        },
+        "latitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "longitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "altitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "error" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "timeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "GenericResponse" : {
+      "type" : "object",
+      "properties" : {
+        "response" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "message" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Gruppo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "province" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/GruppoProvincia"
+          }
+        }
+      }
+    },
+    "GruppoDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "utenti" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/UtenteDO"
+          }
+        },
+        "province" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/GruppoProvinciaDO"
+          }
+        }
+      }
+    },
+    "GruppoFilter" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "da" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "a" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "description" : "Modello dati utile alla ricerca dei Gruppi"
+    },
+    "GruppoProvincia" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nomeProvincia" : {
+          "type" : "string"
+        }
+      }
+    },
+    "GruppoProvinciaDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "gruppo" : {
+          "$ref" : "#/definitions/GruppoDO"
+        },
+        "nomeProvincia" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Image" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "string"
+        },
+        "url" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ImageDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Intervento" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "event" : {
+          "$ref" : "#/definitions/Event"
+        },
+        "dataCreazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "durata" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "dataAccettazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dataRifiuto" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "rifiutatoDa" : {
+          "type" : "string"
+        },
+        "accettatoDa" : {
+          "type" : "string"
+        },
+        "eseguitoDa" : {
+          "$ref" : "#/definitions/FirstResponder"
+        },
+        "dataAnnullamento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "annullatoDa" : {
+          "type" : "string"
+        },
+        "dataChiusura" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "chiusoDa" : {
+          "type" : "string"
+        },
+        "latitudineArrivo" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "longitudineArrivo" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "osservazione" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati che rappresenta un intervento preso in gestione dal First Responder"
+    },
+    "InterventoCoordDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "intervento" : {
+          "$ref" : "#/definitions/InterventoDO"
+        },
+        "dataCreazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "latitudine" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "longitudine" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      }
+    },
+    "InterventoDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "event" : {
+          "$ref" : "#/definitions/EventDO"
+        },
+        "dataCreazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "durata" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "dataAccettazione" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dataRifiuto" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "coordinate" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/InterventoCoordDO"
+          }
+        },
+        "dataChiusura" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "chiusoDa" : {
+          "type" : "string"
+        },
+        "dataAnnullamento" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "annullatoDa" : {
+          "type" : "string"
+        },
+        "rifiutatoDa" : {
+          "type" : "string"
+        },
+        "accettatoDa" : {
+          "type" : "string"
+        },
+        "eseguitoDa" : {
+          "$ref" : "#/definitions/FirstResponderDO"
+        },
+        "latitudineArrivo" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "longitudineArrivo" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "osservazione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LocationDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "$ref" : "#/definitions/ComuneDO"
+        },
+        "indirizzo" : {
+          "$ref" : "#/definitions/StradeDO"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "luogoPubblico" : {
+          "type" : "string"
+        },
+        "tipoLuogoPubblico" : {
+          "type" : "string"
+        },
+        "gpsLocation" : {
+          "$ref" : "#/definitions/GPSLocationDO"
+        }
+      }
+    },
+    "LocationFilter" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "latitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "longitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "altitudine" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "error" : {
+          "type" : "number",
+          "format" : "float"
+        },
+        "timeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "srid" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "geoJSON" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MailTemplate" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MailTest" : {
+      "type" : "object",
+      "properties" : {
+        "mail" : {
+          "type" : "string"
+        },
+        "destinatario" : {
+          "type" : "string"
+        },
+        "entityType" : {
+          "type" : "string",
+          "enum" : [ "USER", "DAE" ]
+        },
+        "entityId" : {
+          "type" : "string"
+        },
+        "mailTemplate" : {
+          "type" : "string",
+          "enum" : [ "RESET_PWD_MAIL_TEMPLATE", "NEW_PWD_MAIL_TEMPLATE", "ENABLE_FR_MAIL_TEMPLATE", "NEW_USER_MAIL_TEMPLATE", "NEW_PASSWORD_MAIL_TEMPLATE", "SCADENZA_SEMESTRALE_MAIL_TEMPLATE", "SCADENZA_MANUTENZIONE_MAIL_TEMPLATE", "MANUTENZIONE_SCADUTA_MAIL_TEMPLATE", "PASSWORD_CHANGED_HTML_TEMPLATE", "PASSWORD_CHANGED_ERROR_HTML_TEMPLATE", "PASSWORD_NOT_CHANGED_HTML_TEMPLATE" ]
+        }
+      }
+    },
+    "MailTrace" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "destinatario" : {
+          "type" : "string"
+        },
+        "mailTemplate" : {
+          "$ref" : "#/definitions/MailTemplate"
+        },
+        "dataInvio" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "entityType" : {
+          "type" : "string"
+        },
+        "entityId" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MailTraceFilter" : {
+      "type" : "object",
+      "properties" : {
+        "destinatario" : {
+          "type" : "string"
+        },
+        "dataDa" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "dataA" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "Manutentore" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "type" : "string"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "$ref" : "#/definitions/Comune"
+        },
+        "tel" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ManutentoreDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "$ref" : "#/definitions/ComuneDO"
+        },
+        "tel" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MedicoFr" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dataLaurea" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "numIscrizioneOrdine" : {
+          "type" : "string"
+        },
+        "ordine" : {
+          "type" : "string"
+        },
+        "universita" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MedicoFrDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dataLaurea" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "numIscrizioneOrdine" : {
+          "type" : "string"
+        }
+      }
+    },
+    "MessageFRFilter" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "filter" : {
+          "$ref" : "#/definitions/FirstResponderFilter"
+        }
+      }
+    },
+    "MessageFRList" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "firstResponders" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/FirstResponder"
+          }
+        }
+      }
+    },
+    "Messaggio" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "testo" : {
+          "type" : "string"
+        },
+        "invio" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "responders" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/FirstResponder"
+          }
+        },
+        "destinatari" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "deleted" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "stato" : {
+          "type" : "string"
+        }
+      }
+    },
+    "NewDAEResponse" : {
+      "type" : "object",
+      "properties" : {
+        "timeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "esito" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "messaggio" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati che rappresenta l'esito di un censimento di  Defibrillatore Automatico Elettronico"
+    },
+    "NotificheEventoDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstResponder" : {
+          "$ref" : "#/definitions/FirstResponderDO"
+        },
+        "event" : {
+          "$ref" : "#/definitions/EventDO"
+        },
+        "timestamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "tipoNotifica" : {
+          "type" : "string",
+          "enum" : [ "NUOVA_EMERGENZA", "ABORT", "UPDATE" ]
+        },
+        "esito" : {
+          "type" : "string"
+        }
+      }
+    },
+    "OrderBy" : {
+      "type" : "object",
+      "properties" : {
+        "property" : {
+          "type" : "string"
+        },
+        "ascending" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "Paging" : {
+      "type" : "object",
+      "properties" : {
+        "firstResult" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "maxResults" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "PasswordHistoryDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "passwordHash" : {
+          "type" : "string"
+        },
+        "utente" : {
+          "$ref" : "#/definitions/UtenteDO"
+        },
+        "creationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "temporany" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "PrivacyAgreement" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "agreementText" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Professione" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ProfessioneDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ProfessioneFilter" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ProfiloSanitario" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ordine" : {
+          "type" : "string"
+        },
+        "numIscrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ProfiloSanitarioDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "ordine" : {
+          "type" : "string"
+        },
+        "numIscrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ProgrammaManutenzione" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "intervallotraInterventi" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "durata" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DAE"
+        },
+        "scadenzaDopo" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "responsabile" : {
+          "$ref" : "#/definitions/Manutentore"
+        },
+        "stato" : {
+          "type" : "string"
+        },
+        "nota" : {
+          "type" : "string"
+        },
+        "tipoManutenzione" : {
+          "type" : "string"
+        },
+        "mailAlert" : {
+          "type" : "string",
+          "enum" : [ "NON_INVIATA", "PRIMA_ALERT", "SECONDA_ALERT", "SCADUTA" ]
+        }
+      }
+    },
+    "ProgrammaManutenzioneDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DaeDO"
+        },
+        "intervallotraInterventi" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "durata" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "scadenzaDopo" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "responsabile" : {
+          "$ref" : "#/definitions/ManutentoreDO"
+        },
+        "stato" : {
+          "type" : "string"
+        },
+        "nota" : {
+          "type" : "string"
+        },
+        "tipoManutenzione" : {
+          "type" : "string"
+        },
+        "mailAlert" : {
+          "type" : "string",
+          "enum" : [ "NON_INVIATA", "PRIMA_ALERT", "SECONDA_ALERT", "SCADUTA" ]
+        }
+      }
+    },
+    "Province" : {
+      "type" : "object",
+      "properties" : {
+        "content" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Provincia" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nomeProvincia" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ProvinciaDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nomeProvincia" : {
+          "type" : "string"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "QuestionarioDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "domandaQuestionario" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DomandaQuestionarioDO"
+          }
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "QuestionarioFirstResponder" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "rispostaQuestionarioFirstResponder" : {
+          "$ref" : "#/definitions/RispostaQuestionarioFirstResponder"
+        }
+      }
+    },
+    "QuestionarioFirstResponderDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstResponder" : {
+          "$ref" : "#/definitions/FirstResponderDO"
+        },
+        "rispostaQuestionarioFirstResponder" : {
+          "$ref" : "#/definitions/RispostaQuestionarioFirstResponderDO"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "ResetPasswordBean" : {
+      "type" : "object",
+      "properties" : {
+        "emailAddress" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Bean utilizzato per il reset della password"
+    },
+    "Responsabile" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "telefono" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "indirizzoResidenza" : {
+          "type" : "string"
+        },
+        "comuneResidenza" : {
+          "$ref" : "#/definitions/Comune"
+        },
+        "codiceFiscale" : {
+          "type" : "string"
+        },
+        "dataNascita" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "whatsApp" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "ResponsabileDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DaeDO"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "telefono" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "indirizzoResidenza" : {
+          "type" : "string"
+        },
+        "comuneResidenza" : {
+          "$ref" : "#/definitions/ComuneDO"
+        },
+        "codiceFiscale" : {
+          "type" : "string"
+        },
+        "dataNascita" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "whatsApp" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      }
+    },
+    "ReverseGeocodingResult" : {
+      "type" : "object",
+      "properties" : {
+        "strada" : {
+          "$ref" : "#/definitions/Strade"
+        }
+      },
+      "description" : "Bean di ritorno delle operazioni di reverse geocoding"
+    },
+    "RispostaQuestionarioFirstResponder" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "domandaQuestionario" : {
+          "$ref" : "#/definitions/DomandaQuestionario"
+        },
+        "risposta" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RispostaQuestionarioFirstResponderDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "questionarioFirstResponder" : {
+          "$ref" : "#/definitions/QuestionarioFirstResponderDO"
+        },
+        "domandaQuestionario" : {
+          "$ref" : "#/definitions/DomandaQuestionarioDO"
+        },
+        "risposta" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Ruolo" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RuoloDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SidebarChild" : {
+      "type" : "object",
+      "properties" : {
+        "role" : {
+          "type" : "string"
+        },
+        "text" : {
+          "type" : "string"
+        },
+        "target" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SidebarMenu" : {
+      "type" : "object",
+      "properties" : {
+        "role" : {
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "iconClass" : {
+          "type" : "string"
+        },
+        "target" : {
+          "type" : "string"
+        },
+        "childs" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SidebarChild"
+          }
+        }
+      }
+    },
+    "Stato" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        }
+      }
+    },
+    "StatoDAE" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "stato" : {
+          "$ref" : "#/definitions/Stato"
+        },
+        "validoDa" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "validoA" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "StatoDAEDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "dae" : {
+          "$ref" : "#/definitions/DaeDO"
+        },
+        "stato" : {
+          "$ref" : "#/definitions/StatoDO"
+        },
+        "validoDa" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "validoA" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "StatoDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Strade" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "$ref" : "#/definitions/Comune"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      }
+    },
+    "StradeDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "comune" : {
+          "$ref" : "#/definitions/ComuneDO"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        }
+      }
+    },
+    "StradeFilter" : {
+      "type" : "object",
+      "properties" : {
+        "paging" : {
+          "$ref" : "#/definitions/Paging"
+        },
+        "fetchRule" : {
+          "type" : "string"
+        },
+        "orderBy" : {
+          "$ref" : "#/definitions/OrderBy"
+        },
+        "cacheable" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "cacheRegion" : {
+          "type" : "string"
+        },
+        "filter" : {
+          "type" : "string"
+        },
+        "maxResult" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "codiceIstatComune" : {
+          "type" : "string"
+        },
+        "nomeComune" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati utile alla ricerca delle Strade"
+    },
+    "TipoProgrammaManutenzione" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TipoStruttura" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "TipoStrutturaDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "descrizione" : {
+          "type" : "string"
+        }
+      }
+    },
+    "UpdateAvailabilityBean" : {
+      "type" : "object",
+      "properties" : {
+        "available" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+      "description" : "Modello dati utile a modificare la disponibilità di un First Responder"
+    },
+    "UpdateAvailabilityResponse" : {
+      "type" : "object",
+      "properties" : {
+        "success" : {
+          "type" : "boolean",
+          "default" : false
+        }
+      },
+      "description" : "Modello dati utilizzato per ottenere l'esito dell'operazione di cambio disponibilità"
+    },
+    "Utente" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "indirizzo" : {
+          "$ref" : "#/definitions/Strade"
+        },
+        "comuneResidenza" : {
+          "$ref" : "#/definitions/Comune"
+        },
+        "codiceFiscale" : {
+          "type" : "string"
+        },
+        "language" : {
+          "type" : "string"
+        },
+        "logon" : {
+          "type" : "string"
+        },
+        "ruoli" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Ruolo"
+          }
+        },
+        "passwordHash" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        },
+        "statoUtente" : {
+          "type" : "string"
+        },
+        "dataNascita" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "gruppi" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/Gruppo"
+          }
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/Image"
+        },
+        "name" : {
+          "type" : "string"
+        }
+      },
+      "description" : "Modello dati che rappresenta un Utente"
+    },
+    "UtenteDO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "firstResponder" : {
+          "$ref" : "#/definitions/FirstResponderDO"
+        },
+        "nome" : {
+          "type" : "string"
+        },
+        "cognome" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "civico" : {
+          "type" : "string"
+        },
+        "dataNascita" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "indirizzo" : {
+          "$ref" : "#/definitions/StradeDO"
+        },
+        "comuneResidenza" : {
+          "$ref" : "#/definitions/ComuneDO"
+        },
+        "codiceFiscale" : {
+          "type" : "string"
+        },
+        "language" : {
+          "type" : "string"
+        },
+        "logon" : {
+          "type" : "string"
+        },
+        "ruoli" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/RuoloDO"
+          }
+        },
+        "gruppi" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/GruppoDO"
+          }
+        },
+        "passwordHash" : {
+          "type" : "string"
+        },
+        "statoUtente" : {
+          "type" : "string"
+        },
+        "deleted" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "immagine" : {
+          "$ref" : "#/definitions/ImageDO"
+        },
+        "passwordHistories" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/PasswordHistoryDO"
+          }
+        },
+        "guasti" : {
+          "type" : "array",
+          "uniqueItems" : true,
+          "items" : {
+            "$ref" : "#/definitions/DaeFaultDO"
+          }
+        }
+      }
+    }
+  }
+}

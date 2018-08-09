@@ -1,0 +1,65 @@
+<div class="navbar yamm navbar-default navbar-fixed-top layout-navbar">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+			<i class="icon-nav fa fa-navicon"></i>
+		</button>
+		<a class="navbar-brand" href="../index.html">EMS Recovery <span
+			class="versioning">1.0</span></a>
+
+	</div>
+	<div id="bookingNavBar" class="navbar-collapse collapse navbar-responsive-collapse navbar-top ">
+		<!--<ul class="nav navbar-nav navbar-left">-->
+		<ul class="nav navbar-nav navbar-left ">
+			<li>
+				<div class="btn-group">
+					<button style="margin-top: 3px;" class="btn btn-primary btn-lg" ng-click="createNewEvent()" href="" class="dropdown-toggle"
+						data-toggle="dropdown">
+				<span class="sr-only">Crea Evento</span>
+				<i style="padding-right: 12px;" class="icon-nav fa fa-plus-circle" aria-hidden="true">
+			</i>
+								Crea Evento</button>
+					<button style="margin-top: 3px;" class="btn btn-primary btn-lg" ng-click="myFun()" href="" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="sr-only">Cerca telefoni</span>
+				<i style="padding-right: 12px;" class="icon-nav fa fa-search" aria-hidden="true">
+			</i>
+								Cerca telefoni</button>
+					<button style="margin-top: 3px;" class="btn btn-primary btn-lg" ng-click="myFun2()" href="" class="dropdown-toggle" data-toggle="dropdown">
+				<span class="sr-only">Cerca telefoni</span>
+				<i style="padding-right: 12px;" class="icon-nav fa fa-search" aria-hidden="true">
+			</i>
+								Cerca eventi</button>
+				</div>
+			</li>
+			<li class="divider"></li>
+			<!--<li>	
+					<button style="margin-top: 3px;" class="btn btn-primary btn-lg" ng-click="myFun()" href="" class="dropdown-toggle"
+					data-toggle="dropdown">
+				<span class="sr-only">Cerca telefoni</span>
+				<i style="padding-right: 12px;" class="icon-nav fa fa-search" aria-hidden="true">
+			</i>
+								Cerca telefoni</button>
+			</li>-->
+			<li class="divider"></li>
+
+		</ul>
+		<!--<ul class="nav navbar-nav navbar-left ">
+			<form class="navbar-form navbar-left">
+				<input type="text" class="form-control col-sm-8" placeholder="Search">
+				<i class="icon-nav fa fa-search" aria-hidden="true"></i>
+				<div class="checkbox">
+					<label>
+                      <input type="checkbox"> Mostra eventi chiusi
+                </label>
+				</div>
+			</form>
+		</ul>-->
+
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown">
+				<button style="margin-right: 18px; margin-top: 3px;" ng-click="logout()" class="btn btn-primary btn-lg" data-toggle="dropdown">
+				<span class="sr-only">Logout</span><i
+					class="icon-nav fa fa-sign-out"></i></a></li>
+		</ul>
+		
+	</div>
+</div>

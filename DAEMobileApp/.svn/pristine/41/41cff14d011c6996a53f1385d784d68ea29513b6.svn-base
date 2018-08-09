@@ -1,0 +1,26 @@
+<ion-view id="new-dae" title="Nuovo DAE">
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons>
+    <ion-content class="overflow-scroll" qy-toggle-overflow-scroll overflow-scroll="false">
+        <md-toolbar class="md-tall toolbar-medium">
+            <div ng-class="{'default': !vm.photo, 'photo': vm.photo  }">
+                <img id="photoDae" src="img/ico_telephone_2.png"/>
+            </div>
+            <a class="md-button md-accent md-fab fab-toolbar-medium" ng-click="vm.getPicture()" aria-label="Add">
+                <i class="icon ion-android-camera"></i>
+            </a>
+        </md-toolbar>
+        <form ng-submit="vm.addNewDae()" name="vm.newDaeForm" novalidate>
+            <formly-form model="vm.dae" fields="vm.daeFields" form="vm.newDaeForm" options="vm.options">
+                <div class="text-center">
+                    <md-button type="submit" class="md-raised md-primary" ng-disabled="vm.newDaeForm.$invalid">{{'INSERT_NEW_DAE' | translate}}</md-button>
+                    <md-button type="button" class="md-raised" ng-click="vm.resetModel()">{{'CLEAN' | translate}}</md-button>
+                </div>
+            </formly-form>
+        </form>
+        <!--<pre>{{vm.dae | json}}</pre>-->
+    </ion-content>
+</ion-view>

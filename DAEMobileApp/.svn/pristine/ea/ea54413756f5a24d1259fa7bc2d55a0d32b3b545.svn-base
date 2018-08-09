@@ -1,0 +1,26 @@
+<ion-view id="registration" title="Registrazione">
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons>
+    <ion-content has-bouncing="false" qy-toggle-overflow-scroll overflow-scroll="false" class="has-toolbar overflow-scroll">
+        <md-toolbar class="md-tall toolbar-medium">
+            <div ng-class="{'default': !vm.photo, 'photo': vm.photo  }">
+                <img id="photo" src="img/omino.png"/>
+            </div>
+            <a class="md-button md-accent md-fab fab-toolbar-medium" ng-click="vm.showUploadBottomSheet($event,'PROFILE')" aria-label="Add">
+                <i class="icon ion-android-camera"></i>
+            </a>
+        </md-toolbar>
+        <form name="vm.newFRForm" novalidate>
+            <formly-form model="vm.registration" fields="vm.registrationFields" form="vm.newFRForm" options="vm.options">
+                <div class="text-center">
+                    <md-button ng-click="vm.addNewFirstResponder()" type="button" ng-disabled="vm.newFRForm.$invalid" class="md-raised md-primary">{{'GO_REGISTRATION' | translate}}</md-button>
+                    <md-button type="button" class="md-raised" ng-click="vm.resetModel()">{{'CLEAN' | translate}}</md-button>
+                </div>
+            </formly-form>
+        </form>
+        <!--<pre>{{vm.registration | json}}</pre>-->
+    </ion-content>
+</ion-view>

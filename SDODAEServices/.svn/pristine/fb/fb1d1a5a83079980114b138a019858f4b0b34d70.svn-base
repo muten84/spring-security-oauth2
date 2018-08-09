@@ -1,0 +1,284 @@
+{
+  "Versioning": {
+    "android": {
+      "currentVersion": "0.0.1",
+      "isLastVersion": true,
+      "isMandatoryUpdate": false,
+      "message": "L'applicazione non e' aggiornata. Vuoi installare l'ultima versione?",
+      "storeLink": ""
+    },
+    "iOS": {
+      "currentVersion": "0.0.1",
+      "isLastVersion": true,
+      "isMandatoryUpdate": false,
+      "message": "L'applicazione non e' aggiornata. Vuoi installare l'ultima versione?",
+      "storeLink": ""
+    }
+  },
+  "PushWoosh": {
+    "AppId": "40ECA-5C396",
+    "AppName": "DAE118ER",
+    "GoogleProjectNumber": "557508951106"
+  },
+  "BackgroundGeolocation": {
+    "stationaryRadius": 100,
+    "distanceFilter": 100,
+    "desiredAccuracy": 100,
+    "interval": 300000,
+    "fastestInterval": 300000,
+    "activitiesInterval": 300000,
+    "stopOnStillActivity": false,
+    "activityType": "AutomotiveNavigation",
+    "pauseLocationUpdates": false,
+    "saveBatteryOnBackground": false
+  },
+  "GoogleMapsUrl": "http://maps.google.com/maps/api/js?key=AIzaSyA9xFlsCg-6GjPs4vbWVM0unqqvgMw0joI",
+  "logLevel": "DEBUG",
+  "imgUrl": "http://daeeng.118er.it",
+  "minDistanceFromEvent": 100,
+  "externalLink": {
+    "FAQ": "http://www.118er.it/dae/faq.asp",
+    "NEWS": "http://www.118er.it/dae/news.asp",
+    "DOCS": "http://www.118er.it/dae/docs.asp",
+    "GUIDE": "http://www.118er.it/dae/guida_app.asp",
+    "CREDITS": "http://www.118er.it/dae/index.asp"
+  },
+  "API": {
+    "baseUrl": "http://daeeng.118er.it/SDODAEServices/rest",
+	"updateFirstResponder": {
+		"uri": "/frservice/saveProfile",
+		"method": "POST",
+		"contentType": "application/json",
+		"timeout": 10000
+	},
+	"getAllProvinceByCompetence": {
+		"uri": "/anagraficheService/getAllProvinceByCompetence",
+		"method": "POST",
+		"contentType": "application/json",
+		"timeout": 10000
+	},
+    "getTranslation": {
+      "uri": "http://dae118er-coll.engbms.it/dae118er/langs/{LANG}.json",
+      "method": "GET",
+      "contentType": "application/x-www-form-urlencoded",
+      "timeout": 10000
+    },
+    "authenticateUser": {
+      "uri": "/authenticationService/authenticateUser",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getCurrentPrivacyAgreement": {
+      "uri": "/frservice/getCurrentPrivacyAgreement",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 15000
+    },
+    "acceptPrivacyAgreement": {
+      "uri": "/frservice/acceptPrivacyAgreement",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 15000
+    },
+    "logout": {
+      "uri": "/authenticationService/logout",
+      "method": "GET",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "resetPassword": {
+      "uri": "/authenticationService/resetPassword",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "changePassword": {
+      "uri": "/userService/changePassword",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "addNewDae": {
+      "uri": "/daeService/addNewDae",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "reportFault": {
+      "uri": "/daeService/reportFault",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllDAE": {
+      "uri": "/daeService/getAllDAE",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllDAEForMap": {
+      "uri": "/daeService/getAllDAEForMap",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 30000
+    },
+    "searchDAEByFilter": {
+      "uri": "/daeService/searchDAEByFilter",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 30000
+    },
+    "getEmergencyDetails": {
+      "uri": "/emergencyService/getEmergencyDetails",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 30000
+    },
+    "placeArrival": {
+      "uri": "/emergencyService/placeArrival",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 30000
+    },
+    "addNewFirstResponder": {
+      "uri": "/frservice/addNewFirstResponder",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getLoggedFirstResponderDetails": {
+      "uri": "/frservice/getLoggedFirstResponderDetails",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getFRDetails": {
+      "uri": "/frservice/getFRDetails",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "searchFirstResponderByFilter": {
+      "uri": "/frservice/searchFirstResponderByFilter",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "updateAvailabilityFR": {
+      "uri": "/frservice/updateAvailabilityFR",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllProvincie": {
+      "uri": "/anagraficheService/getAllProvince",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "searchComuniByFilter": {
+      "uri": "/anagraficheService/searchComuniByFilter",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "searchStradeByFilter": {
+      "uri": "/anagraficheService/searchStradeByFilter",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllTipoStruttura": {
+      "uri": "/anagraficheService/getAllTipoStruttura",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllStato": {
+      "uri": "/anagraficheService/getAllStato",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllTipoManutenzione": {
+      "uri": "/anagraficheService/getAllTipoManutenzione",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllCategorie": {
+      "uri": "/anagraficheService/getAllCategorie",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllEnteCertificatore": {
+      "uri": "/anagraficheService/getAllEnteCertificatore",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getAllProfessione": {
+      "uri": "/anagraficheService/getAllProfessione",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "reverseGeocoding": {
+      "uri": "/anagraficheService/reverseGeocoding",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "updateImageCertificato": {
+      "uri": "/frservice/updateImageCertificato",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "updateImageProfilo": {
+      "uri": "/frservice/updateImageProfilo",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 30000
+    },
+    "updateFRLocation": {
+      "uri": "/frservice/updateFRLocation",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getEventById": {
+      "uri": "/emergencyService/getEventById",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "checkIntervention": {
+      "uri": "/emergencyService/checkIntervention",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "getMyEvents": {
+      "uri": "/emergencyService/getMyEvents",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    },
+    "rejectEvent": {
+      "uri": "/emergencyService/rejectEvent",
+      "method": "POST",
+      "contentType": "application/json",
+      "timeout": 10000
+    }
+  },
+  "i18n": {
+    "languages": [
+      "en_GB",
+      "it_IT"
+    ],
+    "defaultLanguage": "it_IT"
+  }
+}

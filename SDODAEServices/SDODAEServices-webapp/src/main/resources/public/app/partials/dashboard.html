@@ -1,0 +1,367 @@
+<div areas-dashboard="11" aweid="dashboard-container" class="page-content" style="width:100% ;height: 850px;">
+    <ol areas-dashboard-list class="panels list-unstyled draggable" style="position: relative; height: 1280px;">
+        <li id="mappa" areas-dashboard-entry class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-map-marker"></i>
+                        </span>
+                        <h2 class="panel-title">Mappa DAE</h2>
+                    </div>
+                </div>
+
+                <div class="panel-body handle" style="height: 350px; width: 100%">
+                    <leaflet width="100%" height="100%" markers="daeMarkers" center="center" bounds="daeBounds" controls="daeControls"></leaflet>
+                </div>
+            </div>
+        </li>
+        <li id="radarChartDaeActivation" areas-dashboard-entry ng-controller="DaeEventActivationCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-bar-chart"></i>
+                        </span>
+                        <h2 class="panel-title">Numero attivazioni per provincia</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 350px; width: 100%">
+                    <canvas id="ciambella" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas>
+                </div>
+
+            </div>
+        </li>
+
+        <li id="radarChartDaeActivationByDay" areas-dashboard-entry ng-controller="DaeEventActivationCtrlByDay" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-bar-chart"></i>
+                        </span>
+                        <h2 class="panel-title">Numero attivazioni per giorno</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <canvas id="chartByDay" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas>
+                </div>
+
+            </div>
+        </li>
+
+        <li id="linechart" areas-dashboard-entry ng-controller="LineChartCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-bar-chart"></i>
+                        </span>
+
+                        <h2 class="panel-title">Registrazioni First Responder</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <canvas id="line" class="chart chart-line" chart-dataset-override="datasetOverride" chart-data="data2" chart-labels="labels2"
+                        chart-series="series" chart-colors="colors" chart-options="options"></canvas>
+                </div>
+            </div>
+        </li>
+
+        <li id="linechartDAE" areas-dashboard-entry ng-controller="LineChartDAECtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-bar-chart"></i>
+                        </span>
+                        <h2 class="panel-title">Andamento registrazioni DAE</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <canvas id="line" class="chart chart-line" chart-dataset-override="datasetOverride" chart-data="data" chart-labels="labels"
+                        chart-series="series" chart-colors="colors" chart-options="options"></canvas>
+                </div>
+            </div>
+        </li>
+
+        <li id="daeActivationProfile" areas-dashboard-entry ng-controller="DaeActivationProfileCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-heartbeat"></i>
+                        </span>
+                        <h2 class="panel-title">DAE in attesa di validazione</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <p ng-show="daeList.length > 1 || daeList.length == 0">Ci sono {{daeList.length}} DAE in attesa di validazione</p>
+                    <p ng-show="daeList.length == 1">C'è un solo DAE in attesa di validazione</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class=" btn-container  pull-left">
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media pull-right" style="padding: 5px">
+                                <span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 250px;"></div>
+                </div>
+
+            </div>
+        </li>
+
+        <li id="daeFaultProfile" areas-dashboard-entry ng-controller="DaeFaultProfileCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-heartbeat"></i>
+                        </span>
+                        <h2 class="panel-title">DAE con Segnalazioni Aperte</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <p ng-show="daeList.length > 1 || daeList.length == 0">Ci sono {{daeList.length}} DAE con segnalazioni</p>
+                    <p ng-show="daeList.length == 1">C'è un solo DAE con segnalazione</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class=" btn-container  pull-left">
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media pull-right" style="padding: 5px">
+                                <span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 250px;"></div>
+                </div>
+            </div>
+        </li>
+
+        <li id="daeExpirationProfile" areas-dashboard-entry ng-controller="DaeExpirationProfileCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-heartbeat"></i>
+                        </span>
+                        <h2 class="panel-title">DAE in Scadenza</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <p ng-show="daeList.length > 1 || daeList.length == 0">Ci sono {{daeList.length}} DAE in scadenza</p>
+                    <p ng-show="daeList.length == 1">C'è un solo DAE in scadenza</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class=" btn-container  pull-left">
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media pull-right" style="padding: 5px">
+                                <span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 250px;"></div>
+                </div>
+            </div>
+        </li>
+
+        <li id="daeExpiratedProfile" areas-dashboard-entry ng-controller="DaeExpiratedProfileCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-heartbeat"></i>
+                        </span>
+                        <h2 class="panel-title">DAE Scaduti</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <p ng-show="daeList.length > 1 || daeList.length == 0">Ci sono {{daeList.length}} DAE scaduti</p>
+                    <p ng-show="daeList.length == 1">C'è un solo DAE scaduto</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class=" btn-container  pull-left">
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media pull-right" style="padding: 5px">
+                                <span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 250px;"></div>
+                </div>
+            </div>
+        </li>
+
+        <li id="userACtivationProfile" areas-dashboard-entry ng-controller="UserActivationProfileCtrl2" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-users"></i>
+                        </span>
+                        <h2 class="panel-title">First Responder in attesa di attivazione</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+                    <p ng-show="users.length > 1 || users.length == 0">Ci sono {{users.length}} utenti in attesa di attivazione</p>
+                    <p ng-show="users.length == 1">C'è un solo utente in attesa di attivazione</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class=" btn-container  pull-left">
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </button>
+                                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media pull-right" style="padding: 5px">
+                                <span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 250px;"></div>
+                </div>
+            </div>
+        </li>
+
+        <li id="nmberDAEandFR" areas-dashboard-entry ng-controller="NmberDAEandFRCtrl" class=" dashboard-entry panel-container double">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-id">
+                        <span class="panel-icon">
+                            <i class="fa fa-bar-chart"></i>
+                        </span>
+                        <h2 class="panel-title">Numero totale DAE e DAE Responder</h2>
+                    </div>
+                </div>
+                <div class="panel-body" style="height: 325px; width: 100%">
+
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3>DAE</h3>
+                        </div>
+                        
+                    </div>
+                    <div class="row" ng-repeat="(key, value) in val.dae">
+                        <div class="col-md-8">
+                            <h5>{{key}}</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>{{value}}</h5>
+                        </div>
+          
+                    </div>
+
+                    <div class="row" style="border-bottom: 1px black solid">
+                        <div class="col-md-8">
+                            <label>DAE Totali</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>{{val.totalDAE}}</label>
+                        </div>
+                    </div>
+
+                    <div class="row" >
+                        <div class="col-md-8">
+                            <h3>DAE Responder</h3>
+                        </div>
+                         
+                    </div>
+                    <div class="row" ng-repeat="(key, value) in val.fr">
+                        <div class="col-md-8">
+                            <h5>{{key}}</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <h5>{{value}}</h5>
+                        </div>
+ 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label>DAE Responder Totali</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>{{val.totalFR}}</label>
+                        </div>
+                    </div>
+
+                    <!-- <canvas class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options"></canvas> -->
+                </div>
+            </div>
+        </li>
+
+        <!--<li  id="userACtivationProfile" ng-controller="UserActivationProfileCtrl"  class=" dashboard-entry panel-container double">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-id">
+                <span class="panel-icon">
+                            <i class="fa fa-users"></i>
+                        </span>
+                <h2 class="panel-title">Stato utenti</h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <p ng-show="users.length > 1 || users.length == 0">Ci sono {{users.length}} utenti in attesa di attivazione</p>
+            <p ng-show="users.length == 1">C'è un solo utente in attesa di attivazione</p>
+        </div>
+        <ul id="frSlider" class="lista-donatori list-group bxslider">
+            <li ng-repeat="user in users">
+                <a class="list-group-item" ng-click="setInModifying(user.id)" title="{{user.nome}} {{user.cognome}}">
+                    <div class="media">
+                        <div class="media-left">
+                            <img class="media-object img-circle img-avatar" ng-src='{{user.immagine.url}}' alt="...">
+                        </div>
+                        <div class="media-body">
+                            <span class="media-title">{{user.nome}}
+                                        {{user.cognome}}</span>
+                            <span class="media-content">{{user.categoriaFr.descrizione}}</span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</li> -->
+    </ol>
+</div>

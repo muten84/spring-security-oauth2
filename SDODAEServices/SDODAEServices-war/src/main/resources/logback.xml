@@ -1,0 +1,56 @@
+<configuration>
+
+	<appender
+		name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+		<encoder>
+			<pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender
+		name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
+		<!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy -->
+		<!--for further documentation -->
+		<File>${catalina.base}/logs/sdodaeservices.log</File>
+		<encoder>
+			<pattern>%d{dd/MM/yyyy HH:mm:ss} [%t] %-5p - %m%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${catalina.base}/logs/sdodaeservices_rest.log.%d</fileNamePattern>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+	</appender>
+	<!-- Appender per le librerie di terze parti - Hibernate Spring ecc -->
+	<logger
+		name="org.hibernate"
+		level="error"
+		additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger
+		name="org.springframework"
+		level="INFO"
+		additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+	<logger
+		name="net"
+		level="INFO"
+		additivity="false">
+		<appender-ref ref="FILE" />
+	</logger>
+
+
+	<root level="INFO">
+	  <!-- <appender-ref ref="STDOUT" /> -->
+		<appender-ref ref="FILE" />  
+	</root>
+</configuration>
+

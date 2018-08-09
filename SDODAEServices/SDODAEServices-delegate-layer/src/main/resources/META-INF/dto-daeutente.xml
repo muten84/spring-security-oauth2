@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="UtenteDO_Utente_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-b>
+		<field-exclude>
+			<a>ruoli</a>
+			<b>ruoli</b>
+		</field-exclude>
+		<field-exclude>
+			<a>gruppi</a>
+			<b>gruppi</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field-exclude>
+		<field-exclude>
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="UtenteDO_Utente_IMAGE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-b>
+		<field-exclude>
+			<a>ruoli</a>
+			<b>ruoli</b>
+		</field-exclude>
+		<field-exclude>
+			<a>gruppi</a>
+			<b>gruppi</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field-exclude>
+		<field-exclude>
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field>
+	</mapping>
+	
+
+	<mapping
+		wildcard="true"
+		map-id="UtenteDO_Utente_LOGIN">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-b>
+
+		<field map-id="RuoloDO_Ruolo_BARE">
+			<a>ruoli</a>
+			<b>ruoli</b>
+		</field>
+
+		<field map-id="GruppoDO_Gruppo_DEEP">
+			<a>gruppi</a>
+			<b>gruppi</b>
+		</field>
+
+		<field-exclude>
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field-exclude>
+		<field-exclude>
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="UtenteDO_Utente_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-b>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field map-id="Comune_ComuneDO_PROVINCIA">
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE">
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field>
+		<field map-id="GruppoDO_Gruppo_DEEP">
+			<a>gruppi</a>
+			<b>gruppi</b>
+		</field>
+		<field map-id="RuoloDO_Ruolo_BARE">
+			<a>ruoli</a>
+			<b>ruoli</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_UtenteDO_Utente_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-b>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>ruoli</a>
+			<b>ruoli</b>
+		</field-exclude>
+		<field-exclude>
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field>
+			<a>nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>codiceFiscale</a>
+			<b>codiceFiscale</b>
+		</field>
+		<field>
+			<a>email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>civico</a>
+			<b>civico</b>
+		</field>
+
+		<field>
+			<a>language</a>
+			<b>language</b>
+		</field>
+		<field>
+			<a>logon</a>
+			<b>logon</b>
+		</field>
+		<field>
+			<a>passwordHash</a>
+			<b>passwordHash</b>
+		</field>
+		<field>
+			<a>statoUtente</a>
+			<b>statoUtente</b>
+		</field>
+
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Utente_UtenteDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-b>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field map-id="Comune_ComuneDO_PROVINCIA">
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field>
+		<field map-id="Strade_StradeDO_BARE">
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Utente_UtenteDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-b>
+
+	</mapping>
+
+</mappings>

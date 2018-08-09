@@ -1,0 +1,21 @@
+<md-dialog id="addAvailability">
+    <form ng-submit="vm.addAvailability()" name="vm.addAvailabilityForm" novalidate>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!--<p translate>ADD_MUNICIPALITY_TEXT</p>-->
+                <formly-form model="vm.addAvailabilityModel" fields="vm.addAvailabilityFields" form="vm.addAvailabilityForm">
+                </formly-form>
+            </div>
+        </md-dialog-content>
+        <md-dialog-content ng-if="vm.errorMessages">
+            <div class="md-dialog-content no-padding-vertical error-messages">
+                {{vm.errorMessages}}
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="vm.closeDialog()">{{'CANCEL' | translate}}</md-button>
+            <md-button type="submit" class="md-primary">{{'ADD' | translate}}</md-button>
+        </md-dialog-actions>
+    </form>
+
+</md-dialog>

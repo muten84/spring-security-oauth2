@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFrDO_CategoriaFr_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFrDO_CategoriaFr_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-b>
+		<field-exclude>
+			<a>creataDa</a>
+			<b>creataDa</b>
+		</field-exclude>
+		<field-exclude>
+			<a>aggiornataDa</a>
+			<b>aggiornataDa</b>
+		</field-exclude>
+
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFr_CategoriaFrDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-b>
+		<field-exclude>
+			<a>creataDa</a>
+			<b>creataDa</b>
+		</field-exclude>
+		<field-exclude>
+			<a>aggiornataDa</a>
+			<b>aggiornataDa</b>
+		</field-exclude>
+
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFr_CategoriaFrDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-b>
+	</mapping>
+
+</mappings>

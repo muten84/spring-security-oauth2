@@ -1,0 +1,106 @@
+<script type="text/ng-template" id="passwordResetModal.html">
+    <div class="modal-header">
+        <span class="panel-icon">
+            <i class="fa fa-bell"></i>
+        </span>
+        <h3 class="modal-title" id="modal-title">Reset Password</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <p>Inserici la tua email, ti verrà inviata una mail con le istruzioni per generare una nuova password</p>
+        <div class="form-group animate-show">
+            <label for="username">Email:</label>
+            <input clear-text type="text" id="email" autofocus="autofocus" class="clearable form-control" ng-model="email" autocomplete="off" placeholder="Inserisci la mail" autocapitalize="none">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" ng-click="reset()">
+                <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                Reset
+            </button>
+            <button class="btn btn-danger" type="button" ng-click="$dismiss('cancel')">Annulla</button>
+        </div>
+    </div>
+
+</script>
+
+<link rel="stylesheet" href="styles/login.css">
+<div>
+    <div class="layout-app">
+        <div class="layout-app-content dashboard page-login clearfix" id="content">
+            <div id="cookie" class="cookie ng-scope" ng-controller="NormativaCookieCtrl" ng-show="showMsgCookies" ng-init="init()">
+                <p class="cookie-p">
+                    <span translate="MSG_COOKIES" class="ng-scope">Questo sito usa i cookies per darti una migliore esperienza nella navigazione. Continuando accetti la nostra
+                    </span>
+                    <label class="cookie-a" ng-click="openWindow()">
+                        <span translate="COOKIES_POLICY" class="ng-scope">Cookies Policy
+                        </span>
+                    </label>&nbsp;
+                    <label class="cookie-close" ng-click="userAcceptCookies()">
+                        <span translate="DIALOGS_OK" class="ng-scope">OK</span>
+                    </label>
+                </p>
+            </div>
+
+            <div class="panel-login">
+                <div class="login-branding">
+                    <img src="./images/areas-logo.png" alt="AREAS 3.0" class="responsive-image"/>
+                </div>
+                <div>
+                    <form role="form" name="loginForm" ng-submit="login(credentials)" novalidate autocomplete="off">
+                        <div class="form-group">
+                            <p class="text-danger text-center">{{msg.errorMessage.text}}</p>
+                            <p class="text-center">{{msg.detailMessage.text}}</p>
+                        </div>
+                        <input style="display:none;" type="text" name="somefakename"/>
+                        <input style="display:none;" type="password" name="anotherfakename"/>
+                        <div class="form-group animate-show" ng-show="loginStep==1">
+                            <label for="username">Username:</label>
+                            <input clear-text capitalize type="text" id="username" autofocus="autofocus" class="clearable form-control" ng-model="credentials.username" autocomplete="off" placeholder="Inserisci la user name" autocapitalize="none">
+                        </div>
+                        <div class="form-group" ng-show="loginStep==1">
+                            <label for="password">Password</label>
+                            <input clear-text capitalize type="password" id="password" class="clearable form-control" ng-model="credentials.password" autocomplete="off" placeholder="Inserisci la tua password">
+                        </div>
+                        <h3 ng-show="loginStep==2" class="animate-show text-center">{{userInfo.realName}}</h3>
+                        <div class="form-group" ng-show="isPresidioVisible()">
+                            <label for="presidioInput">Presidio</label>
+                            <select id="presidioInput" class="form-control" ng-change="profilePresidioSelection()" ng-model="credentials.presidio" ng-options="p as (p.code+' - '+p.description) for p in availablePresidi track by p.code"></select>
+                        </div>
+                        <div class="form-group" ng-show="loginStep==2">
+                            <label for="profiloInput">Profilo</label>
+                            <select id="profiloInput" class="form-control" ng-change="profileProfiloSelection()" ng-model="credentials.profilo" ng-options="p as (p.code+' - '+p.description) for p in availableProfili track by p.code"></select>
+                        </div>
+                        <div class="form-group" ng-show="loginStep==2">
+                            <label for="mansioneInput">Mansione</label>
+                            <select id="mansioneInput" class="form-control" ng-change="profileMansioneSelection()" ng-model="credentials.mansione" ng-options="p as (p.code+' - '+p.description) for p in availableMansioni track by p.code"></select>
+                        </div>
+
+                        <div class="btn-group btn-group-justified">
+                            <div class="btn-group" ng-show="loginStep==2">
+                                <button type="button" class="btn btn-primary" ng-click="resetLogin()">
+                                    <i class="fa fa-refresh"></i>Reset
+                                </button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary" id="signinBtn" ng-disabled="enableButtonLogin == true">
+                                    <i class="fa fa-unlock-alt"></i>
+                                    Accedi
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <br/>
+                    <div class="form-group">
+                    <u>Non lasciare mai la tua postazione incustodita!</u>
+                    </div>
+                    <div class="form-group" ng-show="loginStep===1">
+                        <a id="lostPwdLnk" ng-click="openPasswordReset()">Password dimenticata?</a>
+                    </div>
+                    <label id="lblCache"></label>
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </div>
+</div>
