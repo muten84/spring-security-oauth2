@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: wdoauth2-poc
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Bifulco Luigi
+Implementation-Vendor-Id: it.luigibifulco.oauth.poc.client
+Build-Jdk: 1.8.0_171
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/wdoauth2-poc
+Created-By: Maven Integration for Eclipse
+
