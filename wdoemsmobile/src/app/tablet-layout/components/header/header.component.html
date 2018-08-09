@@ -1,0 +1,275 @@
+<nav [mdcElevation]="10" [animateTransition]="true" class="navbar navbar-expand-lg fixed-top rounded" *blockUI="'header-section'">
+    <!--    <div class="navbar-nav">     
+        <a class="navbar-brand logo" href="#"><img src="assets/images/logo-header.png" /></a>
+    </div>
+    <div class="navbar-nav">
+        <a class="navbar-brand" href="#"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+         
+         </a>
+        <a class="navbar-brand">
+            <h6>ORARIO
+                <small>DATA</small></h6>
+        </a>
+    </div>-->
+
+
+    <ul [mdcElevation]="0" class="nav header-medium-font mr-auto">
+        <!--  <li class="nav-item"> -->
+        <!--  <a class="nav-link active" href="#">HTML</a>-->
+        <!--       <a class="nav-link logo"><img height="50px" src="assets/images/logo-header.png" /></a>
+        </li>-->
+        <!-- item orario -->
+        <li mdcRipple class="nav-item material-header-item">
+            <a class="nav-link clock-style">
+                <div class="row">
+                    <div class="col-xs-1" style="padding-right: 25px; padding-top: 9px;">
+                        <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-xs-1" style="padding-right: 21px;">
+                        <span> {{ observableCurrentTime | async | date:'HH:mm:ss'}}</span>
+                        <br />
+                        <span>{{ currentTime | async | date:'dd-MM-yyyy'}}</span>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <!-- item stato turno -->
+        <li mdcRipple class="nav-item material-header-item">
+            <a disable="checkedIn" class="nav-link" style="padding:0px;margin-left:10px;margin-right:10px;">
+                <div class="col-xs-4">
+                    <div class="row">
+                        <span *ngIf="!checkedIn">
+                            <strong>Nessun Turno</strong>
+                        </span>
+                        <span *ngIf="checkedIn">
+                            <strong>{{currentTurn?.resource}}</strong>
+                        </span>
+                    </div>
+                    <div class="row" *ngIf="activeTurn">
+                        <span *ngIf="checkedIn">Fine turno
+                            <strong>{{currentTurn?.endturnDate | date: 'dd/MM/yyyy HH:mm'}}</strong>
+                        </span>
+                        <span *ngIf="!checkedIn">
+                            <strong>Nessun Turno</strong>
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <!--  <ul [mdcElevation]="1" class="ml-auto nav header-medium-font" style="display: -webkit-inline-box;">
+        <li mdcRipple [mdcElevation]="0" class="nav-item material-header-item">
+            <a class="nav-link grouped" style="width: 16em; padding-left: 1px;">
+                <div></div>
+            </a>
+        </li>
+    </ul> -->
+
+
+    <ul class="navbar-nav ml-auto" [mdcElevation]="0">
+        <!-- Luigi commentato 12/02/2018 dopo demo con Paolo
+           <li mdcRipple class="nav-item material-header-item mr-item-first">
+            <a class="nav-link grouped" style="padding-left: 1px" (click)="callback()">
+                <div class="row">
+                    <div class="col-md-2">                        
+                        <a class="mdi mdi-bell-ring mdi-36px"></a>
+                    </div>
+                </div>
+            </a>
+        </li> -->
+
+        <!-- Luigi commentato 12/02/2018 dopo demo con Paolo
+            <li mdcRipple class="nav-item material-header-item">
+            <a class="nav-link grouped" style="padding-left: 1px">
+                <div class="row">
+                    <div class="col-md-2">                        
+                        <a class="mdi mdi-camera mdi-36px"></a>
+                    </div>
+                </div>
+            </a>
+        </li> -->
+
+        <li mdcRipple class="nav-item material-header-item  mr-item-first">
+            <a href="javascript:void(0)" class="nav-link grouped" (menuOpened)="requestLastPosition()" [matMenuTriggerFor]="menuGps"
+                style="padding-left: 1px">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a [ngClass]="gpsClass" class="mdi mdi-36px"></a>
+                    </div>
+                </div>
+            </a>
+
+            <mat-menu #menuGps="matMenu" yPosition="below" [overlapTrigger]="false">
+                <div style="text-align:center;">
+                    <span>{{ gpsCoord?.latitude }} </span>
+                    <br />
+                    <span>{{ gpsCoord?.longitude }} </span>
+                </div>
+            </mat-menu>
+        </li>
+
+        <li mdcRipple class="nav-item material-header-item">
+            <a href="javascript:void(0)" class="nav-link grouped" [matMenuTriggerFor]="menuBattery" style="padding-left: 1px">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a [ngClass]="batteryClass" class="mdi mdi-36px"></a>
+                    </div>
+                </div>
+            </a>
+
+            <mat-menu #menuBattery="matMenu" yPosition="below" [overlapTrigger]="false">
+                <div style="text-align:center;">
+                    <span>{{ batteryLevel | translate }}</span>
+                </div>
+            </mat-menu>
+        </li>
+
+        <li mdcRipple class="nav-item dropdown">
+            <a class="nav-link grouped" style="padding-left: 1px">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a [ngClass]="signalClass" class="mdi mdi-36px"></a>
+                        <!--   <mat-icon>network_wifi</mat-icon>-->
+                    </div>
+                </div>
+            </a>
+        </li>
+        <!--     <li [mdcElevation]="1" class="nav-item dropdown">
+            
+            <a href="javascript:void(0)" class="nav-link grouped" [matMenuTriggerFor]="menu">
+                <span mdcIconToggle labelOn="" labelOff="" iconOn="fa-cogs" iconOff="fa-cog" [disabled]="false" [(isOn)]="cog">
+                    <i mdcIconToggleIcon style="color: #fff" class="fa fa-2x"></i>
+                </span>
+            </a>
+      
+            <mat-menu #menu="matMenu" yPosition="below" [overlapTrigger]="false">
+
+                <button [disabled]="!checkedIn || isIntervention" (click)="endTurn()" mat-menu-item>
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>{{ 'Fine Turno' | translate }}</span>
+                </button>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>power_settings_new</mat-icon>
+                    <span>{{ 'Esci' | translate }}</span>
+                </button>               
+            </mat-menu>
+        </li>-->
+
+    </ul>
+    <!-- <div class="collapse navbar-collapse">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}">
+        </form>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item d-none d-xl-block">
+                <a href="https://github.com/start-angular/SB-Admin-BS4-Angular-2/archive/master.zip" class="nav-link btn mt-1" role="button"
+                    style="padding: .375rem 1rem !important;border-color: #999;">
+                    {{ 'Download Now' | translate }}
+                </a>
+            </li> &nbsp;
+            <li class="nav-item">
+                <a href="javascript:void(0)" class="nav-link mt-1" style="padding: 0.375rem 1rem !important; border-color: #999;" (click)="rltAndLtr()">
+                    RTL/LTR
+                </a>
+            </li> &nbsp;
+            <li class="nav-item dropdown" ngbDropdown>
+                <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
+                    <i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right messages">
+                <li class="media">
+                    <img class="d-flex align-self-center mr-3" src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
+                        alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">John Smith</h5>
+                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                        <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                    </div>
+                </li>
+                <li class="media">
+                    <img class="d-flex align-self-center mr-3" src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
+                        alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">John Smith</h5>
+                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                        <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                    </div>
+                </li>
+                <li class="media">
+                    <img class="d-flex align-self-center mr-3" src="http://i.huffpost.com/gadgets/slideshows/461162/slide_461162_6224974_sq50.jpg"
+                        alt="Generic placeholder image" />
+                    <div class="media-body">
+                        <h5 class="mt-0 mb-1">John Smith</h5>
+                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                        <p class="last"> Lorem ipsum dolor sit amet, consectetur...</p>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown>
+            <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <a href="javascript:void(0)" class="dropdown-item">
+                        Pending Task <span class="badge badge-info">6</span>
+                    </a>
+                <a href="javascript:void(0)" class="dropdown-item">
+                        In queue <span class="badge badge-info"> 13</span>
+                    </a>
+                <a href="javascript:void(0)" class="dropdown-item">
+                        Mail <span class="badge badge-info"> 45</span>
+                    </a>
+                <li class="dropdown-divider"></li>
+                <a href="javascript:void(0)" class="dropdown-item">
+                        View All
+                    </a>
+            </ul>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown>
+            <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                <i class="fa fa-language"></i> {{ 'Language' | translate }} <b class="caret"></b>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
+                        {{ 'English' | translate }}
+                    </a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
+                        {{ 'French' | translate }}
+                    </a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('ur')">
+                        {{ 'Urdu' | translate }}
+                    </a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('es')">
+                        {{ 'Spanish' | translate }}
+                    </a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('it')">
+                        {{ 'Italian' | translate }}
+                    </a>
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fa')">
+                        {{ 'Farsi' | translate }}
+                    </a>
+            </div>
+        </li>
+        <li class="nav-item dropdown" ngbDropdown>
+            <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+                <i class="fa fa-user"></i> John Smith <b class="caret"></b>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="javascript:void(0)">
+                    <i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}
+                </a>
+                <a class="dropdown-item" href="javascript:void(0)">
+                    <i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}
+                </a>
+                <a class="dropdown-item" href="javascript:void(0)">
+                    <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
+                </a>
+                <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
+                    <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+                </a>
+            </div>
+        </li>
+    </ul>
+    </div>-->
+</nav>

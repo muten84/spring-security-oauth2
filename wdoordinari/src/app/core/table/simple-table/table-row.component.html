@@ -1,0 +1,25 @@
+<ng-container *ngIf="row.visible">
+  <td (dblclick)="dblCellClick(row, column.name)" (click)="cellClick(row, column.name)" 
+  *ngFor="let column of columns " [ngStyle]="column.style">
+    <span [ngStyle]="row?.rowStyyle" class="table-cell tablesaw-priority-5"
+     [innerHtml]="sanitize(getData(row, column))">
+    </span>
+    <!--{{getData(row, column.name)}}-->
+    <div *ngIf="showButton(row , column)" class="d-inline-block btn-group-sm" ngbDropdown style="background-color: transparent !important; float:right;">
+      <button type="button" class="btn btn-primary btn-sm" ngbDropdownToggle></button>
+      <div class="dropdown-menu dropdown-menu-right action-menu">
+        <button *ngIf="column.optionTitle" style="padding: 1px 1px 10px 10px" [disabled]="true" [ngClass]="{'dropdown-item':true, 'action-item': true, 'disabled': true}">
+          <span [innerHtml]="sanitize(getPropertyValue(row, column.optionTitle))"></span>
+        </button>
+        <ng-template ngFor let-o="$implicit" [ngForOf]="column.options" let-i="indexDet">
+          <button *ngIf="o.name!='SEPARATOR'" (click)="optionItemClick(row,column,o,$event);" style="padding: 1px 1px 10px 10px" [disabled]="!enabled(row, o) "
+            [ngClass]="{'dropdown-item':true, 'action-item': true, 'disabled': !enabled(row, o) }">
+            <i style="padding-right: 2px;" class="fa {{o.icon}}" aria-hidden="true"></i>
+            <span>{{o.name}} </span>
+          </button>
+          <span *ngIf="o.name=='SEPARATOR'" class="divider"></span>
+        </ng-template>
+      </div>
+    </div>
+  </td>
+</ng-container>

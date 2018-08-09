@@ -1,0 +1,45 @@
+  <ngboot-panel id="TurniPanel" titleIconClass="fa-ambulance text-success">
+      <div class="row" style="margin-left:1px; height: 20px">
+          <div class="pull-left"><label>Filtri impostati: {{filterSet}}</label></div>
+        </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-12">
+            <core-table id="turniTable" [config]="configTurniTable" (selected)="selectTurn($event.row)" [rows]="listTurni"
+              [columns]="columnsTurniTable" [showTooltip]="true">
+              <core-table-column index="2"  title="Inizio Turno" flex="8" [style]="{'max-width': '130px'}" [sortFn]="sortRowByStartDate"  [tooltip]="{placement : 'right-top' }">
+                <ng-template let-row="row">
+                  <span [innerHtml]="sanitize( (row.startTurnDateString) )"></span>
+                </ng-template>
+              </core-table-column>
+              <core-table-column index="3"  title="Fine Turno" flex="8" [style]="{'max-width': '130px'}" [sortFn]="sortRowByEndDate"  [tooltip]="{placement : 'right-top' }">
+                <ng-template let-row="row">
+                  <span [innerHtml]="sanitize( (row.endTurnDateString) )"></span>
+                </ng-template>
+              </core-table-column>
+             <core-table-column [title]="'Disponibilità'" [index]="4"  flex="5">
+                <ng-template let-row="row">
+                  <span style="font-size:15px">
+                    <i class="fa {{getAvailabilityIcon(row.availability)}}" aria-hidden="true" ></i>
+                  </span>
+                </ng-template>
+              </core-table-column>
+              <core-table-column [title]="'Pausa'" [index]="5" flex="5">
+                <ng-template let-row="row">
+                  <span style="font-size:15px">
+                    <i class="fa {{getPauseIcon(row.pause)}}" aria-hidden="true" ></i>
+                  </span>
+                </ng-template>
+              </core-table-column>
+            </core-table>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="exportTurns( )" class="btn btn-success" ngbTooltip="Export Turni">
+          <i class="fa fa-calendar" aria-hidden="true"></i> Export
+        </button>
+    </div>
+  </ngboot-panel>
+

@@ -1,0 +1,779 @@
+import {
+    ViewChild, ElementRef, Directive,
+    Component, OnInit, OnDestroy, AfterViewInit, AfterContentChecked,
+    ViewEncapsulation, ViewContainerRef, EventEmitter, Input, Output, HostListener
+} from '@angular/core';
+import { ComponentHolderService, MiddleComponent, HeaderComponent } from '../service/shared-service';
+
+import {
+    TransportModuleServiceApi,
+    TransportResultDTO,
+    SearchTransportResultDTO,
+    FiltroSinottico,
+    BookingToServiceInputDTO,
+    ServiceDTO
+} from '../../services/services.module';
+
+
+import * as moment from 'moment';
+import { MessageService } from '../service/message.service';
+import { DatatableComponent } from "@swimlane/ngx-datatable";
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MenuItemValue } from '../../services/services.module'
+import * as _ from 'lodash'
+import { ContextMenuComponent, ContextMenuService } from 'ngx-contextmenu';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+import { SinotticoServiziHeaderComponent } from 'app/sinottico-servizi/sinottico-servizi-header.component';
+import { FiltroSinotticoAvanzato } from 'services/gen';
+import { convertMenuItem } from 'app/util/sinottico-utils';
+import { ServiceCommon } from "app/common-servizi/service-common";
+import { Subscription } from 'rxjs/Subscription';
+import { EVENTS } from "app/util/event-type";
+import { RequestMessage, AddBookingToServiceMessage, SelectServiceInSinottico, Type, Message } from 'common/services/messages';
+import { BrowserCommunicationService } from "common/services/browser-communication.service";
+import { environment } from 'environments/environment';
+import { ServiziService } from '../service/servizi-service';
+import { FiltroCodaServizi } from './sinottico-servizi-model';
+
+@Component({
+    selector: 'sinottico-servizi',
+    templateUrl: './sinottico-servizi.html',
+    styleUrls: ['sinottico-servizi.scss'],
+    encapsulation: ViewEncapsulation.None
+
+})
+export class SinotticoServiziComponent implements OnInit, MiddleComponent, OnDestroy, AfterViewInit, AfterContentChecked {
+
+    /*    public items = [
+          { name: 'John', otherProperty: 'Foo' },
+          { name: 'Joe', otherProperty: 'Bar' }
+      ];*/
+    @ViewChild(ContextMenuComponent) public rowMenu: ContextMenuComponent;
+    @ViewChild(DatatableComponent) sinottico: DatatableComponent;
+
+    selected = [];
+    private addBookingToServiceLs: (ev: Message) => void;
+
+    currentSelected = {
+        optionItems: []
+    }
+
+    //Stringa riassuntiva dei filtri di ricerca impostati    
+    private filterSet: String;
+    // private filterSinotticoToSave: FiltroSinottico;
+
+    //Filtro front-end
+    private filtroCodaServizi: FiltroCodaServizi;
+    //Filtro da passere al servizio rest
+    // private filterRest: FiltroSinottico;
+    private filterRest: FiltroSinotticoAvanzato;
+
+    private filter: FiltroSinotticoAvanzato;
+    private filterToSave: FiltroSinotticoAvanzato;
+
+    private collapseSubscription: Subscription;
+
+    // sottoscrizione agli eventi pushing
+    private serviceSubscription;
+
+
+    timeout = undefined;
+    rows = [];
+
+    constructor(
+        private sanitizer: DomSanitizer,
+        private contextMenuService: ContextMenuService,
+        private router: Router,
+        private messageService: MessageService,
+        private componentService: ComponentHolderService,
+        private transportService: TransportModuleServiceApi,
+        private serviceCommon: ServiceCommon,
+        protected bcs: BrowserCommunicationService,
+        private serviziService: ServiziService
+    ) {
+        /*   
+        this.fetch((data) => {
+             this.rows = data;
+           });
+        */
+    }
+
+
+    // updateFilterSet(): void {
+    //     this.filterSet = "";
+    // }
+
+
+    @HostListener("resize")
+    public resize() {
+        console.log('resize div');
+    }
+
+
+
+    private updateFiltro(filterInput: any) {
+
+        console.log("updateFiltro() da sinittico-servizi");
+        this.ordinaAsc = true;
+        this.colonnaPrecedente = '';
+        this.filterRest = {};
+
+        let filtroFrontEnd: FiltroCodaServizi = filterInput;
+        this.printFilter(filtroFrontEnd);
+
+        if (filtroFrontEnd.transportDate)
+            this.filterRest.data = this.formatNgbDateStructToDate(filtroFrontEnd.transportDate);
+
+        this.filterRest.fuoriBo = filtroFrontEnd.fuoriBO;
+        this.filterRest.interH = filtroFrontEnd.interH;
+        this.filterRest.intraH = filtroFrontEnd.intraH;
+        this.filterRest.sinottico = filtroFrontEnd.sinottico ? filtroFrontEnd.sinottico : false;
+
+
+        if (!this.filterRest.valori)
+            this.filterRest.valori = {};
+
+        for (let item of filtroFrontEnd.listaElementiFiltro) {
+
+            let listaValori: Array<string> = this.filterRest.valori[item.name];
+
+            if (listaValori) {
+                listaValori.push(item.value);
+            } else {
+                let listaValori: Array<string> = [];
+                /* if(item.value==undefined){
+                     listaValori.push("true");
+                 }else{*/
+                listaValori.push(item.value);
+                // }
+                this.filterRest.valori[this.convertiNomeFiltro(item.name)] = listaValori;
+            }
+        }
+
+    }
+
+    private convertiNomeFiltro(keyIn) {
+        switch (keyIn) {
+            case "PART.INTRA-H":
+                return "INTRA_H_PART";
+            case "DEST.INTRA-H":
+                return "INTRA_H_DEST";
+            case "PART.NON-INTRA-H":
+                return "NON_INTRA_H_PART";
+            case "DEST.NON-INTRA-H":
+                return "NON_INTRA_H_DEST";
+        }
+        return keyIn;
+    }
+
+    private updateRiepilogoFiltro(filterInput: any) {
+
+        console.log("updateRiepilogoFiltro() da sinittico-servizi");
+
+        let filtroFrontEnd: FiltroCodaServizi = filterInput;
+        this.printFilter(filtroFrontEnd);
+
+        this.filterSet = "";
+
+        this.filterSet += "DATA TRASPORTO: "
+        if (filtroFrontEnd.allFlag == true)
+            this.filterSet += "TUTTI" + "; "
+        else if (filtroFrontEnd.todayFlag == true)
+            this.filterSet += "OGGI" + "; "
+        else if (filtroFrontEnd.tomorrowFlag == true)
+            this.filterSet += "DOMANI" + "; "
+        else if (filtroFrontEnd.transportDate != null) {
+
+            let transportDateToSet = { day: filtroFrontEnd.transportDate.day, month: filtroFrontEnd.transportDate.month - 1, year: filtroFrontEnd.transportDate.year };
+            let m = moment(transportDateToSet);
+            let formatDate = m.format('DD-MM-YYYY').toLocaleString();
+            // let parts = moment(filtroFrontEnd.transportDate).format("DD-MM-YYYY").split("-");
+            this.filterSet += formatDate + "; ";
+        }
+
+        if (filtroFrontEnd.fuoriBO == true)
+            this.filterSet += "FUORI BOLOGNA" + "; "
+
+        if (filtroFrontEnd.intraH == true)
+            this.filterSet += "INTRA-H" + "; "
+
+        if (filtroFrontEnd.interH == true)
+            this.filterSet += "INTER-H" + "; "
+
+
+
+
+        for (let item of filtroFrontEnd.listaElementiFiltro) {
+            this.filterSet += item.name + ((item.value === undefined || item.value == null) ? " ; " : ":" + item.value + "; ");
+        }
+
+        this.filterSet.trim;
+        console.log("DATI DEL FILTRO DI RICERCA: " + this.filterSet);
+    }
+
+
+    public searchTransports(): void {
+        //    console.log("searchTransports() da sinittico-servizi ");
+        this.componentService.getRootComponent().mask();
+        if (this.filterRest.data) {
+            this.filterRest.data.setUTCHours(0);
+            this.filterRest.data.setUTCMinutes(0);
+            this.filterRest.data.setUTCSeconds(0);
+        }
+        console.log("FILTRO DI RICERCA --> " + JSON.stringify(this.filterRest));
+
+        //sul refresh dei dati del sinottico invio l'evento al sinottico staccato
+        this.sendMessageToSinottico({});
+
+        this.transportService.filterAdvancedTransports(this.filterRest)
+            .subscribe(result => {
+                let risultato: SearchTransportResultDTO = result;
+
+                let list: TransportResultDTO[] = risultato ? risultato.resultList : [];
+                this.rows = list;
+                //      
+                if (this.rows) {
+                    this.rows.forEach(e => {
+                        this.elaborateRow(e);
+                    });
+                }
+
+                this.componentService.getRootComponent().unmask();
+            }, error => {
+                console.error("Errore" + error);
+                this.componentService.getRootComponent().unmask();
+            });
+    }
+
+    private elaborateRow(r) {
+        let row: TransportResultDTO = r;
+        r.optionItems = this.buildRowMenu(row.popupMenu);
+        this.generateDetail(row);
+    }
+
+    private generateDetail(e: TransportResultDTO) {
+        (<any>e).optionItems = this.buildRowMenu(e.popupMenu);
+        (<any>e).detail = {
+            groups: [{
+                "name": "Trasporto",
+                "icon": "fa fa-ambulance",
+                values: [{
+                    "key": "Codice",
+                    "value": e.code,
+                }, {
+                    "key": "Data Trasporto",
+                    "value": e.transportDate,
+                }]
+            }, {
+                "name": "Itinerario",
+                "icon": "fa-hospital-o",
+                values: [{
+                    "key": "Partenza",
+                    "value": e.startAddress
+                }, {
+                    "key": "Destinazione",
+                    "value": e.endAddress
+                }]
+            }, {
+                "name": "Mezzi",
+                "icon": "fa-ambulance",
+                values: [{
+                    "key": "Mezzi",
+                    "value": e.resources,
+                }]
+            }]
+        };
+    }
+
+    buildRowMenu(menuItems: MenuItemValue[]) {
+        //console.log('buildRowMenu');
+        let optionItems = [];
+
+        if (menuItems && menuItems.length > 0) {
+            menuItems.forEach((mi) => {
+                optionItems.push(convertMenuItem(mi));
+            });
+        }
+        /*  else {
+             optionItems.push(this.createDefaultMenu());
+         }*/
+        return _.sortBy(optionItems, "position");
+    }
+
+
+
+    private ordinaAsc: boolean = true;
+    private colonnaPrecedente: string = '';
+
+    //Viene chiamato dopo  DatatableComponent.prototype.onColumnSort 
+    onSort($event) {
+        //    console.log('onSort');
+
+        if ($event && $event.column) {
+
+            let direzione: string = $event.newValue; //        "asc"       
+            let proprieta = $event.column.prop;
+
+            if (proprieta && this.sinottico && this.sinottico.sorts && this.sinottico.sorts.length > 0) {
+
+                if (proprieta === "dataTasporto") {
+
+                    if (this.colonnaPrecedente && this.colonnaPrecedente === 'dataTasporto') {
+                        this.ordinaAsc = !this.ordinaAsc;
+                    } else {
+                        this.ordinaAsc = false;
+                        this.colonnaPrecedente = 'dataTasporto';
+                    }
+
+                    let direzioneOrdinamentoData = this.ordinaAsc ? 'asc' : 'desc';
+                    //this.sinottico._rows = _.orderBy(this.sinottico._rows, ['transportDate'], [direzioneOrdinamentoData]);
+
+                    this.sinottico._rows = _.orderBy(
+                        this.sinottico._rows,
+                        function (e) {
+
+                            return e.transportDateValue;
+                        },
+                        [direzioneOrdinamentoData]);
+
+                }
+
+                else {
+                    this.ordinaAsc = true;
+                    this.colonnaPrecedente = undefined;
+                }
+            }
+        }
+    }
+
+
+    createDefaultMenu(): any[] {
+        //console.log('createDefaultMenu');
+        let optionItems = [];
+        let mi: MenuItemValue = {
+            enable: true,
+            id: "assignVehicle",
+            name: "Associazione e Gestione",
+            position: 0
+
+        }
+        let miArchive: MenuItemValue = {
+            enable: true,
+            id: "archiveService",
+            name: "Archivia Servizio",
+            position: 1
+
+        }
+        let synoptic: MenuItemValue = {
+            enable: true,
+            id: "synoptic",
+            name: "Finestra Prenotazioni",
+            position: 1
+
+        }
+
+        optionItems.push(convertMenuItem(mi));
+        optionItems.push(convertMenuItem(miArchive));
+        optionItems.push(convertMenuItem(synoptic));
+        return optionItems;
+    }
+
+
+
+    public onOptionItemClicked(row: any, source: string, enabled: boolean, event): any {
+        if (enabled) {
+            let src = source.toLowerCase();
+            switch (src) {
+                case "assignvehicle":
+                    this.router.navigate(['/gestione-servizi', row.id]);
+                    return;
+                case "archiveservice":
+                    this.archiveService(row.id, row.code);
+                    return;
+                case 'synoptic':
+                    if (this.bcs.isChildOpen()) {
+                        this.bcs.focusChild();
+                    } else {
+                        let sendRowIdLs = (ev: Message) => {
+                            let param: SelectServiceInSinottico = {
+                                serviceCode: row.code,
+                                serviceId: row.id
+                            }
+                            this.bcs.postMessage(Type.APP2_SET_CURRENT_SERVICE, param, "*");
+                            this.bcs.removeEventListener(Type.APP2_GET_SELECTED_BOOKING, sendRowIdLs);
+                        };
+                        this.bcs.addEventListener(Type.APP2_GET_SELECTED_BOOKING, sendRowIdLs);
+
+                        this.bcs.openChildren(environment.synURL, 'prenotazioni', 600, 600);
+                    }
+                    return;
+
+            }
+        }
+    }
+
+    private async archiveService(id: string, serviceCode: string) {
+        //controlla se isManaged per 
+        this.componentService.getRootComponent().mask();
+        let checkAllocatedResources = await this.serviceCommon.checkIsManaged(id);
+        if (!checkAllocatedResources.ok) {
+            this.componentService.getRootComponent().unmask();
+            this.componentService.getRootComponent().showModal('warning', 'Archiviazione impossibile! Nessun mezzo è stato associato al servizio.');
+        } else {
+            this.serviceCommon.checkAndArchiveService(id, serviceCode, true);
+        }
+    }
+
+    private updateFiltriImpostati(): void {
+        //   console.log("updateFiltriImpostati() da sinittico-servizi ");
+        let filtroFrontEnd: FiltroCodaServizi = this.componentService.getHeaderComponent('currentSearchHeader').getHeaderFilter();
+        this.updateFiltro(filtroFrontEnd);
+        this.updateRiepilogoFiltro(filtroFrontEnd);
+    }
+
+    ngOnInit() {
+        this.serviceSubscription = this.messageService.subscribe(EVENTS.SERVICE);
+        this.serviceSubscription.observ$.subscribe((msg) => {
+            setTimeout(() => { //Gestione messaggio inserita in timeout per preservare la sottoscrizione al servizo in caso di errore 
+                console.log('received message from topic ' + msg.topic + " - " + JSON.stringify(msg));
+                // Action possibili:  "ALERT" , "UPDATE", "ARCHIVE"
+                let trovato = false;
+                let idServices: Array<string> = null;
+                if (msg.data.payload) {
+                    //lista di id dei servizi da allarmare
+                    idServices = msg.data.payload.split(",");
+                    if (this.rows) {
+                        this.rows.forEach(e => {
+                            //Cerco se devo allarmare servizi per risorse non avviate
+                            if (this.checkPresentElementIntoArray(idServices, e.id)) {
+                                trovato = true;
+                            }
+                        });
+                    }
+
+                }
+
+                switch (msg.data.action) {
+                    case "ARCHIVE":
+                        //se non è presente sul sinottico non faccio nulla
+                        if (trovato) {
+                            this.removeTransport(idServices);
+                        }
+                        break;
+                    case "UPDATE":
+                    // questo evento arriva sia su un update che su una creazione, 
+                    // faccio le stesse cose sull'alert
+                    case "ALERT":
+                        // in caso di update o alert aggiorno i singoli servizi
+                        this.reloadTransport(idServices, !trovato);
+                        break;
+                    default:
+                        this.searchTransports();
+                        break;
+                }
+            }, 0);//Chiudi timeout per preservare la sottoscrizione al servizo in caso di errore 
+
+        });
+    }
+
+    private removeTransport(idServices: Array<string>) {
+        // filtro tutti gli elemendi del sinottico 
+        this.rows = this.rows.filter(el => {
+            //se l'elemento è presente nella lista degli id lo escludo
+            let val = idServices.find(value => {
+                return value == el.id;
+            });
+            return !val;
+        });
+    }
+
+    private reloadTransport(idServices: Array<string>, allFilter: boolean) {
+        let filter = null;
+
+        if (allFilter) {
+            filter = JSON.parse(JSON.stringify(this.filterRest));
+        } else {
+            filter = {};
+        }
+
+
+        idServices.forEach(id => {
+            filter.id = id;
+            this.transportService.filterAdvancedTransports(filter).subscribe(res => {
+                let risultato: SearchTransportResultDTO = res;
+                let list: TransportResultDTO[] = risultato ? risultato.resultList : [];
+                if (list) {
+                    list.forEach(e => {
+                        this.elaborateRow(e);
+
+                        this.replaceElement(e);
+
+                    });
+                }
+            });
+        });
+    }
+
+    private replaceElement(el: TransportResultDTO) {
+        // rimpiazzo la riga presente con quella appena caricata
+        let index = this.rows.findIndex(r => {
+            return r.id === el.id;
+        });
+
+        if (index >= 0) {
+            this.rows[index] = el;
+        } else {
+            this.rows.push(el);
+        }
+        // questo serve a forzare il refresh della grafica, 
+        // dato che modificare l'array non scatena il ridisegno 
+        this.rows = [...this.rows];
+    }
+
+    private checkPresentElementIntoArray(idList: Array<string>, idSearch: string): boolean {
+        let esito = false;
+        if (idList && idList.length > 0 && idSearch && idSearch.length > 0) {
+            idList.forEach(element => {
+                if (element == idSearch) {
+                    esito = true;
+                }
+            });
+        }
+        return esito;
+    }
+
+    ngAfterViewInit() {
+        //       console.log("ngAfterViewInit() da sinittico-servizi ");
+        //      console.log("... inietta il componente come MiddleComponent ");
+
+        this.componentService.setMiddleComponent('currentSearchTable', this);
+
+        // Partenza automatica della ricerca sinottico con i parametri di dafault
+        let currentFilter = sessionStorage.getItem("sinotticoFilter");
+
+
+        let filterDefault: FiltroCodaServizi;
+        if (currentFilter) {
+            filterDefault = JSON.parse(currentFilter);
+        } else {
+
+            let date = new Date();
+            let transportDateToSet = { day: date.getUTCDate(), month: date.getUTCMonth() + 1, year: date.getUTCFullYear() };
+
+            //let parts = moment(new Date()).format("DD-MM-YYYY").split("-");
+            //let transportDateToSet ={ day: Number(parts[0]), month: Number(parts[1]),  year: Number(parts[2]) };
+
+            filterDefault = {
+                tomorrowFlag: false,
+                todayFlag: true,
+                allFlag: false,
+                // firstValue:undefined,
+                fuoriBO: false,
+                interH: false,
+                intraH: false,
+                sinottico: false,
+                listaElementiFiltro: [],
+                // primoElementoFiltro:undefined,
+                // secondoElementoFiltro:undefined,
+                // secondValue:undefined,
+                // selectedPrimoFilterAdd:undefined,
+                // selectedSecondoFilterAdd:undefined,
+                transportDate: transportDateToSet
+            };
+        }
+        setTimeout(() => this.triggerSubmit(filterDefault), 100);
+
+        this.collapseSubscription = this.componentService.getRootComponent().collapseMenu.subscribe(e => {
+            //        console.log("collapse " + e);
+
+            setTimeout(() => {
+                this.sinottico.recalculate();
+            }, 500);
+        });
+    }
+
+    ngOnDestroy() {
+        //      console.log("ngOnDestroy() da sinittico-servizi : TODO");
+        this.serviceSubscription.observ$.unsubscribe();
+        this.collapseSubscription.unsubscribe();
+        this.bcs.removeEventListener(Type.ADD_BOOKING_TO_SERVICE, this.addBookingToServiceLs);
+
+        this.sendMessageToSinottico({});
+        //this.bcs.postMessage({type: 'APP2_SET_CURRENT_SERVICE'}, "*");
+        //     this.bcs.closeChildren(environment.synURL, 'synoptic');
+    }
+
+    ngAfterContentChecked() {
+        // console.log("ngAfterContentChecked() da sinittico-servizi : TODO");
+    }
+
+    //Riceve l'evento 'Cerca' dal filtro dove filterInput è il filtro proveniente dall'header
+    triggerSubmit(filterInput: any) {
+        //     console.log("triggerSubmit() da sinittico-servizi ");
+
+        if (filterInput != null) {
+            this.filter = filterInput;
+            /*aggiorno qui il filtro perché è l'ultima ricerca che ha avviato*/
+            sessionStorage.setItem("sinotticoFilter", JSON.stringify(this.filter));
+            this.filterToSave = JSON.parse(JSON.stringify(this.filter));
+            if (filterInput.transportDate != null) {
+                this.filterToSave.data = new Date(filterInput.transportDate['year'], filterInput.transportDate['month'] - 1, filterInput.transportDate['day']);
+            }
+        }
+
+
+        if (filterInput != null) {
+            this.updateFiltro(filterInput);
+            this.updateRiepilogoFiltro(filterInput);
+        }
+        this.searchTransports();
+    }
+
+
+    onPage(event) {
+        //    console.log("onPage() da sinittico-servizi");
+        //    clearTimeout(this.timeout);
+        //    this.timeout = setTimeout(() => {
+        //        console.log('paged!', event);
+        //    }, 100);
+    }
+
+    onSelect({ selected }) {
+        //   console.log("onSelect() da sinittico-servizi");
+        //  console.log('Select Event', selected, this.selected);
+        this.currentSelected = selected[0];
+
+        this.sendMessageToSinottico(selected[0]);
+    }
+
+
+    sendMessageToSinottico(currentTransport: TransportResultDTO) {
+        let param: SelectServiceInSinottico = {
+            serviceCode: currentTransport.code,
+            serviceId: currentTransport.id
+        }
+        this.bcs.postMessage(Type.APP2_SET_CURRENT_SERVICE, param, "*");
+    }
+
+
+    onActivate(event) {
+        // console.log("onActivate() da sinittico-servizi");
+        // console.log('Activate Event', event);
+        this.currentSelected = event.row;
+    }
+
+
+
+    // getACellClass(patientsNumber){
+
+    //     // let valore =row.patientsNumber;
+    //     // let value =cell.row;
+    //     console.log("getACellClass: " + JSON.stringify(patientsNumber));
+
+    //     console.log("valore: " + patientsNumber);
+
+    //     //<span title="1" style="color:red;">1</span>
+    //     let ret = '<span  style="display: block;    height: 60px;    width: 60px;    line-height: 60px; '
+    //        + '-moz-border-radius: 30px!important;     border-radius: 30px!important;   background-color: red!important;  '
+    //        +' color: white!important;    text-align: center!important;    font-size: 2em;">1</span>';
+    //     return ret;
+
+    // }
+
+
+    getRowClass(row: TransportResultDTO) {
+        //console.log("rowclass: " + row.rowStyle.foreground);
+        let rt = {
+            'row-foreground-green': row.rowStyle.foreground.toLowerCase() === 'green',
+            'row-foreground-yellow': row.rowStyle.foreground.toLowerCase() === 'yellow',
+            'row-foreground-red': row.rowStyle.foreground.toLowerCase() === 'red',
+            'row-background-pink': row.rowStyle.background.toLowerCase() === 'pink',
+        }
+        // console.log(JSON.stringify(rt));
+        return rt;
+    }
+
+    getCellClass(cell) {
+        //  console.log("getCellClass() da sinittico-servizi : TODO");
+
+        /* console.log("getCellClass: " + JSON.stringify(cell));
+         let row = cell.row;
+         let rt = {
+             'row-foreground-green': row.rowStyle.foreground.toLowerCase() === 'green'
+ 
+         }
+         console.log(JSON.stringify(rt));
+         return rt;*/
+    }
+
+    contains(pattern, val): boolean {
+        console.log("contains() da sinittico-servizi");
+        let matchResult = pattern.toLowerCase().match(val);
+        if (matchResult) {
+            return matchResult.length > 0
+        }
+        return false;
+    }
+
+    public formatNgbDateStructToDate(date): Date {
+        return new Date(date.year, (date.month - 1), (date.day + 1));
+    }
+
+    public formatNgbDateStructToString(date): string {
+        return moment(date).format('DD/MM/YYYY HH:mm:ss');
+    }
+
+    getColumnSIcon(pattern: boolean) {
+        //      console.log(pattern);
+        if (pattern === true)
+            return '<i class="fa fa-circle"  style="font-size:1.3rem; padding-left:5px; padding-top:5px; color:red"></i>';
+        return '<i></i>';
+    }
+
+    public sanitize(html: string): SafeHtml {
+        //      console.log("sanitize() da sinittico-servizi");
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    }
+
+    private printFilter(filtroFrontEnd: FiltroCodaServizi): void {
+        filtroFrontEnd.listaElementiFiltro.forEach(
+            e => {
+                console.log(" name:  [" + e.name + "] value: [" + e.value + "]");
+            }
+
+        );
+
+    }
+
+    //Deve implementare fetchComponentData perche' implementa l'intefaccia MiddleComponent
+    fetchComponentData() {
+        // console.log("fetchComponentData() da sinittico-servizi : TODO");
+    }
+
+
+    public onContextMenu($event: MouseEvent, item: any): void {
+        //console.log('onContextMenu');
+        this.contextMenuService.show.next({
+            // Optional - if unspecified, all context menu components will open
+            contextMenu: this.rowMenu,
+            event: $event,
+            item: item,
+        });
+        $event.preventDefault();
+        $event.stopPropagation();
+    }
+
+    toggleExpandRow(row) {
+        //console.log('toggleExpandRow');
+        //  //console.log('Toggled Expand Row!', row);
+        let expand = !this.sinottico.bodyComponent.getRowExpanded(row);
+        this.sinottico.rowDetail.collapseAllRows();
+        if (expand) {
+            this.sinottico.rowDetail.toggleExpandRow(row);
+        }
+
+    }
+
+}

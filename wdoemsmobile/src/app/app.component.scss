@@ -1,0 +1,51 @@
+.mat-form-field-label-wrapper {
+    top: -1em !important;
+    padding-top: 0.84375em;
+}
+
+
+
+@media only screen and (orientation:portrait) {
+
+    #wrap { 
+        display:none; 
+    }
+
+    #warning-portrait { 
+        display:block; 
+    }
+}
+
+@media only screen and (orientation:landscape) {
+
+    #warning-portrait { 
+        display:none; 
+    }
+}
+
+.example-card {
+    width: 83vw;
+    margin: 5rem;
+    /* height: 900px; */
+}
+
+.example-header-image {
+    background-image: url('http://127.0.0.1:8989/app/assets/images/logo-header.png');
+    background-size: cover;
+    width: 8rem;
+    height: 4rem;
+}
+
+.mat-card-title {
+    font-size: 3rem;
+}
+
+.mat-card-subtitle {
+    font-size: 2rem;
+}
+
+.mdc-button {
+    width: 15rem;
+    height: 95px;
+    font-size: 2rem;
+}

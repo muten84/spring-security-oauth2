@@ -1,0 +1,23 @@
+INSERT
+INTO WEB_IDENTITY
+  (
+    ID,
+    DESCRIPTION,
+    LOGIN,
+    PASSWD,
+    EMAIL,
+    TABLE_TYPE,
+    TABLE_ID,
+    PASSWORD_MODIFY_DATE
+  )
+  VALUES
+  (
+    'TEST',
+    'TEST DESCRIPTION',
+    'ADMIN',
+    'ADMIN',
+    'ADMIN@DOMAIN.TEST',
+    '',
+    '',
+    DATE '2016-11-11'
+  );

@@ -1,0 +1,92 @@
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:util="http://www.springframework.org/schema/util"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                        http://www.springframework.org/schema/util
+                        http://www.springframework.org/schema/util/spring-util-4.3.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+ <util:map id="tipologiaTrasporto">
+    <entry key="PROGRAMMATO" value="NO"/>
+    <entry key="NON_PROGRAMMATO" value="NO"/>
+    <entry key="EMERGENZA" value="EM"/>
+    <entry key="URGENZA" value="UR"/>
+</util:map>
+
+<util:map id="modalitaTrasporto"> 
+    <entry key="ACCOMPAGNATO" value="DA_DEFINIRE"/>
+    <entry key="BARELLA" value="BARELLA"/>
+    <entry key="BARELLA_CUCCHIAIO" value="BARELLA_CUCCHIAIO"/>
+    <entry key="BARELLA_OBESI" value="BARELLONE PER PZ OBESI"/>
+    <entry key="CAMMINANTE (sale il gradino del mezzo)" value="CAMMINA"/>
+    <entry key="CARROZZINA" value="DA_DEFINIRE"/>
+    <entry key="CARROZZINA_OBESI" value="DA_DEFINIRE"/>
+    <entry key="CASSETTINA_TRASPORTO_FETO_MORTO" value="CASSETTINA PER TRASPORTO SALME NEONATI"/>
+    <entry key="LETTO (no per ambulanze)" value="DA_DEFINIRE"/>
+    <entry key="SALMA" value="DA_DEFINIRE"/>
+    <entry key="TERMOCULLA" value="TERMOCULLA"/>
+    <entry key="TRASPORTINO_PER_NEONATO" value="DA_DEFINIRE"/>
+ </util:map> 
+
+<util:map id="accompagnamento"> 
+    <entry key="FAMILIARE_CONOSCENTE" value="DA_DEFINIRE"/>
+    <entry key="MEDICO" value="MEDICO"/>
+    <entry key="INFERMIERE" value="INFERMIERE"/>
+    <entry key="SCORTA" value="SCORTA"/>
+ </util:map> 
+<util:map id="attrezzaturaAmbulanza"> 
+    <entry key="OSSIGENO" value="OSSIGENO PORTATILE"/>
+    <entry key="ASPIRATORE" value="ASPIRATORE PORTATILE"/>
+    <entry key="SATURIMETRO" value="SATURIMETRO"/>
+    <entry key="VENTILATORE" value="DA_DEFINIRE"/>
+    <entry key="ZAINO_ALS" value="DA_DEFINIRE"/>
+    <entry key="DAE" value="DEFIBRILLATORE AUTOMATICO"/>
+    </util:map>  
+    <util:map id="attrezzaturaASeguitoPaz"> 
+    <entry key="MONITOR_DEFIBRILLATORE" value="DA_DEFINIRE"/>
+    <entry key="ASPIRATORE_PORTATILE" value="ASPIRATORE PORTATILE"/>
+    <entry key="CARDIOMONITOR" value="DA_DEFINIRE"/>
+    <entry key="CPAP" value="DA_DEFINIRE"/>
+     <entry key="DAE" value="DEFIBRILLATORE AUTOMATICO"/>
+    <entry key="ZAINO_URGENZA" value="DEFIBRILLATORE AUTOMATICO"/>
+     <entry key="O2_PORTATILE" value="OSSIGENO PORTATILE"/>
+    <entry key="PM_TEMPORANEO" value="DA_DEFINIRE"/>
+    <entry key="POMPA_DA_INFUSIONE" value="DA_DEFINIRE"/>
+    <entry key="SUPPORTO_BAMBINI_BARELLA" value="DA_DEFINIRE"/>
+     </util:map>  
+<util:map id="motivoTrasportoIntrah">
+    <entry key="CONSULENZA" value="CONSULENZA"/>
+    <entry key="DIALISI" value="TRASPORTO SOLO ANDATA PAZIENTE DIALIZZATO"/>
+    <entry key="DIMISSIONE_VERSO_ALTRE_STRUTTURE" value="DIMISSIONE PROTETTA"/>
+    <entry key="ESAME_STRUMENTALE" value="ESAMI STRUMENTALI SOLO INTRAH POLICLINICO SANT'ORSOLA MALPIGHI"/>
+    <entry key="TRASFERIMENTO" value="TRASFERIMENTO"/>
+    <entry key="ALTRO" value="DA_DEFINIRE"/>
+    <entry key="INTERVENTO_CHIRURGICO" value="DA_DEFINIRE"/>
+    <entry key="MOVIMENTAZIONE_SALMA" value="DA_DEFINIRE"/>
+</util:map>
+
+<util:map id="motivoTrasportoInterh">
+    <entry key="CONSULENZA" value="CONSULENZA"/>
+    <entry key="ESAMI_STRUMENTALI" value="TRASPORTO ANDATA E RITORNO PAZIENTE ADI"/>
+    <entry key="PAZIENTE_ADI" value="TRASPORTO ANDATA E RITORNO PAZIENTE ADI"/>
+   <entry key="TRASFERIMENTO" value="TRASFERIMENTO"/>
+    <entry key="DIALISI" value="TRASPORTO SOLO ANDATA PAZIENTE DIALIZZATO"/>
+    <entry key="DIMISSIONE_VERSO_ALTRE_STRUTTURE" value="DIMISSIONE PROTETTA"/>
+    <entry key="DIMISSIONE_PROTETTA" value="DIMISSIONE_PROTETTA"/>
+    <entry key="PERSONALE_MATERIALE_SANITARIO" value="TRASPORTO DI PERSONALE SANITARIO O MATERIALE"/>
+    <entry key="SANGUE_EMODERIVATI"  value="TRASPORTO DI PERSONALE SANITARIO O MATERIALE"/>
+    <entry key="ALTRO" value="DA_DEFINIRE"/>
+</util:map>
+
+<util:map id="nonNoto">
+    <entry key="true" value="PAZIENTE SCONOSCIUTO"/>
+    <entry key="false" value=""/>
+</util:map>
+
+</beans>

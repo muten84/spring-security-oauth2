@@ -1,0 +1,82 @@
+<form [formGroup]="turniFG" validationGroup>
+<div class="form-group row">
+  <div class="col-md-3">
+    <label class="mt-2 mr-sm-2 mb-0" for="data" validationLabel="startTurnDate">Data Inizio</label>
+    <div class="input-group input-group-sm" clickoff>
+      <input [inputMask]="'99/99/9999'" type="text" id="fromDate" class="form-control" placeholder="dd/mm/yyyy" name="dpdataDa"
+        [(ngModel)]="startDateStruct" ngbDatepicker #dpdataDa="ngbDatepicker" (ngModelChange)="startDateSelected($event)" tabindex="10" [formControl]="getControl('startTurnDate')" validationMessage>  
+      <div class="input-group-append">
+        <button class="btn input-group-text" (click)="dpdataDa.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="data" validationLabel="endTurnDate">Data Fine</label>
+    <div class="input-group  input-group-sm" clickoff>
+      <input [inputMask]="'99/99/9999'" type="text" id="toDate" class="form-control" placeholder="dd/mm/yyyy" name="dpdataA" [(ngModel)]="endDateStruct"
+        ngbDatepicker #dpdataA="ngbDatepicker" (ngModelChange)="endDateSelected($event)"tabindex="12" [formControl]="getControl('endTurnDate')" validationMessage>
+      <div class="input-group-append">
+        <button class="btn input-group-text" (click)="dpdataA.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+    <label class="label col-form-label">Note</label>
+    <div style="width: 600px">
+      <textarea style="height: 60px !important" [inputMask]="'*{0,1024}'" rows="3" cols="30" class="form-control form-control-ta"
+        [(ngModel)]="turn.note"tabindex="25" [ngModelOptions]="{standalone: true}"></textarea>
+    </div>
+
+  </div>
+
+  <div class="col-md-3">
+    <div>
+      <label class="mt-2 mr-sm-2 mb-0" validationLabel="startTurnTime">Orario Inizio</label>
+      <input inputMask="99:99:99" class="form-control" placeholder="HH:MM:SS" [(ngModel)]="turn.startTurnTime" tabindex="1" tabindex="14" [formControl]="getControl('startTurnTime')" validationMessage>
+    </div>
+    <div>
+      <label class="mt-2 mr-sm-2 mb-0" validationLabel="endTurnTime">Orario Fine</label>
+      <input inputMask="99:99:99" class="form-control" placeholder="HH:MM:SS" [(ngModel)]="turn.endTurnTime" tabindex="1" tabindex="16" [formControl]="getControl('endTurnTime')" validationMessage>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-3">
+    <label class="mt-2 mr-sm-2 mb-0" for="vehicle">Mezzo</label>
+    <div>
+      <ng-select [(ngModel)]="selectedVehicle" [allowClear]="true" [items]="vehicles | async" (refresh)="retrieveVehicle118ByCode($event)"
+        minChar="0" refreshDelay="500" textField="code" placeholder="Selezionare Mezzo..." (ngModelChange)="vehicleSelected($event)" tabindex="18" [ngModelOptions]="{standalone: true}">
+      </ng-select>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="parking">Postazione</label>
+    <div>
+      <ng-select [(ngModel)]="turn.parkingCode" [allowClear]="true" [items]="parkingItems | async" (refresh)="updateParkingList($event)"
+        minChar="0" refreshDelay="500" textField="name" valueField="name" placeholder="Selezionare Postazione..."tabindex="20" [ngModelOptions]="{standalone: true}"> </ng-select>
+    </div>
+  </div>
+
+
+  <div class="col-md-3">
+    <label class="mt-2 mr-sm-2 mb-0" for="sanitaryCategory">Categ. Sanitaria</label>
+    <div>
+      <ng-select [(ngModel)]="selectedSanitaryCategory" allowClear="true" textField="description" [items]="sanitaryCategories | async"
+        placeholder="Selezionare Cat. Sanitaria..." tabindex="5" (ngModelChange)="sanitaryCategorySelected($event)"tabindex="22" [ngModelOptions]="{standalone: true}"> </ng-select>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="convention">Convenzione</label>
+    <div>
+      <ng-select [(ngModel)]="selectedConvention" allowClear="true" textField="description" [items]="conventions | async" placeholder="Selezionare Convenzione..."
+        tabindex="5" (ngModelChange)="conventionSelected($event)"tabindex="24" [ngModelOptions]="{standalone: true}"> </ng-select>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" (click)="manageTurn( )" class="btn btn-success" ngbTooltip="Salva i dati nella maschera">
+    <i class="fa fa-floppy-o" aria-hidden="true"tabindex="26"></i> Salva
+  </button>
+  <button type="button" (click)="clean( )" class="btn btn-success" ngbTooltip="Pulisci i dati nella maschera">
+    <i class="fa fa-eraser" aria-hidden="true"tabindex="28"></i> Pulisci
+  </button>
+</div>
+</form>

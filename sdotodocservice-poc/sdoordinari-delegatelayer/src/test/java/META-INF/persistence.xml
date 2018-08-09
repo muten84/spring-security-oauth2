@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="default">
+		<!-- <class>it.eng.areas.ems.ordinari.entity.AppToHistoricCoordinationDO</class> -->
+		<class>it.eng.areas.ems.ordinari.entity.AvailableMobileStationDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.DdtDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.GenericDataDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.InPatientDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ParkingPropertyDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.RepartiDaImportareDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingDocumentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingHistoryDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingNotifyDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingPatientDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingRefusedDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingReturnInfoDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToChargeDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToCiclicalBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToCiclicalBookingPatientDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToDeallocateReasonDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToDistanceDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToParkingAuthorityDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToPauseTypeDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToServiceCrewDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToVirtualCiclicalServiceDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsAuthorityDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingDpiDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingEquipmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingIdDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingIdPKDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsCiclicalDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsCiclicalBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsCiclicalDayDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsCiclicalDaysInfoDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsCiclicalDaysInfoHistDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsConventionDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsDeleteBookingReasonDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsDeleteServiceReasonDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsDepartmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsDepartmentBkpDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsEquipmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsInterventionDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsInterventionActivityDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsPatientArchiveDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsPatientCompanionDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsPatientStatusDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsResourceParkingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsServiceDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsServiceBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsServiceIdDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsServiceIdPKDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsServiceResourceDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsTransportTypeDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsTransportTypeReturnDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TurnCrewMemberDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebBookingEquipmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebFeatureDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebIdentityDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebIdentityDepartmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebIdentityFeatureDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebSessionDO</class>
+
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+	</persistence-unit>
+</persistence>

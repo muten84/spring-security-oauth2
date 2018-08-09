@@ -1,0 +1,248 @@
+<style type="text/css">
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  
+  #password {
+    border: 1px solid #000;
+    margin: 0 0 10px;
+  }
+  
+  div.pass-container {
+    height: 30px;
+  }
+  
+  div.pass-bar {
+    height: 11px;
+    margin-top: 2px;
+  }
+  
+  div.pass-hint {
+    font-family: arial;
+    font-size: 11px;
+  }
+  
+  input.ng-pristine+ul#strength {
+    display: none;
+  }
+  
+  ul#strength {
+    display: inline;
+    list-style: none;
+    margin: 0;
+    margin-left: 15px;
+    padding: 0;
+    vertical-align: 2px;
+  }
+  
+  .point:last {
+    margin: 0 !important;
+  }
+  
+  .point {
+    background: #DDD;
+    border-radius: 2px;
+    display: inline-block;
+    height: 5px;
+    margin-right: 1px;
+    width: 20px;
+  }
+  
+  #footer {
+    position: fixed;
+    bottom: 5px;
+  }
+  /* login */
+  
+  .panel-login {
+    padding: 2em;
+    max-width: 360px;
+    border-radius: .4em;
+    margin: auto;
+    background-color: white;
+    margin-top: 4em;
+    background-color: white;
+  }
+  
+  .panel-login .btn {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .panel-login .btn .fa {
+    font-size: 18px;
+    line-height: 1;
+    /*margin-right: .33em;*/
+    position: relative;
+    /*bottom: -2px;*/
+  }
+  
+  .login-link {
+    margin-top: .75em;
+    text-align: center;
+    display: block;
+    font-size: 13px;
+  }
+  
+  .responsive-image {
+    width: 100%;
+    height: auto;
+    padding: 1em 2em 1em 0;
+  }
+  
+  .dashboard.page-login {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: url(./images/bg-login.jpg) no-repeat center;
+    background-size: cover;
+  }
+  
+  .logged-username {
+    color: $brand-primary;
+    font-size: 24px;
+  }
+  /*Adeguamento per la normativa sui cooky*/
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  /*
+body {
+  background: #FFAAAA;
+}*/
+  
+  .cookie {
+    position: relative;
+    top: 0;
+    width: 100%;
+    background-color: #000;
+    opacity: 0.8;
+    color: #DFDFDF;
+    text-align: center;
+  }
+  
+  .cookie-p {
+    padding: 6px;
+    font-family: Tahoma;
+    font-size: 12px;
+  }
+  
+  .cookie-a {
+    color: #aaa;
+    text-decoration: underline;
+  }
+  
+  .cookie-close {
+    font-weight: 900;
+    color: #fff;
+    text-decoration: none;
+    background: #aaa;
+    padding: 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+  }
+  /*Fine adeguamento per la normativa sui cooky*/
+
+</style>
+<div>
+
+
+  <div class="layout-app">
+    <div class="layout-app-content dashboard page-login clearfix" id="content">
+      <div id="cookie" class="cookie" ng-show="showMsgCookies" ng-init="init()">
+        <p class="cookie-p">
+          <span translate="MSG_COOKIES" /><label class="cookie-a" ng-click="openWindow()"><span translate="COOKIES_POLICY" /></label>&nbsp;
+          <label class="cookie-close" ng-click="userAcceptCookies()"><span translate="DIALOGS_OK" /></label>
+        </p>
+      </div>
+
+      <div class="panel-login">
+        <div class="login-branding">
+          <img src="./images/areas-logo.png" alt="AREAS 3.0" class="responsive-image" />
+        </div>
+        <div>
+          <form role="form" name="loginForm" ng-submit="login(credentials)" novalidate autocomplete="off">
+            <div class="form-group">
+              <p class="text-danger text-center">{{msg.errorMessage.text}}</p>
+              <p class="text-center">{{msg.detailMessage.text}}</p>
+            </div>
+            <input style="display:none;" type="text" name="somefakename" />
+            <input style="display:none;" type="password" name="anotherfakename" />
+            <div class="form-group animate-show" ng-show="loginStep==1">
+              <label for="username">Username:</label> <input capitalize type="text" id="username" autofocus="autofocus" class="form-control"
+                ng-model="credentials.username" autocomplete="off" placeholder="Inserisci la user name" autocapitalize="none">
+            </div>
+            <div class="form-group animate-show" ng-show="passwordReset">
+              <label for="username">Username:</label> <input capitalize type="text" id="username" autofocus="autofocus" class="form-control"
+                ng-model="credentials.username" autocomplete="off" placeholder="Inserisci la user name" autocapitalize="none">
+            </div>
+            <div class="form-group" ng-show="loginStep==1">
+              <label for="password">Password</label> <input type="password" id="password" class="form-control" ng-model="credentials.password"
+                autocomplete="off" placeholder="Inserisci la tua password">
+            </div>
+            <div class="form-group" ng-show="passwordReset">
+              <label for="password">Vecchia Password</label> <input type="password" id="password" class="form-control" ng-model="credentials.password"
+                autocomplete="off" placeholder="Inserisci la tua password">
+            </div>
+            <div class="form-group" ng-show="passwordReset">
+              <label for="password">Nuova password</label> <input type="password" id="password" class="form-control" ng-model="credentials.newPassword"
+                autocomplete="off" placeholder="Inserisci la tua nuova password">
+            </div>
+            <div class="form-group" ng-show="passwordReset">
+              <label for="password">Reinserisci Nuova password</label> <input type="password" id="password" class="form-control"
+                ng-model="credentials.newPassword2" autocomplete="off" placeholder="Inserisci di nuovo la tua nuova password">
+            </div>
+            <h3 ng-show="loginStep==2" class="animate-show text-center">{{userInfo.realName}}</h3>
+            <div class="form-group" ng-show="isPresidioVisible()">
+              <label for="presidioInput">Presidio</label> <select id="presidioInput" class="form-control" ng-change="profilePresidioSelection()"
+                ng-model="credentials.presidio" ng-options="p as (p.code+' - '+p.description) for p in availablePresidi track by p.code">
+							</select>
+            </div>
+            <div class="form-group" ng-show="loginStep==2">
+              <label for="profiloInput">Profilo</label> <select id="profiloInput" class="form-control" ng-change="profileProfiloSelection()"
+                ng-model="credentials.profilo" ng-options="p as (p.code+' - '+p.description) for p in availableProfili track by p.code">
+							</select>
+            </div>
+            <div class="form-group" ng-show="loginStep==2">
+              <label for="mansioneInput">Mansione</label> <select id="mansioneInput" class="form-control" ng-change="profileMansioneSelection()"
+                ng-model="credentials.mansione" ng-options="p as (p.code+' - '+p.description) for p in availableMansioni track by p.code">
+							</select>
+            </div>
+
+            <div class="btn-group btn-group-justified">
+              <div class="btn-group" ng-show="loginStep==2">
+                <button type="button" class="btn btn-primary" ng-click="resetLogin()">
+									<i class="fa fa-refresh"></i>Reset
+								</button>
+              </div>
+              <div ng-show="loginStep==1" class="btn-group">
+                <button type="submit" class="btn btn-primary" id="signinBtn" ng-disabled="enableButtonLogin == true">
+									<i class="fa fa-unlock-alt"></i> Accedi
+								</button>
+              </div>
+              <div ng-show="passwordReset" class="btn-group">
+                <button type="submit" class="btn btn-primary" id="signinBtn" ng-disabled="enableButtonLogin == true">
+									<i class="fa fa-unlock-alt"></i> Modifica
+								</button>
+              </div>
+            </div>
+          </form>
+          <br />
+
+          <div class="form-group" ng-show="loginStep===1">
+            <!--<a id="lostPwdLnk" ng-click="open()">Password dimenticata?</a>-->
+          </div>
+          <label id="lblCache"></label>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+</div>

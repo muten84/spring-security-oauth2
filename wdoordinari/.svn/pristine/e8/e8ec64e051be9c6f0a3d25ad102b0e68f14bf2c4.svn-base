@@ -1,0 +1,17 @@
+export interface Config {
+    name: string
+    validators: [ConfigValidator];
+}
+
+type ValidatorType =
+    "pattern" | "minvalue" | "maxvalue" |
+    "required" | "requiredTrue" | "notempty"
+     | "requiredFields" | "and" | "or" | "update" | "patternFields" | "notRequired";
+
+export interface ConfigValidator {
+    type: ValidatorType;
+    pattern?: string, 
+    value?: any;
+    message: string;
+    validators: [ConfigValidator];
+}

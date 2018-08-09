@@ -1,0 +1,83 @@
+import { Component, ViewEncapsulation } from "@angular/core";
+import { SinotticoServiziComponent } from "app/sinottico-servizi/sinottico-servizi.component";
+import { DomSanitizer } from "@angular/platform-browser";
+import { ContextMenuService } from "ngx-contextmenu";
+import { Router } from "@angular/router";
+import { MessageService } from "app/service/message.service";
+import { ComponentHolderService } from "app/service/shared-service";
+import { TransportModuleServiceApi, MenuItemValue, TransportResultDTO } from "services/gen";
+import { ServiceCommon } from "app/common-servizi/service-common";
+import { BrowserCommunicationService } from "common/services/browser-communication.service";
+import { ServiziService } from "app/service/servizi-service";
+import { NavigateMessage, Type } from "common/services/messages";
+
+
+
+@Component({
+    selector: 'sinottico-servizi-ex',
+    templateUrl: '../../app/sinottico-servizi/sinottico-servizi.html',
+    styleUrls: ['../../app/sinottico-servizi/sinottico-servizi.scss'],
+    encapsulation: ViewEncapsulation.None
+
+})
+export class SinotticoServiziExComponent extends SinotticoServiziComponent {
+
+
+    constructor(
+        sanitizer: DomSanitizer,
+        contextMenuService: ContextMenuService,
+        router: Router,
+        messageService: MessageService,
+        componentService: ComponentHolderService,
+        transportService: TransportModuleServiceApi,
+        serviceCommon: ServiceCommon,
+        bcs: BrowserCommunicationService,
+        serviziService: ServiziService
+    ) {
+        super(sanitizer,
+            contextMenuService,
+            router,
+            messageService,
+            componentService,
+            transportService,
+            serviceCommon,
+            bcs,
+            serviziService);
+    }
+
+    triggerSubmit(filterInput: any) {
+        filterInput.sinottico = true;
+        super.triggerSubmit(filterInput);
+    }
+
+    buildRowMenu(menuItems: MenuItemValue[]) {
+        menuItems = [ , {
+            name: 'Vai al servizio',
+            id: 'go_to_service',
+            position: 1,
+            enable:true
+        }];
+        return super.buildRowMenu(menuItems);
+    }
+
+    
+    public onOptionItemClicked(row: any, source: string, enabled: boolean, event): any {
+        if (enabled) {
+            let src = source.toLowerCase();
+
+            let selected = <TransportResultDTO>this.currentSelected;
+            let serviceId = selected.id;
+
+            switch (src) {
+               
+                case 'go_to_service':
+                    let msg: NavigateMessage = {
+                        path: 'gestione-servizi/' + serviceId
+                    };
+                    this.bcs.postMessage(Type.navigate, msg);
+                    return;
+            }
+        }
+
+    }
+}

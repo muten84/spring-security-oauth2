@@ -1,0 +1,107 @@
+// stylelint-disable
+$white: rgba(236, 240, 241, 0.9490196078431372) !default;
+
+/*$white: #fff !default;*/
+
+
+/*$gray-100: #F5F5F5 !default;
+$gray-200: #EEEEEE !default;
+$gray-300: #E0E0E0 !default;
+$gray-400: #BDBDBD !default;
+$gray-500: #9E9E9E !default;
+$gray-600: #757575 !default;
+$gray-700: #616161 !default;
+$gray-800: #424242 !default;
+$gray-900: #212121 !default;*/
+
+
+/**/
+
+
+/**https://material.io/guidelines/style/color.html#color-color-palette*/
+
+$gray-100: #CFD8DC !default;
+$gray-200: #b4bcc2 !default;
+$gray-300: #90A4AE !default;
+$gray-400: #78909C !default;
+$gray-500: #607D8B !default;
+$gray-600: #546E7A !default;
+$gray-700: #455A64 !default;
+$gray-800: #37474F !default;
+$gray-900: #263238 !default;
+$black: #212121 !default;
+
+/**/
+
+$grays: () !default;
+$grays: map-merge(( "100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400, "500": $gray-500, "600": $gray-600, "700": $gray-700, "800": $gray-800, "900": $gray-900), $grays);
+$blue: #01579B !default;
+$indigo: #1A237E !default;
+$purple: #4527A0 !default;
+$pink: #E91E63 !default;
+$red: #D50000 !default;
+$orange: #ffc107 !default;
+$yellow: #ffc107 !default;
+$green: #81b85c !default;
+$teal: #81b85c !default;
+$cyan: #81b85c !default; //5bd6de
+$colors: () !default;
+$colors: map-merge(( "blue": $blue, "indigo": $indigo, "purple": $purple, "pink": $pink, "red": $red, "orange": $orange, "yellow": $yellow, "green": $green, "teal": $teal, "cyan": $cyan, "white": $white, "gray": $gray-600, "gray-dark": $gray-800), $colors);
+
+/**/
+
+$primary: #00809d !default;
+$secondary: #7c8b8c !default;
+$success: #81b85c !default;
+$info: #81b85c !default; //00b8d4
+$warning: #81b85c !default; //ffb14c
+$danger: #eb1b4c !default;
+$light: rgba(236, 240, 241, 0.9490196078431372) !default;
+$dark: #041c28 !default;
+$accent: #81b85c !default;
+$theme-colors: () !default;
+
+/**/
+
+$theme-colors: () !default; //
+$theme-colors: map-merge(( //
+"primary": $primary, //
+"secondary": $secondary, //
+"success": $success, //
+"info": $info, //
+"warning": $warning, //
+"danger": $danger, //
+"light": $light, //
+"dark": $dark //
+), $theme-colors); //
+$theme-color-interval: 7% !default;
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: true !default;
+$enable-gradients: true !default;
+$enable-transitions: true !default;
+$enable-hover-media-query: true !default;
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;
+// Options
+$spacer: 1rem !default;
+$spacers: ( 0: 0, 1: ($spacer * .25), 2: ($spacer * .5), 3: $spacer, 4: ($spacer * 1.5), 5: ($spacer * 3)) !default;
+$sizes: ( 25: 15%, 50: 40%, 75: 65%, 100: 90%) !default;
+$body-bg: $white !default;
+$body-color: $gray-900 !default;
+
+/*forms*/
+
+$input-disabled-bg-opacity: 0.5 !default;
+
+/**/
+
+$link-color: theme-color("info") !default;
+$link-decoration: none !default;
+$link-hover-color: darken($link-color, 15%) !default;
+$link-hover-decoration: underline !default;

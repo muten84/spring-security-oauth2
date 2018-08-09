@@ -1,0 +1,19 @@
+sequenceDiagram        
+    Operatore->>DocumentApiService: openMailLink()       
+    alt is logged
+    	Browser-->>Operatore: render document list page 
+        Operatore->>OpenDocumentBtn: onClick()
+        OpenDocumentBtn-->>Operatore: return
+        OpenDocumentBtn->>OpenDocumentCtrl: openDocument(docId)        
+        OpenDocumentCtrl->>DocumentApiService: openDocumentService(docId)
+        DocumentApiService-->>OpenDocumentCtrl: OPENED state
+        OpenDocumentCtrl->>DocumentApiService: refreshDocumentList(filters)
+        DocumentApiService-->>OpenDocumentCtrl: document list
+        OpenDocumentCtrl->>DocumentListTable:  refresh()
+        DocumentListTable-->>OpenDocumentCtrl:  return
+        OpenDocumentCtrl->>DocumentApiService: getPdf(docId)
+        DocumentApiService-->>OpenDocumentCtrl: return pdf attachment    
+        OpenDocumentCtrl-->>Operatore: show PDF document  
+    else is not logged    	
+    	DocumentApiService-->>Operatore: forward to login page
+    end

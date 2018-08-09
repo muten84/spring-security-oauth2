@@ -1,0 +1,1 @@
+call ng serve -c qalitax  --aot

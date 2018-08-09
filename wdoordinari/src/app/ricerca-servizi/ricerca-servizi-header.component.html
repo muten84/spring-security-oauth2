@@ -1,0 +1,54 @@
+<div class="form-group row">
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">Data Servizio Da</label>
+    <div class="input-group input-group-sm" clickoff>
+      <input id="dataDa" name="dataDa" class="form-control" placeholder="dd-mm-yyyy" name="dpdataDa" [(ngModel)]="modelDataDa"
+        ngbDatepicker #dpdataDa="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn input-group-text" (click)="dpdataDa.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">Data Servizio A</label>
+    <div class="input-group input-group-sm" clickoff>
+      <input id="dataA" name="dataA" class="form-control" placeholder="dd-mm-yyyy" name="dpdataA" [(ngModel)]="modelDataA" ngbDatepicker
+        #dpdataA="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn input-group-text" (click)="dpdataA.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="codiceServizi">Codice Servizi</label>
+    <input class="form-control" id="codiceServizi" placeholder="Inserire codice" type="text" value="">
+  </div>
+
+</div>
+
+<div class="form-group row">
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="nome">Nome</label>
+    <input name="name" class="form-control" id="nome" placeholder="Inserire nome" type="text" value="">
+  </div>
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="cognome">Cognome</label>
+    <input name="lastname" class="form-control" id="cognome" placeholder="Inserire cognome" type="text" value="">
+  </div>
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="varie">Varie</label>
+    <input name="others" class="form-control" id="varie" placeholder="Inserire varie" type="text" value="">
+  </div>
+</div>
+
+<div class="row pull-right">
+  <div class="col-md-4 mr-sm-2">
+    <button (click)="searchServices()" type="submit" class="btn btn-primary btn-sm">
+      <i class="fa fa-search" aria-hidden="true"></i>Cerca</button>
+  </div>
+</div>

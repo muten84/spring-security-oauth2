@@ -1,0 +1,21 @@
+<h2 mat-dialog-title style="padding-left:10px;">{{title}}</h2>
+<mat-dialog-content>
+    <div *ngFor="let row of content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-12">
+                    <span class="label">{{row.label}} </span>
+                </div>
+                <div class="col-sm-12">
+                    <span [ngClass]="{'content-justify': justify}" class="value-text">{{row.value}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="align-items-center h-100 justify-content-center pull-center">
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button class="btn-xlg" mdcButton [raised]="true" mat-button [mat-dialog-close]="true">
+        <span class="btn-value">OK</span>
+    </button>
+</mat-dialog-actions>

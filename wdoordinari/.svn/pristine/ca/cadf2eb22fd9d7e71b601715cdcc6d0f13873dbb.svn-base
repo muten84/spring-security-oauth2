@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <div class="form-group">
+
+    <div class="col-md-12">
+      <label class="label col-md-12 col-form-label">{{label}}</label>
+      <input type="text" class="form-control" [inputMask]="'*{0,63}'" [(ngModel)]="text" autofocus>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="close()">OK</button> <!--[disabled]="!text"-->
+  <button type="button" class="btn btn-danger" (click)="dismiss()">Annulla</button>
+</div>

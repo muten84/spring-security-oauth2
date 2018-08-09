@@ -1,0 +1,58 @@
+#mezziAssegnatiTable {
+  .table-responsive {
+    max-height: 200px;
+  }
+}
+
+#mezziDisponibiliTable,
+#telefoniTable,
+#mezziIntervenutiTable {
+  .table-responsive {
+    max-height: 200px;
+  }
+}
+
+#prenotazioniAccorpateTable {
+  .table-responsive {
+    max-height: 150px;
+  }
+}
+
+#mezziAssegnatiTable,
+#mezziDisponibiliTable,
+#telefoniTable,
+#mezziIntervenutiTable,
+#prenotazioniAccorpateTable {
+  font-size: 11px;
+  td {
+    background-color: unset;
+  }
+  .table-active {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .btn-group-sm>.btn,
+  .btn-sm {
+    padding: 3px 6px;
+    font-size: 12px;
+    /* line-height: 1.5; */
+    border-radius: 3px;
+  }
+  .dropdown-menu {
+    width: 300px;
+  }
+  tbody tr {
+    min-height: 38px;
+  }
+}
+
+gestione-servizi {
+  .card-body {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  button {
+    i.fa {
+      font-size: 14px;
+    }
+  }
+}

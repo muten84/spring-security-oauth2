@@ -1,0 +1,14 @@
+sequenceDiagram
+    alt is logged and document is just opened   	 
+        Operatore->>OpenDocumentBtn: onClick()
+        OpenDocumentBtn-->>Operatore: return
+        OpenDocumentBtn->>OpenDocumentCtrl: openDocument(docId)        
+        OpenDocumentCtrl->>DocumentApiService: openDocument(docId)
+        DocumentApiService-->>OpenDocumentCtrl: 403 Forbidden 
+        Note right of OpenDocumentCtrl: Document is just OPENED so is not possible to reopen
+        OpenDocumentCtrl->>DocumentApiService: getPdf(docId)
+        DocumentApiService-->>OpenDocumentCtrl: return bytes[] of pdf
+        OpenDocumentCtrl->>Operatore: render PDF
+    else is not logged    	
+    	DocumentApiService-->>Operatore: forward to login page
+    end

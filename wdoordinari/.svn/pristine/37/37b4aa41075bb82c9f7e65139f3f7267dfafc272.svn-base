@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col ">
+    <ng-select tabindex="12" #selectFullText [(ngModel)]="fulltextValue" allowClear="true" [items]="departmentFullTextList | async" (refresh)="updateDepartmentFullText($event)"
+      (selected)="setDepartmentOrAuthority($event)" minChar="3" refreshDelay="1000" placeholder="Ricerca...">
+
+      <ng-template let-el="el">
+        <div class="row">
+          <div class="col-9">
+            <small>Ente: </small>{{el.authority? el.authority : '--'}}
+          </div>
+          <div class="col-3">
+            <small>CC: </small>{{el.costCenter ? el.costCenter : '--'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <small>Rep: </small>{{el.department ? el.department : '--'}}
+          </div>
+          <div class="col-3">
+            <small>Tel: </small>{{el.telephone ? el.telephone : '--'}}
+          </div>
+        </div>
+      </ng-template>
+    </ng-select>
+
+    <!--
+    <button class="btn input-group-text" (click)="rebuildIndex( )">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      Ricarica gli indici
+    </button>
+ -->
+  </div>
+</div>

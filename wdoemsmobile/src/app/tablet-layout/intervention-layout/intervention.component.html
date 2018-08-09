@@ -1,0 +1,7 @@
+<div [@.disabled]="disableAnimation" [@routerTransition]>
+    <app-header></app-header>
+    <app-sidebar (onNewStatus)="newStatus($event)" [activeElement]="'newIntervention'" [intervention]="true"></app-sidebar>
+    <section class="main-container" style="height: 93vh">
+        <router-outlet></router-outlet>
+    </section>
+</div>

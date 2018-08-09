@@ -1,0 +1,544 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "API for Document Service operations",
+    "version" : "v1",
+    "title" : "SDOTO Document Service API"
+  },
+  "host" : "127.0.0.1:8082",
+  "basePath" : "/sdoto-docservice-war/rest",
+  "tags" : [ {
+    "name" : "documentService"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/documentService/authenticateUser" : {
+      "post" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Authenticate user operation for check purpose",
+        "description" : "",
+        "operationId" : "authenticateUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The search document filter request data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Credentials"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AuthResponse"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/changeDocumentStatus" : {
+      "post" : {
+        "tags" : [ "documentService" ],
+        "summary" : "With the change document status operation you can change the state of document.",
+        "description" : "Possible states are CREATED, SENT, OPENED, CLOSED",
+        "operationId" : "changeDocumentStatus",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The change status document request data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/ChangeDocumentStatusRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/changePassword" : {
+      "post" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Enable a user to change its password and perform a logout",
+        "description" : "",
+        "operationId" : "changePassword",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Credentials to use for changing password",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Credentials"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/createAndSendDocument" : {
+      "put" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Insert a document in the repository and automatically send it to associated receivers",
+        "description" : "Insert a document in the repository and automatically send it to associated receivers",
+        "operationId" : "createAndSend",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The insert document request data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InsertDocumentRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/createDocument" : {
+      "put" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Insert a document in the repository",
+        "description" : "The repository depends on the data layer type, it should be an RDBMS",
+        "operationId" : "insertDocument",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The insert document request data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/InsertDocumentRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/getAuthenticated" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Get current user authenticated",
+        "description" : "",
+        "operationId" : "getAuthenticated",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AuthResponse"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/getDocument/{docId}" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Useful when you need to get document data when you know the document id",
+        "description" : "The document id will never change",
+        "operationId" : "getDocumentById",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/listDocuments" : {
+      "post" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Using list documents you can retrieve all documents in the repository.",
+        "description" : "If you need to filter the list you can post a BookingDocumentFilter json data",
+        "operationId" : "listDocuments",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The search document filter request data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/BookingDocumentFilter"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documentService/logout" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Logout current authenticated user if user not logged do nothing",
+        "description" : "",
+        "operationId" : "logout",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/needToRenew/{days}" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Test if current user need to renew password based on days passed in input",
+        "description" : "",
+        "operationId" : "needToRenew",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "days",
+          "in" : "path",
+          "required" : true,
+          "type" : "integer",
+          "format" : "int32"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/notifyDocumentByMail/{docId}/{email}" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Notify a just created document to receiver knowing its email",
+        "description" : "",
+        "operationId" : "notifyDocumentByMail",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "email",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/notifyDocumentByReference" : {
+      "post" : {
+        "tags" : [ "documentService" ],
+        "summary" : "When you have to notify that a document was create you can call this operation.",
+        "description" : "The addressee are derived from reference data",
+        "operationId" : "notifyDocumentByReference",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "The notify document request data",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/NotifyDocumentRequest"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/openDocument/{docId}" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "The getPdf returns a PDF document by its reference id",
+        "description" : "You can know id using the DocumentServiceResource",
+        "operationId" : "openDocument",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/pdf" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/InputStream"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/test" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Test operation for check purpose",
+        "description" : "",
+        "operationId" : "test",
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    },
+    "/repository/getPdf/{docId}" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "The getPdf returns a PDF document by its reference id",
+        "description" : "You can know id using the DocumentServiceResource",
+        "operationId" : "getPdf",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/pdf" ],
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/InputStream"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "AuthResponse" : {
+      "type" : "object",
+      "properties" : {
+        "username" : {
+          "type" : "string"
+        },
+        "authenticated" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "reason" : {
+          "type" : "string"
+        },
+        "token" : {
+          "type" : "string"
+        },
+        "details" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        }
+      },
+      "description" : "Response authentication info"
+    },
+    "BookingDocumentDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "state" : {
+          "type" : "string",
+          "enum" : [ "CREATED", "SENT", "OPENED", "CLOSED", "FAIL" ]
+        },
+        "parking" : {
+          "type" : "string"
+        },
+        "creationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "openDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "closeDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "sentDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "docReference" : {
+          "type" : "string"
+        }
+      }
+    },
+    "BookingDocumentFilter" : {
+      "type" : "object",
+      "properties" : {
+        "fromDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "toDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "inState" : {
+          "type" : "string",
+          "enum" : [ "CREATED", "SENT", "OPENED", "CLOSED", "FAIL" ]
+        },
+        "currentState" : {
+          "type" : "string",
+          "enum" : [ "CREATED", "SENT", "OPENED", "CLOSED", "FAIL" ]
+        },
+        "excludeInCurrentState" : {
+          "type" : "string",
+          "enum" : [ "CREATED", "SENT", "OPENED", "CLOSED", "FAIL" ]
+        },
+        "parking" : {
+          "type" : "string"
+        },
+        "exactParkingMatch" : {
+          "type" : "boolean",
+          "default" : false
+        },
+        "docReference" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ChangeDocumentStatusRequest" : {
+      "type" : "object",
+      "required" : [ "documentId", "newState" ],
+      "properties" : {
+        "documentId" : {
+          "type" : "string",
+          "description" : "The document id, returned when inserted or fetched"
+        },
+        "newState" : {
+          "type" : "string",
+          "description" : "The new document state",
+          "enum" : [ "CREATED", "SENT", "OPENED", "CLOSED" ]
+        }
+      },
+      "description" : "Request for changing the document status. You should know the document id"
+    },
+    "Credentials" : {
+      "type" : "object",
+      "required" : [ "password", "username" ],
+      "properties" : {
+        "username" : {
+          "type" : "string",
+          "description" : "The username"
+        },
+        "password" : {
+          "type" : "string",
+          "description" : "password"
+        }
+      },
+      "description" : "Request to authenticate user"
+    },
+    "InputStream" : {
+      "type" : "object"
+    },
+    "InsertDocumentRequest" : {
+      "type" : "object",
+      "required" : [ "docReference", "parking" ],
+      "properties" : {
+        "parking" : {
+          "type" : "string",
+          "description" : "The parking or department assigned to the booking"
+        },
+        "docReference" : {
+          "type" : "string",
+          "description" : "The doc reference, usually the booking code"
+        }
+      },
+      "description" : "Request for insert a document associated to a parking"
+    },
+    "NotifyDocumentRequest" : {
+      "type" : "object",
+      "required" : [ "receiverReference" ],
+      "properties" : {
+        "docReference" : {
+          "type" : "string",
+          "description" : "A document reference if exists"
+        },
+        "receiverReference" : {
+          "type" : "string",
+          "description" : "A receiver reference, department description or parking code"
+        }
+      },
+      "description" : "Request for send a notification to a receiver knowing its reference and the docReference"
+    }
+  }
+}

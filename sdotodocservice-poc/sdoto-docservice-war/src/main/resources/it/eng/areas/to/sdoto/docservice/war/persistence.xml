@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+	version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="default">
+		<class>it.eng.areas.to.sdoto.docservice.entity.ExampleDO</class>
+		<class>it.eng.areas.to.sdoto.docservice.entity.BookingDocumentDO</class>
+		<class>it.eng.areas.to.sdoto.docservice.entity.DepartmentAdresseeDO</class>
+		<class>it.eng.areas.to.sdoto.docservice.entity.DepartmentAdresseePk</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.ToBookingPatientDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingEquipmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsBookingDpiDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.TsEquipmentDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebIdentityDO</class>
+		<class>it.eng.areas.ems.ordinari.entity.WebSessionDO</class>
+				
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+	</persistence-unit>
+</persistence>

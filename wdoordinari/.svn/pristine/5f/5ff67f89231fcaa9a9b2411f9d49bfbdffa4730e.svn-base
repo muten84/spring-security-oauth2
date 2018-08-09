@@ -1,0 +1,256 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NgModule, forwardRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { CoreModule, CommonBannerComponent } from './core/core.module'; /*modulo core di componenti*/
+import { Ng2TableModule } from 'ng2-table/ng2-table';
+import { Ng2SmartTableModule, LocalDataSource } from 'ng2-smart-table';
+import { NgbModule, NgbDateParserFormatter, NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown.module';
+
+import { PaginationModule, PaginationConfig } from 'ngx-bootstrap';
+import { DynamicModule } from 'ng-dynamic-component';
+import { BlockUIModule } from 'ng-block-ui';
+
+import { NgbDateCustomParserFormatter } from './util/date-formatter';
+import { CustomDatepickerI18n, I18n } from './util/date-language';
+import { UppercaseDirective } from './util/uppercase.directive';
+import { DynamicDisable } from './util/validator-dynamic-disable.directive';
+import { RootComponent } from './root/root.component';
+/*import { TopNavModule } from './top-nav/top-nav.module';*/
+import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
+import { routing } from './app.routes';
+import { Router } from '@angular/router';
+import { AppComponent } from './app.component';
+
+//import { GestionePrenotazioniComponent } from './gestione-prenotazioni/gestione-prenotazioni.component';
+import { ModificaPrenotazioneComponent } from './gestione-prenotazioni/modifica-prenotazione.component';
+import { SinotticoPrenotazioniComponent } from './sinottico-prenotazioni/sinottico-prenotazioni.component';
+import { SinotticoPrenotazioniHeaderComponent } from './sinottico-prenotazioni/sinottico-prenotazioni-header.component';
+
+/*import { SinotticoPrenotazioniTableComponent } from './sinottico-prenotazioni/sinottico-prenotazioni-table.component';*/
+import { RicercaServiziHeaderComponent } from './ricerca-servizi/ricerca-servizi-header.component';
+import { ModificaPrenotazioneHeaderComponent } from './gestione-prenotazioni/modifica-prenotazione-header.component';
+import { RicercaServiziComponent } from './ricerca-servizi/ricerca-servizi.component';
+
+import { RicercaAvanzataPrenotazioniComponent } from './ricerca-avanzata-prenotazioni/ricerca-avanzata-prenotazioni.component';
+import { RicercaAvanzataPrenotazioniHeaderComponent } from './ricerca-avanzata-prenotazioni/ricerca-avanzata-prenotazioni-header.component';
+import { RicercaAvanzataPrenotazioniTableComponent } from './ricerca-avanzata-prenotazioni/ricerca-avanzata-prenotazioni-table.component';
+
+import { EventService, ComponentHolderService } from './service/shared-service';
+import { ToastModule } from 'ng2-toastr/ng2-toastr';
+import { CommonHeaderComponent, ROUTES } from './common-header/common-header.component'
+
+import { LoginComponent, LoginModule } from './core/core.module';
+
+import {
+    ResponseType, Http,
+    BaseRequestOptions, Response,
+    ResponseOptions, RequestMethod, XHRBackend, RequestOptions
+} from '@angular/http';
+import { ExtendedHttpService } from './service/extended-http.service';
+import { BackendConfigService } from './service/config.service';
+import { StaticDataService } from './static-data/cached-static-data';
+import { ServiceCommon } from './common-servizi/service-common';
+
+/*import per fake auth*/
+import { DummyAuthGuard } from './service/DummyAuthGuard';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { fakeBackendProvider } from './core/login/_helpers/index';
+
+import { BasePathGenerator, ServicesModule } from '../services/services.module';
+import { MessageService } from './service/message.service';
+import { TokenService } from './service/token.service';
+
+import {
+    ValidationModule
+} from './core/validation/validation.module';
+import { AddressModifyComponent } from 'app/gestione-prenotazioni/address-modify-component';
+import { ResultGridModalComponent } from 'app/gestione-prenotazioni/result-grid-modal-component';
+import { CheckDuplicateModalComponent } from 'app/gestione-prenotazioni/checkduplicate.component';
+
+import { AddressDetailComponent } from 'app/gestione-prenotazioni/address-detail-component';
+import { RichiedenteComponent } from 'app/gestione-prenotazioni/richiedente.component';
+import { OpaqueToken } from '@angular/core';
+
+import { SinotticoServiziHeaderComponent } from './sinottico-servizi/sinottico-servizi-header.component';
+import { SinotticoServiziComponent } from './sinottico-servizi/sinottico-servizi.component';
+
+
+import { BookingHistoryModalComponent } from './sinottico-prenotazioni/bookinghistory.component';
+import { ClosingModalComponent } from "app/modals/closing-modal/closing-modal-component";
+import { DuplicaMultiplaPrenotazioneComponent } from 'app/duplica/duplica-multipla-prenotazioni-component';
+import { CalendarModule } from 'angular-calendar';
+import { GestioneServiziComponent } from 'app/gestione-servizi/gestione-servizi-component';
+import { GestioneServiziHeaderComponent } from 'app/gestione-servizi/gestione-servizi-header.component';
+import { SinotticoCiclicheComponent } from 'app/sinottico-cicliche/sinottico-cicliche-component';
+import { SinotticoCiclicheHeaderComponent } from 'app/sinottico-cicliche/sinottico-cicliche-header.component';
+import { GestioneCiclicheHeaderComponent } from 'app/gestione-cicliche/gestione-cicliche-header.component';
+import { ChiusuraMezzoModal } from 'app/gestione-servizi/chiusura-mezzo.modal';
+import { VehicleDetailComponent } from 'app/gestione-servizi/vehicle-detail.component';
+import { ArchiviaServizioConfirmModal } from 'app/common-servizi/archivia-servizio.modal';
+import { AddressBookingDetailModal } from 'app/gestione-prenotazioni/address-booking-detail.modal';
+import { BrowserCommunicationService } from 'common/services/browser-communication.service';
+import { routes } from 'app/app.routes';
+
+import { CodaRitorniComponent } from 'app/coda-ritorni/coda-ritorni-component';
+import { CodaRitorniHeaderComponent } from 'app/coda-ritorni/coda-ritorni-header-component';
+import { ServiziService } from './service/servizi-service';
+import { RicercaPazienteModalComponent } from 'app/ricerca-paziente/ricerca-paziente-component';
+
+import { IntervalloCiclicheComponent } from 'app/gestione-cicliche/intervallo-cicliche-component';
+import { ModificaCiclicheComponent } from 'app/gestione-cicliche/modifica-cicliche-component';
+import { BlankComponent } from './blank/blank.component';
+import { StaticDataResolve } from './static-data/cached-static-data-resolver';
+import { TextModalComponent } from './modals/text-modal/text-modal-component';
+import { CrewMemberModalComponent } from './modals/crew-member-modal/crew-member-modal-component';
+import { TurnModalComponent } from './modals/turn-modal/turn-modal-component';
+
+import { SinotticoTurniComponent } from 'app/sinottico-turni/sinottico-turni-component';
+import { SinotticoTurniHeaderComponent } from 'app/sinottico-turni/sinottico-turni-header.component';
+
+
+export const GLOBAL_BASE_PATH = new OpaqueToken('globalBasePath');
+
+@NgModule({
+    declarations: [
+        /*LoginComponent,*/
+        AppComponent,
+        RootComponent,
+        BreadcrumbComponent,
+        //GestionePrenotazioniComponent,
+        SinotticoPrenotazioniComponent,
+        SinotticoServiziHeaderComponent,
+        RicercaAvanzataPrenotazioniComponent,
+        RicercaServiziComponent,
+        UppercaseDirective, DynamicDisable,
+        CommonHeaderComponent,
+        SinotticoPrenotazioniHeaderComponent,
+        RicercaAvanzataPrenotazioniHeaderComponent,
+        RicercaServiziHeaderComponent,
+        RicercaAvanzataPrenotazioniTableComponent,
+        ModificaPrenotazioneHeaderComponent,
+        ModificaPrenotazioneComponent,
+        AddressModifyComponent,
+        ResultGridModalComponent,
+        CheckDuplicateModalComponent,
+        AddressDetailComponent,
+        RichiedenteComponent,
+        SinotticoServiziComponent,
+        BookingHistoryModalComponent,
+        ClosingModalComponent,
+        DuplicaMultiplaPrenotazioneComponent,
+        GestioneServiziComponent,
+        GestioneServiziHeaderComponent,
+        SinotticoCiclicheComponent,
+        SinotticoCiclicheHeaderComponent,
+        GestioneCiclicheHeaderComponent,
+        ChiusuraMezzoModal,
+        VehicleDetailComponent,
+        ArchiviaServizioConfirmModal,
+        AddressBookingDetailModal,
+        CodaRitorniComponent,
+        CodaRitorniHeaderComponent,
+        IntervalloCiclicheComponent,
+        ModificaCiclicheComponent,
+        RicercaPazienteModalComponent,
+        BlankComponent,
+        TextModalComponent,
+        CrewMemberModalComponent,
+        TurnModalComponent,
+        SinotticoTurniComponent,
+        SinotticoTurniHeaderComponent
+    ],
+    imports: [
+        LoginModule,
+        BlockUIModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        NgbModule.forRoot(),
+        ToastModule.forRoot(),
+        PaginationModule.forRoot(),
+        Ng2TableModule,
+        CoreModule,
+        Ng2SmartTableModule,
+        routing,
+        CalendarModule.forRoot(),
+        /*TopNavModule,*/
+        DynamicModule.withComponents([
+            SinotticoServiziHeaderComponent,
+            SinotticoPrenotazioniHeaderComponent,
+            RicercaAvanzataPrenotazioniHeaderComponent,
+            RicercaServiziHeaderComponent,
+            CodaRitorniHeaderComponent]),
+
+        /*DataTableModule*/
+        ValidationModule.forRoot(),
+        ServicesModule,
+
+    ],
+    providers: [
+        // providers used to create fake backend
+        DummyAuthGuard,
+        /*fakeBackendProvider,*/
+        /*MockBackend,*/
+        BaseRequestOptions,
+        /*fine fake login*/
+        ComponentHolderService,
+        EventService,
+        BrowserCommunicationService,
+        BackendConfigService,
+        ServiziService,
+        {
+            provide: GLOBAL_BASE_PATH, useFactory: BasePathGenerator
+        },
+        {
+            provide: ROUTES, useFactory: getRoutes
+        },
+        StaticDataService,
+        StaticDataResolve,
+        {
+            provide: NgbDateParserFormatter,
+            useClass: forwardRef(() => NgbDateCustomParserFormatter),
+
+        },
+        I18n,
+        {
+            provide: NgbDatepickerI18n, useClass: forwardRef(() => CustomDatepickerI18n)
+        },
+        {
+            provide: Http,
+            useClass: ExtendedHttpService,
+            deps: [ComponentHolderService, XHRBackend, RequestOptions]
+        },
+        /*    {
+                provide: Http,
+                useFactory: (xhrBackend: XHRBackend, requestOptions: RequestOptions, router: Router) => new ExtendedHttpService(xhrBackend, requestOptions, router),
+                deps: [XHRBackend, RequestOptions, Router]
+            },*/
+        MessageService,
+        TokenService,
+        ServiceCommon
+        /*StompService,
+        {
+          provide: StompConfig,
+          useValue: stompConfig
+        }*/
+    ],
+    entryComponents: [CommonBannerComponent, ModificaPrenotazioneHeaderComponent,
+        SinotticoPrenotazioniHeaderComponent, RicercaAvanzataPrenotazioniHeaderComponent,
+        RicercaServiziHeaderComponent, ResultGridModalComponent, RicercaPazienteModalComponent,
+        CheckDuplicateModalComponent, BookingHistoryModalComponent,
+        ClosingModalComponent, GestioneServiziHeaderComponent, ChiusuraMezzoModal, 
+        VehicleDetailComponent, ArchiviaServizioConfirmModal, AddressBookingDetailModal,
+        TextModalComponent, CrewMemberModalComponent, TurnModalComponent],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+export function getRoutes() {
+    return routes;
+}

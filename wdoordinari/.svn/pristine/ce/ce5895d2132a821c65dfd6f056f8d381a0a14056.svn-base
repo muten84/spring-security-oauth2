@@ -1,0 +1,144 @@
+import { Component, OnInit } from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { TurnModuleServiceApi, StaticData118,  TurnRequestDTO} from "services/gen";
+import { Observable, BehaviorSubject } from "rxjs";
+import { ComponentHolderService } from "../../service/shared-service";
+import { Subject } from "rxjs";
+
+
+
+@Component({
+    selector: 'turn-modal',
+    templateUrl: './turn-modal-component.html'
+})
+export class TurnModalComponent implements OnInit {
+
+    modified = false;
+
+    
+
+    public parkingVehicleTurnId: string;
+
+    taskText: string;
+
+    public pause:boolean;
+    public standby:boolean;
+    public title:string;
+    public timeLabel:string;
+
+    //lista codici note pausa/standby
+    public noteCodes: Subject<Array<any>>;
+    //lista tempi pausa/standby
+    public times: Subject<Array<any>>;
+    //codice selezionato dalla combo
+    public selectedCode: StaticData118;
+    //tempo selezionato dalla combo
+    public selectedTime: StaticData118;
+
+     
+     public timeDescr: string; //id del tempo selezionato
+     public codeDescr: string; //id del codice selezionato
+     public pauseNote: string; //note della messa in pausa/standby
+
+    constructor(
+        protected activeModal: NgbActiveModal,
+        protected comp: ComponentHolderService,
+        protected turnService: TurnModuleServiceApi,
+        protected componentService: ComponentHolderService,
+    ) {
+        this.noteCodes = new Subject<Array<any>>();
+        this.times = new Subject<Array<any>>();
+    }
+
+    ngOnInit(): void {
+        if (this.pause){
+            this.title='Note di Pausa del Mezzo';
+            this.timeLabel='Tempo Pausa Previsto';
+        }
+        else if (this.standby){
+            this.title='Note di Standby del Mezzo';
+            this.timeLabel='Tempo Standby Previsto';
+        }
+        this.selectNoteCodes();
+        this.selectTimes();
+    }
+
+    //carica la lista dei codici delle note di pausa/standby
+    selectNoteCodes() {
+        let type ='';
+        if (this.pause){
+            type = 'COD NOTE PAUSA'
+        }else if (this.standby){
+            type = 'COD NOTE STANDBY'
+        }
+        let filter = {
+            type: type
+        };
+        this.turnService.searchStaticDataByFilter(filter).catch((e, o) => {
+            this.componentService.getRootComponent().showToastMessage('error', 'Errore nel caricamento dei codici delle note di pausa/standby');
+            return [];
+        }).subscribe(res => {
+            this.noteCodes.next(res.resultList);
+        });
+
+    }
+
+
+    //carica la lista dei tempi di pausa/standby
+    selectTimes() {
+        let filter = {
+            type: 'MINUTI PAUSA'
+        };
+        this.turnService.searchStaticDataByFilter(filter).catch((e, o) => {
+            this.componentService.getRootComponent().showToastMessage('error', 'Errore nel caricamento dei tempi di pausa/standby');
+            return [];
+        }).subscribe(res => {
+            this.times.next(res.resultList);
+        });
+
+    }
+
+    codeSelected(value: StaticData118): void {
+        if (value) {
+            console.log('code selected = '+value);
+            this.codeDescr=value.description;
+        }else {
+            this.codeDescr=null;
+        }
+    }
+
+    timeSelected(value: StaticData118): void {
+        if (value) {
+            console.log('time selected = '+value);
+            this.timeDescr=value.description;
+        }else {
+            this.timeDescr=null;
+        }
+    }
+
+    close() {
+        this.comp.getRootComponent().mask();
+        // invio la lista al server
+        let body: TurnRequestDTO = {
+            parkingVehicleTurnId: this.parkingVehicleTurnId,
+            pauseNote: this.pauseNote,
+            timeDescr: this.timeDescr,
+            codeDescr: this.codeDescr
+        };
+        if (this.pause){
+            this.turnService.changePause(body).subscribe(res => {
+                this.comp.getRootComponent().unmask();
+                this.activeModal.close();
+            });
+        }else  if (this.standby){
+            this.turnService.changeAvailability(body).subscribe(res => {
+                this.comp.getRootComponent().unmask();
+                this.activeModal.close();
+            });
+        }
+    }
+
+    dismiss() {
+        this.activeModal.dismiss();
+    }
+}

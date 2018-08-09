@@ -1,0 +1,97 @@
+<div class="form-group" style="background-color: #ecf0f1; padding: 15px; margin-bottom: 0px">
+  <div class="row">
+    <div class="col-6">
+      <label class="col-form-label">Telefono</label>
+      <div class="input-group">
+        <input tabindex="1" [inputMask]="'9{0,16}'" class="form-control" type="text" [(ngModel)]="model.phoneNumber">
+        <span (click)="searchAuthority(null, model.phoneNumber)" class="input-group-addon" id="basic-addon2">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </div>
+      <label class="col-form-label">Convenzione</label>
+      <ng-select tabindex="3" [(ngModel)]="convention" allowClear="true" [items]="conventionList | async" textField="name" placeholder="Selezionare Convenzione..."
+        validationMessage valueField="name"> </ng-select>
+    </div>
+
+    <div class="col-6">
+      <label class="col-form-label">C. di Costo</label>
+      <div class="input-group">
+        <input tabindex="2" [inputMask]="'*{0,16}'" class="form-control" type="text" [(ngModel)]="model.costCenter">
+        <span (click)="searchDepartmentByCC(model.costCenter)" class="input-group-addon" id="basic-addon2">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </span>
+      </div>
+
+      <label class="col-form-label">Tipo Ente</label>
+      <ng-select tabindex="4" [(ngModel)]="authorityType" allowClear="true" [items]="authorityTypeList | async" textField="description"
+        placeholder="Selezionare Tipo Ente..." validationMessage> </ng-select>
+    </div>
+  </div>
+  <div class="row"></div>
+
+  <div class="row">
+    <div class="col-12">
+
+      <label class="col-form-label">Nome dell'Ente</label>
+      <ng-select tabindex="5" [(ngModel)]="model.authority" allowClear="true" [items]="authorityList | async" (refresh)="updateAuthorityList($event)"
+        (selected)="setAuthority($event)" minChar="2" refreshDelay="1000" textField="description" placeholder="Selezionare Ente..."
+        validationMessage> </ng-select>
+
+
+      <label class="col-form-label">Padiglione/Reparto</label>
+      <ng-select tabindex="6" [(ngModel)]="model.department" allowClear="true" [items]="departmentList | async" (refresh)="updateDepartmentList($event)"
+        (selected)="setDepartmentAndAuthority($event)" minChar="3" refreshDelay="1000" textField="description" placeholder="Selezionare Reparto..."
+        validationMessage> </ng-select>
+
+
+      <label class="col-form-label">Dettaglio</label>
+      <input tabindex="7" [(ngModel)]="detail" allowClear="true" refreshDelay="1000" textField="detail" class="form-control" type="text"
+        uppercase>
+    </div>
+  </div>
+
+  <fieldset>
+    <div class="row">
+      <div class="col-4">
+        <label class="col-form-label" validationLabel="comune{{type}}">Comune</label>
+        <ng-select tabindex="8" [(ngModel)]="model.municipality" allowClear="true" [formControl]="getControl('comune' + type)" [items]="municipalityList | async"
+          (refresh)="updateMunicipalityList($event)" (selected)="municipalitySelected($event)" textField="name" placeholder="Selezionare Comune..."
+          validationMessage> </ng-select>
+      </div>
+      <div class="col-4">
+        <label class="col-form-label">Località</label>
+        <ng-select tabindex="9" [(ngModel)]="model.locality" allowClear="true" [formControl]="getControl('localita' + type)" [items]="localityList | async"
+          (refresh)="updateLocalityList($event)" (selected)="localitySelected($event)" textField="name" placeholder="Selezionare Località..."
+          validationMessage> </ng-select>
+      </div>
+      <div class="col-4">
+        <label class="col-form-label" validationLabel="provincia{{type}}">Provincia</label>
+        <ng-select tabindex="10" [(ngModel)]="model.province" allowClear="true" [formControl]="getControl('provincia' + type)" [items]="provinceList | async"
+          (refresh)="updateProvinceList($event)" (selected)="provinceSelected($event)" textField="name" minChar="1" placeholder="Selezionare provincia..."
+          validationMessage> </ng-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label class="col-form-label">Indirizzo</label>
+        <div class="input-group">
+          <input tabindex="11" [(ngModel)]="streetName" [ngModelOptions]="{standalone: true}" class="col-10 form-control" type="text"
+            uppercase>
+          <input tabindex="12" [(ngModel)]="model.civicNumber" [ngModelOptions]="{standalone: true}" class="col-2 form-control" type="text"
+            uppercase>
+          <span (click)="searchStreet()" class="input-group-addon" id="basic-addon2">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
+
+<div class="modal-footer">
+  <button tabindex="13" type="button" class="btn btn-outline-primary" (click)="exitWithoutSave()">Annulla</button>
+  <button tabindex="14" type="button" class="btn btn-outline-primary" (click)="close()">OK</button>
+  <button tabindex="15" class="btn btn-outline-danger" type="button" (click)="clean()">
+    <i aria-hidden="true" class="fa fa-undo"></i> Pulisci
+  </button>
+</div>

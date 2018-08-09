@@ -1,0 +1,1 @@
+Insert into DEPARTMENT_ADDRESSEE (DEPARTMENT_ID,DESCRIPTION,ADDRESS) values ('TEST_DEP_ID','TEST DEP','testdep@cto.test');

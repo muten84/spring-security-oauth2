@@ -1,0 +1,466 @@
+
+import {
+    ViewChild, ElementRef, Directive, Component, OnInit,
+    ViewEncapsulation, ViewContainerRef, EventEmitter, Input, Output, AfterViewInit
+} from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { OrdinariCombo } from '../core/core.module'
+import { NgbModal, ModalDismissReasons, NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+
+import { FiltroCodaServizi, ItemFiltroServizi } from './sinottico-servizi-model';
+import { ComponentHolderService, MiddleComponent, HeaderComponent } from '../service/shared-service';
+import { FiltroSinottico, TransportModuleServiceApi } from 'services/gen';
+import * as moment from 'moment';
+
+@Component({
+    selector: 'sinottico-servizi-header',
+    templateUrl: './sinottico-servizi-header.component.html',
+    encapsulation: ViewEncapsulation.None,
+})
+export class SinotticoServiziHeaderComponent implements OnInit, HeaderComponent, AfterViewInit {
+
+    @Output() searchResult = new EventEmitter();
+
+    //Oggetto filtro proviente dal front-end
+    private filtroCodaServizi: FiltroCodaServizi;
+
+    // Valori della combo "Filtro Aggiuntivo"
+    private addizionaliItems: Array<any> = [
+        "PART.INTRA-H",
+        "PART.NON-INTRA-H",
+        "DEST.INTRA-H",
+        "DEST.NON-INTRA-H",
+        "CODICE",
+        "PARTENZA",
+        "DESTINAZIONE",
+        "PAZIENTE",
+        "MEZZI_ATTIVI"
+    ];
+
+    // Valore selezionato nella combo "Filtro Aggiuntivo"
+    private selectedFilterAdd: any;
+
+    // Abilita/disabilita l'inserimento del Valore 
+    // testuale corripondente al filtro aggiuntivo   
+    private isEditDisabled: boolean = true;
+
+    // Valore testuale corripondente al filtro aggiuntivo    
+    private newItemValue: string;
+
+    //Array di filtri aggiunti
+    private listAddFilterItems: ItemFiltroServizi[] = [];
+
+    /*private selectedItemIndex: number;
+    select(index: any): void {
+        //      console.log("Selezionato l'elemento "+ index+ " --> " +this.listAddFilterItems[index].name +" "+this.listAddFilterItems[index].value);
+        this.selectedItemIndex = index;
+    }*/
+
+    //Funzioni per la gestione del filtro aggiuntivo
+    filtroAggSelected(value: any): void {
+        if (value.text == "CODICE" || value.text == "PARTENZA" || value.text == "DESTINAZIONE" || value.text == "PAZIENTE") {
+            this.isEditDisabled = false;
+        } else {
+            this.isEditDisabled = true;
+        }
+    }
+
+    addFilter(): void {
+        console.log("addFilter");
+        if (this.selectedFilterAdd != null) {
+            if (this.isEditDisabled || (!this.isEditDisabled && this.newItemValue != null)) {
+                if (this.isEditDisabled && this.checkItemContain()) {
+
+                } else {
+                    if (!this.checkItemContain()) {
+                        this.listAddFilterItems.push(new ItemFiltroServizi(this.selectedFilterAdd.text, this.newItemValue));
+                    }
+                    this.selectedFilterAdd = null;
+                    this.newItemValue = null;
+                    this.isEditDisabled = true;
+                }
+            }
+        }
+    }
+
+    /*removeFilter(): void {
+        //       console.log("removeFilter()" );
+
+        if (this.selectedItemIndex != null) {
+            this.listAddFilterItems.splice(this.selectedItemIndex, 1);
+            this.selectedItemIndex = null;
+        }
+
+    }*/
+
+    removeFilterIndex(i:number): void {
+        if (i != null) {
+            this.listAddFilterItems.splice(i, 1);
+        }
+    }
+
+    checkItemContain(): boolean {
+        //       console.log("checkItemContain()  da sinottico-servizi.header: TODO ");     
+
+        let returnValue = false;
+
+        this.listAddFilterItems.forEach(element => {
+            if (element.name == this.selectedFilterAdd.text && element.value == this.newItemValue) {
+                returnValue = true;
+            }
+        });
+
+        return returnValue;
+    }
+
+    /* ******************************************************************** */
+    /* ******************************************************************** */
+
+    constructor(private componentService: ComponentHolderService, private transportService: TransportModuleServiceApi) {
+
+    }
+
+    ngOnInit(): void {
+        //      console.log("ngOnInit() da sinottico-servizi.header ");
+        // this.loadArrayComboPrimoElemento();
+        // this.loadArrayComboSecondoElemento();
+        this.initItemsList();
+        this.resetFilter();
+    }
+
+
+
+    private initItemsList() {
+        this.selectedFilterAdd = undefined;
+        this.newItemValue = undefined;
+        this.isEditDisabled = true;
+        //this.selectedItemIndex = -1;
+        this.listAddFilterItems = [];
+    }
+
+    ngAfterViewInit(): void {
+        //     console.log("ngAfterViewInit() da sinottico-servizi.header ");       
+        //inietto l'header nel componente padre
+        this.componentService.setHeaderComponent('currentSearchHeader', this);
+        setTimeout(() => {
+
+            let filterS = sessionStorage.getItem("sinotticoFilter");
+            if (filterS) {
+                this.filtroCodaServizi = JSON.parse(filterS);
+                this.processFilter();
+            }else{
+                this.filtroCodaServizi.todayFlag=true;
+            }
+        }, 0)
+    }
+
+    processFilter() {
+        /* Aggiorna la lista dei filtri aggiuntivi */
+        if (this.filtroCodaServizi.listaElementiFiltro != null && this.filtroCodaServizi.listaElementiFiltro.length > 0) {
+            this.filtroCodaServizi.listaElementiFiltro.forEach(element => {
+                if (element.name  ) { //&& element.value
+                    this.listAddFilterItems.push(new ItemFiltroServizi(element.name , element.value));
+                }
+            });           
+        }      
+    }
+
+
+    onChangeAll(event) {
+        if (event) {
+            this.filtroCodaServizi.todayFlag = false;
+            this.filtroCodaServizi.tomorrowFlag = false;
+            this.filtroCodaServizi.transportDate = null;
+        }
+    }
+
+    onChangeToday(event) {
+        if (event) {
+            this.filtroCodaServizi.allFlag = false;
+            this.filtroCodaServizi.tomorrowFlag = false;
+            this.filtroCodaServizi.transportDate = null;
+
+            var displayDate = new Date();
+            displayDate.setUTCHours(0, 0, 0);
+            this.filtroCodaServizi.transportDate = { day: displayDate.getUTCDate(), month: displayDate.getUTCMonth() + 1, year: displayDate.getUTCFullYear() };
+
+            //let parts = moment(displayDate).format("DD-MM-YYYY").toLocaleString().split("-");
+            //this.filtroCodaServizi.transportDate ={ day: Number(parts[0]), month: Number(parts[1]),  year: Number(parts[2]), };
+        }
+
+    }
+
+    onChangeTomorrow(event) {
+        if (event) {
+            this.filtroCodaServizi.todayFlag = false;
+            this.filtroCodaServizi.allFlag = false;
+            //this.filtroCodaServizi.transportDate = null;
+
+            var displayDate = new Date();
+            //console.log(displayDate);
+            displayDate.setUTCHours(0, 0, 0);
+            //console.log("prima:"+displayDate.getUTCDate());
+            displayDate.setUTCDate(displayDate.getUTCDate()+1);
+            //console.log("dopo:"+displayDate.getUTCDate());
+            //console.log(displayDate);
+            this.filtroCodaServizi.transportDate = { day: displayDate.getUTCDate(), month: displayDate.getUTCMonth() + 1, year: displayDate.getUTCFullYear() };
+
+            //let parts = moment(displayDate).format("DD-MM-YYYY").toLocaleString().split("-");
+            //this.filtroCodaServizi.transportDate ={ day: Number(parts[0])+1, month: Number(parts[1]),  year: Number(parts[2]) };
+        }
+
+    }
+
+    onChangeIntraH(event) {
+        if (event) {
+            this.filtroCodaServizi.interH = false;
+            this.filtroCodaServizi.fuoriBO = false;
+        }
+    }
+
+    onChangeInterH(event) {
+        if (event) {
+            this.filtroCodaServizi.intraH = false;
+            this.filtroCodaServizi.fuoriBO = false;
+        }
+    }
+
+    onChangeFuoriBo(event) {
+
+        if (event) {
+            this.filtroCodaServizi.interH = false;
+            this.filtroCodaServizi.intraH = false;
+        }
+
+    }
+
+    fetchHeaderData(id: string) {
+    };
+
+    resetFilter(): void {
+        var displayDate = new Date();
+        displayDate.setUTCHours(0, 0, 0);
+        let transportDateToSet = { day: displayDate.getUTCDate(), month: displayDate.getUTCMonth() + 1, year: displayDate.getUTCFullYear() };
+
+
+        //let parts = moment(displayDate).format("DD-MM-YYYY").split("-");
+        //let transportDateToSet ={ day: Number(parts[0]), month: Number(parts[1]),  year: Number(parts[2]) };
+
+        this.filtroCodaServizi = {
+            tomorrowFlag: false,
+            todayFlag: false,
+            allFlag: false,
+            intraH: undefined,
+            interH: undefined,
+            fuoriBO: undefined,
+            transportDate: transportDateToSet,
+            listaElementiFiltro: []
+            // primoElementoFiltro :undefined,
+            // secondoElementoFiltro:undefined,
+            // selectedPrimoFilterAdd:undefined,
+            // selectedSecondoFilterAdd:undefined,
+            // firstValue:undefined,
+            // secondValue:undefined
+
+        };
+
+
+        /*
+        this.valorePrimoElemento=undefined;
+        this.valoreSecondoElemento=undefined;        
+        this.isEditPrimoFiltroDisabled=true;
+        this.isEditSecondoFiltroDisabled=true;
+        */
+    }
+
+
+    /* VALORIZZA IL FILTRO DA PASSARE AL COMPOMENTE PER LA RICERCA */
+
+    getHeaderFilter(): any {
+        this.filtroCodaServizi.listaElementiFiltro = this.listAddFilterItems;
+        /*
+        if(this.filtroPrimoSelected){
+            this.filtroCodaServizi.primoElementoFiltro=this.filtroPrimoSelected;
+            if(!this.isEditPrimoFiltroDisabled){
+                if(this.valorePrimoElemento){
+                    this.filtroCodaServizi.firstValue=this.valorePrimoElemento;
+                    this.filtroCodaServizi.selectedPrimoFilterAdd=true;      
+                }else{
+                    this.filtroCodaServizi.firstValue=undefined;    
+                    this.filtroCodaServizi.selectedPrimoFilterAdd=false;            
+                }
+            }else{
+                this.filtroCodaServizi.firstValue=undefined;    
+                this.filtroCodaServizi.selectedPrimoFilterAdd=false;    
+            }
+        }else{
+            this.filtroCodaServizi.primoElementoFiltro=undefined;
+            this.filtroCodaServizi.firstValue=undefined;    
+            this.filtroCodaServizi.selectedPrimoFilterAdd=false;    
+        }
+
+        if(this.filtroSecondoSelected){
+            this.filtroCodaServizi.secondoElementoFiltro=this.filtroSecondoSelected;
+            if(!this.isEditSecondoFiltroDisabled){
+                if(this.valoreSecondoElemento){
+                    this.filtroCodaServizi.secondValue=this.valoreSecondoElemento;
+                    this.filtroCodaServizi.selectedSecondoFilterAdd=true;
+                }else{
+                    this.filtroCodaServizi.secondValue=undefined;    
+                    this.filtroCodaServizi.selectedSecondoFilterAdd=false;         
+                }
+            }else{
+                this.filtroCodaServizi.secondValue=undefined;    
+                this.filtroCodaServizi.selectedSecondoFilterAdd=false;         
+            }
+            
+        }else{
+            this.filtroCodaServizi.secondoElementoFiltro=undefined;
+            this.filtroCodaServizi.secondValue=undefined;    
+            this.filtroCodaServizi.selectedSecondoFilterAdd=false;        
+        }
+        */
+        return this.filtroCodaServizi;
+    }
+
+
+    /*
+ loadArrayComboPrimoElemento() {
+     console.log("loadArrayComboPrimoElemento() da sinottico-servizi.header ");
+     var arrayToOrder :  Array<string>=[] ;
+     for (let item in FiltroSinottico.PrimoElementoFiltroEnum) {   
+         console.debug(item);
+         var re = /_/gi; 
+
+        if(!arrayToOrder.includes(item.replace( re, ""))) 
+             arrayToOrder.push(item);            
+     }
+ 
+     this.listPrimoElemento = arrayToOrder.sort((n1,n2) => {
+         if (n1 > n2) {return 1;}
+         if (n1 < n2) {return -1;}
+         return 0;
+     });
+
+
+     var index = this.listPrimoElemento.indexOf("TUTTI", 0);
+     if (index > -1) {
+         this.listPrimoElemento.splice(index, 1);
+     }
+     
+     this.listPrimoElemento.splice(0, 0,"Selezionare Filtro...");
+     console.log(" ----> "+this.listPrimoElemento);     
+ }
+
+
+ loadArrayComboSecondoElemento() {
+
+     console.log("loadArrayComboSecondoElemento() da sinottico-servizi.header ");
+     var arrayToOrder :  Array<string> =[];
+     for (let item in FiltroSinottico.SecondoElementoFiltroEnum) {    
+         var re = /_/gi; 
+         if(!arrayToOrder.includes(item.replace( re, ""))) 
+             arrayToOrder.push(item);                 
+     }
+ 
+     this.listSecondoElemento = arrayToOrder.sort((n1,n2) => {
+         if (n1+'' > n2+'') {return 1;}
+         if (n1+'' < n2+'') {return -1;}
+         return 0;
+     });
+
+     var index = this.listSecondoElemento.indexOf("TUTTI", 0);
+     if (index > -1) {
+         this.listSecondoElemento.splice(index, 1);
+     }
+     this.listSecondoElemento.splice(0, 0,"Selezionare Filtro...");
+     console.log(" ----> "+this.listSecondoElemento);     
+
+ }
+
+ */
+
+    /*
+    filtroPrimoSelectedAction($event){
+        console.log("filtroPrimoSelectedAction() da sinottico-servizi.header ");
+        this.filtroPrimoSelected = $event.text;
+        this.isEditPrimoFiltroDisabled=true;
+        console.log("Valore selezionato dal primo filtro : "+ this.filtroPrimoSelected);
+       
+        if (this.filtroPrimoSelected){
+            switch (this.filtroPrimoSelected) {
+                case FiltroSinottico.PrimoElementoFiltroEnum.TUTTI:
+                case FiltroSinottico.PrimoElementoFiltroEnum.INTRAH:
+                case FiltroSinottico.PrimoElementoFiltroEnum.NONINTRAH:
+                case FiltroSinottico.PrimoElementoFiltroEnum.MEZZIATTIVI:
+                    //NESSUN VALORE DA ASSEGNARE    
+                    //this.filterSet += this.filterSinotticoToSave.primoElementoFiltro +  "; ";
+                    this.isEditPrimoFiltroDisabled=true;
+                    this.valorePrimoElemento=undefined;
+
+                    break;
+                    
+                case FiltroSinottico.PrimoElementoFiltroEnum.CODICE:
+                case FiltroSinottico.PrimoElementoFiltroEnum.PARTENZA:
+                case FiltroSinottico.PrimoElementoFiltroEnum.DESTINAZIONE:
+                case FiltroSinottico.PrimoElementoFiltroEnum.PAZIENTE:
+                    // --> prendere il valore assegnato
+                    this.isEditPrimoFiltroDisabled=false;
+                    //this.filterSet += this.filterSinotticoToSave.primoElementoFiltro + " " +this.filterSinotticoToSave.valorePrimoElemento +  "; ";
+                break;
+                default:
+                    
+                    this.isEditPrimoFiltroDisabled=true;
+                    this.valorePrimoElemento=undefined;
+
+                    break;
+            } 
+        }
+    }
+
+    
+    
+    filtroSecondoSelectedAction($event){
+        console.log("filtroSecondoSelectedAction() da sinottico-servizi.header ");
+        this.filtroSecondoSelected = $event.text;
+        console.log("Valore selezionato dal secondo filtro : "+ this.filtroSecondoSelected);
+        this.isEditSecondoFiltroDisabled=true;
+       
+        if (this.filtroSecondoSelected){
+            switch (this.filtroPrimoSelected) {
+                case FiltroSinottico.SecondoElementoFiltroEnum.TUTTI:
+                case FiltroSinottico.SecondoElementoFiltroEnum.INTRAH:
+                case FiltroSinottico.SecondoElementoFiltroEnum.MEZZIATTIVI:
+                case FiltroSinottico.SecondoElementoFiltroEnum.NONINTRAH:
+                     //NESSUN VALORE DA ASSEGNARE    
+                    //this.filterSet += this.filterSinotticoToSave.primoElementoFiltro +  "; ";
+                    this.isEditSecondoFiltroDisabled=true;
+                    this.valoreSecondoElemento=undefined;
+
+                    break;
+                    
+                case FiltroSinottico.SecondoElementoFiltroEnum.PAZIENTE:
+                case FiltroSinottico.SecondoElementoFiltroEnum.CODICE:
+                case FiltroSinottico.SecondoElementoFiltroEnum.DESTINAZIONE:
+                case FiltroSinottico.SecondoElementoFiltroEnum.PARTENZA:
+                    // --> prendere il valore assegnato
+                    this.isEditSecondoFiltroDisabled=false;
+                    //this.filterSet += this.filterSinotticoToSave.primoElementoFiltro + " " +this.filterSinotticoToSave.valorePrimoElemento +  "; ";
+                break;
+                default:
+                    this.isEditSecondoFiltroDisabled=true;
+                    this.valoreSecondoElemento=undefined;
+
+                    break;
+                } 
+        }
+
+    } 
+*/
+
+    triggerSubmit(): void {
+
+    };
+
+}

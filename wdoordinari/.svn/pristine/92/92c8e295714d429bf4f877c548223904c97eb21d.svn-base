@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <label class="label col-2 col-form-label" validationLabel="telephone">Telefono</label>
+      <!--<input [(ngModel)]="model.telephone" [formControl]="getControl('telephone')" class="form-control" type="text" placeholder="Inserire telefono"/>-->
+      <div class="input-group input-group-sm">
+        <input tabindex="1" autocomplete="nope" [inputMask]="'9{0,16}'" class="form-control" type="text" [(ngModel)]="model.telephone" (keydown.enter)="searchDepartmentByPhone(model.telephone)">
+        <div class="input-group-append">
+          <button (click)="searchDepartmentByPhone(model.telephone)" class=" btn input-group-text" id="basic-addon2">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <label class="label col-2 col-form-label" validationLabel="convention">Convenzione</label>
+      <ng-select tabindex="3" [(ngModel)]="model.convention" [formControl]="getControl('convention')" [allowClear]="true" [items]="convenzioneItems | async"
+        textField="name" valueField="name" placeholder="Selezionare Convenzione..."> </ng-select>
+
+
+      <label class="label col-2 col-form-label" validationLabel="vat">Partita IVA</label>
+      <input tabindex="5" autocomplete="nope" [(ngModel)]="model.vat" [formControl]="getControl('vat')" class="form-control" type="text"
+        placeholder="Inserire partita IVA" />
+
+      <label class="label col-2 col-form-label" validationLabel="reference">Riferimento</label>
+      <input tabindex="7" autocomplete="nope" [inputMask]="'*{0,64}'" [(ngModel)]="model.reference" [formControl]="getControl('reference')" class="form-control"
+        type="text" placeholder="Inserire Riferimento" />
+
+      <label class="label col-2 col-form-label" validationLabel="department">Padiglione/Reparto</label>
+      <ng-select tabindex="9" [(ngModel)]="model.department" [allowClear]="true" [items]="departmentList | async" (refresh)="updateDepartmentList($event)"
+        textField="description" (selected)="setDepartmentAndAuthority($event)" minChar="0" refreshDelay="1000" placeholder="Selezionare Padiglione/Reparto...">
+      </ng-select>
+    </div>
+    <div class="col-md-6">
+      <label class="label col-2 col-form-label" validationLabel="cc">Centro di Costo</label>
+      <!--<input [(ngModel)]="model.cc" [formControl]="getControl('cc')" class="form-control" type="text" placeholder="Inserire centro di costo"/>-->
+      <div class="input-group input-group-sm">
+        <input tabindex="2" autocomplete="nope" [inputMask]="'*{0,16}'" class="form-control" type="text" [(ngModel)]="model.cc" (keydown.enter)="searchDepartmentByCC(model.cc)">
+        <div class="input-group-append">
+          <button (click)="searchDepartmentByCC(model.cc)" class="btn input-group-text" id="basic-addon2">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <label class="label col-2 col-form-label">Tipo Ente</label>
+      <ng-select tabindex="4" [(ngModel)]="model.type" textField="description" valueField="description" [allowClear]="true" [items]="authorityTypeList | async"
+        placeholder="Inserire il tipo ente"> </ng-select>
+
+      <label class="label col-2 col-form-label" validationLabel="authority">Nome Ente</label>
+      <ng-select tabindex="6" [(ngModel)]="model.authority" [allowClear]="true" [items]="authorityList | async" (selected)="setAuthority($event)"
+        textField="description" (refresh)="updateAuthorityList($event)" minChar="0" refreshDelay="1000" placeholder="Selezionare Ente...">
+      </ng-select>
+
+      <label class="label col-2 col-form-label">Telefono</label>
+      <ng-select tabindex="8" [(ngModel)]="model.startTelephone" [allowClear]="true" [items]="startTelephoneList | async" placeholder="Selezionare Telefono...">
+      </ng-select>
+    </div>
+  </div>
+</div>

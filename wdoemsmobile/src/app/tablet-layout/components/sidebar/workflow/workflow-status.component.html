@@ -1,0 +1,47 @@
+<ul *ngIf="sreadonly" class="list-group workflow-readonly">
+    <ng-template ngFor let-i [ngForOf]="items">
+        <a compact raised class="list-group-item checked-status-container">
+            <div class="row sidebar-menu-item-container" style="margin:0px">
+                <div class="col-md-3 sidebar-menu-item-icon">
+                    <div class="checked-status-icon"><i class="fa fa-check fa-x-center"></i></div>
+                </div>
+                <div class="col-md-8 sidebar-menu-item checked-status-label">
+                    <span>{{i.label}}</span>
+                </div>
+                <div class="col-md-8 sidebar-menu-item checked-status-sublabel">
+                    <span>{{i.sublabel}}</span>
+                </div>
+            </div>
+        </a>
+    </ng-template>
+</ul>
+<div *ngIf="sactive" class="active-container">
+    <ul class="list-group workflow-active">
+        <ng-template ngFor let-i [ngForOf]="items">
+            <a mdcButton compact raised (click)="statusClicked(i)" class="list-group-item active-status-container">
+                <div class="row sidebar-menu-item-container" style="margin:0px">
+                    <div class="col-md-3 sidebar-menu-item-icon">
+                        <div class="active-status-icon"><i class="fa fa-2x fa-angle-right fa-x-center"></i></div>
+                    </div>
+                    <div class="col-md-8 sidebar-menu-item active-status-label">
+                        <span>{{i.label}}</span>
+                    </div>
+                </div>
+            </a>
+        </ng-template>
+    </ul>
+</div>
+<ul *ngIf="sdisabled" class="list-group workflow-disabled">
+    <ng-template ngFor let-i [ngForOf]="items">
+        <a compact raised class="list-group-item disabled-status-container">
+            <div class="row sidebar-menu-item-container" style="margin:0px">
+                <div class="col-md-3 sidebar-menu-item-icon">
+                    <div class="disabled-status-icon"><i class="fa fa-check fa-x-center"></i></div>
+                </div>
+                <div class="col-md-8 sidebar-menu-item disabled-status-label">
+                    <span>{{i.label}}</span>
+                </div>
+            </div>
+        </a>
+    </ng-template>
+</ul>

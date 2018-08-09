@@ -1,0 +1,88 @@
+<div [@.disabled]="disableAnimation" [@routerTransition] class="checkin-section" style="height: 99vh;">
+    <div mdcCard class="custom-card--with-avatar">
+        <!-- <section mdcCardPrimary>
+            
+
+            <h1 mdcCardTitle>
+                <mat-icon>fingerprint</mat-icon>
+                Inizio turno
+            </h1>
+            
+        </section> -->
+        <section class="sectionWrapper">
+            <mat-icon>fingerprint</mat-icon>
+            <span class="title">Scelta ospedale di destinazione</span>
+            <!-- <div class="pull-right">
+            <button mdcButton [raised]="true" (click)="addNota()">  <i class="fa fa-pencil-square-o editIcon"></i>Aggiungi nota</button>      
+       </div>-->
+        </section>
+        <section class="center-section" style="height: 70vh">
+
+            <form class="checkin-form-container ">
+
+                <section class="sectionWrapperSearch" *ngIf="!ospedaleConfirmed">
+                    <a class="mdi mdi-magnify mdi-48px align-search"></a>
+                    <mat-form-field class="example-full-width">
+
+                        <!--   <input id="inputItem" name="searchFilter" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric"
+                            ng-virtual-keyboard-placeholder="Digitare il nome dell'ospedale e confermare con pulsante di spunta"
+                            (change)="onInputChange($event)" [(ngModel)]="searchFilter" (keyboardClosed)="onVKeyboardValue($event)"
+                            placeholder="Digitare il nome dell'ospedale da cercare" >-->
+
+                        <input id="inputItem" name="searchFilter" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="extendedConfirm"
+                            ng-virtual-keyboard-placeholder="Digitare il nome dell'ospedale e confermare con pulsante di spunta"
+                            (change)="onInputChange($event)" (keyboardClosed)="onVKeyboardValue($event)" placeholder="Digitare il nome dell'ospedale da cercare" 
+                            [(ngModel)]="searchFilter">
+                    </mat-form-field>
+                    <a class="mdi mdi-close-circle-outline mdi-48px align-search" (click)="clean($event)"></a>
+                </section>
+            </form>
+
+            
+            <form class="checkin-form-container ">
+
+                <section class="sectionWrapperSearch" *ngIf="ospedaleConfirmed">
+                    <a class="mdi mdi-magnify mdi-48px align-search"></a>
+                    <mat-form-field class="example-full-width">
+                       <input  id="inputItemRep" name="searchFilterRep" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="extendedConfirm" 
+                            ng-virtual-keyboard-placeholder="Digitare il nome del reparto e confermare con pulsante di spunta"
+                            (change)="onInputChange($event)" (keyboardClosed)="onVKeyboardValueRep($event)" placeholder="Digitare il nome del reparto da cercare"
+                            [(ngModel)]="searchFilterRep">
+                    </mat-form-field>
+                    <a class="mdi mdi-close-circle-outline mdi-48px align-search" (click)="cleanRep($event)"></a>
+                </section>
+            </form>
+
+            <div *ngIf="true">
+                <div [@fadeInOut] *ngIf="!ospedaleConfirmed">
+                    <app-list-item #parkingListContainer [rowHeight]="'2.5:1'" [cols]="3" [itemList]="ospedaliList | async" (itemSelected)="itemSelected('ospedale', $event)"></app-list-item>
+                </div>
+                <div [@fadeInOut] *ngIf="ospedaleConfirmed">
+                    <app-list-item [rowHeight]="'2.5:1'" [cols]="3" [itemList]="repartoList | async" (itemSelected)="itemSelected('reparto', $event)"></app-list-item>
+                </div>
+            </div>
+        </section>
+        <section mdcCardActions compact class="row h-30 justify-content-center align-items-center">
+            <button [disabled]="!prevEnabled" class="mdc-button-small" [hidden]="ospedaleConfirmed" mdcButton [raised]="true" (click)="toPrevPage('ospedale')">
+                <mat-icon>fast_rewind</mat-icon>
+            </button>
+            <button [disabled]="!prevEnabled" class="mdc-button-small" [hidden]="!ospedaleConfirmed" mdcButton [raised]="true" (click)="toPrevPage('reparto')">
+                <mat-icon>fast_rewind</mat-icon>
+            </button>
+
+            <button [hidden]="ospedaleConfirmed" mdcButton [raised]="true" (click)="confirm('ospedale')">Conferma</button>
+            <button style="width: 17rem" [hidden]="!ospedaleConfirmed" mdcButton color="warning" [raised]="true" (click)="confirm('reparto')">Invia Destinazione</button>
+            <button [hidden]="ospedaleConfirmed" mdcButton [raised]="true" (click)="back()">Annulla</button>
+            <button [hidden]="!ospedaleConfirmed" mdcButton [raised]="true" (click)="back()">Annulla</button>
+            <!--<button [hidden]="!ospedaleConfirmed" mdcButton color="warning" [raised]="true" (click)="reset()">Annulla</button>-->
+            <button [disabled]="!nextEnabled" class="mdc-button-small" [hidden]="ospedaleConfirmed" mdcButton [raised]="true" (click)="toNextPage('ospedale')">
+                <mat-icon>fast_forward</mat-icon>
+            </button>
+            <button [disabled]="!nextEnabled" class="mdc-button-small" [hidden]="!ospedaleConfirmed" mdcButton [raised]="true" (click)="toNextPage('reparto')">
+                <mat-icon>fast_forward</mat-icon>
+            </button>
+
+            <!--<button mdcButton [raised]="true" (click)="action2()">Action 2</button>-->
+        </section>
+    </div>
+</div>

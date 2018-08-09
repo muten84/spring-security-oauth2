@@ -1,0 +1,106 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "wdoordinari"
+  },
+  "apps": [{
+      "name": "ordinari",
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "img",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles/vendor.scss",
+        "styles/main.scss"
+      ],
+      "scripts": ["../node_modules/jquery/dist/jquery.js",
+        "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/nouislider/distribute/nouislider.js",
+        "../node_modules/sockjs-client/dist/sockjs.js",
+        "../node_modules/inputmask/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js",
+        "../node_modules/inputmask/dist/inputmask/inputmask.js",
+        "../node_modules/inputmask/dist/inputmask/inputmask.extensions.js",
+        "../node_modules/inputmask/dist/inputmask/inputmask.numeric.extensions.js",
+        "../node_modules/inputmask/dist/inputmask/inputmask.date.extensions.js",
+        "../node_modules/inputmask/dist/inputmask/inputmask.phone.extensions.js",
+        "../node_modules/inputmask/dist/inputmask/phone-codes/phone.js",
+        "../node_modules/inputmask/dist/inputmask/phone-codes/phone-be.js",
+        "../node_modules/inputmask/dist/inputmask/phone-codes/phone-ru.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "qalitax": "environments/environment.qalitax.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "sinottico",
+      "root": "src",
+      "outDir": "dist_sinottico",
+      "assets": [
+        "assets",
+        "img",
+        "favicon.ico"
+      ],
+      "index": "sinottico.html",
+      "main": "main.sinottico.ts",
+      "polyfills": "polyfills.sinottico.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "syn",
+      "styles": [
+        "styles/vendor.scss",
+        "styles.sinottico/main.scss"
+      ],
+      "scripts": ["../node_modules/jquery/dist/jquery.js",
+        "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/nouislider/distribute/nouislider.js",
+        "../node_modules/sockjs-client/dist/sockjs.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "qalitax": "environments/environment.qalitax.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [{
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {}
+  }
+}

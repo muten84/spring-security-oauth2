@@ -1,0 +1,563 @@
+import { Component, ViewEncapsulation, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { ComponentHolderService, MiddleComponent } from "app/service/shared-service";
+import { ServiceDTO } from "services/services.module";
+import { MenuItemValue,BookingModuleServiceApi } from '../../services/services.module';
+import { convertMenuItem } from 'app/util/sinottico-utils';
+import { ContextMenuComponent, ContextMenuService } from 'ngx-contextmenu';
+import { NgbModal, } from '@ng-bootstrap/ng-bootstrap';
+import { ClosingModalComponent } from "app/modals/closing-modal/closing-modal-component";
+import { Router, ActivatedRoute } from "@angular/router";
+import { CodaRitorniHeaderComponent } from "app/coda-ritorni/coda-ritorni-header-component";
+import { StaticDataService } from "app/static-data/cached-static-data";
+import { TailReturnsServiceApi, OverviewTailReturnsDTO, SearchBookingResultDTO, OverviewTailReturnFilterDTO, BookingDTO } from 'services/services.module';
+import { calcolaTrasportato, decodePhaseForDate, getBookingImage } from 'app/util/sinottico-utils';
+import * as moment from 'moment';
+import { CoreTableColumn, CoreTableComponent, CoreTableOption } from "app/core/table/core-table/core-table.component";
+import { ServiceCommon } from "app/common-servizi/service-common";
+import * as _ from 'lodash';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { MessageService, Subscription } from '../service/message.service';
+import { EVENTS } from '../util/event-type';
+import { SelectBookingInSinottico, Type } from 'common/services/messages';
+import { BrowserCommunicationService } from 'common/services/browser-communication.service';
+import { TransportModuleServiceApi } from 'services/gen/api/TransportModuleServiceApi';
+import { CiclicalBookingForVirtualServiceDTO } from 'services/gen/model/models';
+import { BookingHistoryModalComponent } from '../sinottico-prenotazioni/bookinghistory.component';
+
+function execute(context: any, funct: { (obj: any): any }): { (obj: any): any } {
+    return function (obj: any) {
+        return funct.call(context, obj);
+    }
+}
+
+@Component({
+    selector: 'coda-ritorni',
+    templateUrl: './coda-ritorni-component.html',
+    styleUrls: ['./coda-ritorni-component.scss'],
+    encapsulation: ViewEncapsulation.None,
+})
+
+export class CodaRitorniComponent implements OnInit, MiddleComponent, AfterViewInit {
+
+    bookingSubscription: Subscription;
+
+    public columnsCodaRitorniTable: Array<CoreTableColumn> = 
+    [
+        { title: 'A', name: 'specialEquipment', style: { "flex-grow": "3", } },
+        { title: 'Data', name: 'transportDateDescr', style: { "flex-grow": "7", } },
+        { title: 'Tipo', name: 'transportType', style: { "flex-grow": "7" } },
+        { title: 'Deamb', name: 'patientStatusDescr', style: { "flex-grow": "7" } },
+        { title: 'Convenzione', name: 'convention', style: { "flex-grow": "7", } },
+        { title: 'Indirizzo partenza', name: 'startAddress', style: { "flex-grow": "10", } },
+        { title: 'Indirizzo destinazione', name: 'endAddress', style: { "flex-grow": "10", } },
+        { title: 'Trasportato', name: 'denominazionePaziente', style: { "flex-grow": "7", } },
+        /*{ title: 'Postazione', name: 'postazione', style: { "flex-grow": "7", } },*/
+        { title: '', name: '', index: 10, optionTitle: 'code', options: [
+            {
+                name: 'SEPARATOR',
+                icon: ' '
+            },{
+                name: 'Trasferisci nella coda prenotazioni ',
+                icon: 'mdi mdi-forward',
+                clicked: execute(this, this.moveToBooking)
+            },           
+            {
+                name: 'Dati della Prenotazione',
+                icon: 'mdi mdi-information-outline', /*mdi mdi-lead-pencil',*/
+                clicked: execute(this, this.goToBookingDetail)
+            }, 
+            {
+                name: 'Elimina il ritorno',
+                icon: 'mdi mdi-table-column-remove',
+                clicked: execute(this, this.removeReturn)
+            }, 
+            {
+                name: 'SEPARATOR',
+                icon: ' '
+            },
+            {
+                name: 'Crea nuovo servizio',
+                icon: 'mdi mdi-information-outline', /*mdi mdi-lead-pencil',*/
+                clicked: execute(this, this.makeService)
+            }, 
+            {
+                name: 'SEPARATOR',
+                icon: ' '
+            },
+            {
+                name: 'Mostra lo storico delle modifiche',
+                icon: 'mdi mdi-information-outline', /*mdi mdi-lead-pencil',*/
+                clicked: execute(this, this.showBookingHistory)
+            }
+        
+        ], style: { "flex-grow": "3" }
+        }
+    ];
+
+    selected = [];
+    
+    currentId;
+
+    currentSelected = {
+        optionItems: [],
+        charge: ""
+    }
+
+    private filterSet: String;
+    private filter: OverviewTailReturnFilterDTO;
+    private filterToSave: OverviewTailReturnFilterDTO={};
+
+   /* public getOptions(): CoreTableOption[]{
+        let options= //this.buildRowMenu('optionItems');      
+        [
+            {
+                name: 'Trasferisci nella coda prenotazioni ',
+                icon: 'mdi mdi-forward',
+                clicked: execute(this, this.moveToBooking)
+            }
+        ];
+        return options;
+    }*/
+
+    public configCodaRitorniTable = {
+        paging: true,
+        sorting: { columns: this.columnsCodaRitorniTable },
+        filtering: { filterString: '' },
+    };
+
+    public listCodaRitorni : Array<OverviewTailReturnsDTO> = [];
+    @ViewChild(ContextMenuComponent) public rowMenu: ContextMenuComponent;
+    
+
+    constructor(
+        private componentService: ComponentHolderService,
+        private route: ActivatedRoute,
+        private sdSvc: StaticDataService,
+        private staticService: StaticDataService,
+        private router: Router,
+        private serviceCommon: ServiceCommon,
+        private codaRitorniService : TailReturnsServiceApi,
+        private sanitizer: DomSanitizer,
+        private contextMenuService: ContextMenuService,
+        private bookingService: BookingModuleServiceApi,
+        private messageService: MessageService,
+        protected bcs: BrowserCommunicationService,
+        private modalService: NgbModal,
+        private transportService: TransportModuleServiceApi,
+    ) { }
+
+    public ngOnInit() {
+        this.loadCodaRitorni(null);
+        this.bookingSubscription = this.messageService.subscribe(EVENTS.BOOKING);
+        this.bookingSubscription.observ$.subscribe((msg) => {
+            console.log('received message from topic ' + msg.topic + " - " + JSON.stringify(msg));
+            this.elaboratePushMessage(msg);
+        });
+    }
+
+    ngAfterViewInit() {
+        this.componentService.setMiddleComponent('currentSearchTable', this);
+    }
+
+    ngOnDestroy() {
+        //console.log('ngOnDestroy');
+        this.bookingSubscription.observ$.unsubscribe();
+        this.sendMessageToSinottico({});
+        ////console.log("sinottico destroyed")
+    }
+
+    onSelect({ selected }) {
+        //console.log('onSelect');
+        // //console.log('Select Event', selected, this.selected);
+
+        this.currentSelected = selected[0];
+        /*Luigi: dichiaro tutto con i tipi così sono sicuro che quello che passo in input
+        e' coerente con il backend*/
+        let currentBooking: OverviewTailReturnsDTO = <OverviewTailReturnsDTO>this.currentSelected;
+        let id = currentBooking.id;
+
+        this.sendMessageToSinottico(currentBooking);
+
+        if (this.currentId == id) {
+            return;
+        }
+        this.currentId = id;
+        
+    }
+    
+
+    deleteReturn(row){
+        let modal = this.modalService.open(ClosingModalComponent, { size: 'sm' });
+        modal.componentInstance.id = row.id;
+        modal.result.then((result) => {
+            ////console.log("modal result is: " + result);
+            if (result) {
+                let idServices: Array<string> =[row.id];// se l'utente ha chiuso la prenotazione, ricarico il sinottico
+                this.removeBooking(idServices);
+            }
+        }, (reason) => {
+            console.log("Non accetta la cancellazione del ritorno");
+        });
+        return;
+    }
+
+    makeService(row) {
+        let model = {
+            bookingId: row.id,
+            ciclicalId: "",
+            transportDate: (<any>row.transportDate),
+        };
+        this.transportService.getCiclicalBookingForVirtualService(model).subscribe(res => {
+            if (res && res.length > 0) {
+                console.log("Devi creare modale");
+                //TODO
+                // far apparire una popup per selezionare le cicliche da utilizzare nella creazione del servizio virtuale
+            } else {
+                this.createService(row);
+            }
+        });
+    }
+
+
+    createService(row: OverviewTailReturnsDTO, cicliche?: [CiclicalBookingForVirtualServiceDTO]) {
+        
+        let listId;
+
+        if (cicliche) {
+            listId = cicliche.map(el => {
+                return el.id;
+            });
+        } else {
+            listId = [];
+        }
+
+        listId.push(row.id);
+
+        let model = {
+            bookingIdList: listId,
+            bookingFlag: false,
+            closedStatus: false,
+        };
+        this.componentService.getRootComponent().mask();
+        this.transportService.createService(model).subscribe(res => {
+            // this.router.navigate(['/sinottico-servizi']);
+            // ricarico la lista dei bookings
+            this.loadCodaRitorni(null);
+            this.componentService.getRootComponent().showToastMessage('success', "Il servizo '" + res.result.code + "' è stato creato!");
+            this.componentService.getRootComponent().unmask();
+        });
+    }
+
+    showBookingHistory(res) {
+        //console.log('showBookingHistory');
+        if(res && res.id){
+            this.componentService.getRootComponent().mask();
+            this.bookingService.getBookingHistoryById(res.id).subscribe(res => {
+                //console.log("history result: " + JSON.stringify(res));
+                this.componentService.getRootComponent().unmask();
+                let modal = this.modalService.open(BookingHistoryModalComponent, { size: 'lg' });
+
+                modal.componentInstance.list = res;
+                modal.componentInstance.title = 'Storico modifiche prenotazione';
+                modal.componentInstance.columns = [
+                    { title: 'Data', name: 'modificationDate' },
+                    { title: 'Operatore', name: 'operator' },
+                    { title: 'Modifica', name: 'modificationSynthesis' },
+                ];
+                return modal;
+            })
+        }else{
+            this.componentService.getRootComponent().showToastMessage('warning', "L'elemento selezionato ha identificativo non valido!");
+        }
+    }
+
+
+    sendMessageToSinottico(currentBooking: OverviewTailReturnsDTO) {
+        // invio l'id al sinottico staccato se è aperto
+        let param: SelectBookingInSinottico = {
+            bookingCode: currentBooking.code,
+            bookingId: currentBooking.id
+        }
+        this.bcs.postMessage(Type.APP2_SET_CURRENT_BOOKING, param, "*");
+    }
+
+    private elaboratePushMessage(msg) {
+        if (msg.data.payload && msg.data.action) {
+            let idServices: Array<string> = null;
+            //lista di id dei servizi da allarmare
+            idServices = msg.data.payload.split(",");
+            switch (msg.data.action) {
+                case "SWITCH_TO_BOOKING":
+                    //remove dalla coda ritorno nel caso di passaggio a booking
+                    this.removeBooking(idServices);
+                    break;
+                case "ARCHIVE":
+                    //se è un archiviazione lo tolgo
+                    this.removeBooking(idServices);
+                    break;
+                case "UPDATE":
+                // questo evento arriva sia su un update che su una creazione, 
+                // faccio le stesse cose sull'alert
+                case "ALERT":
+                    // in caso di update o alert aggiorno i singoli servizi
+                    this.reloadBookings(idServices);
+                    break;
+                case "SWITCH_TO_RETURN":
+                    // in caso di update o alert aggiorno i singoli servizi
+                    this.reloadBookings(idServices);
+                    break;
+                default:
+                    this.loadCodaRitorni(null);
+                    break;
+            }
+        }
+    }
+
+    private loadCodaRitorni(filter : OverviewTailReturnFilterDTO) {
+        if(!filter) {
+            filter = {};
+        }
+        this.componentService.getRootComponent().mask();
+        this.codaRitorniService.searchTailReturnsByFilter(filter).catch((err, c) => {
+            this.componentService.getRootComponent().unmask();
+            return err;
+        }).subscribe((result) => {
+           let res : SearchBookingResultDTO = result;
+           if(res && res.resultList) {
+            let resultList: Array<OverviewTailReturnsDTO> = res.resultList;
+            resultList.forEach(element => {                
+                this.generateTableElement(element);
+                /*(<any>element).transportDateDescr = decodePhaseForDate(element.phase, element.transportDate.toString());
+                (<any>element).patientStatusDescr = 
+                (element.patientStatus ? element.patientStatus : '') +  (element.patientCompare  ? ' + ' + element.patientCompare  : '');
+                (<any>element).optionItems = this.buildRowMenu(element.popupMenu);*/
+            });
+            this.listCodaRitorni = resultList;
+           } else {
+               this.listCodaRitorni = [];
+           }
+           this.componentService.getRootComponent().unmask();
+        });
+    }
+
+    generateTableElement( element:OverviewTailReturnsDTO ){
+        (<any>element).transportDateDescr = decodePhaseForDate(element.phase, element.transportDate.toString());
+        (<any>element).patientStatusDescr = 
+        (element.patientStatus ? element.patientStatus : '') +  (element.patientCompare  ? ' + ' + element.patientCompare  : '');
+        (<any>element).optionItems = this.buildRowMenu(element.popupMenu);
+    }
+
+    private reloadBookings(idServices: Array<string>) {
+        //copio il filter
+        let filter = JSON.parse(JSON.stringify(this.filterToSave));
+        //
+        filter.ids = idServices;
+
+        this.codaRitorniService.searchTailReturnsByFilter(filter).subscribe(result => {
+            let cnt = 0;
+
+            let list: OverviewTailReturnsDTO[] = result ? result.resultList : [];
+
+            if (list && list.length > 0) {
+                list.forEach(e => {
+                    this.generateTableElement(e);
+                    //sostituisco gli elementi o li aggiungo alla fine 
+                    let index = this.listCodaRitorni.findIndex(r => {
+                        return r.id === e.id;
+                    });
+
+                    if (index >= 0) {
+                        this.listCodaRitorni[index] = e;
+                    } else {
+                        this.listCodaRitorni.push(e);
+                    }
+                    //svuoto la lista di id;
+                    idServices = idServices.filter(id => {
+                        return id !== e.id;
+                    });
+                });
+            }
+            if (idServices.length > 0) {
+                // se è rimasto qualche id nella lista vuol dire che il booking non è stato caricato
+                // provo a rimuoverlo dalla griglia
+                this.removeBooking(idServices);
+            }
+            this.listCodaRitorni = _.orderBy(this.listCodaRitorni, ['transportDate', 'code'], ['asc', 'asc']);
+        });
+    }
+
+    public goToBookingDetail(res){
+        this.router.navigate(['/modifica-prenotazione', '4', res.id]);//4 indica il codice della pagina di provenienza
+    }
+    public removeReturn(res){
+        this.router.navigate(['/modifica-prenotazione', '3', res.id]);
+    }
+    public moveToBooking(r){
+        if(r!=null){
+            let body = {bookingId:r.id};
+            this.componentService.getRootComponent().showConfirmDialog('Attenzione', "Si desidera confermare l'operazione?").then((result) => {
+                this.componentService.getRootComponent().mask();
+                this.bookingService.switchBookingReturn(body).subscribe(res => {
+                    if(res.removedReturnId){
+                        this.componentService.getRootComponent().showToastMessage('success', 'Nuova Prenotazione creata con codice ' + res.bookingCode );
+                        let idBookings :Array<string> =[res.removedReturnId];
+                        this.removeBooking(idBookings);
+                        this.componentService.getRootComponent().unmask();
+                    }
+                });
+            }, (reason) => {
+                console.log("L'elemento resta come ritorno");
+                this.componentService.getRootComponent().unmask();
+            });
+        }
+    }
+
+    public removeBooking(idServices: Array<string>) {
+        // filtro tutti gli elemendi del sinottico 
+        this.listCodaRitorni = this.listCodaRitorni.filter(el => {
+            //se l'elemento è presente nella lista degli id lo escludo
+            let val = idServices.find(value => {
+                return value == el.id;
+            }); 
+            return !val;
+        });
+    }
+
+    public decodePhaseForDate(phase, date) {
+        return decodePhaseForDate(phase, date);
+    }
+
+    public getBookingImage(element) {
+        return getBookingImage(element,null,null);
+    }
+
+    getForeground(row : OverviewTailReturnsDTO) {
+        row.convention
+    }
+
+    public sanitize(html: string): SafeHtml {
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    }
+
+    fetchHeaderData(id: string) {}
+
+    getHeaderFilter(): any {}
+
+    resetFilter(): void {}
+
+    triggerSubmit(filterInput: OverviewTailReturnFilterDTO): void {
+        this.loadCodaRitorni(filterInput);
+    }
+
+    fetchComponentData(id: string): void {}
+
+    createDefaultMenu(): any[] {
+        //console.log('createDefaultMenu');
+        let optionItems = [];
+
+       // optionItems.push(convertMenuItem(mi));
+        return optionItems;
+
+        /*let mi: MenuItemValue = {
+            enable: true,
+            id: "return2booking",
+            name: "Trasferisci nella coda prenotazioni",
+            position: 0
+
+        }
+        let miBookingDet: MenuItemValue = {
+            enable: true,
+            id: "bookingDetail",
+            name: "Dati prenotazione",
+            position: 1
+
+        }
+        let deleteRet: MenuItemValue = {
+            enable: true,
+            id: "returnDelete",
+            name: "Elimina ritorno",
+            position: 2
+
+        }
+        let createService: MenuItemValue = {
+            enable: true,
+            id: "createService",
+            name: "Crea il servizio",
+            position: 3
+
+        }
+        let add2Resource: MenuItemValue = {
+            enable: true,
+            id: "add2Resource",
+            name: "Aggiungi al mezzo",
+            position: 4
+
+        }
+        let synoptic: MenuItemValue = {
+            enable: true,
+            id: "synoptic",
+            name: "Finestra Prenotazioni",
+            position: 1
+
+        }
+
+        optionItems.push(convertMenuItem(mi));
+        optionItems.push(convertMenuItem(miBookingDet));
+        optionItems.push(convertMenuItem(deleteRet));
+        optionItems.push(convertMenuItem(createService));
+        optionItems.push(convertMenuItem(add2Resource));
+        optionItems.push(convertMenuItem(synoptic));
+        return optionItems;*/
+    }
+
+    /*public onContextMenu($event: MouseEvent, item: any): void {
+        //console.log('onContextMenu');
+        this.contextMenuService.show.next({
+            // Optional - if unspecified, all context menu components will open
+            contextMenu: this.rowMenu,
+            event: $event,
+            item: item,
+        });
+        $event.preventDefault();
+        $event.stopPropagation();
+    }
+*/
+    buildRowMenu(menuItems: MenuItemValue[]) {
+        //console.log('buildRowMenu');
+        let optionItems = [];
+
+        if (menuItems && menuItems.length > 0) {
+            menuItems.forEach((mi) => {
+                optionItems.push(convertMenuItem(mi));
+            });
+        }
+        /*  else {
+             optionItems.push(this.createDefaultMenu());
+         }*/
+        return _.sortBy(optionItems, "position");
+    }
+
+   /* public onOptionItemClicked(row: any, source: string, enabled: boolean, event): any {
+        if (enabled) {
+            let src = source.toLowerCase();
+            switch (src) {
+                case "return2booking":
+                    this.createBookingFromReturn(row.id);
+                    return;
+                case "bookingdetail":
+                    this.router.navigate(['/modifica-prenotazione', row.id]);
+                    return;
+                case "bookingdetail":
+                    this.router.navigate(['/modifica-prenotazione', row.id]);
+                    return;                
+                case "bookingdetail":
+                    this.router.navigate(['/modifica-prenotazione', row.id]);
+                    return;
+            }
+        }
+    }*/
+
+    createBookingFromReturn(retId: string){
+
+    }
+}

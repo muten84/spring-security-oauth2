@@ -1,0 +1,146 @@
+import { Component, OnInit } from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { CoreTableColumn } from "../../core/table/core-table/core-table.component";
+import { TransportModuleServiceService, CrewMemberDTO, RequestAddCrewMembersToService } from "services/gen";
+import { Observable, BehaviorSubject } from "rxjs";
+import { ComponentHolderService } from "../../service/shared-service";
+
+
+@Component({
+    selector: 'crew-member-modal',
+    templateUrl: './crew-member-modal-component.html'
+})
+export class CrewMemberModalComponent implements OnInit {
+
+    modified = false;
+
+    public title = 'Equipaggio utilizzato per il servizio';
+
+    public serviceId: string;
+
+    taskText: string;
+
+
+    // Conf per la tabella
+
+    columns: Array<CoreTableColumn> = [
+        { title: 'Incarico', name: 'task', sort: 'asc', style: { "flex-grow": "20", } },
+        { title: 'Nominativo', name: 'member', style: { "flex-grow": "30", } }
+    ];
+    config = {
+        paging: true,
+        sorting: { columns: this.columns },
+        filtering: { filterString: '' },
+    };
+
+    crewMembers: BehaviorSubject<Array<CrewMemberDTO>>;
+    crewMembersApp: Array<CrewMemberDTO>;
+    // lista di crew member aggiunti alla griglia
+    crewMembersList: Array<CrewMemberDTO> = [];
+
+    //membro selezionato dalla select
+    crewMemberSelected: CrewMemberDTO;
+    //membro selezionato dalla griglia
+    crewMemberListSelected: CrewMemberDTO;
+
+    constructor(
+        protected activeModal: NgbActiveModal,
+        protected transportService: TransportModuleServiceService,
+        protected comp: ComponentHolderService
+    ) {
+    }
+
+    ngOnInit(): void {
+        this.comp.getRootComponent().mask();
+        this.transportService.loadCrewMembers().subscribe(res => {
+            this.crewMembersApp = res;
+            this.crewMembers = new BehaviorSubject<Array<CrewMemberDTO>>(this.crewMembersApp);
+
+            this.transportService.getServiceCrewMembers(this.serviceId).subscribe(r => {
+                this.crewMembersList = r;
+                this.updateComboList();
+                this.comp.getRootComponent().unmask();
+            });
+        });
+    }
+
+    close() {
+        this.comp.getRootComponent().mask();
+        // invio la lista al server
+        let body: RequestAddCrewMembersToService = {
+            serviceId: this.serviceId,
+            serviceCrewMemberList: this.crewMembersList
+        };
+
+        this.transportService.addCrewMembersToService(body).subscribe(res => {
+            this.comp.getRootComponent().unmask();
+            this.activeModal.close();
+        });
+    }
+
+    dismiss() {
+        this.activeModal.dismiss();
+    }
+
+    // evento di selezione della combo
+    selectCombo(selected: CrewMemberDTO) {
+        this.taskText = selected.task;
+    }
+
+    // evento di selezione della griglia
+    selected(selected: CrewMemberDTO) {
+        this.crewMemberListSelected = selected;
+
+    }
+
+    addCrewMember() {
+        //aggiungo l'elemento selezionato all'array
+        if (this.crewMemberSelected) {
+            let clone = JSON.parse(JSON.stringify(this.crewMemberSelected))
+            if (this.taskText) {
+                clone.task = this.taskText;
+            }
+            this.crewMembersList.push(clone);
+            this.crewMembersList = [... this.crewMembersList];
+
+            this.updateComboList();
+
+            this.crewMemberSelected = null;
+            this.taskText = null;
+            this.modified = true;
+        }
+    }
+
+    updateComboList() {
+        // tolgo l'elemento aggiunto dalla select
+        this.crewMembers.next(
+            this.crewMembersApp.filter(c => {
+                let present = false;
+                //controllo se i members sono presenti nella griglia
+                this.crewMembersList.forEach(cs => {
+                    if (c.id === cs.id) {
+                        present = true;
+                    }
+                });
+                //se sono presenti non li visualizzo nella combo
+                return !present;
+            })
+        );
+    }
+
+
+
+    removeSelected() {
+        //rimuovo l'elemento dalla griglia
+        if (this.crewMemberListSelected) {
+            this.crewMembersList = this.crewMembersList.filter(el => {
+                return el.id !== this.crewMemberListSelected.id;
+            });
+            this.crewMemberListSelected = null;
+
+            this.updateComboList();
+
+            this.modified = true;
+        }
+    }
+}

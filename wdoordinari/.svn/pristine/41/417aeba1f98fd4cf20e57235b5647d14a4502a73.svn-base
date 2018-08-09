@@ -1,0 +1,54 @@
+import {
+    Component, ViewEncapsulation, OnInit
+} from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap/modal/modal-ref";
+import { ComponentHolderService } from "app/service/shared-service";
+import { TransportModuleServiceApi, Vehicle118Detail } from "services/services.module";
+
+
+
+@Component({
+    selector: 'vehicle-detail',
+    templateUrl: './vehicle-detail.component.html',
+    encapsulation: ViewEncapsulation.None,
+})
+export class VehicleDetailComponent implements OnInit {
+
+    public vehicleCode: string
+
+    public vehicle: Vehicle118Detail = {};
+
+    public telefono: string;
+
+    constructor(
+        public activeModal: NgbActiveModal,
+        private componentService: ComponentHolderService,
+        private transportService: TransportModuleServiceApi
+    ) {
+    }
+
+    ngOnInit(): void {
+        this.componentService.getRootComponent().mask();
+
+        this.transportService.vehicles118Detail(this.vehicleCode).subscribe(res => {
+            let list: Array<Vehicle118Detail> = res.resultList;
+            if (list && list.length > 0) {
+                this.vehicle = list[0];
+                if (this.vehicle.listaTelefoni && this.vehicle.listaTelefoni.length > 0) {
+                    this.telefono = this.vehicle.listaTelefoni[0];
+                }
+            }
+            this.componentService.getRootComponent().unmask();
+
+        });
+
+    }
+
+    close() {
+        this.activeModal.close('ok');
+    }
+
+    dismiss() {
+        this.activeModal.dismiss('close');
+    }
+}

@@ -1,0 +1,405 @@
+import {
+    ViewChild, ElementRef, Directive,
+    Component, OnInit, OnDestroy, AfterViewInit, AfterContentChecked,
+    ViewEncapsulation, ViewContainerRef, EventEmitter, Input, Output, HostListener
+} from '@angular/core';
+import { ComponentHolderService, MiddleComponent, HeaderComponent } from '../service/shared-service';
+import { convertToString, convertMomentDateToStruct } from 'app/util/convert';
+
+import {
+    TransportModuleServiceApi,
+    FiltroSinottico,
+    BookingToServiceInputDTO,
+    BookingModuleServiceApi,
+} from '../../services/services.module';
+
+
+import * as moment from 'moment';
+import { MessageService } from '../service/message.service';
+import { DatatableComponent } from "@swimlane/ngx-datatable";
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { MenuItemValue } from '../../services/services.module'
+import * as _ from 'lodash'
+import { ContextMenuComponent, ContextMenuService } from 'ngx-contextmenu';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+import { SinotticoServiziHeaderComponent } from 'app/sinottico-servizi/sinottico-servizi-header.component';
+import { FiltroSinotticoAvanzato, WorkingResourceInputDTO, WorkingResourceCompactDTO } from 'services/gen';
+import { convertMenuItem } from 'app/util/sinottico-utils';
+import { ServiceCommon } from "app/common-servizi/service-common";
+import { Subscription } from 'rxjs/Subscription';
+import { EVENTS } from "app/util/event-type";
+import { RequestMessage, AddBookingToServiceMessage, SelectServiceInSinottico, Type, Message } from 'common/services/messages';
+import { BrowserCommunicationService } from "common/services/browser-communication.service";
+import { environment } from 'environments/environment';
+import { ServiziService } from '../service/servizi-service';
+
+
+@Component({
+    selector: 'mezzi-attivi',
+    templateUrl: './mezzi-attivi.html',
+    styleUrls: ['mezzi-attivi.scss'],
+    encapsulation: ViewEncapsulation.None
+
+})
+export class MezziAttiviComponent implements OnInit, MiddleComponent, OnDestroy, AfterViewInit, AfterContentChecked {
+
+    /*    public items = [
+          { name: 'John', otherProperty: 'Foo' },
+          { name: 'Joe', otherProperty: 'Bar' }
+      ];*/
+    @ViewChild(ContextMenuComponent) public rowMenu: ContextMenuComponent;
+    @ViewChild(DatatableComponent) sinottico: DatatableComponent;
+
+    selected = [];
+    private addBookingToServiceLs: (ev: Message) => void;
+
+    currentSelected = {
+        optionItems: []
+    }
+    //Stringa riassuntiva dei filtri di ricerca impostati    
+    private filterSet: String;
+
+    private filter: WorkingResourceInputDTO;
+    private filterToSave: WorkingResourceInputDTO;
+
+    private collapseSubscription: Subscription;
+
+    // sottoscrizione agli eventi pushing
+    private serviceSubscription;
+    private interventionActivitySubscription;
+
+    rows = [];
+
+    constructor(
+        private sanitizer: DomSanitizer,
+        private contextMenuService: ContextMenuService,
+        private router: Router,
+        private messageService: MessageService,
+        private componentService: ComponentHolderService,
+        private transportService: TransportModuleServiceApi,
+        protected bcs: BrowserCommunicationService
+    ) {
+    }
+
+    @HostListener("resize")
+    public resize() {
+        console.log('resize div');
+    }
+
+    public loadVehicles(filter: WorkingResourceInputDTO) {
+
+        this.componentService.getRootComponent().mask();
+
+        this.transportService.getWorkingResourceList(filter).subscribe(result => {
+
+            if (result.resultList) {
+                let risultato: WorkingResourceCompactDTO[] = result.resultList;
+
+                this.rows = risultato;
+                //      
+                if (this.rows) {
+                    this.rows.forEach(e => {
+                        let row: WorkingResourceCompactDTO = e;
+                        //
+                        //   e.optionItems = this.buildRowMenu(row.popupMenu);
+                        this.generateDetail(row);
+
+                        e.optionItems = this.buildRowMenu(e.popupMenu);
+                    });
+                }
+            }else{
+                this.rows = [];
+            }
+        this.componentService.getRootComponent().unmask();
+        });
+    }
+
+
+
+    private generateDetail(e: WorkingResourceCompactDTO) {
+        let groups = [];
+        if (e.lastStop) {
+            groups.push({
+                "name": "Ultima Tappa servita",
+                "icon": "fa fa-book",
+                values: [{
+                    "key": "Codice Servizio",
+                    "value": e.lastStop.serviceCode,
+                }, {
+                    "key": "Indirizzo",
+                    "value": e.lastStop.address,
+                }, {
+                    "key": "Deambulazione",
+                    "value": e.lastStop.companion,
+                },/*{
+                    "key": "Data Attivazione",
+                    "value": e.lastStop.activationDate,
+                }, */{
+                    "key": "Ora Arrivo",
+                    "value": e.lastStop.arrivalDate,
+                }, {
+                    "key": "Ora partenza",
+                    "value": e.lastStop.departureDate,
+                }]
+            });
+
+        }
+        if (e.nextStop) {
+            groups.push({
+                "name": "Prossima Tappa",
+                "icon": "fa-book",
+                values: [{
+                    "key": "Codice Servizio",
+                    "value": e.nextStop.serviceCode,
+                }, {
+                    "key": "Indirizzo",
+                    "value": e.nextStop.address,
+                }, {
+                    "key": "Deambulazione",
+                    "value": e.nextStop.companion,
+                }/*, {
+                    "key": "Data Attivazione",
+                    "value": e.nextStop.activationDate,
+                }*/]
+            });
+        }
+
+        (<any>e).detail = {
+            groups: groups
+        };
+    }
+
+    buildRowMenu(menuItems: MenuItemValue[]) {
+        //console.log('buildRowMenu');
+        let optionItems = [];
+
+        if (menuItems && menuItems.length > 0) {
+            menuItems.forEach((mi) => {
+                optionItems.push(convertMenuItem(mi));
+            });
+        }
+        return _.sortBy(optionItems, "position");
+    }
+
+
+
+    private ordinaAsc: boolean = true;
+    private colonnaPrecedente: string = '';
+
+    //Viene chiamato dopo  DatatableComponent.prototype.onColumnSort 
+    onSort($event) {
+        //    console.log('onSort');
+        if ($event && $event.column) {
+            let direzione: string = $event.newValue;
+            let proprieta = $event.column.prop;
+
+            if (proprieta && this.sinottico && this.sinottico.sorts && this.sinottico.sorts.length > 0) {
+
+                if (proprieta === "dataTasporto") {
+
+                    if (this.colonnaPrecedente && this.colonnaPrecedente === 'dataTasporto') {
+                        this.ordinaAsc = !this.ordinaAsc;
+                    } else {
+                        this.ordinaAsc = false;
+                        this.colonnaPrecedente = 'dataTasporto';
+                    }
+
+                    let direzioneOrdinamentoData = this.ordinaAsc ? 'asc' : 'desc';
+                    //this.sinottico._rows = _.orderBy(this.sinottico._rows, ['transportDate'], [direzioneOrdinamentoData]);
+
+                    this.sinottico._rows = _.orderBy(
+                        this.sinottico._rows,
+                        function (e) {
+
+                            return e.transportDate;
+                        },
+                        [direzioneOrdinamentoData]);
+                } else {
+                    this.ordinaAsc = true;
+                    this.colonnaPrecedente = undefined;
+                }
+            }
+        }
+    }
+
+
+    ngOnInit() {
+        let filter = {all: true};
+        let filterS = sessionStorage.getItem("resourceFilter");
+        if(filterS) filter = JSON.parse(filterS);
+        this.loadVehicles(filter);
+
+
+        this.serviceSubscription = this.messageService.subscribe(EVENTS.SERVICE);
+        this.serviceSubscription.observ$.subscribe((msg) => {
+            if (!this.filter) {
+                this.filter = { all: true };
+            }
+            if (msg.data.action && msg.data.action != "ALERT") {
+                this.loadVehicles(this.filter);
+            }
+            /* else {
+                //refresh solo se presente il servizio dell'ALERT nella lista risultato della ricerca
+                let trovato = false;
+                if (msg.data.payload) {
+                    //lista di id dei servizi da allarmare
+                    let idServices: Array<string> = msg.data.payload.split(",");
+                    if (this.rows) {
+                        this.rows.forEach(e => {
+                            //Cerco se devo allarmare servizi per risorse non avviate
+                            if (e.rowStyle && e.rowStyle.background && e.rowStyle.background != "pink")
+                                trovato = this.checkPresentElementIntoArray(idServices, e.id);
+                        });
+                    }
+                    if (trovato) {
+                        this.loadVehicles(this.filter);
+                    }
+                }
+            }*/
+        });
+
+
+        this.interventionActivitySubscription = this.messageService.subscribe(EVENTS.INTERVENTION_ACTIVITY);
+        this.interventionActivitySubscription.observ$.subscribe((msg) => {
+            if (!this.filter) {
+                this.filter = { all: true };
+            }
+            if (msg.data.action && msg.data.action != "ALERT") {
+                this.loadVehicles(this.filter);
+            }
+        });
+    }
+
+    private checkPresentElementIntoArray(idList: Array<string>, idSearch: string): boolean {
+        let esito = false;
+        if (idList && idList.length > 0 && idSearch && idSearch.length > 0) {
+            idList.forEach(element => {
+                if (element == idSearch) {
+                    esito = true;
+                }
+            });
+        }
+        return esito;
+    }
+
+    ngAfterViewInit() {
+
+        this.componentService.setMiddleComponent('currentSearchTable', this);
+
+        this.collapseSubscription = this.componentService.getRootComponent().collapseMenu.subscribe(e => {
+            setTimeout(() => {
+                this.sinottico.recalculate();
+            }, 500);
+        });
+    }
+
+    ngOnDestroy() {
+        this.serviceSubscription.observ$.unsubscribe();
+        this.interventionActivitySubscription.observ$.unsubscribe();
+    }
+
+    ngAfterContentChecked() {
+    }
+
+    //Riceve l'evento 'Cerca' dal filtro dove filterInput è il filtro proveniente dall'header
+    triggerSubmit(filterInput: any) {
+
+        if (filterInput != null) {
+            this.filter = filterInput;
+            /*aggiorno qui il filtro perché è l'ultima ricerca che ha avviato*/
+            sessionStorage.setItem("resourceFilter", JSON.stringify(this.filter));
+            this.filterToSave = JSON.parse(JSON.stringify(this.filter));
+
+            this.loadVehicles(this.filter);
+        }
+    }
+
+
+    onPage(event) {
+
+    }
+
+    onSelect({ selected }) {
+
+        this.currentSelected = selected[0];
+
+        let param: SelectServiceInSinottico = {
+            serviceCode: selected[0].code,
+            serviceId: selected[0].id
+        }
+        this.bcs.postMessage(Type.APP2_SET_CURRENT_SERVICE, param, "*");
+
+    }
+
+    onActivate(event) {
+
+        this.currentSelected = event.row;
+    }
+
+    getRowClass(row: WorkingResourceCompactDTO) {
+    }
+
+    getCellClass(cell) {
+    }
+
+    contains(pattern, val): boolean {
+        console.log("contains() da sinittico-mezzi");
+        let matchResult = pattern.toLowerCase().match(val);
+        if (matchResult) {
+            return matchResult.length > 0
+        }
+        return false;
+    }
+
+    public formatNgbDateStructToDate(date): Date {
+        return new Date(date.year, (date.month - 1), (date.day + 1));
+    }
+
+    public formatNgbDateStructToString(date): string {
+        return moment(date).format('DD/MM/YYYY HH:mm:ss');
+    }
+
+    getColumnSIcon(pattern: boolean) {
+        if (pattern === true)
+            return '<i class="fa fa-circle"  style="font-size:1.3rem; padding-left:5px; padding-top:5px; color:red"></i>';
+        return '<i></i>';
+    }
+
+    public sanitize(html: string): SafeHtml {
+        //      console.log("sanitize() da sinittico-servizi");
+        return this.sanitizer.bypassSecurityTrustHtml(html);
+    }
+
+
+    //Deve implementare fetchComponentData perche' implementa l'intefaccia MiddleComponent
+    fetchComponentData() {
+        // console.log("fetchComponentData() da sinittico-servizi : TODO");
+    }
+
+
+    public onContextMenu($event: MouseEvent, item: any): void {
+        //console.log('onContextMenu');
+        this.contextMenuService.show.next({
+            // Optional - if unspecified, all context menu components will open
+            contextMenu: this.rowMenu,
+            event: $event,
+            item: item,
+        });
+        $event.preventDefault();
+        $event.stopPropagation();
+    }
+
+    toggleExpandRow(row) {
+        //console.log('toggleExpandRow');
+        //  //console.log('Toggled Expand Row!', row);
+        let expand = !this.sinottico.bodyComponent.getRowExpanded(row);
+        this.sinottico.rowDetail.collapseAllRows();
+        if (expand) {
+            this.sinottico.rowDetail.toggleExpandRow(row);
+        }
+
+    }
+
+}

@@ -1,0 +1,40 @@
+#CodaRitorniPanel {
+  tbody {
+    max-height: auto;
+  }
+}
+
+#CodaRitorniPanel {
+  tbody {
+    max-height: auto;
+  }
+}
+
+#CodaRitorniPanel,
+  {
+  font-size: 13px;
+  td {
+    background-color: unset;
+  }
+  .table-active {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .btn-group-sm>.btn,
+  .btn-sm {
+    padding: 3px 6px;
+    font-size: 12px;
+    /* line-height: 1.5; */
+    border-radius: 3px;
+  }
+ 
+  .dropdown-menu {
+    width: 300px;
+  }
+  tbody tr {
+    min-height: 38px;
+  }
+}
+
+coda-ritorni-header {
+  color: black;
+}

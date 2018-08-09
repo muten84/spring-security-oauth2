@@ -1,0 +1,29 @@
+.ng-invalid:not(form),
+ng-select.ng-invalid .form-control {
+  border-bottom: 2px solid #a94442;
+}
+
+label.invalid::after {
+  content: "\f06a";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  /*--adjust as necessary--*/
+  color: #a94442;
+  font-size: 1em;
+  padding-left: 5px;
+}
+
+
+.card-header.invalid>a:first-child::after {
+  content: "\f06a";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  /*--adjust as necessary--*/
+  color: #a94442;
+  font-size: 1em;
+  padding-left: 5px;
+}

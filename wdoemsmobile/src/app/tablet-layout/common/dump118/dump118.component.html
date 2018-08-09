@@ -1,0 +1,96 @@
+<div [@routerTransition] style="height: 95vh;" *blockUI="'dump-section'">
+    <section class="sectionWrapper">
+        <div>
+            <a class="mdi mdi-google-circles-extended mdi-36px"></a>
+            <span class="title">Emergenze Centrale di {{coName}}</span>
+        </div>
+
+        <div style="margin-top:5px;">
+            <!-- <button mdcButton [raised]="true" (click)="addFilter('PROV')">  <i class="fa fa-filter fa-2x"></i>Prov</button>  -->
+            <!-- <button mdcButton [raised]="true" (click)="addFilter('RED')"> </button>       -->
+
+            <!-- [color]="color" -->
+            <mat-slide-toggle [color]="'#00e7ff'" class="ems-toggle" [labelPosition]="before" (change)="onCriticityChange($event)">
+                <i class="fa fa-filter fa-2x" style="color: white; margin-left:15px;"></i>
+                <i class="fa fa-circle color-text-R"></i>
+            </mat-slide-toggle>
+
+
+            <button mdcButton class="pull-right refresh" [raised]="true" (click)="requestEvents()">
+                <i style="margin-top: 9px;" class="fa fa-refresh fa-2x"></i>
+            </button>
+        </div>
+    </section>
+
+
+
+    <div class="example-container mat-elevation-z8">
+        <mat-table #table [dataSource]="dumpEvents">
+            <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+            <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+            <ng-container matColumnDef="emergencyId">
+                <mat-header-cell class="cell-small" *matHeaderCellDef>Emerg.</mat-header-cell>
+                <mat-cell class="cell-small" *matCellDef="let element">{{element.emergencyId}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="codex">
+                <mat-header-cell class="cell-small" *matHeaderCellDef>Codice</mat-header-cell>
+                <mat-cell class="cell-small" *matCellDef="let element">
+                    <div>
+                        <i class="fa fa-circle" [ngClass]="{'R': 'color-text-R', 'V': 'color-text-V', 'B': 'color-text-B', 'G': 'color-text-G'}[changeClassCriticy(element.codex)]"></i>
+                        {{element.codex}} </div>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="prov">
+                <mat-header-cell class="cell-xsmall" *matHeaderCellDef>Prov.</mat-header-cell>
+                <mat-cell class="cell-xsmall" *matCellDef="let element"> {{element.province}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="address">
+                <mat-header-cell class="cell-large" *matHeaderCellDef>Indirizzo</mat-header-cell>
+                <mat-cell class="cell-large" *matCellDef="let element"> {{element.address}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="typeVehicle">
+                <mat-header-cell class="cell-icon" *matHeaderCellDef></mat-header-cell>
+                <mat-cell class="cell-icon" *matCellDef="let element">
+                    <span>
+                        <ng-template ngFor let-item [ngForOf]="element.manageVehicleForSynoptics" let-i="index">
+                            <span>
+                                <i class="fa fa-fw fa-ambulance" style="font-size: x-large;"></i>
+                                <br>
+                            </span>
+                        </ng-template>
+                    </span>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="vehicles">
+                <mat-header-cell class="cell-vehicle" *matHeaderCellDef>Mezzi</mat-header-cell>
+                <mat-cell class="cell-vehicle" *matCellDef="let element">
+                    <ng-template ngFor let-item [ngForOf]="element.manageVehicleForSynoptics" let-i="index">
+                        <span>{{item.vehicleCode}}</span>
+                        <br>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="phase">
+                <mat-header-cell class="cell-phase" *matHeaderCellDef>Fase</mat-header-cell>
+                <mat-cell class="cell-phase" *matCellDef="let element">
+                    <ng-template ngFor let-item [ngForOf]="element.manageVehicleForSynoptics" let-i="index">
+                        <span>{{item.dateActivation}}</span>
+                        <br>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+            <!--     <ng-container matColumnDef="stato">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <div *ngIf="{'R': true, 'V': false, 'B': false, 'G': false}[changeClassCriticy(element.codex)]" matTooltip="Arrivo in Ospedale"
+                        matTooltipPosition="left" #tooltip="matTooltip">
+                        <span>
+                            <i class="fa fa-fw fa-hospital-o" style="font-size: x-large;"></i>
+                        </span>
+                    </div>
+                </mat-cell>
+            </ng-container> -->
+
+        </mat-table>
+    </div>
+</div>

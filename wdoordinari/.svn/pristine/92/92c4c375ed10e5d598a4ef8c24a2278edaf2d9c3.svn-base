@@ -1,0 +1,17 @@
+<div class="table-responsive ctable-hover" style="height: auto; width: 101% !important; overflow-x: auto !important;">
+  <table class="table togglable-table tablesaw-columntoggle table-hover" ngClass="{{config.className || ''}}" role="grid" data-minimap
+    cellpadding="0" cellspacing="0">
+    <thead>
+      <tr role="row" style="font-size: 11px;">
+        <th [ngStyle]="column.style" *ngFor="let column of columns" [ngTableSorting]="config" [column]="column" (sortChanged)="onChangeTable($event)">{{getTitle(column.title)}}
+          <i *ngIf="config && column.sort" class="pull-right fa" [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody #body [ngStyle]="{'height': tbodyHeight}">
+      <tr simpleTableRow *ngFor="let row of rows ; let i = index;" 
+      scope="row" [row]="row" [columns]="columns" [ngClass]="getActive(row)"
+        (dblCellClicked)="dblCellClick($event)" (cellClicked)="cellClick($event)"></tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,280 @@
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { ComponentHolderService } from "app/service/shared-service";
+import { CiclicalModuleServiceApi } from "services/services.module";
+import { CalendarEvent } from "calendar-utils";
+import { CalendarEventTimesChangedEvent, CalendarMonthViewDay, DAYS_OF_WEEK } from "angular-calendar";
+import { Subject } from "rxjs/Subject";
+import { convertToDate, convertMomentDateToStruct, sameDay } from "app/util/convert";
+import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-struct";
+import { Router } from "@angular/router";
+import * as moment from 'moment';
+import { MessageService, Subscription } from '../service/message.service';
+import { EVENTS } from '../util/event-type';
+import { TokenService } from '../service/token.service';
+
+
+@Component({
+    selector: 'intervallo-cicliche-component',
+    templateUrl: './intervallo-cicliche-component.html'
+})
+export class IntervalloCiclicheComponent implements OnInit {
+
+    bookingId: string;
+    ciclicalId: string;
+    viewDate: Date = new Date();
+    events: CalendarEvent[] = [];
+    days: Array<Date> = [];
+    intervalFrom: NgbDateStruct;
+    intervalTo: NgbDateStruct;
+    selectedDays: boolean[] = [];
+    daysOfWeek = DAYS_OF_WEEK;
+    allDay: boolean;
+    ciclicalSubscription: Subscription;
+    private currentUser;
+
+
+    constructor(
+        private route: ActivatedRoute,
+        private componentService: ComponentHolderService,
+        private ciclicalService: CiclicalModuleServiceApi,
+        private router: Router,
+        private messageService: MessageService,
+        private tokenService: TokenService,
+    ) {
+    }
+
+    ngOnInit(): void {
+        this.bookingId = this.route.snapshot.params['id']; //è il bookingId
+        let queryParam = this.route.snapshot.queryParams;
+        if(queryParam){
+            if(queryParam.ciclicalId){
+                //se sto in modifica di una ciclica, la ricarico
+                this.ciclicalId = queryParam.ciclicalId;
+                let ciclicalToGet = {
+                    ciclicalId: this.ciclicalId
+                };
+                //ricarico dal server la ciclica
+                this.getCiclicalPeriod(ciclicalToGet);
+            }               
+        }
+
+        if (!this.getCurrentUser()) {
+            console.log("ATTENZIONE! Utente non recuperato da token");
+        }
+        this.ciclicalSubscription = this.messageService.subscribe(EVENTS.CICLICAL);
+        this.ciclicalSubscription.observ$.subscribe((msg) => {
+            setTimeout(() => { //Gestione messaggio inserita in timeout per preservare la sottoscrizione al servizo in caso di errore
+                console.log('received message from topic ' + msg.topic + " - " + JSON.stringify(msg));
+                this.elaboratePushMessage(msg);
+            }, 0);//Chiudi timeout per preservare la sottoscrizione al servizo in caso di errore 
+        });
+       
+    }
+
+    getCiclicalPeriod(ciclicalToGet: any){
+        this.componentService.getRootComponent().mask();
+        this.ciclicalService.getCiclicalPeriod(ciclicalToGet).catch((e, o) => {
+            this.componentService.getRootComponent().unmask();
+            return [];
+        }).subscribe(res => {
+            this.intervalFrom = convertMomentDateToStruct(moment(res.fromDate));
+            this.intervalTo = convertMomentDateToStruct(moment(res.toDate));
+            if (res.days){
+                for (let d in res.days) {
+                    this.selectedDays[res.days[d]] = true;
+                }
+            }
+            this.componentService.getRootComponent().unmask();
+        });
+    }
+
+    public getCurrentUser() {
+        this.currentUser = this.tokenService.getUserName();
+        if (this.currentUser) {
+            console.log("################## CURRENT_USER:" + this.currentUser);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //elaboro il messaggio ricevuto
+    private elaboratePushMessage(msg) {
+        if (msg.data.payload && msg.data.action) {
+            //se l'operazione è stata effettuata da un altro utente
+            if (!this.currentUser || !msg.data.from || (msg.data.from != this.currentUser)){
+                let ciclicalId: string = null;
+                //recupero l'id della ciclica
+                ciclicalId = msg.data.payload;
+                if (ciclicalId==this.ciclicalId){
+                    this.ciclicalId = ciclicalId;
+                    let ciclicalToGet = {
+                        ciclicalId: this.ciclicalId
+                    };
+                    switch (msg.data.action) {
+                        case "DELETE":
+                            //ritorno al sinottico delle cicliche
+                            this.router.navigate(['/gestione-cicliche']);
+                            break;
+                        case "UPDATE":
+                            //ricarico dal server la ciclica
+                            this.clean();
+                            this.getCiclicalPeriod(ciclicalToGet);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    ngOnDestroy() {
+        this.ciclicalSubscription.observ$.unsubscribe();
+    }
+
+    //creo un array con i giorni selezionati
+    setCodeDays(selectedDays: boolean[]) {
+        var daySelectedCode = [];
+        var i=0;
+        for (let d in DAYS_OF_WEEK) {
+            if (this.selectedDays[d] == true){
+                daySelectedCode[i] = d;
+                i=i+1;
+            }
+        }
+        return daySelectedCode;
+    }
+
+    //controllo se è stato selezionato almeno un giorno della settimana
+    checkSelectedDays(): boolean{
+        for (var i = 0; i < this.selectedDays.length; i++) {
+            if (this.selectedDays[i]==true){
+                //trovato almeno un giorno selezionato
+                return true;
+            }
+        }
+        return false;
+    }
+
+    salva() {
+        //controllo che sia stato selezionato almeno un giorno della settimana
+        //ovvero che ci siano elementi in selectedDays a true
+        if (this.checkSelectedDays()){
+
+            //controlllo che sia stato valorizzato l'intervallo di date della ciclica
+            if (this.intervalFrom &&  this.intervalTo) {           
+                //ottengo l'array dei giorni selezionati
+                let daySelectedCode = this.setCodeDays(this.selectedDays);
+                //se ho il ciclicalId vuol dire che sto in update dell'intervallo della prenotazione ciclica
+                if (this.ciclicalId){
+                    var toCheck = {
+                        ciclicalId: this.ciclicalId,
+                        days: daySelectedCode,
+                        fromDate: convertToDate(this.intervalFrom, "") ,
+                        toDate:convertToDate(this.intervalTo, "")
+                    };
+                    this.componentService.getRootComponent().mask();
+                     //controllo il periodo selezionato 
+                    this.ciclicalService.checkNewCiclicalInterval(toCheck).catch((o, t) => {
+                        this.componentService.getRootComponent().unmask();
+                        return [];
+                    }).subscribe(res => {
+                        this.componentService.getRootComponent().unmask();
+                        if (!res.checkNewCiclicalIntervalResult){
+                            if (res.checkNewCiclicalIntervalMessage){
+                                //mostro il messaggio di conferma
+                                this.componentService.getRootComponent().showConfirmDialog('Attenzione!',
+                                res.checkNewCiclicalIntervalMessage).then((result) => {
+                                    this.componentService.getRootComponent().mask();
+                                    this.ciclicalService.modifyCiclicalPeriod(toCheck).catch((e, o) => {
+                                        this.componentService.getRootComponent().unmask();
+                                        return [];
+                                    }).subscribe(res => {
+                                        this.componentService.getRootComponent().unmask();
+                                        this.componentService.getRootComponent().showToastMessage('success', "Modifica del periodo della prenotazione ciclica avvenuta con successo");
+                                    });
+                                }, (reason) => {
+                                    console.log("Modifica del periodo della prenotazione ciclica non effettuata");
+                                    this.componentService.getRootComponent().unmask();
+                                    return;
+                                });
+                            }
+                        }else {
+                            this.componentService.getRootComponent().mask();
+                            this.ciclicalService.modifyCiclicalPeriod(toCheck).catch((e, o) => {
+                                this.componentService.getRootComponent().unmask();
+                                return [];
+                            }).subscribe(res => {
+                                this.componentService.getRootComponent().unmask();
+                                this.componentService.getRootComponent().showToastMessage('success', "Modifica del periodo della prenotazione ciclica avvenuta con successo");
+                            });
+                        }
+                    });
+                }else {
+                    //nuova ciclica
+                    var toSave = {
+                        bookingId: this.bookingId,
+                        days: daySelectedCode,
+                        fromDate: convertToDate(this.intervalFrom, "") ,
+                        toDate:convertToDate(this.intervalTo, "")
+                    };
+                    this.componentService.getRootComponent().mask();
+                    this.ciclicalService.makeBookingCiclical(toSave).catch((o, t) => {
+                        this.componentService.getRootComponent().unmask();
+                        return [];
+                    }).subscribe(res => {
+                        this.componentService.getRootComponent().unmask();
+                        this.router.navigate(['/sinottico-prenotazioni']);
+                    });
+                }
+            }else {
+                var message = 'Selezionare l\'intervallo delle date';
+                this.componentService.getRootComponent().showModal('Attenzione', message);
+            }
+        } else {
+          var message = 'Selezionare almeno un giorno della settimana';
+          this.componentService.getRootComponent().showModal('Attenzione', message);
+       }
+    }
+
+    clean() {
+        this.selectedDays = [];
+        this.intervalFrom = null;
+        this.intervalTo = null;
+        this.allDay = false;
+        this.days = [];
+    }
+
+
+    setDate(day: Date) {
+        this.viewDate = day
+    }
+
+    //metodo chiamato al click di 'Tutti i giorni'
+    checkAll(event) {
+        this.allDay = true;
+        for (let d in DAYS_OF_WEEK) {
+            this.selectedDays[d] = event;
+        }
+    }
+
+    //metodo chiamato al click di un giorno della settimana
+    checkDay(event, daysOfWeek: DAYS_OF_WEEK) {
+        this.allDay = false;
+        this.selectedDays[daysOfWeek] = event;
+    }
+
+    handleEvent(action: string, event: CalendarEvent): void {
+        console.log("handleEvent  " + action + " " + event);
+    }
+
+    eventTimesChanged({
+        event,
+        newStart,
+        newEnd
+      }: CalendarEventTimesChangedEvent): void {
+        console.log("eventTimesChanged  " + event + " " + newStart + " " + newEnd);
+    }
+}

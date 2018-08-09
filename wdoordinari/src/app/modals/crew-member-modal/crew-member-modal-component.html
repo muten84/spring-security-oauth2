@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <div class="col-md-12">
+      <label class="label col-md-12 col-form-label">Persona</label>
+      <ng-select [(ngModel)]="crewMemberSelected" (ngModelChange)="selectCombo($event)"
+      allowClear="true"
+       [items]="crewMembers | async" textField="member" placeholder="Persona..."></ng-select>
+      <label class="label col-md-12 col-form-label">Incarico</label>
+      <input type="text" class="form-control" [(ngModel)]="taskText">
+
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="btn-group pull-right form-group">
+      <button type="button" (click)="addCrewMember( )" class="btn btn-primary">
+        <i class="mdi mdi-plus-box-outline" aria-hidden="true"></i> Aggiungi
+      </button>
+      <button type="button" (click)="removeSelected()" class="btn btn-primary">
+        <i class="mdi mdi-minus-box-outline" aria-hidden="true"></i> Rimuovi
+      </button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="label col-md-12 col-form-label">Equipaggio</label>
+    <core-table id="crewTable" [config]="config" (selected)="selected($event.row)" [rows]="crewMembersList" [columns]="columns"
+      [showTooltip]="true"></core-table>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" [disabled]="!modified" (click)="close()">OK</button>
+  <button type="button" class="btn btn-danger" (click)="dismiss()">Annulla</button>
+</div>

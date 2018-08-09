@@ -1,0 +1,87 @@
+<form [formGroup]="ciclicheFG" validationGroup>
+<div class="row col-12">
+  <!--<div class="col-12"></div>-->
+  <div class="col-6">
+    <div class="row justify-content-md-center">
+      <div class="col-auto">
+        <h3>Intervallo</h3>
+      </div>
+    </div>
+
+    <div class="row  ">
+      <div class="col-6">
+        <label class="label col-2 col-form-label" validationLabel="intervalFrom">Dal giorno</label>
+        <div class="input-group" clickoff>
+          <input [inputMask]="'99/99/9999'"  type="text" class="form-control" placeholder="dd/mm/aaaa" [(ngModel)]="intervalFrom" ngbDatepicker
+            #dpdataDa="ngbDatepicker" [formControl]="getControl('intervalFrom')" validationMessage>
+          <div class="input-group-append">
+            <button class="btn input-group-text" (click)="dpdataDa.toggle()">
+              <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <label class="label col-2 col-form-label" validationLabel="intervalTo">Al giorno</label>
+        <div class="input-group" clickoff>
+          <input [inputMask]="'99/99/9999'" type="text" class="form-control" placeholder="dd/mm/aaaa" [(ngModel)]="intervalTo" ngbDatepicker
+            #dpdataA="ngbDatepicker" placement="bottom-right" [formControl]="getControl('intervalTo')" validationMessage>
+          <div class="input-group-append">
+            <button class="btn input-group-text" (click)="dpdataA.toggle()">
+              <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+
+    <div class="row">
+      <div class="col-6">
+
+        <label class="label col-2 col-form-label">Lunedì</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.MONDAY]" size="small" (change)="checkDay($event, daysOfWeek.MONDAY)"></ui-switch>
+
+        <label class="label col-2 col-form-label">Martedì</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.TUESDAY]" size="small" (change)="checkDay($event, daysOfWeek.TUESDAY)"></ui-switch>
+
+        <label class="label col-2 col-form-label">Mercoledì</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.WEDNESDAY]" size="small" (change)="checkDay($event, daysOfWeek.WEDNESDAY)"></ui-switch>
+
+        <label class="label col-2 col-form-label">Giovedì</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.THURSDAY]" size="small" (change)="checkDay($event, daysOfWeek.THURSDAY)"></ui-switch>
+
+        <label class="label col-2 col-form-label">Venerdì</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.FRIDAY]" size="small" (change)="checkDay($event, daysOfWeek.FRIDAY)"></ui-switch>
+
+        <label class="label col-2 col-form-label">Sabato</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.SATURDAY]" size="small" (change)="checkDay($event, daysOfWeek.SATURDAY)"></ui-switch>
+
+        <label class="label col-2 col-form-label">Domenica</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModel]="selectedDays[daysOfWeek.SUNDAY]" size="small" (change)="checkDay($event, daysOfWeek.SUNDAY)"></ui-switch>
+      </div>
+
+      <div class="col-6">
+        <label class="label col-2 col-form-label span12 pagination-centered">Tutti i giorni</label>
+        <ui-switch [ngModelOptions]="{standalone: true}" [ngModel]="allDay" size="small" (change)="checkAll($event)"></ui-switch>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<hr/>
+<div class="row ">
+  <div class="col-12">
+    <div class="btn-group pull-right" role="group" aria-label="Basic example">
+      <button type="button" (click)="salva( )" class="btn btn-success">
+        <i class="fa fa-floppy-o" aria-hidden="true"></i> Salva
+      </button>
+      <button type="button" (click)="clean( )" class="btn btn-danger">
+        <i class="fa fa-undo" aria-hidden="true"></i> Pulisci
+      </button>
+    </div>
+  </div>
+</div>
+
+</form>
