@@ -1,0 +1,26 @@
+version: '2'
+services:
+    config-server:
+        container_name: oauth2-server
+        build:
+            context: ./sdooauth2-poc
+            dockerfile: Dockerfile
+            args: 
+             JAR_FILE: target/app.jar
+        image: oauth2-server:latest
+        expose:
+            - 8080
+        ports:
+            - "8080:8081"
+        networks:
+            - spring-oauth2-network
+        volumes:
+            - spring-oauth2-config-repo:/var/lib/spring-oauth2/config-repo
+        logging:
+            driver: json-file
+networks:
+    spring-oauth2-network:
+        driver: bridge
+volumes:
+    spring-oauth2-config-repo:
+        external: true
