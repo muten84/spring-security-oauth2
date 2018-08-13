@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
     config-server:
         container_name: oauth2-server
@@ -18,6 +18,10 @@ services:
             - spring-oauth2-config-repo:/var/lib/spring-oauth2/config-repo
         logging:
             driver: json-file
+    mysql:
+        container_name: oauth2db
+        image: mysql
+        hostname: mysqldb
 networks:
     spring-oauth2-network:
         driver: bridge
