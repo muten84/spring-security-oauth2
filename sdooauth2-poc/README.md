@@ -40,3 +40,12 @@ https://alexbilbie.com/guide-to-oauth-2-grants/
 
 Docker Registry:
 kubectl create secret docker-registry regcred --docker-server=127.0.0.1 --docker-username=muten84 --docker-password=12345678 --docker-email=bifulcoluigi@gmail.com
+
+Per attivare i profili di maven e spring bisogna lanciare tutto da maven
+
+Il docker compose è: docer-compose -f file up -d per buttare giù docper-compose down
+
+TODO: 
+il docker compose non ha un volume
+provare h2 console con mysql
+capire meglio flybase per gli aggiornamenti

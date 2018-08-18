@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class City implements Serializable {
@@ -19,15 +22,20 @@ public class City implements Serializable {
 	private Long id;
 
 	@Column(nullable = false)
+	@NotNull
+	@Size(min=2)
 	private String name;
 
 	@Column(nullable = false)
+	@NotNull
 	private String state;
 
 	@Column(nullable = false)
+	@NotNull
 	private String country;
 
 	@Column(nullable = false)
+	@NotNull
 	private String map;
 
 	public City() {
@@ -36,6 +44,16 @@ public class City implements Serializable {
 	public City(String name, String country) {
 		this.name = name;
 		this.country = country;
+	}
+	
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -36,9 +36,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { // @formatter:off
 		http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class);
+		http.csrf().disable();
+		http.headers().frameOptions().disable();
 		http.csrf().disable().requestMatchers()
 
-				.antMatchers("/index.html", "/login", "/oauth/authorize", "/v2/api-docs",
+				.antMatchers("/h2-console/**", "/index.html", "/login", "/oauth/authorize", "/v2/api-docs",
 						"/swagger-resources/configuration/ui", "/swagger-resources/**", "/configuration/security",
 						"/swagger-ui.html", "/webjars/**")
 				.and().authorizeRequests().anyRequest().authenticated().and().formLogin().permitAll();
