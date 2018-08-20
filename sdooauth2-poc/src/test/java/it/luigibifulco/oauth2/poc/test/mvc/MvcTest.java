@@ -15,6 +15,13 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
+/**
+ * In this test, the full Spring application context is started, but without the
+ * server. We can narrow down the tests to just the web layer by using
+ * 
+ * @author luigib
+ *
+ */
 public class MvcTest {
 
 	@Autowired

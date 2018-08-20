@@ -13,6 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+/**
+ * The wohle server is started useful for integration test on the resources and
+ * api
+ * 
+ * @author luigib
+ *
+ */
 public class WebAppTest {
 
 	@LocalServerPort

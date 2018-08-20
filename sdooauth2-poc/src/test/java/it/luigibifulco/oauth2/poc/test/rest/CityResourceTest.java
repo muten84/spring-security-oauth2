@@ -22,6 +22,15 @@ import it.luigibifulco.oauth2.poc.server.controller.CityResource;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CityResource.class)
+/**
+ * Usefuel to test a controller or a resource to check if return what expected
+ * only the web layer is started not whole server and context so the other
+ * layers have to be mocked and these tests has mocked dao and transactional
+ * service
+ * 
+ * @author luigib
+ *
+ */
 public class CityResourceTest {
 
 	@MockBean
