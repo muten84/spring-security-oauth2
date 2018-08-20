@@ -15,7 +15,7 @@ import it.luigibifulco.oauth2.poc.jpa.domain.City;
 import it.luigibifulco.oauth2.poc.jpa.service.CityRepository;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = { MyTestConfiguration.class })
 @DataJpaTest
 public class CityRepositoryTest {
 

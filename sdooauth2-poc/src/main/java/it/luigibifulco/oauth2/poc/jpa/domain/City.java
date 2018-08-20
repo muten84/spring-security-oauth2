@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,14 +16,17 @@ public class City implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+//	@Id
+//	@SequenceGenerator(name = "city_generator", sequenceName = "city_sequence", initialValue = 23)
+//	@GeneratedValue(generator = "city_generator")
 	@Id
-	@SequenceGenerator(name = "city_generator", sequenceName = "city_sequence", initialValue = 23)
-	@GeneratedValue(generator = "city_generator")
+	@GeneratedValue(generator = "city_generator", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "city_generator", sequenceName = "city_sequence", allocationSize = 10)
 	private Long id;
 
 	@Column(nullable = false)
 	@NotNull
-	@Size(min=2)
+	@Size(min = 2)
 	private String name;
 
 	@Column(nullable = false)
@@ -45,8 +48,6 @@ public class City implements Serializable {
 		this.name = name;
 		this.country = country;
 	}
-	
-	
 
 	public Long getId() {
 		return id;

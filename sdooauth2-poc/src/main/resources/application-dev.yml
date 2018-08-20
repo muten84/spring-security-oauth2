@@ -1,15 +1,32 @@
 server:
   port: 8081
   servlet:
-    contextPath: /dev  
+    contextPath: /dev
 spring:
+  flyway:
+    enabled: false
+    clean-on-validation-error: true
+    validate-on-migrate: true
   datasource:
     url: jdbc:h2:~/test;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
-    initialization-mode: embedded
+    initialization-mode: always
   h2:
     console:
       enabled: true
   jpa:
+    properties:
+      javax:
+        persistence:
+          schema-generation:
+            create-source: metadata
+            scripts:
+              action: create
+              create-target: target/ddl-h2.sql
+    database: H2
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+    generate-ddl: true
+  test:
+    database:
+      replace: none

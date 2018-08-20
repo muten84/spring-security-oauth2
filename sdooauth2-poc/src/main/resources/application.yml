@@ -1,7 +1,4 @@
 spring:
-  flyway:
-    enabled: true
-    clean-on-validation-error: true
-    locations:
-    - classpath:db/migration
-    validate-on-migrate: true
+  profiles:
+    active:
+    - prod
