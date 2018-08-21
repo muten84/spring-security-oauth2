@@ -4,7 +4,7 @@ server:
     contextPath: /dev
 spring:
   flyway:
-    enabled: false
+    enabled: true
     clean-on-validation-error: true
     validate-on-migrate: true
   datasource:
@@ -25,8 +25,17 @@ spring:
               create-target: target/ddl-h2.sql
     database: H2
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     generate-ddl: true
   test:
     database:
       replace: none
+security:
+  oauth2:
+    client:
+      clientId: SampleClientId
+      clientSecret: secret
+      accessTokenUri: http://127.0.0.1:8081/dev/oauth/token
+      userAuthorizationUri: http://127.0.0.1:8081/dev/oauth/authorize
+    resource:
+      userInfoUri: http://localhost:8081/dev/user/me

@@ -26,7 +26,7 @@ import it.luigibifulco.oauth2.poc.jpa.service.CityRepository;
 import it.luigibifulco.oauth2.poc.jpa.service.ICityService;
 
 @RestController
-@RequestMapping("cities")
+@RequestMapping(path = "cities", produces = "application/it.luigibifulco.oauth2.app-v1+json", consumes = "application/it.luigibifulco.oauth2.app-v1+json")
 public class CityResource {
 
 	@Autowired
@@ -36,7 +36,7 @@ public class CityResource {
 	@Autowired
 	private CityRepository repository;
 
-	@GetMapping("/startsWith/{startsWith}")
+	@GetMapping(path = "/startsWith/{startsWith}")
 	@ApiOperation(value = "create an entity", notes = "Requires an entity id to lookup", response = City.class, authorizations = {
 			@Authorization(value = "oauth2", scopes = {
 					@AuthorizationScope(scope = "read", description = "Read access on entity in my new API") }) })
@@ -56,7 +56,7 @@ public class CityResource {
 		return city.get();
 	}
 
-	@PostMapping
+	@PostMapping()
 	@ApiOperation(value = "create an entity", notes = "Requires an entity id to lookup", response = City.class, authorizations = {
 			@Authorization(value = "oauth2", scopes = {
 					@AuthorizationScope(scope = "create", description = "Read access on entity in my new API") }) })
