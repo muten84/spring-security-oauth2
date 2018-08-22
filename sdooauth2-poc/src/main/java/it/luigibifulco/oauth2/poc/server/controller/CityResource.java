@@ -1,10 +1,12 @@
 package it.luigibifulco.oauth2.poc.server.controller;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,7 @@ import it.luigibifulco.oauth2.poc.jpa.domain.City;
 import it.luigibifulco.oauth2.poc.jpa.domain.excpetion.ResourceNotFoundException;
 import it.luigibifulco.oauth2.poc.jpa.service.CityRepository;
 import it.luigibifulco.oauth2.poc.jpa.service.ICityService;
+import it.luigibifulco.oauth2.poc.jpa.service.config.CityResourceConfiguration;
 
 @RestController
 @RequestMapping(path = "cities", produces = "application/it.luigibifulco.oauth2.app-v1+json", consumes = "application/it.luigibifulco.oauth2.app-v1+json")
@@ -36,6 +39,9 @@ public class CityResource {
 	@Autowired
 	private CityRepository repository;
 
+	@Autowired
+	private CityResourceConfiguration configuration;
+
 	@GetMapping(path = "/startsWith/{startsWith}")
 	@ApiOperation(value = "create an entity", notes = "Requires an entity id to lookup", response = City.class, authorizations = {
 			@Authorization(value = "oauth2", scopes = {
@@ -44,6 +50,15 @@ public class CityResource {
 	public Iterable<City> startsWith(@PathVariable("startsWith") String startsWith) {
 		return this.cityService.startsWith(startsWith);
 
+	}
+
+	@GetMapping("/page/{page}")
+	public List<City> findAll(@PathVariable(required = false, value = "page") Integer page) {
+		if (page == null)
+			page = 0;
+		PageRequest maxResults = PageRequest.of(page, configuration.getMaxResult());// new PageRequest(0,
+																					// configuration.getMaxResult());
+		return repository.findAll(maxResults).getContent();
 	}
 
 	@GetMapping(path = "/{id}")

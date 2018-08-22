@@ -26,10 +26,14 @@
 		<docker.image.prefix>springio</docker.image.prefix>
 		<project.test.enabled>false</project.test.enabled>
 		<spring.profiles.active>prod</spring.profiles.active>
-		
+		<spring-cloud.version>Finchley.SR1</spring-cloud.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -132,6 +136,18 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -145,7 +161,7 @@
 							<goal>process</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>target/generated-sources</outputDirectory>
+							<outputDirectory>.apt_generated</outputDirectory>
 							<processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
 							<includes>
 								<include>it.luigibifulco.oauth2.poc.jpa.domain</include>
@@ -176,7 +192,7 @@
 	<profiles>
 		<profile>
 			<id>dev</id>
-			<activation> 
+			<activation>
 				<property>
 					<name>spring.profiles.active</name>
 					<value>dev</value>
@@ -205,7 +221,7 @@
 		</profile>
 		<profile>
 			<id>prod</id>
-			<activation> 
+			<activation>
 				<property>
 					<name>spring.profiles.active</name>
 					<value>prod</value>
