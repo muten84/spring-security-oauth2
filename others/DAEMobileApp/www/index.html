@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <title></title>
+
+    <!-- Font reference section -->
+    <link rel="stylesheet" href="lib/robotodraft/robotodraft.css">
+    <!-- end Font reference section -->
+
+    <!-- CSS reference section -->
+    <link rel="stylesheet" href="lib/animate.css/animate.css">
+    <link rel="stylesheet" href="css/ionic.app.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+    <!-- end CSS reference section -->
+
+    <!-- Ionic javascript lib -->
+    <script src="lib/api-check/dist/api-check.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="lib/angular-translate/angular-translate.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <!-- end Ionic javascript lib -->
+
+    <!-- Angular javascript lib -->
+    <script src="lib/angular-messages/angular-messages.js"></script>
+    <script src="lib/angular-aria/angular-aria.js"></script>
+    <script src="lib/angular-material/angular-material.js"></script>
+    <script src="lib/angular-formly/dist/formly.js"></script>
+    <script src="lib/angular-dynamic-locale/dist/tmhDynamicLocale.js"></script>
+    <script src="lib/ngmap/build/scripts/ng-map.js"></script>
+    <script src="lib/gmaps-marker-clusterer/src/markerclusterer.js"></script>
+    <!-- end Angular javascript lib -->
+
+    <script src="lib/lodash/dist/lodash.js"></script>
+    <script src="lib/moment/moment.js"></script>
+
+    <!-- librerie per la gestione dell'i18n -->
+    <script src="lib/moment/locale/en-gb.js"></script>
+    <script src="lib/moment/locale/it.js"></script>
+    <script src="lib/angular-i18n/angular-locale_en-gb.js"></script>
+    <script src="lib/angular-i18n/angular-locale_it.js"></script>
+
+    <script src="lib/crypto-js/crypto-js.js"></script>
+    <script src="lib/crypto-js/sha256.js"></script>
+    <!-- Cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!-- end Cordova script -->
+
+    <!-- app.js section-->
+    <script src="js/global.js"></script>
+    <script src="js/boot.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/app.js"></script>
+    <script src="lib/templates.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/router.js"></script>
+    <!-- end app.js section-->
+
+    <!-- Filters section-->
+    <script src="js/filters/sharedFilter.js"></script>
+    <script src="js/filters/moment.js"></script>
+    <!-- end Filters section-->
+
+    <!-- Services section-->
+    <script src="js/services/api.js"></script>
+    <script src="js/services/apiInterceptor.js"></script>
+    <script src="js/services/device.js"></script>
+    <script src="js/services/language.js"></script>
+    <script src="js/services/logger.js"></script>
+    <script src="js/services/translate.js"></script>
+    <script src="js/services/pushwoosh.js"></script>
+    <script src="js/services/user.js"></script>
+    <script src="js/services/backgroundGeolocation.js"></script>
+    <script src="js/services/lazyloadgmap.js"></script>
+    <script src="js/services/event.js"></script>
+    <script src="js/services/privacy.js"></script>
+    <script src="js/services/utils.js"></script>
+    <!-- end Services section-->
+
+    <!-- Directives section-->
+    <script src="js/directives/numbersOnly.js"></script>
+    <script src="js/directives/qyToggleOverflowScroll.js"></script>
+    <!-- end Directives section-->
+
+    <!-- Controllers section-->
+    <script src="js/controllers/home.js"></script>
+    <script src="js/controllers/login.js"></script>
+    <script src="js/controllers/menu.js"></script>
+    <script src="js/controllers/dae-list.js"></script>
+    <script src="js/controllers/alert-dae-list.js"></script>
+    <script src="js/controllers/newDae.js"></script>
+    <script src="js/controllers/daeDetail.js"></script>
+    <script src="js/controllers/damageReporting.js"></script>
+    <script src="js/controllers/daeMapDetail.js"></script>
+    <script src="js/controllers/shared.js"></script>
+    <script src="js/controllers/profile.js"></script>
+    <script src="js/controllers/registration.js"></script>
+    <script src="js/controllers/changePassword.js"></script>
+    <script src="js/controllers/interventionRequests.js"></script>
+    <script src="js/controllers/interventionDetail.js"></script>
+    <script src="js/controllers/interventionConfirmed.js"></script>
+    <script src="js/controllers/dialog/resetPassword.js"></script>
+    <script src="js/controllers/dialog/selectMunicipality.js"></script>
+    <script src="js/controllers/dialog/addAvailability.js"></script>
+    <script src="js/controllers/dialog/addDoNotDisturbInterval.js"></script>
+    <script src="js/controllers/rhythm.js"></script>
+    <script src="js/controllers/updateProfile.js"></script>
+    <script src="js/controllers/settings.js"></script>
+    <script src="js/controllers/eventList.js"></script>
+    <script src="js/controllers/update.js"></script>
+    <script src="js/controllers/testLocation.js"></script>
+    <script src="js/controllers/errorPage.js"></script>
+
+    <!-- jQuery section-->
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <!-- end jQuery section-->
+
+</head>
+<!-- end head section-->
+
+<body class="hide-native-scroll-y">
+
+<!--Custom Style section-->
+<style type="text/css">
+    {{customStyle}}
+</style>
+<!-- end Custom Style section-->
+
+<ion-nav-view></ion-nav-view>
+<!--loading progress-->
+<div id="custom-loading-progress" class="loading-progress fade-in">
+    <ion-spinner ng-if="!isAndroid" class="progress-circular"></ion-spinner>
+    <md-progress-circular ng-if="isAndroid" md-mode="indeterminate"></md-progress-circular>
+</div>
+<!--end loading progress-->
+</body>
+<script type="text/javascript">
+    boot.initialize();
+</script>
+
+</html>

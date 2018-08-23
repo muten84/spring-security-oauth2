@@ -1,0 +1,17 @@
+<md-dialog id="selectMunicipality">
+    <form ng-submit="vm.addMunicipality()" name="vm.selectMunicipalityForm" novalidate>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p translate>ADD_MUNICIPALITY_TEXT</p>
+                <formly-form model="vm.selectMunicipalityModel" fields="vm.selectMunicipalityFields" form="vm.selectMunicipalityForm">
+
+                </formly-form>
+
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="vm.closeResetPasswordPopup()">{{'CANCEL' | translate}}</md-button>
+            <md-button type="submit" class="md-primary">{{'ADD' | translate}}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

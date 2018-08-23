@@ -1,0 +1,15 @@
+<md-dialog id="addDoNotDisturbInterval">
+    <form ng-submit="vm.addDoNotDisturbInterval()" name="vm.addDoNotDisturbForm" novalidate>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <!--<p translate>ADD_MUNICIPALITY_TEXT</p>-->
+                <formly-form model="vm.interval" fields="vm.intervalFields" form="vm.addDoNotDisturbForm">
+                </formly-form>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="vm.closeDialog()">{{'CANCEL' | translate}}</md-button>
+            <md-button type="submit" class="md-primary">{{'ADD' | translate}}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

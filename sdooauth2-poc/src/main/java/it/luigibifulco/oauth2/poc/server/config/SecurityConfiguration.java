@@ -40,9 +40,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().disable();
 		http.csrf().disable().requestMatchers()
 
-				.antMatchers("/h2-console/**", "/index.html", "/login", "/oauth/authorize", "/v2/api-docs",
-						"/swagger-resources/configuration/ui", "/swagger-resources/**", "/configuration/security",
-						"/swagger-ui.html", "/webjars/**")
+				.antMatchers("/actuator/**", "/h2-console/**", "/index.html", "/login", "/oauth/authorize",
+						"/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources/**",
+						"/configuration/security", "/swagger-ui.html", "/webjars/**")
 				.and().authorizeRequests().anyRequest().authenticated().and().formLogin().permitAll();
 
 		/*

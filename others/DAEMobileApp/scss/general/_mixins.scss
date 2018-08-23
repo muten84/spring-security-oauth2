@@ -1,0 +1,20 @@
+
+@mixin background-image($url) {
+    -webkit-background-image: url("../img/logo_login.png");
+       -moz-background-image: url("../img/logo_login.png");
+            background-image: url("../img/logo_login.png");
+}
+
+@mixin col($percent) {
+    -webkit-box-flex: 0;
+        -webkit-flex: 0 0 $percent;
+       -moz-box-flex: 0;
+           -moz-flex: 0 0 $percent;
+            -ms-flex: 0 0 $percent;
+                flex: 0 0 $percent;
+    max-width: $percent;
+}
+
+@mixin col-offset($percent) {
+    margin-left: $percent;
+}

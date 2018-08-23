@@ -1,10 +1,12 @@
 package it.luigibifulco.oauth2.poc.jpa.service.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 @ConfigurationProperties(prefix = "city-service")
 @Component
+@RefreshScope
 public class CityResourceConfiguration {
 
 	private String unknownCity;

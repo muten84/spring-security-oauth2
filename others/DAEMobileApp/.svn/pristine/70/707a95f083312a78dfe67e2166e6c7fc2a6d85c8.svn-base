@@ -1,0 +1,69 @@
+<ion-view id="intervention-requests" title="Interventi">
+    <!--left button on navigation bar-->
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons><!--end left button on navigation bar-->
+    <ion-content>
+      <!--  <div class="row header">
+            <div class="col">
+                <p>L'assegnazione dell'intervento è determinata dal sistema informatico secondo parametri
+                    prestabiliti</p>
+            </div>
+        </div>
+    -->
+        <md-card class="intervention-card">
+            <md-card-header class="alert">
+                <md-card-avatar>
+                    <img src="img/pharmacy.png"/>
+                </md-card-avatar>
+                <md-card-header-text>
+                    <span class="md-headline">Emergenza</span>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content class="no-padding">
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-maps2" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Comune:</h3>
+                            <h3 class="detail-data"> {{vm.event.comune}}</h3>
+                            <h3 class="detail-label">Indirizzo:</h3>
+                            <h3 class="detail-data"> {{vm.event.indirizzo}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-map-location" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Luogo</h3>
+                            <h3 class="detail-data">{{vm.event.luogo}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-tragitto" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Distanza</h3>
+                            <h3 class="detail-data">{{vm.event.distance}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-ambulance" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Orario stimato di arrivo ambulanza</h3>
+                            <h3 class="detail-data">{{vm.event.dataArrivoAmbulanza | date : 'dd/MM/yyyy HH:mm'}}</h3>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+            <md-card-actions ng-if="!vm.eventManaged" layout="column" layout-align="center center">
+                <md-button ng-click="vm.checkIntervention(vm.event.id)" class="md-raised md-accent intervention">
+                    Posso intervenire
+                </md-button>
+                <md-button ng-click="vm.rejectIntervention()" class="md-raised md-accent intervention gray">
+                    Non posso intervenire
+                </md-button>
+            </md-card-actions>
+        </md-card>
+    </ion-content>
+</ion-view>

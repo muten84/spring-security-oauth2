@@ -1,0 +1,66 @@
+<ion-view id="intervention-detail" title="Dettagli">
+    <!--left button on navigation bar-->
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons>
+    <!--end left button on navigation bar-->
+    <ion-content class="has-toolbar">
+        <div class="row header">
+            <div class="col">
+                <p>L' intervento è stato accettato</p>
+                <!--       <p>Scegli se andare direttamente sul luogo dell'emergenza oppure cercare il DAE più vicino</p> -->
+                <p ng-if="$root.DEV">DISTANZA: {{$root.distanceFromEvent}}</p>
+            </div>
+        </div>
+        <md-card-actions layout="row" layout-align="center center">
+            <md-button ng-click="vm.openMap()" class="md-raised md-accent intervention">Guidami sul Luogo</md-button>
+            <md-button ng-click="vm.goToDae('app.daeList')" class="md-raised md-accent intervention">Lista dae</md-button>
+        </md-card-actions>
+        <md-card class="intervention-card">
+            <md-card-content class="no-padding">
+                <md-list>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-scadenza" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Orario allarme</h3>
+                            <h3 class="detail-data">{{vm.event.timestamp | date : 'HH:mm'}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-maps2" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Comune:</h3>
+                            <h3 class="detail-data"> {{vm.event.comune}}</h3>
+                            <h3 class="detail-label">Indirizzo:</h3>
+                            <h3 class="detail-data"> {{vm.event.indirizzo}}{{vm.event.civico? ", ": ""}}{{vm.event.civico}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-map-location" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Luogo</h3>
+                            <h3 class="detail-data">{{vm.event.luogo}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-tragitto" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Distanza</h3>
+                            <h3 class="detail-data">{{vm.event.distance}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item class="md-2-line">
+                        <md-icon md-font-icon="dae-ambulance" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3 class="detail-label">Orario stimato di arrivo ambulanza</h3>
+                            <h3 class="detail-data">{{vm.event.dataArrivoAmbulanza | date : 'dd/MM/yyyy HH:mm'}}</h3>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </md-card-content>
+          
+        </md-card>
+    </ion-content>
+</ion-view>

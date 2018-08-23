@@ -1,0 +1,53 @@
+
+#privacy {
+
+    &.modal{
+        top: 0px;
+    }
+    .privacy-header {
+        height: 60px;
+        color: $light;
+        background: $color_primary;
+        i {
+            font-size: 21px;
+            font-weight: bold;
+        }
+        .title {
+            font-family: $font_roboto_draft;
+            font-size: x-large;
+        }
+    }
+
+    .privacy-btn{
+        min-height: 40px;
+        min-width: 150px;
+        color: $light;
+        background-color: $color_primary;
+        border-radius: 0;
+    }
+
+    // iphone < 6
+    @media (max-width: 320px) {
+        .privacy-header {
+            i {
+                font-size: 18px;
+            }
+            .title {
+                font-size: large;
+            }
+        }
+    }
+
+    .privacy-content {
+        top: 60px;
+        bottom: 70px;
+        color: $very-dark;
+        font-weight: 300;
+    }
+
+    .privacy-footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+    }
+}

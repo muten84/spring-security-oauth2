@@ -1,0 +1,76 @@
+<ion-view id="damage-reporting" title="Segnalazione problemi">
+    <!--left button on navigation bar-->
+    <ion-nav-buttons side="left">
+        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+            <i class="ion-android-arrow-back "></i>
+        </a>
+    </ion-nav-buttons><!--end left button on navigation bar-->
+    <ion-content class="overflow-scroll" qy-toggle-overflow-scroll overflow-scroll="false">
+        <md-card class="detail-card">
+            <md-card-header class="card-header">
+                <md-card-header-text>
+                    <div class="row no-padding">
+                        <div class="col no-padding">
+                            <span class="headline">{{ vm.dae.nomeSede }}</span>
+                        </div>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content class="no-padding">
+                <md-list class="md-dense no-padding">
+                    <md-list-item>
+                        <md-icon md-font-icon="dae-maps" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3>{{ vm.dae.gpsLocation.indirizzo.name }}{{vm.dae.gpsLocation.civico? ", " :
+                                ""}}{{vm.dae.gpsLocation.civico}} </h3>
+                            <h3>{{ vm.dae.gpsLocation.comune.nomeComune }}{{vm.dae.gpsLocation.comune.codiceIstat? ", "
+                                : ""}}{{ vm.dae.gpsLocation.comune.codiceIstat
+                                }}{{vm.dae.gpsLocation.comune.provincia.nomeProvincia? " (" : ""}}{{
+                                vm.dae.gpsLocation.comune.provincia.nomeProvincia
+                                }}{{vm.dae.gpsLocation.comune.provincia.nomeProvincia? ")" : ""}}</h3>
+                        </div>
+                    </md-list-item>
+                    <md-list-item>
+                        <md-icon md-font-icon="dae-maps2" class="detail-icon"></md-icon>
+                        <div class="md-list-item-text">
+                            <h3> {{ vm.dae.ubicazione }} </h3>
+                        </div>
+                    </md-list-item>
+                    <!--<md-list-item>-->
+                        <!--<md-icon md-font-icon="dae-phone-call" class="detail-icon"></md-icon>-->
+                        <!--<div class="md-list-item-text">-->
+                            <!--<h3> {{ vm.dae.responsabile.telefono }} </h3>-->
+                        <!--</div>-->
+                    <!--</md-list-item>-->
+                    <!--<md-list-item>-->
+                        <!--<md-icon md-font-icon="dae-note" class="detail-icon"></md-icon>-->
+                        <!--<div class="md-list-item-text">-->
+                            <!--<h3> {{ vm.dae.notediAccessoallaSede }} </h3>-->
+                        <!--</div>-->
+                    <!--</md-list-item>-->
+                </md-list>
+            </md-card-content>
+        </md-card>
+        <md-card class="detail-card">
+            <md-card-header class="card-header">
+                <md-card-header-text>
+                    <div class="row no-padding">
+                        <div class="col no-padding">
+                            <span class="headline">Segnala un problema</span>
+                        </div>
+                    </div>
+                </md-card-header-text>
+            </md-card-header>
+            <md-card-content>
+                <form name="vm.damageReportingForm" novalidate>
+                    <formly-form model="vm.damageReporting" fields="vm.damageReportingFieds" form="vm.damageReportingForm" options="vm.options">
+                        <div class="text-center">
+                            <md-button ng-click="vm.newDamageReporting()" type="button" ng-disabled="vm.damageReportingForm.$invalid" class="md-raised md-primary">Invia</md-button>
+                            <md-button type="button" class="md-raised" ng-click="vm.options.resetModel()">{{'CLEAN' | translate}}</md-button>
+                        </div>
+                    </formly-form>
+                </form>
+            </md-card-content>
+        </md-card>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,357 @@
+#upload-photo {
+  .md-bottom-sheet-header {
+    font-size: 16px !important;
+    margin: 20px 0 10px 8px !important;
+    font-weight: 500 !important;
+  }
+  .uploadBtn {
+    i {
+      font-size: xx-large;
+    }
+
+  }
+}
+
+#update-profile {
+
+  .municipality-alert {
+    .municipality-card {
+      margin: 0;
+      .md-title{
+        font-size: 20px;
+        font-weight: 400;
+        text-align: justify;
+        color: $color-primary;
+        @media (max-width: 320px) {
+          font-size: 18px;
+        }
+      }
+      .municipality-header{
+        padding: 10px;
+      }
+      .municipality-list{
+        padding: 0px 10px;
+        .repeatsection {
+          font-size: 18px;
+          @media (max-width: 320px) {
+            font-size: 16px;
+          }
+          .formly-field {
+            margin: 0;
+          }
+          md-icon {
+            font-size: 20px;
+            @media (max-width: 320px) {
+              font-size: 16px;
+            }
+          }
+        }
+        .clear-btn {
+          font-size: 24px;
+        }
+      }
+    }
+    .md-subheader {
+      font-size: 18px;
+    }
+
+
+    .add-new {
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      height: 40px;
+      position: relative;
+      .add-icon {
+        text-align: center;
+        i {
+          font-size: 20px;
+          line-height: 38px;
+        }
+      }
+      .add-text {
+        line-height: 38px;
+        font-size: 20px;
+        color: $color-primary;
+        // iphone < 6
+        @media (max-width: 320px) {
+          font-size: 16px;
+        }
+      }
+
+
+    }
+  }
+
+
+  .has-header{
+    top: 44px;
+  }
+
+  form{
+    padding: 10px;
+  }
+
+  md-icon{
+    font-size: 28px;
+  }
+
+  .md-button {
+    &.md-accent {
+      &.md-fab {
+        &.fab-toolbar-medium {
+          position: absolute;
+          top: 165px;
+          right: 10px;
+        }
+      }
+    }
+  }
+  .md-button {
+    color: $color_black;
+    font-size: 16px;
+    // iphone < 6
+    @media (max-width: 320px) {
+      font-size: 14px;
+    }
+    &.md-primary{
+      color: $color_white;
+    }
+  }
+  .formly-field {
+    margin-bottom: 10px;
+  }
+
+  md-switch {
+    &.md-checked {
+      &.md-primary {
+        .md-bar {
+          background-color: rgb(158, 158, 158);
+        }
+      }
+    }
+  }
+  md-autocomplete[md-floating-label] {
+
+    md-input-container{
+      margin: 18px 0;
+    }
+
+  }
+
+  md-input-container {
+    margin: 18px 0 0 0;
+
+    &.md-input-focused,
+    &.md-input-has-value {
+      label:not(.md-no-float) {
+        transform: translate3d(0, 6px, 0) scale(1);
+        font-size: 20px;
+        @media (max-width: 320px) {
+          font-size: 18px;
+        }
+      }
+    }
+
+    &:not(.md-input-focused) {
+      &:not(.md-input-invalid) {
+        label {
+          color: $color_primary;
+          font-size: 20px;
+          // iphone < 6
+          @media (max-width: 320px) {
+            font-size: 18px;
+          }
+        }
+      }
+
+
+
+      //&.md-input-focused{
+      //  label {
+      //    &:not(.md-no-float) {
+      //      transform: translate3d;
+      //      font-size: 20px !important;
+      //      // iphone < 6
+      //      @media (max-width: 320px) {
+      //        font-size: 18px !important;
+      //      }
+      //    }
+      //  }
+      //}
+      &.md-input-invalid {
+        label {
+          font-size: 20px;
+          // iphone < 6
+          @media (max-width: 320px) {
+            font-size: 18px;
+          }
+        }
+      }
+      &.md-input-has-placeholder {
+        margin: 18px 0 0 0;
+
+      }
+    }
+    &:not([md-no-float]){
+      .md-select-placeholder {
+        span:first-child{
+          color: $color_primary;
+          font-size: 20px;
+          // iphone < 6
+          @media (max-width: 320px) {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+    md-select {
+      margin-bottom: 15px;
+      font-size: 18px;
+      // iphone < 6
+      @media (max-width: 320px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  md-switch {
+    margin: 0;
+    div.md-label {
+      width: 100%;
+      font-size: 16px;
+      color: $color_primary;
+    }
+  }
+
+  .toolbar-medium {
+    max-height: 200px !important;
+    height: 200px !important;
+    box-shadow: 0 2px 6px $color_black_20;
+    display: block;
+    div {
+      &.default {
+        padding: 10px;
+        background-color: $color_celeste_approx;
+        text-align: center;
+        height: inherit !important;
+        &.header {
+          padding: 0;
+        }
+        img {
+          width: 40%;
+        }
+      }
+    }
+
+    div {
+      &.photo {
+        padding: 0;
+        background-color: #000;
+        text-align: center;
+        height: inherit !important;
+        &.header {
+          padding: 0;
+        }
+        img {
+          height: 100%;
+        }
+      }
+    }
+    h1 {
+      color: $color_white;
+      font-size: 34px;
+    }
+
+    h2 {
+      color: $color_white;
+      font-size: 18px;
+    }
+
+    h3 {
+      color: $color_white;
+      font-size: 28px !important;
+    }
+  }
+
+  .upload {
+    .add-new {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      height: 40px;
+      .add-icon {
+        text-align: center;
+        i {
+          font-size: 28px;
+          line-height: 38px;
+        }
+      }
+      .add-text {
+        line-height: 38px;
+        font-size: 18px;
+      }
+
+    }
+    .added{
+      &.show{
+        display: flex;
+      }
+      &.hide{
+        display: none;
+      }
+
+      height: 40px;
+      .add-icon {
+        text-align: center;
+        i {
+          font-size: 18px;
+          line-height: 38px;
+        }
+      }
+      .add-text {
+        line-height: 38px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .municipality-list {
+    .md-subheader {
+      font-size: 18px;
+    }
+    .repeatsection {
+      .formly-field {
+        margin: 0;
+      }
+      md-icon {
+        font-size: 20px;
+        @media (max-width: 320px) {
+          font-size: 16px;
+        }
+      }
+    }
+    .clear-btn {
+      font-size: 24px;
+    }
+
+    .add-new {
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      height: 40px;
+      position: relative;
+      .add-icon {
+        text-align: center;
+        i {
+          font-size: 20px;
+          line-height: 38px;
+        }
+      }
+      .add-text {
+        line-height: 38px;
+        font-size: 18px;
+        // iphone < 6
+        @media (max-width: 320px) {
+          font-size: 14px;
+        }
+      }
+
+
+    }
+  }
+}

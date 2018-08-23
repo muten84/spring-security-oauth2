@@ -1,0 +1,4 @@
+Modifica colore orari non disturbare
+Modifica label "Tempo stimato di arrivo ambulanza" con "Orario stimato di arrivo ambulanza"
+Nuovo file audio in loop pe iOS ed Android
+

@@ -1,0 +1,24 @@
+<!--loop through each element in model array-->
+<div class="availability">
+    <div class="repeatsection row no-padding" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
+        <div class="col col-90 no-padding">
+        <formly-form fields="fields"
+                     model="element"
+                     form="form">
+        </formly-form>
+        </div>
+        <div class="col col-center no-padding">
+            <md-button type="button" class="md-icon-button" ng-click="model[options.key].splice($index, 1)">
+                <md-icon class="clear-btn md-accent" md-font-icon="dae-clear"></md-icon>
+            </md-button>
+        </div>
+    </div>
+    <div ng-if="model[options.key].length < 2" md-ink-ripple="#FF0000" class="add-new" layout="layout-row" ng-click="addNew()">
+        <div class="add-icon flex-15">
+            <i class="dae-add"></i>
+        </div>
+        <div class="add-text flex-85">
+            <span>{{to.btnText}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+
+.popup-container {
+
+    &.medium .popup {
+        width: 80%;
+    }
+
+    &.large .popup {
+        width: 90%;
+    }
+
+    .popup-body {
+        color: $very-dark;
+        text-align: center;
+    }
+
+    &.primary {
+        button.button {
+            background-color: $color_primary;
+        }
+    }
+
+    &.accent {
+        button.button {
+            background-color: $color_accent;
+        }
+    }
+
+    &.royal {
+        button.button {
+            background-color: $royal;
+        }
+    }
+
+    &.positive {
+        button.button {
+            background-color: $positive;
+        }
+    }
+
+    &.balanced {
+        button.button {
+            background-color: $balanced;
+        }
+    }
+
+    &.calm {
+        button.button {
+            background-color: $calm;
+        }
+    }
+
+    &.energized {
+        button.button {
+            background-color: $energized;
+        }
+    }
+
+    &.assertive {
+        button.button {
+            background-color: $assertive;
+        }
+    }
+}
+
+[name="resetPasswordForm"]{
+    .popup-buttons {
+        padding: 10px 0;
+        margin-top: 10px;
+    }
+}

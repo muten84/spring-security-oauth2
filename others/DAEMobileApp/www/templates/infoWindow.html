@@ -1,0 +1,23 @@
+<div class="infowindow" ng-non-bindable="">
+    <h3>{{vm.dae.nomeSede}}</h3>
+    <h2>{{ vm.dae.gpsLocation.indirizzo.name }}{{vm.dae.gpsLocation.civico? ", " :
+        ""}}{{vm.dae.gpsLocation.civico}} </h2>
+    <h2>{{ vm.dae.gpsLocation.comune.codiceIstat }}{{vm.dae.gpsLocation.comune.nomeComune? ", "
+        : ""}}
+        {{ vm.dae.gpsLocation.comune.nomeComune}}
+        {{ vm.dae.gpsLocation.localita? "- " + vm.dae.gpsLocation.localita.name: ""}}
+        {{vm.dae.gpsLocation.comune.provincia.nomeProvincia? " (" : ""}}{{
+        vm.dae.gpsLocation.comune.provincia.nomeProvincia
+        }}{{vm.dae.gpsLocation.comune.provincia.nomeProvincia? ")" : ""}}</h2>
+    <h2>{{ vm.dae.ubicazione }}</h2>
+    <h2>{{vm.dae.notediAccessoallaSede}}</h2>
+    <div class="row no-padding navigation">
+        <div class="col no-padding">
+
+            
+        </div>
+        <div class="col col-30 text-right no-padding">
+            <i ng-click="vm.openMap(vm.dae.gpsLocation.latitudine, vm.dae.gpsLocation.longitudine)" class="dae-navigation"></i>
+        </div>
+    </div>
+</div>
