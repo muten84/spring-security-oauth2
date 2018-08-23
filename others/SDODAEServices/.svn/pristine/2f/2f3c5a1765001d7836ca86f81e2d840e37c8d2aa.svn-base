@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field-exclude>
+			<a>tipologiaStruttura</a>
+			<b>tipologiaStruttura</b>
+		</field-exclude>
+		<field-exclude>
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field-exclude>
+		<field-exclude>
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field-exclude>
+		<field-exclude>
+			<a>posizione</a>
+			<b>posizione</b>
+		</field-exclude>
+		<field-exclude>
+			<a>programmiManutenzione</a>
+			<b>programmiManutenzione</b>
+		</field-exclude>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field-exclude>
+			<a>storicoStatoDAE</a>
+			<b>storicoStatoDAE</b>
+		</field-exclude>
+		<field-exclude>
+			<a>guasti</a>
+			<b>guasti</b>
+		</field-exclude>
+		<field-exclude>
+			<a>currentStato</a>
+			<b>currentStato</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DAE_FAULT">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field map-id="DaeFaultDO_DaeFault_UTENTE">
+			<a>guasti</a>
+			<b>guasti</b>
+		</field>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+	 
+		<field-exclude>
+			<a>tipologiaStruttura</a>
+			<b>tipologiaStruttura</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_BARE">
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field>
+		<field-exclude>
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_MINIMAL">
+			<a>posizione</a>
+			<b>gpsLocation</b>
+		</field>
+		<field-exclude>
+			<a>programmiManutenzione</a>
+			<b>programmiManutenzione</b>
+		</field-exclude>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field-exclude>
+			<a>storicoStatoDAE</a>
+			<b>storicoStatoDAE</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>currentStato</a>
+			<b>currentStato</b>
+		</field-exclude>
+	</mapping>
+
+
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DASHBOARD">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_BARE">
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field>
+		<field map-id="DaeFaultDO_DaeFault_BARE">
+			<a>guasti</a>
+			<b>guasti</b>
+		</field>
+		<field map-id="DaeDO_Dae_DEEP_ProgrammaManutenzioneDO_ProgrammaManutenzione_MINIMAL">
+			<a>programmiManutenzione</a>
+			<b>programmiManutenzione</b>
+		</field>
+
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+	 
+		<field-exclude>
+			<a>tipologiaStruttura</a>
+			<b>tipologiaStruttura</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field-exclude>
+		<field-exclude>
+			<a>posizione</a>
+			<b>posizione</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field-exclude>
+			<a>storicoStatoDAE</a>
+			<b>storicoStatoDAE</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>currentStato</a>
+			<b>currentStato</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="false"
+		map-id="DaeDO_Dae_IMAGE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field>
+			<a>matricola</a>
+			<b>matricola</b>
+		</field>
+		<field>
+			<a>modello</a>
+			<b>modello</b>
+		</field>
+		<field>
+			<a>tipo</a>
+			<b>tipo</b>
+		</field>
+		<field>
+			<a>alias</a>
+			<b>alias</b>
+		</field>
+		<field>
+			<a>nomeSede</a>
+			<b>nomeSede</b>
+		</field>
+		<field>
+			<a>notediAccessoallaSede</a>
+			<b>notediAccessoallaSede</b>
+		</field>
+		<field>
+			<a>ubicazione</a>
+			<b>ubicazione</b>
+		</field>
+		<field>
+			<a>noteGenerali</a>
+			<b>noteGenerali</b>
+		</field>
+		<field>
+			<a>tipologiaStruttura</a>
+			<b>tipologiaStruttura</b>
+		</field>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_DEEP">
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field>
+		<field>
+			<a>scadenzaDae</a>
+			<b>scadenzaDae</b>
+		</field>
+		 
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP">
+			<a>posizione</a>
+			<b>gpsLocation</b>
+		</field>
+		<field map-id="DaeDO_Dae_DEEP_ProgrammaManutenzioneDO_ProgrammaManutenzione_BARE">
+			<a>programmiManutenzione</a>
+			<b>programmiManutenzione</b>
+		</field>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_BARE">
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field>
+		<field map-id="DaeFaultDO_DaeFault_UTENTE_LIGHT">
+			<a>guasti</a>
+			<b>guasti</b>
+		</field>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field map-id="UtenteDO_Utente_BARE">
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_APP_MOBILE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field-exclude>
+			<a>tipologiaStruttura</a>
+			<b>tipologiaStruttura</b>
+		</field-exclude>
+		<field-exclude>
+			<a>guasti</a>
+			<b>guasti</b>
+		</field-exclude>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field-exclude>
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field-exclude>
+		<field>
+			<a>scadenzaDae</a>
+			<b>scadenzaDae</b>
+		</field>
+	 
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP">
+			<a>posizione</a>
+			<b>gpsLocation</b>
+		</field>
+		<field-exclude>
+			<a>programmiManutenzione</a>
+			<b>programmiManutenzione</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_BARE">
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="false"
+		map-id="DaeDO_Dae_MINIMAL">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>noteGenerali</a>
+			<b>noteGenerali</b>
+		</field>
+		<field>
+			<a>notediAccessoallaSede</a>
+			<b>notediAccessoallaSede</b>
+		</field>
+		<field>
+			<a>nomeSede</a>
+			<b>nomeSede</b>
+		</field>
+		<field>
+			<a>ubicazione</a>
+			<b>ubicazione</b>
+		</field>
+		<field>
+			<a>tipologiaDisponibilita</a>
+			<b>tipologiaDisponibilita</b>
+		</field>
+		<field-exclude>
+			<a>creatoDA</a>
+			<b>creatoDA</b>
+		</field-exclude>
+		<field-exclude>
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field-exclude>
+	 
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_MINIMAL">
+			<a>posizione</a>
+			<b>gpsLocation</b>
+		</field>
+		<field-exclude>
+			<a>programmiManutenzione</a>
+			<b>programmiManutenzione</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_BARE_NOID">
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ProgrammaManutenzioneDO_ProgrammaManutenzione_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ProgrammaManutenzioneDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.ProgrammaManutenzione
+		</class-b>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_BARE">
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ProgrammaManutenzioneDO_ProgrammaManutenzione_MINIMAL">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ProgrammaManutenzioneDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.ProgrammaManutenzione
+		</class-b>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+		<field-exclude>
+			<a>responsabile</a>
+			<b>responsabile</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_BARE">
+
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ManutentoreDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Manutentore
+		</class-b>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ComuneDO_Comune_PROVINCIA">
+			<a>comune</a>
+			<b>comune</b>
+		</field>
+	</mapping>
+
+
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ComuneDO_Comune_PROVINCIA_NOID">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ComuneDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Comune
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ProvinciaDO_Provincia_BARE">
+			<a>provincia</a>
+			<b>provincia</b>
+		</field>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ComuneDO_Comune_PROVINCIA">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ComuneDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Comune
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ProvinciaDO_Provincia_BARE">
+			<a>provincia</a>
+			<b>provincia</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ProvinciaDO_Provincia_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ProvinciaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Provincia
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.LocationDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.GPSLocation
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE">
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field>
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_LocalitaDO_Localita_BARE">
+			<a>localita</a>
+			<b>localita</b>
+		</field>
+		<field>
+			<a>civico</a>
+			<b>civico</b>
+		</field>
+		<field>
+			<a>luogoPubblico</a>
+			<b>luogoPubblico</b>
+		</field>
+		<field>
+			<a>tipoLuogoPubblico</a>
+			<b>tipoLuogoPubblico</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.id</a>
+			<b>gpsId</b>
+		</field>
+		<field>
+			<a>gpsLocation.latitudine</a>
+			<b>latitudine</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.longitudine</a>
+			<b>longitudine</b>
+		</field>
+		<field>
+			<a>gpsLocation.altitudine</a>
+			<b>altitudine</b>
+		</field>
+		<field>
+			<a>gpsLocation.error</a>
+			<b>error</b>
+		</field>
+		<field>
+			<a>gpsLocation.timeStamp</a>
+			<b>timeStamp</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_MINIMAL">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.LocationDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.GPSLocation
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE_NOID">
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field>
+
+		<field map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_LocalitaDO_Localita_BARE_NOID">
+			<a>localita</a>
+			<b>localita</b>
+		</field>
+
+		<field map-id="DaeDO_Dae_DEEP_ManutentoreDO_Manutentore_DEEP_ComuneDO_Comune_PROVINCIA_NOID">
+			<a>comune</a>
+			<b>comune</b>
+		</field>
+
+		<field>
+			<a>civico</a>
+			<b>civico</b>
+		</field>
+		<field>
+			<a>luogoPubblico</a>
+			<b>luogoPubblico</b>
+		</field>
+		<field>
+			<a>tipoLuogoPubblico</a>
+			<b>tipoLuogoPubblico</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.id</a>
+			<b>gpsId</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.latitudine</a>
+			<b>latitudine</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.longitudine</a>
+			<b>longitudine</b>
+		</field>
+		<field>
+			<a>gpsLocation.altitudine</a>
+			<b>altitudine</b>
+		</field>
+		<field>
+			<a>gpsLocation.error</a>
+			<b>error</b>
+		</field>
+		<field>
+			<a>gpsLocation.timeStamp</a>
+			<b>timeStamp</b>
+		</field>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.StradeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Strade
+		</class-b>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE_NOID">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.StradeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Strade
+		</class-b>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_LocalitaDO_Localita_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.LocalitaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Localita
+		</class-b>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_LocationDO_GPSLocation_DEEP_LocalitaDO_Localita_BARE_NOID">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.LocalitaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Localita
+		</class-b>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibileDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Disponibile
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaSpecificaDO_disponibilitaSpecifica_BARE">
+			<a>disponibilitaSpecifica</a>
+			<b>disponibilitaSpecifica</b>
+		</field>
+		<field-exclude>
+			<a>disponibilitaEccezioni</a>
+			<b>disponibilitaEccezioni</b>
+		</field-exclude>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_BARE_NOID">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibileDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Disponibile
+		</class-b>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaSpecificaDO_disponibilitaSpecifica_BARE_NOID">
+			<a>disponibilitaSpecifica</a>
+			<b>disponibilitaSpecifica</b>
+		</field>
+		<field-exclude>
+			<a>disponibilitaEccezioni</a>
+			<b>disponibilitaEccezioni</b>
+		</field-exclude>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_DisponibileLight_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibileDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Disponibile
+		</class-b>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaSpecificaDO_disponibilitaSpecifica_BARE">
+			<a>disponibilitaSpecifica</a>
+			<b>disponibilitaSpecifica</b>
+		</field>
+		<field-exclude>
+			<a>disponibilitaEccezioni</a>
+			<b>disponibilitaEccezioni</b>
+		</field-exclude>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaSpecificaDO_disponibilitaSpecifica_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaSpecificaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.DisponibilitaSpecifica
+		</class-b>
+		<field-exclude>
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaSpecificaDO_disponibilitaSpecifica_BARE_NOID">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaSpecificaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.DisponibilitaSpecifica
+		</class-b>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+		<field map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaGiornalieraDO_disponibilitaGiornaliera_BARE_NOID">
+			<a>disponibilitaGiornaliera</a>
+			<b>disponibilitaGiornaliera</b>
+		</field>
+		<field-exclude>
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaGiornalieraDO_disponibilitaGiornaliera_BARE_NOID">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaGiornalieraDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.DisponibilitaGiornaliera
+		</class-b>
+		<field-exclude>
+			<a>id</a>
+			<b>id</b>
+		</field-exclude>
+		<field-exclude>
+			<a>disponibilitaSpecifica</a>
+			<b>disponibilitaSpecifica</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_DisponibileDO_Disponibile_disponibilitaEccezioniDO_disponibilitaEccezioni_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaEccezioniDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.DisponibilitaEccezioni
+		</class-b>
+		<field-exclude>
+			<a>disponibilita</a>
+			<b>disponibilita</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ResponsabileDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Responsabile
+		</class-b>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_ResponsabileDO_Responsabile_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ResponsabileDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Responsabile
+		</class-b>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+		<field-exclude>
+			<a>comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeDO_Dae_DEEP_CertificatoDaeDO_CertificatoDae_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CertificatoDaeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CertificatoDae
+		</class-b>
+		<field-exclude>
+			<a>dae</a>
+			<b>dae</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Dae_DaeDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Dae_DaeDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Dae
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.DaeDO
+		</class-b>
+		<field map-id="Image_ImageDO_DEEP">
+			<a>immagine</a>
+			<b>immagine</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeFilter_DaeFilterDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.filter.DaeFilter
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.filter.DaeFilterDO
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="DaeFilterDO_DaeFilter_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.filter.DaeFilterDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.filter.DaeFilter
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Image_ImageDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ImageDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Image
+		</class-b>
+		<field>
+			<a>data</a>
+			<b>data</b>
+		</field>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+	</mapping>
+
+</mappings>

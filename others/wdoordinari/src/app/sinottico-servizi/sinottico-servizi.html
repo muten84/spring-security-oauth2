@@ -1,0 +1,79 @@
+<div class="row" style="margin-left:1px; height: 20px">
+  <div class="pull-left">
+    <label>Filtri impostati: {{filterSet}}</label>
+  </div>
+</div>
+<div class="row" style="margin-top: 8px; height: 20px">
+    <div class="pull-left">
+        <div class="col-12">
+          <label>Servizi in coda {{numElement}}</label>
+          <span title="In sollecito" alt="In sollecito" style="margin-left: 5rem"><i style="padding: 3px; color: #072c3f; font-size: 0.9rem; border-radius: 27px;  margin-right:4px" class="fa fa-clock-o"></i><label>{{numAlarm}}</label></span>
+          <span title="In ritardo" alt="In ritardo" style="margin-left: 5rem"><i style="padding: 3px; color: #072c3f; font-size: 0.9rem; border-radius: 27px" class="fa fa-clock-o"></i><i style="padding:-4px; color: #eb1b4c; font-size: 0.9rem; border-radius: 27px; margin-right:4px" class="fa fa-exclamation"></i><label>{{numDelay}}</label></span>
+        </div>
+    </div>
+</div>
+<core-table style="height: 45rem" id="serviziTable" [config]="configServiziTable" (selected)="onSelect($event.row)" [rows]="rows"
+  [columns]="columnsServiziTable" [showTooltip]="true" [rowClass]="getRowClasses" [autoExpand]="true">
+  <core-table-info>
+    <ng-template let-row="row">
+      <div class="container-fluid">
+        <div class="row dettagli">
+          <ng-template ngFor let-group="$implicit" [ngForOf]="row.detail?.groups">
+            <div class="col-4">
+              <div class="media">
+                <div class="pull-left">
+                  <div class="media-object img-circle">
+                    <i class="fa {{group.icon}}"></i>
+                  </div>
+                </div>
+                <div class="media-body">
+                  <dl class="dettaglio">
+                    {{group.name}}
+                  </dl>
+                  <dl class="dettaglio">
+                    <ng-template ngFor let-groupValue="$implicit" [ngForOf]="group.values">
+                      <dt>{{groupValue.key}}</dt>
+                      <dd>{{groupValue.value}}</dd>
+                    </ng-template>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </ng-template>
+  </core-table-info>
+  <!-- COLONNA S -->
+  <core-table-column title="S" flex="0" [style]="{'flex-basis':'50px'}" [tooltip]="{text : getTooltipS, placement : 'right-top' }">
+    <ng-template let-row="row" let-rowIndex="rowIndex" core-table-cell-template>
+      <span [innerHtml]="sanitize(getColumnSIcon(row.redBall) + getHistoricalIcon(row.source))"></span>
+    </ng-template>
+  </core-table-column>
+
+  <!-- COLONNA A -->
+  <core-table-column title="A" flex="0" [style]="{'flex-basis':'30px'}" [tooltip]="{placement : 'right-top' }">
+    <!-- name="patientsNumber" > -->
+    <ng-template let-row="row" let-rowIndex="rowIndex" core-table-cell-template>
+      <span class="patient">{{row.patientsNumber}}</span>
+    </ng-template>
+  </core-table-column>
+
+  <!-- COLONNA CODICE -->
+  <core-table-column title="Codice" flex="0" [style]="{'flex-basis' : '80px'}" name="code"  [tooltip]="{placement : 'right-top' }" ></core-table-column>
+  <!-- COLONNA DATA TRASPORTO -->
+  <core-table-column [cellClass]="getCellClass" title="Data Tasporto" flex="0" [style]="{'flex-basis' : '115px'}" [sortFn]="sortRowByData">
+    <ng-template let-row="row" let-rowIndex="rowIndex" core-table-cell-template>
+      <!--<span [innerHtml]="formatNgbDateStructToString(row.transportDate)"></span>-->
+      <span [innerHtml]="row.transportDate"></span>
+    </ng-template>
+  </core-table-column>
+  <!-- COLONNA INDIRIZZO PARTENZA -->
+  <core-table-column title="Partenza" [flex]="250" name="startAddress"></core-table-column>
+  <!-- COLONNA INDIRIZZO DESTINAZIONE -->
+  <core-table-column title="Destinazione" [flex]="250" name="endAddress"></core-table-column>
+  <!-- COLONNA MEZZI -->
+  <core-table-column title="Mezzi" [flex]="100" name="resources"></core-table-column>
+  <!-- <core-table-column title="Mezzi" [flex]="100" prop="transportType"></core-table-column> -->
+
+</core-table>

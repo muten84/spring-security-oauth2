@@ -1,0 +1,85 @@
+<form name="notificationForm"
+  ng-submit="send()"
+  validate>
+
+  <div class="row ">
+    <div class="form-group col-md-6">
+      <label-validated label="Inviare A"
+        class="{'form-group': false, 'has-error':filter.gruppo.$invalid}"
+        name="inviareA"></label-validated>
+      <ui-select ng-model="filter.gruppo"
+        theme="bootstrap"
+        name="inviareA"
+        ui-validate="{required: 'validateGruppo($value)'}">
+        <ui-select-match placeholder="Gruppo">{{$select.selected}}</ui-select-match>
+        <ui-select-choices repeat="gruppo in gruppi track by $index">
+          <div ng-bind-html="gruppo | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+    <div class=" form-group col-md-6">
+
+      <div ng-show="filter.gruppo === 'PROVINCIA'">
+        <label-validated label="Provincia"
+          class="{'form-group': false, 'has-error':filter.provincia.$invalid}"
+          name="provincia"></label-validated>
+        <ui-select ng-model="filter.provincia"
+          theme="bootstrap"
+          name="provincia"
+          ui-validate="{required: 'validateCombo($value, \'PROVINCIA\')'}">
+          <ui-select-match allow-clear
+            placeholder="Provincia">{{$select.selected.nomeProvincia}}</ui-select-match>
+          <ui-select-choices repeat="provincia.nomeProvincia as provincia in province | filter: { nomeProvincia: $select.search }">
+            <div ng-bind-html="provincia.nomeProvincia | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+
+      <div ng-show="filter.gruppo === 'CATEGORIA'">
+        <label-validated label="Categoria"
+          class="{'form-group': false, 'has-error':filter.categoria.$invalid}"
+          name="categoria"></label-validated>
+        <ui-select ng-model="filter.categoria"
+          theme="bootstrap"
+          name="categoria"
+          ui-validate="{required: 'validateCombo($value, \'CATEGORIA\')'}">
+          <ui-select-match allow-clear
+            placeholder="Categoria">{{$select.selected.descrizione}}</ui-select-match>
+          <ui-select-choices repeat="categoria.descrizione as categoria in categorie">
+            <div ng-bind-html="categoria.descrizione | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+    </div>
+  </div>
+  <div class="row ">
+    <div class="form-group col-md-12">
+      <label-validated label="Messaggio"
+        class="{'form-group': false, 'has-error':filter.messaggio.$invalid}"
+        name="messaggio"></label-validated>
+      <textarea name="messaggio"
+        class="form-control"
+        rows="5"
+        ng-model="filter.messaggio"
+        placeholder="Messaggio"
+        ui-validate="{required: 'validate($value)'}"></textarea>
+    </div>
+  </div>
+
+  <div class=" btn-container pull-right">
+    <div class="btn-group">
+      <button type="submit"
+        class="btn btn-primary">
+        <i class="fa fa-paper-plane-o"
+          aria-hidden="true"></i>
+        Invia
+      </button>
+      <button type="button"
+        class="btn btn-danger"
+        ng-click="pulisci()">
+        <i class="fa fa-undo"
+          aria-hidden="true"></i>
+        Annulla</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+<div class="input-group-addon hour-menu">
+  <span class="input-group-text dropdown-toggle" data-toggle="dropdown">Pre</span>
+  <div class="dropdown-menu">
+    <a *ngFor="let value of values" class="dropdown-item" (click)="selectHour(value)">{{value}}</a>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title">Risultati della ricerca</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        <div class="col-md-12">
+       <!--   <core-table id="crewMembersTable" [config]="configCrewMembersTable" [rows]="listCrewMembers" [columns]="columnsCrewMembers"
+            [showTooltip]="true" (selected)="selected($event.row)">
+          </core-table> -->
+          <core-table id="crewMembersTable" [config]="configCrewMembersTable" (dblCellClicked)="close()" (selected)="selected($event.row)" [rows]="listCrewMembers" [columns]="columnsCrewMembers"
+          [showTooltip]="true"> </core-table> 
+
+          </div>
+    </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="close()">Ok</button>
+  <button type="button" class="btn btn-danger" (click)="dismiss()">Annulla</button>
+</div>
+
+
+

@@ -1,0 +1,39 @@
+.example-card {
+    width: 90vw;
+    margin: 5rem;
+    height: 50vw;
+}
+
+.example-header-image {
+    background-image: url('assets/images/logo-header.png');
+    /* background-image: url('C:/front_end_terminale/wdoemsmobile/src/assets/images/logo-header.png');    */
+    background-size: cover;
+    width: 20rem;
+    height:0px;
+    display:none;
+   // margin: 3vw;
+}
+
+.mat-card-title {
+    font-size: 4.4569rem;
+    color: #006b84;
+    margin: 35px;
+}
+
+.mat-card-subtitle{
+    font-size: 4.4569rem;
+    margin: 0rem 0.5rem 0rem 0.5rem;
+    text-align: center;
+    color: #006b84;
+}
+
+.mdc-button {
+    width: 15rem;
+    height: 95px;
+    font-size: 2rem;
+}
+
+.mat-card-content {
+    display: block;
+    margin-bottom: calc(100% - 94%) !important;
+}

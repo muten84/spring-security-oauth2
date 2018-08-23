@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_BASIC">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>utente.nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>utente.cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>utente.email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>utente.datanascita</a>
+			<b>datanascita</b>
+		</field>
+		<field>
+			<a>utente.civico</a>
+			<b>civico</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_BASIC_NUMBER">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>numCellulare</a>
+			<b>numCellulare</b>
+		</field>
+		<field>
+			<a>utente.nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>utente.cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>utente.email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>utente.datanascita</a>
+			<b>datanascita</b>
+		</field>
+		<field>
+			<a>utente.civico</a>
+			<b>civico</b>
+		</field>
+
+
+	</mapping>
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_BASIC_CATEGORY">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>utente.nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>utente.cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>utente.email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>utente.datanascita</a>
+			<b>datanascita</b>
+		</field>
+		<field>
+			<a>utente.civico</a>
+			<b>civico</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_CategoriaFRDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoriaFr</b>
+		</field>
+
+	</mapping>
+
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_IMAGE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field>
+			<a>utente.immagine</a>
+			<b>immagine</b>
+		</field>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_CERTIFICATO_IMAGE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_CertificatoFirstResponderDO_CertificatoFirstResponder_IMMAGINE">
+			<a>certificatoFr</a>
+			<b>certificatoFr</b>
+		</field>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_StradeDO_Strade_BARE">
+			<a>utente.indirizzo</a>
+			<b>indirizzo</b>
+		</field>
+		<field>
+			<a>utente.nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>utente.cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>utente.email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>utente.datanascita</a>
+			<b>datanascita</b>
+		</field>
+		<field>
+			<a>utente.civico</a>
+			<b>civico</b>
+		</field>
+		<field>
+			<a>utente.comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field>
+		<field>
+			<a>utente.codiceFiscale</a>
+			<b>codiceFiscale</b>
+		</field>
+		<field>
+			<a>utente.language</a>
+			<b>language</b>
+		</field>
+		<field>
+			<a>utente.logon</a>
+			<b>logon</b>
+		</field>
+		<field>
+			<a>utente.ruoli</a>
+			<b>ruoli</b>
+		</field>
+		<field map-id="GruppoDO_Gruppo_DEEP">
+			<a>utente.gruppi</a>
+			<b>gruppi</b>
+		</field>
+		<field>
+			<a>utente.passwordHash</a>
+			<b>passwordHash</b>
+		</field>
+		<field>
+			<a>utente.statoUtente</a>
+			<b>statoUtente</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_QuestionarioFirstResponderDO_QuestionarioFirstResponder_BARE">
+			<a>questionarioFirstResponder</a>
+			<b>questionarioFirstResponder</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_MedicoFrDO_MedicoFr_BARE">
+			<a>medicoFr</a>
+			<b>medicoFr</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_DispositiviDO_Dispositivi_BARE">
+			<a>dispositivo</a>
+			<b>dispositivo</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_LocationDO_GPSLocation_BARE">
+			<a>lastPosition</a>
+			<b>lastPosition</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_CategoriaFRDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoriaFr</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_CertificatoFirstResponderDO_CertificatoFirstResponder_BARE">
+			<a>certificatoFr</a>
+			<b>certificatoFr</b>
+		</field>
+
+		<field map-id="ComuneDO_Comune_BARE">
+			<a>comuniCompetenza</a>
+			<b>comuniCompetenza</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_ACTIVATION">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field-exclude>
+			<a>utente.indirizzo</a>
+			<b>indirizzo</b>
+		</field-exclude>
+		<field>
+			<a>utente.nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>utente.cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>utente.email</a>
+			<b>email</b>
+		</field>
+		<field-exclude>
+			<a>professione</a>
+			<b>professione</b>
+		</field-exclude>
+		<field>
+			<a>utente.datanascita</a>
+			<b>datanascita</b>
+		</field>
+		<field>
+			<a>utente.civico</a>
+			<b>civico</b>
+		</field>
+		<field-exclude>
+			<a>utente.comuneResidenza</a>
+			<b>comuneResidenza</b>
+		</field-exclude>
+		<field>
+			<a>utente.codiceFiscale</a>
+			<b>codiceFiscale</b>
+		</field>
+		<field>
+			<a>utente.language</a>
+			<b>language</b>
+		</field>
+		<field>
+			<a>utente.logon</a>
+			<b>logon</b>
+		</field>
+		<field-exclude>
+			<a>utente.ruoli</a>
+			<b>ruoli</b>
+		</field-exclude>
+		<field>
+			<a>utente.passwordHash</a>
+			<b>passwordHash</b>
+		</field>
+		<field-exclude>
+			<a>utente.statoUtente</a>
+			<b>statoUtente</b>
+		</field-exclude>
+		<field-exclude>
+			<a>questionarioFirstResponder</a>
+			<b>questionarioFirstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>medicoFr</a>
+			<b>medicoFr</b>
+		</field-exclude>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_DispositiviDO_Dispositivi_BARE">
+			<a>dispositivo</a>
+			<b>dispositivo</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_LocationDO_GPSLocation_BARE">
+			<a>lastPosition</a>
+			<b>lastPosition</b>
+		</field>
+		<field-exclude>
+			<a>certificatoFr</a>
+			<b>certificatoFr</b>
+		</field-exclude>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_CategoriaFRDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoriaFr</b>
+		</field>
+		<field map-id="ComuneDO_Comune_BARE">
+			<a>comuniCompetenza</a>
+			<b>comuniCompetenza</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DASHBOARD">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field>
+			<a>utente.nome</a>
+			<b>nome</b>
+		</field>
+		<field>
+			<a>utente.cognome</a>
+			<b>cognome</b>
+		</field>
+		<field>
+			<a>utente.email</a>
+			<b>email</b>
+		</field>
+		<field>
+			<a>utente.datanascita</a>
+			<b>datanascita</b>
+		</field>
+		<field>
+			<a>utente.civico</a>
+			<b>civico</b>
+		</field>
+		<field>
+			<a>utente.codiceFiscale</a>
+			<b>codiceFiscale</b>
+		</field>
+		<field>
+			<a>utente.language</a>
+			<b>language</b>
+		</field>
+		<field>
+			<a>utente.logon</a>
+			<b>logon</b>
+		</field>
+		<field>
+			<a>utente.passwordHash</a>
+			<b>passwordHash</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_CategoriaFRDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoriaFr</b>
+		</field>
+		<field-exclude>
+			<a>questionarioFirstResponder</a>
+			<b>questionarioFirstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>medicoFr</a>
+			<b>medicoFr</b>
+		</field-exclude>
+		<field-exclude>
+			<a>dispositivo</a>
+			<b>dispositivo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>lastPosition</a>
+			<b>lastPosition</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>certificatoFr</a>
+			<b>certificatoFr</b>
+		</field-exclude>
+		<field-exclude>
+			<a>professione</a>
+			<b>professione</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>comuniCompetenza</a>
+			<b>comuniCompetenza</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_MedicoFrDO_MedicoFr_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.MedicoFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.MedicoFr
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_DispositiviDO_Dispositivi_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DispositiviDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Dispositivo
+		</class-b>
+	</mapping>
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_QuestionarioFirstResponderDO_QuestionarioFirstResponder_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.QuestionarioFirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.QuestionarioFirstResponder
+		</class-b>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_QuestionarioFirstResponderDO_QuestionarioFirstResponder_RispostaQuestionarioFirstResponderDO_RispostaQuestionarioFirstResponder_BARE">
+			<a>rispostaQuestionarioFirstResponder</a>
+			<b>rispostaQuestionarioFirstResponder</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_QuestionarioFirstResponderDO_QuestionarioFirstResponder_RispostaQuestionarioFirstResponderDO_RispostaQuestionarioFirstResponder_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.RispostaQuestionarioFirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.RispostaQuestionarioFirstResponder
+		</class-b>
+		<field-exclude>
+			<a>questionarioFirstResponder</a>
+			<b>questionarioFirstResponder</b>
+		</field-exclude>
+	</mapping>
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_QuestionarioFirstResponderDO_QuestionarioFirstResponder_RispostaQuestionarioFirstResponderDO_RispostaQuestionarioFirstResponder_DomandaQuestionarioDO_DomandaQuestionario_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DomandaQuestionarioDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.DomandaQuestionario
+		</class-b>
+		<field-exclude>
+			<a>risposteQuestionarioFirstResponder</a>
+			<b>risposteQuestionarioFirstResponder</b>
+		</field-exclude>
+	</mapping>
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_QuestionarioFirstResponderDO_QuestionarioFirstResponder_RispostaQuestionarioFirstResponderDO_RispostaQuestionarioFirstResponder_DomandaQuestionarioDO_DomandaQuestionario_QuestionarioDO_Questionario_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.QuestionarioDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Questionario
+		</class-b>
+		<field-exclude>
+			<a>domandaQuestionario</a>
+			<b>domandaQuestionario</b>
+		</field-exclude>
+	</mapping>
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_StradeDO_Strade_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.StradeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Strade
+		</class-b>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_CategoriaFRDO_CategoriaFR_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-b>
+		<field-exclude>
+			<a>creataDa</a>
+			<b>creataDa</b>
+		</field-exclude>
+		<field-exclude>
+			<a>aggiornataDa</a>
+			<b>aggiornataDa</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_ColoreDO_Colore_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ColoreDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Colore
+		</class-b>
+		<field-exclude>
+			<a>categoriaFr</a>
+			<b>categoriaFr</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_LocationDO_GPSLocation_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.LocationDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.GPSLocation
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE">
+			<a>indirizzo</a>
+			<b>indirizzo</b>
+		</field>
+		<field>
+			<a>civico</a>
+			<b>civico</b>
+		</field>
+		<field>
+			<a>luogoPubblico</a>
+			<b>luogoPubblico</b>
+		</field>
+		<field>
+			<a>tipoLuogoPubblico</a>
+			<b>tipoLuogoPubblico</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.latitudine</a>
+			<b>latitudine</b>
+		</field>
+
+		<field>
+			<a>gpsLocation.longitudine</a>
+			<b>longitudine</b>
+		</field>
+		<field>
+			<a>gpsLocation.altitudine</a>
+			<b>altitudine</b>
+		</field>
+		<field>
+			<a>gpsLocation.error</a>
+			<b>error</b>
+		</field>
+		<field>
+			<a>gpsLocation.timeStamp</a>
+			<b>timeStamp</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_ComuneDO_Comune_PROVINCIA">
+			<a>comune</a>
+			<b>comune</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.StradeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Strade
+		</class-b>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Strade_StradeDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Strade
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.StradeDO
+		</class-b>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_ComuneDO_Comune_PROVINCIA">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ComuneDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Comune
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_ProvinciaDO_Provincia_BARE">
+			<a>provincia</a>
+			<b>provincia</b>
+		</field>
+
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Comune_ComuneDO_PROVINCIA">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Comune
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.ComuneDO
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP_ProvinciaDO_Provincia_BARE">
+			<a>provincia</a>
+			<b>provincia</b>
+		</field>
+
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_ProvinciaDO_Provincia_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ProvinciaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Provincia
+		</class-b>
+
+
+	</mapping>
+
+
+
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderDO_FirstResponder_DEEP_CertificatoFirstResponderDO_CertificatoFirstResponder_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CertificatoFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CertificatoFr
+		</class-b>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field>
+			<a>rilasciatoDa</a>
+			<b>rilasciatoDa</b>
+		</field>
+	</mapping>
+
+
+
+	<mapping
+		wildcard="false"
+		map-id="FirstResponderDO_FirstResponder_DEEP_CertificatoFirstResponderDO_CertificatoFirstResponder_IMMAGINE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CertificatoFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CertificatoFr
+		</class-b>
+		<field>
+			<a>id</a>
+			<b>id</b>
+		</field>
+		<field>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="QuestionarioDO_Questionario_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.QuestionarioDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Questionario
+		</class-b>
+		<field map-id="QuestionarioDO_Questionario_DEEP_DomandaQuestionarioDO_DomandaQuestionario_BARE">
+			<a>domandaQuestionario</a>
+			<b>domandaQuestionario</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="QuestionarioDO_Questionario_DEEP_DomandaQuestionarioDO_DomandaQuestionario_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.DomandaQuestionarioDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.DomandaQuestionario
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponder_FirstResponderDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-b>
+		<field>
+			<a>numCellulare</a>
+			<b>numCellulare</b>
+		</field>
+		<field>
+			<a>interventiEseguiti</a>
+			<b>interventiEseguiti</b>
+		</field>
+		<field>
+			<a>richiesteEseguite</a>
+			<b>richiesteEseguite</b>
+		</field>
+		<field>
+			<a>statoProfilo</a>
+			<b>statoProfilo</b>
+		</field>
+		<field>
+			<a>nome</a>
+			<b>utente.nome</b>
+		</field>
+		<field>
+			<a>cognome</a>
+			<b>utente.cognome</b>
+		</field>
+		<field>
+			<a>codiceFiscale</a>
+			<b>utente.codiceFiscale</b>
+		</field>
+		<field>
+			<a>email</a>
+			<b>utente.email</b>
+		</field>
+		<field>
+			<a>indirizzo</a>
+			<b>utente.indirizzo</b>
+		</field>
+		<field>
+			<a>comuneResidenza</a>
+			<b>utente.comuneResidenza</b>
+		</field>
+		<field>
+			<a>civico</a>
+			<b>utente.civico</b>
+		</field>
+
+		<field>
+			<a>language</a>
+			<b>utente.language</b>
+		</field>
+		<field>
+			<a>logon</a>
+			<b>utente.logon</b>
+		</field>
+		<field>
+			<a>passwordHash</a>
+			<b>utente.passwordHash</b>
+		</field>
+		<field>
+			<a>statoUtente</a>
+			<b>utente.statoUtente</b>
+		</field>
+		<field>
+			<a>ruoli</a>
+			<b>utente.ruoli</b>
+		</field>
+		<field>
+			<a>gruppi</a>
+			<b>utente.gruppi</b>
+		</field>
+		<field>
+			<a>immagine</a>
+			<b>utente.immagine</b>
+		</field>
+
+		<field map-id="FirstResponder_FirstResponderDO_DEEP_CertificatoFirstResponder_CertificatoFirstResponderDO_BARE">
+			<a>certificatoFr</a>
+			<b>certificatoFr</b>
+		</field>
+		<field-exclude>
+			<a>questionarioFirstResponder</a>
+			<b>questionarioFirstResponder</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponder_FirstResponderDO_DEEP_Utente_UtenteDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Utente
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.UtenteDO
+		</class-b>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponder_FirstResponderDO_DEEP_CertificatoFirstResponder_CertificatoFirstResponderDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.CertificatoFr
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.CertificatoFrDO
+		</class-b>
+		<field-exclude>
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderFilter_FirstResponderFilterDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.filter.FirstResponderFilter
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.filter.FirstResponderFilterDO
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="FirstResponderFilterDO_FirstResponderFilter_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.filter.FirstResponderFilterDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.filter.FirstResponderFilter
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Questionario_QuestionarioDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Questionario
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.QuestionarioDO
+		</class-b>
+	</mapping>
+
+</mappings>

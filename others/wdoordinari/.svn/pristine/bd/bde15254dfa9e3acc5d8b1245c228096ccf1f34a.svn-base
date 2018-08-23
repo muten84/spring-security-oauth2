@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "module": "es2015",
+    "baseUrl": "",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "main.sinottico.ts",
+    "sinottico/app.module.ts",
+    "sinottico/*.ts",
+    "sinottico/**/*.ts",
+    "**/*.spec.ts"
+  ]
+}

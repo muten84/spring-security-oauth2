@@ -1,0 +1,28 @@
+<table class="table thead togglable-table tablesaw-columntoggle table-hover" ngClass="{{config.className || ''}}" role="grid"
+  data-minimap cellpadding="0" cellspacing="0">
+  <thead #thead>
+    <tr role="row" style="font-size: 11px;">
+      <th [ngStyle]="column.style" *ngFor="let column of columns" [ngTableSorting]="config" [column]="column" (sortChanged)="onChangeTable($event)">{{getTitle(column.title)}}
+        <i *ngIf="config && column.sort" class="pull-right fa" [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
+      </th>
+
+      <!--     <th *ngIf="scrollbarVisible()" style="width: 13px;padding: 0px;"></th> -->
+    </tr>
+  </thead>
+</table>
+<div #body class="table-responsive ctable-hover" style="height: auto; width: 100% !important; overflow-x: auto !important;">
+  <table class="table togglable-table tablesaw-columntoggle table-hover" ngClass="{{config.className || ''}}" role="grid" data-minimap
+    cellpadding="0" cellspacing="0">
+    <tbody #tbody [ngStyle]="{'height': tbodyHeight}">
+      <ng-container *ngFor="let row of rows ; let i = index;">
+        <tr coreTableRow [row]="row" [i]="i" [columns]="columns" [ngClass]="getActive(row)" (dblCellClicked)="dblCellClick($event)"
+          (cellClicked)="cellClick($event)" [showInfo]="!!infoComponent" [showTooltip]="showTooltip"></tr>
+        <tr *ngIf="row.visible && infoComponent && row.showDetail" class="collapsible">
+          <td>
+            <ng-template [ngTemplateOutlet]="infoComponent.template" [ngOutletContext]="{row: row}" scope="row"></ng-template>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

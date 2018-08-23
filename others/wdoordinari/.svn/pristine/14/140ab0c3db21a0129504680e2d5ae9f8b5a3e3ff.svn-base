@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{title}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group row">
+    <div class="col-md-6">
+        <label class="mt-2 mr-sm-2 mb-0" for="code">Codici</label>
+        <div style="width: 300px">
+            <ng-select tabindex="5" [(ngModel)]="selectedCode" allowClear="true" [items]="noteCodes | async"
+            textField="description" placeholder="Selezionare Codice..."
+            [queryLike]="false" (ngModelChange)="codeSelected($event)"> </ng-select>
+        </div>
+        <label class="label col-form-label" >Note</label>
+        <div style="width: 700px">
+        <textarea style="height: 60px !important" [inputMask]="'*{0,1024}'" rows="3" cols="30" class="form-control form-control-ta"
+        [(ngModel)]="pauseNote" ></textarea>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <label class="mt-2 mr-sm-2 mb-0" for="time">{{timeLabel}}</label>
+        <div style="width: 300px">
+          <ng-select [(ngModel)]="selectedTime" allowClear="true" textField="description" [items]="times | async" placeholder="Selezionare Tempo..."
+          tabindex="5" (ngModelChange)="timeSelected($event)"> </ng-select>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="close()">OK</button>
+  <button type="button" class="btn btn-danger" (click)="dismiss()">Annulla</button>
+</div>

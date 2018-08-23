@@ -1,0 +1,1 @@
+javaw -jar mobileagent-launcher.jar mobile-agent run.bat /esel/terminal/web /esel/terminal/download/EE

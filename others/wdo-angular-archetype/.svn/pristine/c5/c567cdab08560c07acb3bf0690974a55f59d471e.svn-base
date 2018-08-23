@@ -1,0 +1,6 @@
+<div ui-view="navbar">
+</div>
+<!-- navbar.html plugs in here -->
+<div ui-view="list"></div>
+<!-- list.html plugs in here -->
+

@@ -1,0 +1,52 @@
+#turniTable {
+  tbody {
+    max-height: auto;
+  }
+}
+
+#turniTable {
+  tbody {
+    max-height: auto;
+  }
+}
+
+
+#turniTable,
+ {
+  font-size: 13px;
+  td {
+    background-color: unset;
+  }
+  .table-active {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  .btn-group-sm>.btn,
+  .btn-sm {
+    padding: 3px 6px;
+    font-size: 12px;
+    /* line-height: 1.5; */
+    border-radius: 3px;
+  }
+  .dropdown {
+    position: static;
+  }
+  .dropdown-menu {
+    position: absolute;
+    top: 50px;
+    right: 60px;
+    width: 450px;
+  }
+}
+
+.icon-red {
+  color : red
+}
+
+.icon-green {
+  color : green
+}
+
+.turn-modal .modal-lg {
+  max-width: 1300px;
+} 
+

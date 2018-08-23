@@ -1,0 +1,75 @@
+<div class="form-group row">
+  <div class="col-md-3">
+    <label class="mt-2 mr-sm-2 mb-0" for="data">Data Trasporto</label>
+    <div class="input-group input-group-sm" clickoff>
+      <input type="text" [disabled]="filter.allBookingFlag || filter.todayBookingFlag || filter.tomorrowBookingFlag" id="data"
+        name="dataDa" class="form-control" placeholder="dd/mm/yyyy" name="dpdata" [(ngModel)]="filter.transportDate" ngbDatepicker
+        #dpdataDa="ngbDatepicker">
+
+      <div class="input-group-append">
+        <button [disabled]="filter.allBookingFlag || filter.todayBookingFlag || filter.tomorrowBookingFlag" class="btn input-group-text"
+          (click)="dpdataDa.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">Tutte</label>
+    <div class="input-group">
+      <ui-switch [(ngModel)]="filter.allBookingFlag" (change)="onChangeAll($event)" size="small"></ui-switch>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">INTRA-H</label>
+    <div class="input-group">
+      <ui-switch [(ngModel)]="filter.intraOspFlag" (change)="onChangeIntraH($event)" size="small"></ui-switch>
+    </div>
+    <!--<ngb-timepicker [spinners]="false" [(ngModel)]="time"></ngb-timepicker>-->
+    <!--<calendar [textMask]="{mask: mask}"calendarID="data" calendarName="dpdata" calendarPlaceholder="dd-mm-yyyy"></calendar>-->
+  </div>
+  <div class="col-md-3">
+    <label class="mt-2 mr-sm-2 mb-0" for="dataAdd">Filtro Aggiuntivo</label>
+    <div style="width: 260px">
+      <ng-select [items]="addizionaliItems" placeholder="Selezionare Filtro..." [(ngModel)]="selectedFilterAdd" (selected)="filtroAggSelected($event)">
+      </ng-select>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">Oggi</label>
+    <div class="input-group">
+      <ui-switch [(ngModel)]="filter.todayBookingFlag" (change)="onChangeToday($event)" size="small"></ui-switch>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">INTER-H</label>
+    <div class="input-group">
+      <ui-switch [(ngModel)]="filter.interOspFlag" (change)="onChangeInterH($event)" size="small"></ui-switch>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <label for="dataAdd" class="mt-2 mr-sm-2 mb-0">Valore Filtro Aggiuntivo</label>
+    <div class="input-group input-group-sm">
+      <input class="form-control" type="text" [(ngModel)]="valueFilterAdd" placeholder="Inserire valore filtro..." [disabled]="isEditDisabled"
+        id="valore-filtro-text-input" />
+      <div class="input-group-append">
+        <button data-toggle="collapse" (click)="addFilter()" aria-expanded="false" class="btn input-group-text" type="button">+</button>
+        <button data-toggle="collapse" (click)="removeFilter()" aria-expanded="false" class="btn input-group-text" type="button">-</button>
+      </div>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">Domani</label>
+    <div class="input-group">
+      <ui-switch [(ngModel)]="filter.tomorrowBookingFlag" (change)="onChangeTomorrow($event)" size="small"></ui-switch>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="dataDa">Fuori BO</label>
+    <div class="input-group">
+      <ui-switch [(ngModel)]="filter.fuoriBologna" size="small"></ui-switch>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <label for="dataAdd" class="mt-2 mr-sm-2 mb-0">Lista Filtri Aggiuntivi</label>
+    <div class="list-group" style="max-height: 170px;overflow: auto;">
+      <button type="button" style="min-height: 35px;" class="btn btn-primary btn-sm" *ngFor="let item of listAddFilterItems; let i=index"
+        (click)="select(i)">
+        {{ item.name }} {{item.value!= null ? ':' : ''}} {{ item.value }}
+      </button>
+    </div>
+  </div>
+</div>
+<!--<div class="row pull-right">
+  <div class="col-md-4 mr-sm-2">
+    <button (click)="searchBookings()" type="submit" class="btn btn-primary btn-sm"><i class="fa fa-search" aria-hidden="true"></i>Cerca</button>
+  </div>
+</div>-->

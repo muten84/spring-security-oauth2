@@ -1,0 +1,95 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule, OpaqueToken } from '@angular/core';
+
+
+import { AppComponent } from './app.component';
+import { BrowserCommunicationService } from 'common/services/browser-communication.service';
+import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CoreModule } from 'app/core/core.module';
+import { StaticDataService } from 'app/static-data/cached-static-data';
+import { ServicesModule, BasePathGenerator } from 'services/services.module';
+import { ComponentHolderService, EventService } from 'app/service/shared-service';
+import { ExtendedHttpService } from 'app/service/extended-http.service';
+import { routing, routes } from 'sinottico/app.routes';
+import { FormsModule } from '@angular/forms';
+import { BlockUIModule } from 'ng-block-ui';
+import { CommonHeaderComponent, ROUTES } from 'app/common-header/common-header.component';
+import { BreadcrumbComponent } from 'app/core/breadcrumb/breadcrumb.component';
+import { DynamicModule } from 'ng-dynamic-component';
+import { MessageService } from 'app/service/message.service';
+import { BackendConfigService } from 'app/service/config.service';
+import { ToastModule } from 'ng2-toastr';
+import { SinotticoPrenotazioniHeaderExComponent } from './sinottico-prenotazioni/sinottico-prenotazioni-header-ex-component';
+import { SinotticoPrenotazioniExComponent } from './sinottico-prenotazioni/sinottico-prenotazioni-ex-component';
+import { SinotticoServiziExComponent } from './sinottico-servizi/sinottico-servizi-ex-component';
+import { SinotticoRootComponent } from './root/sinottico.root.component';
+import { SinotticoServiziHeaderExComponent } from './sinottico-servizi/sinottico-servizi-header-ex-component';
+import { ServiceCommon } from 'app/common-servizi/service-common';
+import { ServiziService } from 'app/service/servizi-service';
+import { MezziAttiviHeaderComponent } from 'app/mezzi-attivi/mezzi-attivi-header.component';
+import { MezziAttiviExComponent } from './mezzi-attivi/mezzi-attivi-ex.component';
+import { StaticDataResolve } from 'app/static-data/cached-static-data-resolver';
+
+
+export const GLOBAL_BASE_PATH = new OpaqueToken('globalBasePath');
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    SinotticoServiziExComponent,
+    SinotticoServiziHeaderExComponent,
+    SinotticoPrenotazioniExComponent,
+    SinotticoPrenotazioniHeaderExComponent,
+    MezziAttiviExComponent,
+    MezziAttiviHeaderComponent,
+    SinotticoRootComponent,
+    CommonHeaderComponent,
+    BreadcrumbComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpModule,
+    ToastModule.forRoot(),
+    NgbModule.forRoot(),
+    CoreModule,
+    ServicesModule,
+    routing,
+    BlockUIModule,
+    FormsModule,
+    DynamicModule.withComponents([
+      SinotticoServiziHeaderExComponent,
+      SinotticoPrenotazioniHeaderExComponent,
+      MezziAttiviHeaderComponent,
+    ]),
+  ],
+  providers: [
+    BrowserCommunicationService,
+    StaticDataService,
+    StaticDataResolve,
+    ComponentHolderService,
+    MessageService,
+    BackendConfigService,
+    EventService,
+    ServiceCommon,
+    ServiziService,
+    {
+      provide: GLOBAL_BASE_PATH, useFactory: BasePathGenerator
+    }, {
+      provide: ROUTES, useFactory: getRoutes
+    },
+    {
+      provide: Http,
+      useClass: ExtendedHttpService,
+      deps: [ComponentHolderService, XHRBackend, RequestOptions]
+    },
+  ],
+  entryComponents: [
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+export function getRoutes() {
+  return routes;
+}

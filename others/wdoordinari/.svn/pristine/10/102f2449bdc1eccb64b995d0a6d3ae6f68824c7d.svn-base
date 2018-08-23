@@ -1,0 +1,59 @@
+import { Component, OnInit } from "@angular/core";
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+import { BookingModuleServiceApi, BookingDiscardDTO } from "services/services.module";
+import { Observable } from "rxjs/Rx";
+import { StaticDataService } from "app/static-data/cached-static-data";
+import { valueToSelect } from "app/util/convert";
+import { ComponentHolderService } from "app/service/shared-service";
+
+@Component( {
+    selector: 'closing-modal',
+    templateUrl: './closing-modal-component.html'
+} )
+export class ClosingModalComponent implements OnInit {
+
+    public title = 'Motivo della cancellazione';
+
+    //Id della prenotazione
+    public id: string;
+
+    public reason: string;
+    public reasonText: string;
+
+    reasonList: Observable<Array<any>>;
+
+    constructor( public activeModal: NgbActiveModal,
+        private componentService: ComponentHolderService,
+        private bookingService: BookingModuleServiceApi,
+        private sdSvc: StaticDataService ) {
+    }
+
+    ngOnInit(): void {
+
+        this.reasonList = this.sdSvc.getStaticDataByType( 'DELETE_REASON' ).map( valueToSelect );
+    }
+
+    close() {
+        //se l'utente ha scelto close chiudo il servizio invocando il server
+        this.componentService.getRootComponent().mask();
+        let request = {
+            bookingId: this.id,
+            reason: this.reason + ' ' + this.reasonText
+        };
+        this.bookingService.discardBooking( request ).catch(( c, o ) => {
+            this.componentService.getRootComponent().showToastMessage( 'error', 'Errore nella chiusura della prenotazione' );
+            return [];
+        } ).subscribe( ev => {
+            this.componentService.getRootComponent().unmask();
+            this.componentService.getRootComponent().showToastMessage( 'success', 'Chiusura della prenotazione avvenuta con successo' );
+            this.activeModal.close( 'ok' );
+        } );
+
+
+    }
+
+    dismiss() {
+        // l'utente ha annullato, chiudo la window senza fare nulla
+        this.activeModal.dismiss( 'close' );
+    }
+}

@@ -1,0 +1,90 @@
+<div class="modal-header">
+  <h4 class="modal-title">Turno</h4>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group row">
+      <div class="col-md-3">
+          <label class="mt-2 mr-sm-2 mb-0" for="data">Data Inizio</label>
+          <div class="input-group" clickoff>
+            <input [inputMask]="'99/99/9999'" type="text"  id="fromDate"
+              class="form-control" placeholder="dd/mm/yyyy" name="dpdataDa" [(ngModel)]="startDateStruct"
+              ngbDatepicker #dpdataDa="ngbDatepicker" (ngModelChange)="startDateSelected($event)">
+            <div class="input-group-append">
+            <button class="btn input-group-text" (click)="dpdataDa.toggle()">
+            <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+          </button>
+            </div>
+          </div>
+          <label class="mt-2 mr-sm-2 mb-0" for="data">Data Fine</label>
+          <div class="input-group" clickoff>
+            <input [inputMask]="'99/99/9999'" type="text"  id="toDate"
+              class="form-control" placeholder="dd/mm/yyyy" name="dpdataA" [(ngModel)]="endDateStruct"
+              ngbDatepicker #dpdataA="ngbDatepicker" (ngModelChange)="endDateSelected($event)">
+             <div class="input-group-append">
+          <button class="btn input-group-text" (click)="dpdataA.toggle()">
+            <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+          </button>
+          </div>
+          </div>
+          <label class="label col-form-label" >Note</label>
+          <div style="width: 600px">
+          <textarea style="height: 60px !important" [inputMask]="'*{0,1024}'" rows="3" cols="30" class="form-control form-control-ta"
+          [(ngModel)]="turn.note" ></textarea>
+          </div>  
+          
+          
+          
+        </div>
+
+        <div class="col-md-3">
+          <div >
+            <label class="mt-2 mr-sm-2 mb-0" >Orario Inizio</label>
+            <input inputMask="99:99:99" class="form-control" placeholder="HH:MM:SS" [(ngModel)]="turn.startTurnTime" tabindex="1">
+            </div>
+          <div >
+          <label class="mt-2 mr-sm-2 mb-0" >Orario Fine</label>
+          <input inputMask="99:99:99" class="form-control" placeholder="HH:MM:SS" [(ngModel)]="turn.endTurnTime" tabindex="1">
+          </div>
+          
+        </div>
+    
+    
+        <div class="col-md-3">
+          <label class="mt-2 mr-sm-2 mb-0" for="vehicle">Mezzo</label>
+          <div>
+            <ng-select [(ngModel)]="selectedVehicle" [allowClear]="true" [items]="vehicles | async" (refresh)="retrieveVehicle118ByCode($event)"
+            minChar="2" refreshDelay="500" textField="code" placeholder="Selezionare Mezzo..." (ngModelChange)="vehicleSelected($event)"> </ng-select>
+          </div>
+          <label class="mt-2 mr-sm-2 mb-0" for="parking">Postazione</label>
+          <div>
+            <ng-select [(ngModel)]="turn.parkingCode" [allowClear]="true" [items]="parkingItems | async" (refresh)="updateParkingList($event)"
+            minChar="2" refreshDelay="500" textField="name" valueField="name" placeholder="Selezionare Postazione..." > </ng-select>
+          </div>
+        </div>
+    
+    
+        <div class="col-md-3">
+          <label class="mt-2 mr-sm-2 mb-0" for="sanitaryCategory">Categ. Sanitaria</label>
+          <div>
+              <ng-select [(ngModel)]="selectedSanitaryCategory" allowClear="true" textField="description" [items]="sanitaryCategories | async"
+               placeholder="Selezionare Cat. Sanitaria..."
+              tabindex="5" (ngModelChange)="sanitaryCategorySelected($event)"> </ng-select>
+          </div>
+          <label class="mt-2 mr-sm-2 mb-0" for="convention">Convenzione</label>
+          <div>
+            <ng-select [(ngModel)]="selectedConvention" allowClear="true" textField="description" [items]="conventions | async" 
+            placeholder="Selezionare Convenzione..."
+            tabindex="5" (ngModelChange)="conventionSelected($event)"> </ng-select>
+          </div>
+      </div>
+   
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-success" (click)="close()">Salva</button>
+  <button type="button" class="btn btn-danger" (click)="clean()">Pulisci</button>
+  <button type="button" class="btn btn-danger" (click)="dismiss()">Annulla</button>
+</div>

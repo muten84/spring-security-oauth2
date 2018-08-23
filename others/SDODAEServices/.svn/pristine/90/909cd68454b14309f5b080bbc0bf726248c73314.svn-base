@@ -1,0 +1,46 @@
+<areas-navbar title="Gestione DAE" version="1.0" target="dashboard">
+    <areas-navbar-left>
+        <areas-navbar-dropdown>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="avatar icon-info">
+                  <img ng-src="{{user.immagine.url}}?size=SMALL" alt="">
+                </span>
+                <div class="nav-label-container">
+                    <span class="nav-label">{{user.nome}}
+                        {{user.cognome}}</span>
+                    <span class="nav-sublabel">{{user.ruoli[0].descrizione}}</span>
+                    <i class="caret fa fa-chevron-down"></i>
+                </div>
+            </a>
+            <div style="min-width: 400px" class="dropdown-menu yamm-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <span class="dropdown-header">Il tuo account</span>
+                        <ul class="nav nav-pills nav-stacked">
+                            <!--<li><a href="#" title="I miei dati personali" tabindex=""><i class="fa fa-user"></i>I miei dati personali</a></li>
+                            <li><a href="#" title="Il mio presidio" tabindex=""><i class="fa fa-building"></i>Il mio presidio</a></li> ng-click="profilo()"-->
+                            <li>
+                                <a ui-sref="main.userProfile" title="Profilo" tabindex="">
+                                    <i class="fa fa-user"></i>Gestione Profilo</a>
+                            </li>
+                            <li>
+                                <a href="#" title="Logout" tabindex="" ng-click="logout()">
+                                    <i class="fa fa-power-off"></i>Logout</a>
+                            </li>
+                            <!--<li><a href="#" title="Back" tabindex=""><i class="fa fa-reply"></i>Back</a></li>-->
+                        </ul>
+                    </div>
+                    <!-- <div class="col-sm-12 yamm-footer">
+                        <small>Scadenza password: 22 giorni.
+		        		Ultimo accesso: oggi alle 09:25</small>
+                    </div> -->
+                </div>
+            </div>
+        </areas-navbar-dropdown>
+    </areas-navbar-left>
+    <areas-navbar-right>
+        <araes-navbar-right-button text="Refresh" icon="fa fa-refresh" target="refresh()"></araes-navbar-right-button>
+        <araes-navbar-right-button text="Back" icon="fa fa-reply" target="back()"></araes-navbar-right-button>
+        <araes-navbar-right-button text="Logout" icon="fa fa-power-off" target="logout()"></araes-navbar-right-button>
+    </areas-navbar-right>
+</areas-navbar>

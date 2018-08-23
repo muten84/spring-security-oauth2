@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>it.eng.areas.archetype</groupId>
+  <artifactId>wdo-angular-archetype</artifactId>
+  <version>1.0.1-SNAPSHOT</version>
+  <name>Archetype - wdo-angular-archetype</name>
+  <url>http://maven.apache.org</url>
+  
+  <distributionManagement>
+		<site>
+			<id>ftp-areas-server</id>
+			<url>ftp://161.27.213.60/home/tomcatna/tomcat_continuos/webapps/AREAS/sdo-modular-archetype</url>
+		</site>
+		<repository>
+			<id>releases</id>
+			<name>engsanapp1-releases</name>
+			<url>http://161.27.213.60:9116/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>engsanapp1-snapshots</name>
+			<url>http://161.27.213.60:9116/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+  
+  <build>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.archetype</groupId>
+				<artifactId>archetype-packaging</artifactId>
+				<version>2.2</version>
+			</extension>
+		</extensions>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-archetype-plugin</artifactId>
+					<version>2.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<locales>it</locales>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.7</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-site-renderer</artifactId>
+						<version>1.7.1</version>
+					</dependency>
+					<dependency><!-- add support for ssh/scp -->
+						<groupId>org.apache.maven.wagon</groupId>
+						<artifactId>wagon-ftp</artifactId>
+						<version>1.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+
+	<!--  <distributionManagement>
+		<site>
+			<id>ftp-areas-server</id>
+			<url>ftp://161.27.213.60/home/tomcatna/tomcat_continuos/webapps/AREAS/sdo-modular-archetype</url>
+		</site>
+		<repository>
+			<id>releases</id>
+			<name>engsanapp1-releases</name>
+			<url>http://161.27.213.60:9116/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>engsanapp1-snapshots</name>
+			<url>http://161.27.213.60:9116/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement> -->
+
+	<developers>
+		<developer>
+			<id>lb</id>
+			<name>Luigi Bifulco</name>
+			<email>luigi.bifulco@eng.it</email>
+			<roles>
+				<role>Solution Developer TD02</role>
+			</roles>
+			<organization>Engineering Ingegneria Informatica</organization>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	
+	<organization>
+		<name>Engineering Ingegneria Informatica S.p.A</name>
+		<url>http://www.eng.it</url>
+	</organization>
+
+</project>  

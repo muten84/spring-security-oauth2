@@ -1,0 +1,25 @@
+.mat-dialog-content {
+    font-size: 3.2rem;
+    text-align: center;
+}
+
+.mat-button {
+    /* font-size: 25px; */
+    padding: 3rem;
+    font-size: 3rem;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.mat-dialog-actions {
+    /* padding-left: 58% !important; */
+    /* position: fixed; */
+    float: none;
+    padding-right: 1px !important;
+    background-color: rgba(236, 240, 241, 0.94902);
+}
+
+.pull-center {
+    position: relative;
+    left: calc(100% - 62%);
+}

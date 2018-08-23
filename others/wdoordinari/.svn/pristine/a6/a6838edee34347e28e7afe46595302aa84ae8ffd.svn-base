@@ -1,0 +1,22 @@
+import { ContentChild, TemplateRef, Input, Component } from "@angular/core";
+
+
+
+@Component({
+    selector: 'core-table-column',
+    template: '<td></td>'
+})
+export class CoreTableColumnComponent {
+
+    @Input() title: string;
+    @Input() name: string;
+    @Input() style: {
+        [key: string]: string;
+    };
+    @Input() sort: 'asc' | 'desc' | false;
+    @Input() index = 0;
+
+    @ContentChild(TemplateRef) template: TemplateRef<any>;
+
+
+}

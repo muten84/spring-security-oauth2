@@ -1,0 +1,58 @@
+<h2 mat-dialog-title style="padding-left:10px;">{{title}}</h2>
+<!-- <mat-dialog-content>{{title}}</mat-dialog-content> -->
+<mat-dialog-content>
+    <mat-table #table [dataSource]="dataSource" >
+        <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+        <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+        <ng-container matColumnDef="group">
+            <mat-header-cell *matHeaderCellDef >Tipo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.group}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="subgroup">
+            <mat-header-cell *matHeaderCellDef >Gruppo</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.subgroup}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef >Nome</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.name}} </mat-cell>
+        </ng-container>
+
+
+
+    </mat-table>
+
+
+    <!--<mat-accordion [multi]="false" class="headers-align">
+        <ng-template ngFor let-i [ngForOf]="groupedItems">
+            <mat-expansion-panel [expanded]="nextGroup === i[0].subgroup" (opened)="setCurrent(i[0].subgroup)" hideToggle="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Gruppo: {{i[0].subgroup}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Numero sintomi rilevati: {{i.length}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-table #table [dataSource]="i" matSort>                    
+                    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{element.name}} </mat-cell>
+                    </ng-container>
+                </mat-table>
+                <mat-action-row>                    
+                    <button mat-button color="primary" (click)="nextStep()">Prossimo</button>
+                </mat-action-row>
+            </mat-expansion-panel>
+        </ng-template>
+    </mat-accordion> -->
+</mat-dialog-content>
+<mat-dialog-actions class="align-items-center h-100 justify-content-center pull-center">
+    <!-- Can optionally provide a result for the closing dialog. -->
+    <button class="btn-xlg" mdcButton [raised]="true" mat-button [mat-dialog-close]="true">
+        <span class="btn-value">OK</span>
+    </button>
+</mat-dialog-actions>

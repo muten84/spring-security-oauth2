@@ -1,0 +1,5 @@
+#daysInfoHistoryTable 
+  table {
+    max-height: 70px;
+}
+

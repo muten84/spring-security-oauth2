@@ -1,0 +1,5 @@
+{
+ "artifactId": "emsmobile",
+ "immediateInstall": "true",
+ "localInstallPath": "/esel/terminal/app" 
+}

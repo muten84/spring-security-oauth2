@@ -1,0 +1,62 @@
+<div>
+	<table class="table table-bordered table-hover table-condensed">
+		<tr style="font-weight: bold">
+			<td style="width:10%">Mezzo</td>
+			<td style="width:10%">Attivazione</td>
+			<td style="width:10%">Partenza </td>
+			<td style="width:10%">Arrivo</td>
+            <td style="width:10%">Carico Pazienti</td>
+            <td style="width:10%">Destinazione</td>            
+			<td style="width:10%">Libero</td>			
+			<!--<td style="width:30%"></td>-->
+		</tr>
+		<!-- riga di un intervento -->
+		<tr ng-repeat="i in interventions">
+			<td>
+				<!-- MEZZO -->
+				<span e-form="rowform" e-name="vehicleName"> {{ i.vehicleName || 'empty' }} </span>
+			</td>
+			<td>
+				<!-- ORARIO ATTIVAZIONE-->
+				<span e-form="rowform" e-name="activation"> {{ i.activation || 'empty' }} </span>
+			</td>
+			<td>
+                <!-- ORARIO PARTENZA-->
+				<span e-form="rowform" e-name="send"> {{ i.send || 'empty' }} </span>
+			</td>
+			<td>
+                <!-- ORARIO ARRIVO-->
+				<span e-form="rowform" e-name="placeArrival"> {{ i.placeArrival || 'empty' }} </span>
+			</td>
+			<td>
+				<!-- ORARIO CARICO PAZIENTI-->
+				<span e-form="rowform" e-name="placeDeparture"> {{ i.placeDeparture || 'empty' }} </span>
+			</td>
+			<td>
+				<!-- ORARIO DESTINAZIONE-->
+				<span e-form="rowform" e-name="destination"> {{ i.destination || 'empty' }} </span>
+                <!-- OSPEDALE-->
+			</td>
+			<td>
+				<!-- lista mezzi assegnati -->
+			</td>
+			<td style="white-space: nowrap">
+				<!-- form -->
+				<form onshow="currentForm(rowform)" editable-form name="rowform" onbeforesave="saveEvent($data, ev.id)" ng-show="rowform.$visible" class="form-buttons form-inline"
+					shown="inserted == ev">
+
+					<button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">Salva</button>
+					<button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">Annulla</button>
+					<!--<button type="button" ng-disabled="rowform.$waiting" class="btn btn-primary">Salva</button> -->
+				</form>
+				<div class="buttons" ng-show="!rowform.$visible">
+					<button class="btn btn-primary" ng-click="rowform.$show()"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+					<button class="btn btn-primary" ng-click="rowform.$show()"><i class="fa fa-ambulance" aria-hidden="true"></i></button>
+					<button class="btn btn-danger" ng-click="removeEvent($index)"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+				</div>
+			</td>
+		</tr>
+		<!-- riga di un evento -->
+	</table>
+	<button class="btn btn-default" ng-click="addEvent()">Crea evento</button>
+</div>

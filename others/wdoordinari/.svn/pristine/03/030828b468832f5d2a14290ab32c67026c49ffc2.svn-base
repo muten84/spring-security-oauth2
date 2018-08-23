@@ -1,0 +1,7 @@
+<div ngbDropdown class="input-group-btn hour-menu">
+  <button [disabled]="disabled" class="btn input-group-text btn-sm" type="button" data-toggle="dropdown" ngbDropdownToggle>
+    Pre</button>
+  <div ngbDropdownMenu>
+    <a *ngFor="let value of values" class="dropdown-item" (click)="selectHour(value)">{{value}}</a>
+  </div>
+</div>

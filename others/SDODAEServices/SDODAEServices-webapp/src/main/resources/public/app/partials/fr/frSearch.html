@@ -1,0 +1,173 @@
+<!--INIZIO TEMPLATE POPOVER PROFILO -->
+<script type="text/ng-template" id="profilePopOver.html">
+	<div class="media" style="width: auto !important">
+		<div class="pull-left">
+			<div class="media-object img-circle">
+				<i class="fa fa-user"></i>
+			</div>
+		</div>
+		<div class="media-body" style="width: auto !important">
+			<dl class="dettaglio">
+				<dt>Nome e Cognome</dt>
+				<dd>{{row.entity.nome}} {{row.entity.cognome}}</dd>
+				<dt>Codice fiscale</dt>
+				<dd>{{row.entity.codiceFiscale}}</dd>
+				<dt>Numero di cellulare</dt>
+				<dd>{{row.entity.numCellulare}}</dd>
+				<dt>Comune</dt>
+				<dd>{{row.entity.comuneResidenza.nomeComune}}</dd>
+				<dt>Certificato il</dt>
+				<dd>{{grid.appScope.formatDate(row.entity.certificatoFr.dataConseguimento)}}</dd>
+				<dt>Ordine/Num. Iscrizione</dt>
+				<dd>{{row.entity.profiloSanitario.ordine}} - {{row.entity.medicoFr.numIscrizioneOrdine}}</dd>
+
+				<dt>Disponibile</dt>
+				<dd>{{row.entity.disponibile?"SI":"NO"}}</dd>
+				<dt>Non Disturbare</dt>
+				<dd>{{row.entity.doNotDisturb ?"SI":"NO"}}</dd>
+
+				<dt ng-show="row.entity.doNotDisturb">DA</dt>
+				<dd ng-show="row.entity.doNotDisturb">{{row.entity.doNotDisturbFrom}}</dd>
+
+				<dt ng-show="row.entity.doNotDisturb">A</dt>
+				<dd ng-show="row.entity.doNotDisturb">{{row.entity.doNotDisturbTo}}</dd>
+
+				<dt ng-show="row.entity.lastPosition">Data ultima Posizione</dt>
+				<dd ng-show="row.entity.lastPosition">{{grid.appScope.formatDate(row.entity.lastPosition.timeStamp)}}</dd>
+			</dl>
+		</div>
+	</div>
+</script>
+<!-- FINE -->
+
+<!--INIZIO TEMPLATE MODALE immagine del certificato -->
+<script type="text/ng-template" id="certificatoModal.html">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">{{title}}</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<img class="modal-image" ng-src='{{immagine}}' ng-click="open(immagine)"></img>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" type="button" ng-click="$dismiss('cancel')">OK</button>
+	</div>
+</script>
+<!-- FINE -->
+
+<!--INIZIO TEMPLATE MODALE del QUESTIONARIO -->
+<script type="text/ng-template" id="questionarioModal.html">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">{{title}}</h3>
+	</div>
+	<div class="modal-body" id="modal-body">
+		<div class="media" style="width: auto !important">
+			<div class="pull-left">
+				<div class="media-object img-circle">
+					<i class="fa fa-list-ol"></i>
+				</div>
+			</div>
+			<div class="media-body" style="width: auto !important">
+				<dl ng-repeat="entry in questions" class="dettaglio">
+					<dt>{{entry.rispostaQuestionarioFirstResponder.domandaQuestionario.domanda}}</dt>
+					<dd>{{entry.rispostaQuestionarioFirstResponder.risposta}}</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" type="button" ng-click="$dismiss('cancel')">OK</button>
+	</div>
+</script>
+
+
+
+
+<div class="modal-attach"></div>
+
+<fieldset>
+	<div class="row">
+		<div class="col-md-6">
+			<label>Nome</label>
+			<input clear-text type="text" class="clearable form-control" ng-model="filter.nome" placeholder="Inserire Nome" />
+			<label>Email</label>
+			<input clear-text type="text" class="clearable form-control" ng-model="filter.email" placeholder="Inserire Email" />
+
+			<label>Provincia</label>
+			<ui-select reset-search-input="true" ng-model="filter.province" theme="bootstrap">
+				<ui-select-match allow-clear placeholder="Provincia">{{$select.selected.nomeProvincia}}</ui-select-match>
+				<ui-select-choices repeat="provincia.nomeProvincia as provincia in province | filter: { nomeProvincia: $select.search }">
+					<div ng-bind-html="provincia.nomeProvincia | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+			<!--<label>Modello</label>
+                <input clear-text type="text" class="clearable form-control" ng-model="filter.modello" placeholder="Modello" />-->
+		</div>
+		<div class="form-group col-md-6">
+			<label>Cognome</label>
+			<input clear-text type="text" class="clearable form-control" ng-model="filter.cognome" placeholder="Inserire Cognome" />
+
+			<div class="row">
+				<div class="col-md-6">
+					<label>Categoria</label>
+					<ui-select ng-model="filter.categoria" theme="bootstrap">
+						<ui-select-match allow-clear placeholder="Categoria">{{$select.selected.descrizione}}</ui-select-match>
+						<ui-select-choices repeat="c as c in categorie" refresh="refreshCategorie($select.search)" refresh-delay="500">
+							<div ng-bind-html="c.descrizione | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+				</div>
+				<div class="col-md-6">
+					<label>Stato Profilo</label>
+					<ui-select ng-model="filter.profileStat" theme="bootstrap">
+						<ui-select-match allow-clear placeholder="Inserire Stato Profilo">{{$select.selected.descrizione}}</ui-select-match>
+						<ui-select-choices repeat="c as c in statoProfili" refresh="refreshProfileStatus($select.search)" refresh-delay="500">
+							<div ng-bind-html="c.descrizione | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+				</div>
+			</div>
+			<label>Comune</label>
+			<ui-select ng-model="filter.comune" theme="bootstrap">
+				<ui-select-match allow-clear placeholder="Comune">{{$select.selected.nomeComune}}</ui-select-match>
+				<ui-select-choices repeat="comune.nomeComune as comune in comuni" refresh="refreshComune($select.search)" refresh-delay="500">
+					<div ng-bind-html="comune.nomeComune | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+	</div>
+	<div class="btn-container pull-right">
+		<div class="btn-group">
+			<button ng-click="exportCSV()" class="btn btn-primary" ng-disabled="gridOptions.data.length <= 0">
+				<i class="fa fa-th " aria-hidden="true"></i> Esporta Excel
+			</button>
+			<button ng-click="search(filter)" class="btn btn-primary">
+				<i class="fa fa-search" aria-hidden="true"></i> Cerca
+			</button>
+			<button ng-click="pulisci()" class="btn btn-danger">
+				<i class="fa fa-undo" aria-hidden="true"></i> Pulisci
+			</button>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Risultati: {{gridOptions.data.length}}</legend>
+	<div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 490px;"></div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class=" btn-container  pull-left">
+				<button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+					<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+					<i class="fa fa-chevron-right" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="media pull-right" style="padding: 5px">
+				<span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+			</div>
+		</div>
+	</div>
+</fieldset>

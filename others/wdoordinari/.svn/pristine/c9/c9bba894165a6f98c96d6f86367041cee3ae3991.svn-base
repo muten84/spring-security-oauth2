@@ -1,0 +1,43 @@
+<!--<div class="layout-app-content clearfix dashboard" id="content">
+  <div class="container-fluid">-->
+<div *ngIf="isForSearch" id="commonsearch">
+  <div class="breadcrumbs header-section row " style="padding: 0px !important">
+    <!--style="margin-left: 11px !important;margin-right: -19px !important;"-->
+    <div class="title col-xs-12 col-sm-10" style="margin-top:3px; margin-bottom:2px;">
+      <span class="section-icon"><i class="fa {{headerIcon}} fa-2x" aria-hidden="true"></i></span>
+      <h1 class="section-title">{{headerTitle}}</h1>
+    </div>
+    <div *ngIf="showHeaderHook" class="col-xs-12 col-sm-2 input-group input-group-lg" style="margin-top: 18px">
+      <!--<span style="background-color: white;" class="input-group-addon" id="basic-addon1"><i class="fa fa-microphone" aria-hidden="true"></i></span>
+      <input style="background-color: white; border-left: transparent;" type="text" class="form-control" placeholder="Cerca..."
+        aria-describedby="basic-addon1">-->
+
+      <button data-toggle="collapse" (click)="manageSearch()" aria-expanded="false" class="input-group-addon btn btn-primary" style="font-size: 18px; padding: 10px;width: 100px"
+        type="submit">Cerca</button>
+      <button class="input-group-addon btn btn-primary collapsed" style="font-size: 13px;padding: 10px;" data-target="#search-advanced"
+        data-toggle="collapse" type="button"><span class="sr-only">Ricerca avanzata</span>
+            <i
+              class="fa fa-chevron-down"></i>
+      </button>
+      <button data-toggle="collapse" (click)="resetFilter()" aria-expanded="false" class="input-group-addon btn btn-primary"
+        style="font-size: 18px; padding: 10px" type="submit"><i class="fa fa-undo" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container search-advanced collapsible collapse in" id="search-advanced" style="background-color:rgb(207, 217, 219); ">
+      <form name="bookingSearchForm" id="searchForm" aria-expanded="true" class="collapse show" action="/html/tags/html_form_tag_action.cfm">
+        <ndc-dynamic [ndcDynamicComponent]="contentForm" [ndcDynamicInputs]="inputs" [ndcDynamicOutputs]="outputs"></ndc-dynamic>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="!isForSearch" class="row">
+  <ndc-dynamic [ndcDynamicComponent]="contentForm" [ndcDynamicInputs]="inputs" [ndcDynamicOutputs]="outputs"></ndc-dynamic>
+</div>
+
+
+<!--<div class="row">
+    <ndc-dynamic [ndcDynamicComponent]="contentAll" [ndcDynamicInputs]="inputs" [ndcDynamicOutputs]="outputs"></ndc-dynamic>
+  </div>-->

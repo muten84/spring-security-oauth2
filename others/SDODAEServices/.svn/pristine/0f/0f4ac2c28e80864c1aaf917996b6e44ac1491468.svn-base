@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+	version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+	<persistence-unit name="default">
+		<property
+			name="spring.jpa.hibernate.naming_strategy "
+			value="org.hibernate.cfg.ImprovedNamingStrategy" />
+		<class>it.eng.areas.ems.sdodaeservices.entity.CalendarioFestivitaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrFilterDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.CertificatoFrDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ColoreDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ComuneDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DaeDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DisponibileDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaEccezioniDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaGiornalieraDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DisponibilitaSpecificaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DomandaQuestionarioDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ExampleDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.GPSLocationDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.GruppoDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ImageDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.InterventoDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.InterventoCoordDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.EventDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.LocationDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.LogAlertDAEDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ManutentoreDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.MappaDAEConfigDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.MessaggioDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.NotaDAEDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.NotificaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.NotificheConfigDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ProfiloSanitarioDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ProgrammaManutenzioneDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ProvinciaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ConfigDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.QuestionarioDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DomandaQuestionarioDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.QuestionarioFirstResponderDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ResponsabileDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.RichiestaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.RispostaQuestionarioFirstResponderDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.RuoloDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ScadenzaDAEDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.SMTPProtocolConfigDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.StatoDAEDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.StatoDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.StatoRichiestaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.StatoUtenteDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.StrutturaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.TipoStrutturaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.TonoDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.UbicazioneDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.CertificatoDaeDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.CertificatoFrDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DaeMobileTokenDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.UtenteDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.gis.VCTDaeDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.StradeDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DispositiviDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.EventDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ProfessioneDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.EnteCertificatoreDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.MedicoFrDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.NotificheEventoDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.MailTemplateDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.MailTraceDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.ResetPasswordDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.PasswordHistoryDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.GruppoProvinciaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DaeFaultDO</class>
+
+		<class>it.eng.areas.ems.sdodaeservices.entity.LocalitaDO</class>
+		<class>it.eng.areas.ems.sdodaeservices.entity.DaeFaultTraceDO</class>
+
+		<class>it.eng.areas.ems.sdodaeservices.entity.gis.VctDaeDODistanceBean</class>
+
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+	</persistence-unit>
+</persistence>
+

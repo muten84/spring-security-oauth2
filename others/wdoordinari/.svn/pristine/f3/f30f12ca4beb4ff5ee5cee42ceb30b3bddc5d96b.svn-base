@@ -1,0 +1,16 @@
+<div aria-expanded="true" id="searchResult" class="card-block to-check collpase show">
+  <complex-table [config]="config" (optionItemClicked)="onOptionItemClicked($event)" (tableChanged)="onChangeTable(config)"
+    (cellClicked)="onCellClick($event);" [rows]="rows" [columns]="columns" (showOptionsMenu)="onMenuShow($event)">
+  </complex-table>
+</div>
+<div class="card-block to-check collpase show">
+  <div class="row pull-left">
+    <pagination class="pagination-sm pull-right" *ngIf="config.paging" class="pagination-sm" [(ngModel)]="page" [totalItems]="length"
+      [itemsPerPage]="itemsPerPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false" (pageChanged)="onChangeTable(config, $event)"
+      (numPages)="numPages = $event">
+    </pagination>
+  </div>
+  <div class="row pull-right">
+    <span *ngIf="config.paging" class="badge">Pagina: {{page}} / {{numPages}}</span>
+  </div>
+</div>

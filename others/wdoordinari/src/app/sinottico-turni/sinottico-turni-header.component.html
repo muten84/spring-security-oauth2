@@ -1,0 +1,52 @@
+<form [formGroup]="turniFG" validationGroup>
+<div class="form-group row">
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="data" validationLabel="startTurnDate">Data Inizio</label>
+    <div class="input-group input-group-sm" clickoff>
+      <input [inputMask]="'99/99/9999'" type="text" id="fromDate" class="form-control" placeholder="dd/mm/yyyy" name="dpdataDa"
+        [(ngModel)]="initDateToSet" [formControl]="getControl('startTurnDate')" validationMessage ngbDatepicker #dpdataDa="ngbDatepicker" (ngModelChange)="dateSelected($event)">
+      <div class="input-group-append">
+        <button class="btn input-group-text" (click)="dpdataDa.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+    </div>
+    <div>
+      <label class="mt-2 mr-sm-2 mb-0" validationLabel="startTurnTimeNoSec">Orario</label>
+      <input inputMask="99:99" class="form-control" placeholder="HH:MM" [(ngModel)]="filter.initTurnTime" tabindex="1" [formControl]="getControl('startTurnTimeNoSec')" validationMessage>
+    </div>
+
+  </div>
+
+
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="vehicle">Mezzo</label>
+    <div>
+      <ng-select [(ngModel)]="selectedVehicle" [allowClear]="true" [items]="vehicles | async" (refresh)="retrieveVehicle118ByCode($event)"
+        minChar="0" refreshDelay="500" textField="code" placeholder="Selezionare Mezzo..." (ngModelChange)="vehicleSelected($event)" [ngModelOptions]="{standalone: true}">
+      </ng-select>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="parking">Postazione</label>
+    <div>
+      <ng-select [(ngModel)]="filter.parkingCode" [allowClear]="true" [items]="parkingItems | async" (refresh)="updateParkingList($event)"
+        minChar="0" refreshDelay="500" textField="name" valueField="name" placeholder="Selezionare Postazione..." [ngModelOptions]="{standalone: true}"> </ng-select>
+    </div>
+  </div>
+
+
+  <div class="col-md-4">
+    <label class="mt-2 mr-sm-2 mb-0" for="sanitaryCategory">Categ. Sanitaria</label>
+    <div>
+      <ng-select [(ngModel)]="selectedSanitaryCategory" allowClear="true" textField="description" [items]="sanitaryCategories | async" 
+      tabindex="5"  placeholder="Selezionare Cat. Sanitaria..." (ngModelChange)="sanitaryCategorySelected($event)" [ngModelOptions]="{standalone: true}">
+      </ng-select>
+    </div>
+    <label class="mt-2 mr-sm-2 mb-0" for="convention">Convenzione</label>
+    <div>
+      <ng-select [(ngModel)]="selectedConvention" allowClear="true" textField="description" [items]="conventions | async" placeholder="Selezionare Convenzione..."
+        tabindex="5" (ngModelChange)="conventionSelected($event)" [ngModelOptions]="{standalone: true}"> </ng-select>
+    </div>
+  </div>
+
+</div>
+</form>

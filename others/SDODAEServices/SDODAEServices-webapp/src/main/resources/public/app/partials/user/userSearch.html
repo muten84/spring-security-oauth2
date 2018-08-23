@@ -1,0 +1,98 @@
+<!--INIZIO TEMPLATE POPOVER PROFILO -->
+<script type="text/ng-template" id="profileUserPopOver.html">
+    <div class="media" style="width: auto !important">
+        <div class="pull-left">
+            <div class="media-object img-circle">
+                <i class="fa fa-user"></i>
+            </div>
+        </div>
+        <div class="media-body" style="width: auto !important">
+            <dl class="dettaglio">
+                <dt>Nome e Cognome</dt>
+                <dd>{{row.entity.nome}} {{row.entity.cognome}}</dd>
+                <dt>Codice fiscale</dt>
+                <dd>{{row.entity.codiceFiscale}}</dd>
+                <dt>Numero di cellulare</dt>
+                <dd>{{row.entity.numCellulare}}</dd>
+                <dt>Comune</dt>
+                <dd>{{row.entity.comuneResidenza.nomeComune}}</dd>
+                <dt>Ruolo</dt>
+                <dd>{{row.entity.ruoli[0].descrizione}}</dd>
+            </dl>
+        </div>
+    </div>
+</script>
+<!-- FINE -->
+
+<form>
+    <fieldset>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Identificativo Utente</label>
+                <input clear-text type="text" class="clearable form-control" ng-model="filter.logon" placeholder="Inserire Identificativo Utente"
+                />
+
+                <label>Email</label>
+                <input clear-text type="text" class="clearable form-control" ng-model="filter.email" placeholder="Inserire Email" />
+
+                <label>Ruolo</label>
+                <ui-select name="Stato" ng-model="filter.ruolo" theme="bootstrap">
+                    <ui-select-match allow-clear placeholder="Ruolo">{{$select.selected.descrizione}}</ui-select-match>
+                    <ui-select-choices repeat="ruolo in ruoli  track by $index">
+                        <div ng-bind-html="ruolo.descrizione | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+            <div class="form-group col-md-6">
+
+                <label>Nome</label>
+                <input clear-text type="text" class="clearable form-control" ng-model="filter.nome" placeholder="Inserire Nome" />
+
+                <label>Cognome</label>
+                <input clear-text type="text" class="clearable form-control" ng-model="filter.cognome" placeholder="Inserire Cognome" />
+
+                <label>Gruppo</label>
+                <ui-select name="Stato" ng-model="filter.gruppo" theme="bootstrap">
+                    <ui-select-match allow-clear placeholder="Gruppo">{{$select.selected.nome}}</ui-select-match>
+                    <ui-select-choices repeat="gruppo in gruppi  track by $index">
+                        <div ng-bind-html="gruppo.nome | highlight: $select.search"></div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="btn-container pull-right">
+            <div class="btn-group">
+                <button ng-click="exportCSV()" class="btn btn-primary" ng-disabled="gridOptions.data.length <= 0">
+                    <i class="fa fa-th " aria-hidden="true"></i>
+                    Esporta Excel</button>
+                <button ng-click="search(filter)" class="btn btn-primary">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Cerca</button>
+                <button ng-click="pulisci()" class="btn btn-danger">
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                    Pulisci</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<fieldset>
+    <legend>Risultati: {{gridOptions.data.length}}</legend>
+    <div ui-grid="gridOptions" ui-grid-pagination class="gridDAE" style="height: 490px;"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class=" btn-container  pull-left">
+                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.previousPage()">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="gridApi2.pagination.nextPage()">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="media pull-right" style="padding: 5px">
+                <span class="media-title">Pagina: {{ gridApi2.pagination.getPage() }} di {{ gridApi2.pagination.getTotalPages() }}</span>
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,15 @@
+spinner .input-group-btn-vertical>.btn:first-child {
+  border-top-right-radius: 0px;
+}
+
+spinner .input-group-btn-vertical>.btn:last-child {
+  border-bottom-right-radius: 0px;
+}
+
+hour-menu .input-group-addon {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+

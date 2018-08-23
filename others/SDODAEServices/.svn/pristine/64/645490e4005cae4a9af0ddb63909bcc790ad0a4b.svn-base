@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings
+	xmlns="http://dozer.sourceforge.net"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net schema/beanmapping.xsd">
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+		<field-exclude>
+			<a>interventi</a>
+			<b>interventi</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_SEARCH">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+		<field map-id="EventDO_Event_DEEP_LocationDO_GPSLocation_BARE">
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field>
+		<field map-id="InterventoDO_Intervento_BARE">
+			<a>interventi</a>
+			<b>interventi</b>
+		</field>
+		<field-exclude>
+			<a>notifiche</a>
+			<b>notifiche</b>
+		</field-exclude>
+		<field map-id="CategoriaFrDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoria</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+		<field map-id="EventDO_Event_DEEP_LocationDO_GPSLocation_BARE">
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field>
+		<field map-id="CategoriaFrDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoria</b>
+		</field>
+		<field-exclude>
+			<a>interventi</a>
+			<b>interventi</b>
+		</field-exclude>
+		<field-exclude>
+			<a>notifiche</a>
+			<b>notifiche</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_DETAIL">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+		<field map-id="EventDO_Event_DEEP_LocationDO_GPSLocation_BARE">
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field>
+		<field map-id="CategoriaFrDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoria</b>
+		</field>
+		<field map-id="InterventoDO_Intervento_USER_FULL">
+			<a>interventi</a>
+			<b>interventi</b>
+		</field>
+		<!-- <field map-id="NotificheEventoDO_NotificheEvento_USER"> <a>notifiche</a> <b>notifiche</b> </field> -->
+		<field-exclude>
+			<a>notifiche</a>
+			<b>notifiche</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_APP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+		<field map-id="EventDO_Event_DEEP_LocationDO_GPSLocation_BARE">
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field>
+		<field map-id="CategoriaFrDO_CategoriaFR_BARE">
+			<a>categoriaFr</a>
+			<b>categoria</b>
+		</field>
+		<field map-id="InterventoDO_Intervento_USER">
+			<a>interventi</a>
+			<b>interventi</b>
+		</field>
+		<field-exclude>
+			<a>notifiche</a>
+			<b>notifiche</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="NotificheEventoDO_NotificheEvento_USER">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.NotificheEventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.NotificheEvento
+		</class-b>
+		<field map-id="FirstResponderDO_FirstResponder_BASIC_CATEGORY">
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field>
+		<field-exclude>
+			<a>event</a>
+			<b>event</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="NotificheEventoDO_NotificheEvento_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.NotificheEventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.NotificheEvento
+		</class-b>
+		<field map-id="NotificheEventoDO_NotificheEvento_DEEP_FirstResponderDO_FirstResponder_BARE">
+			<a>firstResponder</a>
+			<b>firstResponder</b>
+		</field>
+		<field map-id="NotificheEventoDO_NotificheEvento_DEEP_EventDO_Event_BARE">
+			<a>event</a>
+			<b>event</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFr_CategoriaFRDO_DEEP">
+
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFrDO_CategoriaFR_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-b>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="CategoriaFrDO_CategoriaFR_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.CategoriaFrDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.CategoriaFr
+		</class-b>
+
+		<field-exclude>
+			<a>aggiornataDa</a>
+			<b>aggiornataDa</b>
+		</field-exclude>
+
+		<field-exclude>
+			<a>creataDa</a>
+			<b>creataDa</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="NotificheEventoDO_NotificheEvento_DEEP_FirstResponderDO_FirstResponder_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+		<field-exclude>
+			<a>categoriaFr</a>
+			<b>categoriaFr</b>
+		</field-exclude>
+		<field-exclude>
+			<a>statoProfilo</a>
+			<b>statoProfilo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>certificatoFr</a>
+			<b>certificatoFr</b>
+		</field-exclude>
+		<field-exclude>
+			<a>professione</a>
+			<b>professione</b>
+		</field-exclude>
+		<field-exclude>
+			<a>immagine</a>
+			<b>immagine</b>
+		</field-exclude>
+		<field-exclude>
+			<a>dispositivo</a>
+			<b>dispositivo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>profiloSanitario</a>
+			<b>profiloSanitario</b>
+		</field-exclude>
+		<field-exclude>
+			<a>lastPosition</a>
+			<b>lastPosition</b>
+		</field-exclude>
+		<field-exclude>
+			<a>questionarioFirstResponder</a>
+			<b>questionarioFirstResponder</b>
+		</field-exclude>
+		<field-exclude>
+			<a>gruppo</a>
+			<b>gruppo</b>
+		</field-exclude>
+		<field-exclude>
+			<a>medicoFr</a>
+			<b>medicoFr</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="NotificheEventoDO_NotificheEvento_DEEP_EventDO_Event_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+		<field-exclude>
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field-exclude>
+		<field-exclude>
+			<a>interventi</a>
+			<b>interventi</b>
+		</field-exclude>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_DEEP_LocationDO_GPSLocation_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.GPSLocationDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.GPSLocation
+		</class-b>
+		<field-exclude>
+			<a>location</a>
+			<b>location</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_DEEP_LocationDO_GPSLocation_DEEP_StradeDO_Strade_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.StradeDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Strade
+		</class-b>
+		<field-exclude>
+			<a>comune</a>
+			<b>comune</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_DEEP_ComuneDO_Comune_PROVINCIA">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ComuneDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Comune
+		</class-b>
+		<field map-id="EventDO_Event_DEEP_ProvinciaDO_Provincia_BARE">
+			<a>provincia</a>
+			<b>provincia</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="EventDO_Event_DEEP_ProvinciaDO_Provincia_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.ProvinciaDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Provincia
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Event_EventDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-b>
+		<field map-id="CategoriaFr_CategoriaFRDO_DEEP">
+			<a>categoria</a>
+			<b>categoriaFr</b>
+		</field>
+		<field-exclude>
+			<a>notifiche</a>
+			<b>notifiche</b>
+		</field-exclude>
+		<field>
+			<a>coordinate.latitudine</a>
+			<b>coordinate.latitudine</b>
+		</field>
+
+		<field>
+			<a>coordinate.longitudine</a>
+			<b>coordinate.longitudine</b>
+		</field>
+		<field>
+			<a>coordinate.altitudine</a>
+			<b>coordinate.altitudine</b>
+		</field>
+		<field>
+			<a>coordinate.error</a>
+			<b>coordinate.error</b>
+		</field>
+		<field>
+			<a>coordinate.timeStamp</a>
+			<b>coordinate.timeStamp</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="Event_EventDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-b>
+		<field-exclude>
+			<a>event</a>
+			<b>event</b>
+		</field-exclude>
+		<field-exclude>
+			<a>eseguitoDa</a>
+			<b>eseguitoDa</b>
+		</field-exclude>
+		<field-exclude>
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-b>
+		<field map-id="EventDO_Event_DEEP">
+			<a>event</a>
+			<b>event</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_DEEP">
+			<a>eseguitoDa</a>
+			<b>eseguitoDa</b>
+		</field>
+		<field-exclude>
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_USER">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-b>
+		<field-exclude>
+			<a>event</a>
+			<b>event</b>
+		</field-exclude>
+		<field map-id="FirstResponderDO_FirstResponder_BASIC">
+			<a>eseguitoDa</a>
+			<b>eseguitoDa</b>
+		</field>
+		<field map-id="InterventoCoordDO_InterventoCoord_BARE">
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_USER_FULL">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-b>
+		<field-exclude>
+			<a>event</a>
+			<b>event</b>
+		</field-exclude>
+		<field map-id="FirstResponderDO_FirstResponder_BASIC_CATEGORY">
+			<a>eseguitoDa</a>
+			<b>eseguitoDa</b>
+		</field>
+		<field>
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field>
+	</mapping>
+
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_FOR_EVENT">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-b>
+		<field map-id="EventDO_Event_DEEP">
+			<a>event</a>
+			<b>event</b>
+		</field>
+		<field map-id="FirstResponderDO_FirstResponder_BASIC">
+			<a>eseguitoDa</a>
+			<b>eseguitoDa</b>
+		</field>
+		<field-exclude>
+			<a>coordinate</a>
+			<b>coordinate</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoCoordDO_InterventoCoord_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.InterventoCoordDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.InterventoCoord
+		</class-b>
+		<field-exclude>
+			<a>intervento</a>
+			<b>intervento</b>
+		</field-exclude>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_DEEP_FirstResponderoDO_FirstRespondero_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.FirstResponderDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.FirstResponder
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="InterventoDO_Intervento_DEEP_EventoDO_Evento_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.entity.EventDO
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.delegate.model.Event
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Intervento_InterventoDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-b>
+	</mapping>
+
+	<mapping
+		wildcard="true"
+		map-id="Intervento_InterventoDO_BARE">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.Intervento
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.InterventoDO
+		</class-b>
+	</mapping>
+	<mapping
+		wildcard="true"
+		map-id="NotificheEvento_NotificheEventoDO_DEEP">
+		<class-a>it.eng.areas.ems.sdodaeservices.delegate.model.NotificheEvento
+		</class-a>
+		<class-b>it.eng.areas.ems.sdodaeservices.entity.NotificheEventoDO
+		</class-b>
+	</mapping>
+
+
+</mappings>

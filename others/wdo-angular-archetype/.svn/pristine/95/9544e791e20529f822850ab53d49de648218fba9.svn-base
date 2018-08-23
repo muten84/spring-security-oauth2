@@ -1,0 +1,22 @@
+<table ng-table="usersTable" class="table table-striped">
+   <tr ng-repeat="user in data">
+       <td data-title="'Id'" >
+           {{user.id}}
+       </td>
+       <td data-title="'First Name'" >
+           {{user.first_name}}
+       </td>
+       <td data-title="'Last Name'" >
+           {{user.last_name}}
+       </td>    
+       <td data-title="'e-mail'" >
+           {{user.email}}
+       </td>    
+       <td data-title="'Country'">
+           {{user.country}}
+       </td>    
+       <td data-title="'IP'" >
+           {{user.ip_address}}
+       </td>    
+   </tr>
+</table>

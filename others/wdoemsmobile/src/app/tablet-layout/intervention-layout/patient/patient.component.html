@@ -1,0 +1,327 @@
+<div [@.disabled]="disableAnimation" [@routerTransition] class="checkin-section" style="height: 99vh;">
+
+    <section class="sectionWrapperCard">
+
+        <i class="fa fa-3x fa-address-card" style="color: #ecf0f1;"></i>
+        <span class="title">Scheda Paziente</span>
+
+        <mat-card style="width: 100%;height: 100%;">
+            <div class="row">
+                <span style="font-size: 1.3em;" class="label-card ml-auto pull-left col-sm-5">COD.EMERG.: {{intervention?.codEmergenza?.value}}</span>
+
+                <span style="font-size: 1.3em;" class="label-card ml-auto pull-left col-sm-4">MEZZO:
+                    <span [ngClass]="classLabelMezzo">{{ownerPage}}</span>
+                </span>
+
+                <span style="font-size: 1.3em;" class="label-card ml-auto pull-left col-sm-3">VAL.SAN.: {{patient?.valutazSanitaria}} </span>
+
+            </div>
+        </mat-card>
+
+        <div class="row" style="padding: 12px;">
+            <mat-card style="width: 23%;height: 5.4em;padding: 0px;">
+                <i class="fa fa-3x fa-user" style="margin-left:10px;margin-top:0.3em;color: #ecf0f1;"></i>
+                <span style="font-size: 1.3em;" class="label-card mr-auto col-sm-12">Paziente {{indexPatient}} / {{pages}} </span>
+            </mat-card>
+
+            <mat-card style="width: 53%;height: 5.4em;">
+                <span style="font-size: 1.3em;" class="label-card ml-auto pull-left col-sm-12">COGNOME: {{patient.cognome}}</span>
+                <span style="font-size: 1.3em;" class="label-card mr-auto pull-right col-sm-12">NOME: {{patient.nome}}</span>
+            </mat-card>
+            <mat-card style="width: 12%;height: 5.4em;padding: 0px;">
+                <button [disabled]="synchronizing || !patient.dirty" [ngClass]="{'mdc-button2-small-T': !(synchronizing || !patient.dirty), 'mdc-button2-small-G':(synchronizing || !patient.dirty)}"
+                    mdcButton [raised]="true" (click)="clean()">Annulla</button>
+                <!--<div class="row" style="margin-left:5px;padding: 0px;width:100%;height:100%">
+                    <button [disabled]="synchronizing || !patient.dirty" class="mdc-button2-small" mdcButton [raised]="true" (click)="clean()">
+                        Annulla
+                    </button>
+                    
+                </div>-->
+            </mat-card>
+            <mat-card style="width: 12%;height: 5.4em;padding: 0px;">
+                <!--<div class="row" style="margin-left:5px;padding: 0px;width:100%;height:100%">-->
+
+                <button [disabled]="synchronizing || !patient.dirty" type="submit" [ngClass]="{'mdc-button2-small-T': !(synchronizing || !patient.dirty), 'mdc-button2-small-G':(synchronizing || !patient.dirty)}"
+                    mdcButton [raised]="true" (click)="save()">
+                    Salva
+                </button>
+                <!--  </div>-->
+            </mat-card>
+        </div>
+    </section>
+
+    <section class="sectionWrapper" style="height:50vh;" *ngIf="activeItem === 'cardValutazSan'">
+
+        <div class="rowCenter" >
+            <div class="col-sm-4">
+                <span class="label">VALUTAZIONE SANITARIA</span>
+            </div>
+
+            <div class="col-sm-8">
+                <mat-radio-group [ngModel]="patient.valutazSanitaria">
+                    <mat-radio-button value="{{item.id}}" *ngFor="let item of valutazSanitList" (click)="itemSelected('valSan', item)">{{item.description}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+        </div>
+        <div class="rowCenter">
+            <div class="col-sm-12">
+                <span class="label">ESITO</span>
+                <mat-form-field>
+                    <input id="esito" (click)="openDialogList('listItemDialogNoSearch', 'serviceresulttype', 'ESITO', 2, '700px')" name="esito"
+                        readonly="true" matInput (change)="onInputChange($event)" value="{{patient?.esito?.description}}" [disabled]="synchronizing || enabledOwner">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="rowCenter">
+            <div class="col-sm-6">
+                <span class="label">ACCOMPAGNATO DA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <!--     <input id="inputItemaccompDa" name="accompDa" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="extended"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'vehicles')"
+                        ng-virtual-keyboard-placeholder="Inserire il mezzo" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.accompDa?.description}}"
+                        [disabled]="synchronizing || enabledOwner"> -->
+                    <input id="inputItemaccompDa" (click)="openDialogList('listItemDialogNoSearch', 'accompda', 'accompda', 2, '700px')" name="accompDa"
+                        readonly="true" matInput (change)="onInputChange($event)" value="{{patient?.accompDa?.description}}"
+                        [disabled]="synchronizing || enabledOwner">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+                <span class="label">DESTINAZIONE</span>
+                <mat-form-field>
+                    <input id="inputItemDestinazione" name="destinazione" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'ospedali')"
+                        ng-virtual-keyboard-placeholder="Inserire la destinazione" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.destinazione?.description}}"
+                        [disabled]="synchronizing || enabledOwner || patient.criticitaFineId == '0'">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="rowCenter">
+            <div class="col-sm-2" style="margin-bottom:5px;">
+                <span class="label">CRITICIT&#192; FINE</span>
+            </div>
+
+            <div class="col-sm-12" style="padding:0px;">
+                <mat-radio-group [(ngModel)]="patient.criticitaFine" style="padding:0px;" [disabled]="synchronizing || enabledOwner">
+                    <mat-radio-button style=" margin-left: 20px !important;" [disabled]="synchronizing || enabledOwner || item.disabled" value="{{item.description}}" *ngFor="let item of criticitaFineList"
+                        (click)="itemSelected('criticitaFine', item)">
+                        <div style="width:8.7em;padding:0px;margin-right: 15px;">
+                            <div style="width:20%;columns:2;padding:0px;">
+                                <div [ngClass]="item.color"></div>
+                                {{item.description}}
+                            </div>
+                        </div>
+                    </mat-radio-button>
+
+
+                </mat-radio-group>
+            </div>
+
+        </div>
+    </section>
+
+    <section mdcCardActions compact class="row justify-content-center align-items-center" *ngIf="activeItem === 'cardValutazSan'">
+        <button class="mdc-button-small" [disabled]="prevEnabled || patient.dirty || isListDirty ||  !synchronized" mdcButton [raised]="true"
+            (click)="toMovePatient('prev')">
+            <mat-icon>fast_rewind</mat-icon>
+        </button>
+        <!-- || isListDirty || !synchronized -->
+        <button class="mdc-button-footer" mdcButton [raised]="true" (click)="add()" [disabled]="patient.dirty || isListDirty ||  !synchronized">Aggiungi</button>
+        <button class="mdc-button-footer" mdcButton [raised]="true" (click)="remove()" [disabled]="!removeEnabled">Rimuovi</button>
+
+        <button class="mdc-button-small" [disabled]="nextEnabled || patient.dirty || isListDirty ||  !synchronized" mdcButton [raised]="true"
+            (click)="toMovePatient('next')">
+            <mat-icon>fast_forward</mat-icon>
+        </button>
+    </section>
+
+    <section class="sectionWrapper" style="height:60vh;" *ngIf="activeItem === 'cardDatiAnagrafici'">
+
+        <div class="rowCenter2" >
+            <div class="col-sm-5">
+                <span class="label">COGNOME</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemCognome" name="cognome" readonly="patient?.checkSconosc" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        ng-virtual-keyboard-placeholder="Digitare il cognome del paziente" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" [(ngModel)]="patient.cognome" [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-5">
+                <span class="label">NOME</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemNome" name="nome" readonly="patient?.checkSconosc" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        ng-virtual-keyboard-placeholder="Digitare il nome del paziente" (change)="onInputChange($event)" (keyboardClosed)="onVKeyboardValue($event)"
+                        placeholder="" [(ngModel)]="patient.nome" [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-2">
+                <mat-checkbox (change)="onChangeCheck($event)" [disabled]="synchronizing || enabledOwner">
+                    <span class="label">Sconosciuto</span>
+                </mat-checkbox>
+            </div>
+        </div>
+
+        <div class="rowCenter2">
+            <div class="col-sm-4">
+                <span class="label">SESSO</span>
+                <!-- <div class="col-xs-12" style="margin-top: 22px;">
+                    <app-radio-button [itemList]="sexList" (itemSelected)="itemSelected('sex', $event)" ></app-radio-button>
+                </div>-->
+
+                <div class="col-xs-12" style="margin-top: 22px;">
+                    <mat-radio-group [ngModel]="patient.sex" [disabled]="synchronizing || enabledOwner">
+                        <mat-radio-button [disabled]="synchronizing || enabledOwner" value="{{item.id}}" *ngFor="let item of sexList" (click)="itemSelected('sex', item)">{{item.description}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <span class="label">DATA NASCITA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input [matDatepicker]="picker" id="inputDataNascita" name="dataNascita" readonly matInput ng-virtual-keyboard ng-virtual-keyboard-layout="numeric"
+                        ng-virtual-keyboard-placeholder="GG/MM/AAAA" (change)="onInputChange($event)" (keyboardClosed)="onVKeyboardValue($event)"
+                        placeholder="" [(ngModel)]="patient.dataNascita" (dateChange)="addEvent('change', $event)" [disabled]="enabledOwner">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-2">
+                <span class="label">ET&#192;</span>
+                <mat-form-field>
+                    <input id="inputItemEta" name="eta" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="numeric" ng-virtual-keyboard-placeholder="Digitare et&#224;"
+                        (change)="onInputChange($event)" (keyboardClosed)="onVKeyboardValue($event)" placeholder="" [(ngModel)]="patient.eta"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-2">
+                <span class="label">
+                    <br/>
+                </span>
+
+                <mat-form-field>
+                    <input id="typeEta" (click)="openDialogList('listItemDialogNoSearch', 'TYPE_ETA', 'TYPE_ETA', 2, '500px')" name="typeEta"
+                        readonly="true" matInput (change)="onInputChange($event)" value="{{patient?.typeEta?.description}}" [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="rowCenter2">
+            <div class="col-sm-6">
+                <span class="label">CITTADINANZA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemCittadinanza" name="cittadinanza" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'country')"
+                        ng-virtual-keyboard-placeholder="Inserire la cittadinanza" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.cittadinanza?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+                <span class="label">COMUNE</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemComune" name="comune" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'municipality')"
+                        ng-virtual-keyboard-placeholder="Inserire il comune" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.comune?.description}}" [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="sectionWrapper" style="height:60vh" *ngIf="activeItem === 'cardDatiClinici'">
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="label">CLASSE PATOLOGIA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="classPatholocy" (click)="openDialogList('listItemDialogNoSearch', 'PATHOLOGYCLASS', 'PATHOLOGYCLASS', 2, '900px')"
+                        name="classPatholocy" readonly="true" matInput (change)="onInputChange($event)" value="{{patient?.classePatologia?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+                <span class="label">DETTAGLIO PATOLOGIA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="detailClassPathology" (click)="openDialogList('listItemDialogNoSearch', 'PATHOLOGY', 'PATHOLOGY', 2, '900px')"
+                        name="detailClassPathology" readonly="true" matInput (change)="onInputChange($event)" value="{{patient?.patologia?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <span class="label">PRESTAZIONE PRINCIPALE</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemPrestPrinc" name="prestPrinc" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'serviceprovided')"
+                        ng-virtual-keyboard-placeholder="Inserire la prestazione" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.prestazPrinc?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="label">PRIMA PRESTAZIONE SECONDARIA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemPrestSec1" name="prestSec1" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'serviceprovided')"
+                        ng-virtual-keyboard-placeholder="Inserire la prestazione" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.prestazSec1?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+                <span class="label">SECONDA PRESTAZIONE SECONDARIA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemPrestSec2" name="prestSec2" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'serviceprovided')"
+                        ng-virtual-keyboard-placeholder="Inserire la prestazione" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.prestazSec2?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="label">TERZA PRESTAZIONE SECONDARIA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemPrestSec3" name="prestSec3" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'serviceprovided')"
+                        ng-virtual-keyboard-placeholder="Inserire la prestazione" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.prestazSec3?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6">
+                <span class="label">QUARTA PRESTAZIONE SECONDARIA</span>
+                <mat-form-field class="mat-form-field-type-mat-input mat-form-field-can-float mat-form-field-hide-placeholder">
+                    <input id="inputItemPrestSec4" name="prestSec4" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="{{layout}}"
+                        [ng-virtual-keyboard-items]="currentList" (ng-virtual-keyboard-requestItems)="refreshList($event, 'serviceprovided')"
+                        ng-virtual-keyboard-placeholder="Inserire la prestazione" style="padding:0px;" (change)="onInputChange($event)"
+                        (keyboardClosed)="onVKeyboardValue($event)" placeholder="" value="{{patient?.prestazSec4?.description}}"
+                        [disabled]="enabledOwner">
+                </mat-form-field>
+            </div>
+        </div>
+    </section>
+
+
+
+</div>

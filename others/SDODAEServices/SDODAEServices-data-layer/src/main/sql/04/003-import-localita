@@ -1,0 +1,64 @@
+INSERT INTO dae_localita (id,
+                          comune,
+                          name,
+                          note)
+   (SELECT l.id,
+           (SELECT id
+              FROM dae_comune c
+             WHERE C.NOME_COMUNE = m.name) as comune,
+           l.name,
+           note
+      FROM web118_clu.locality l, web118_clu.municipality m
+     WHERE (l.deleted IS NULL OR l.deleted = 0) AND m.id = L.MUNICIPALITY_ID);
+     
+     
+-------------------------------------------     
+     
+
+DECLARE
+   TYPE refcursor IS REF CURSOR;
+
+   loc_id      VARCHAR2 (64);
+   street_id   VARCHAR2 (64);
+
+   COUNT_ROW   NUMBER := 0;
+
+   CURSOR loc_streets
+   IS
+      SELECT *
+        FROM WEB118_CLU.STREET_LOCALITY sl;
+BEGIN
+   FOR loc_street IN loc_streets
+   LOOP
+      BEGIN
+         COUNT_ROW := COUNT_ROW + 1;
+
+         SELECT id
+           INTO loc_id
+           FROM dae_localita
+          WHERE web118_clu.getNewId ('locality', id) = loc_street.locality_id;
+
+         SELECT id
+           INTO street_id
+           FROM dae_strade
+          WHERE web118_clu.getNewId ('street', id) = loc_street.street_id;
+
+         INSERT INTO DAE_TEST.DAE_LOCALITA_STRADE (localita, strada)
+              VALUES (loc_id, street_id);
+
+         IF COUNT_ROW = 10
+         THEN
+            COMMIT;
+            COUNT_ROW := 0;
+         END IF;
+      EXCEPTION
+         WHEN OTHERS
+         THEN
+            COMMIT;
+      END;
+   END LOOP;
+EXCEPTION
+   WHEN OTHERS
+   THEN
+      COMMIT;
+END;

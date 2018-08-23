@@ -1,0 +1,28 @@
+banner {
+  border-top-color: #041c28 !important;
+  background-color: #041c28 !important;
+}
+
+.dettagli .media-object {
+  width: 2.4em;
+  height: 2.4em;
+  background-color: #00809d;
+  margin-top: .5em;
+  text-align: center;
+}
+
+.img-circle {
+  width: 3.2em;
+  height: 3.2em;
+  border-radius: 3em;
+  background-color: #7c8b8c;
+  background: #7c8b8c;
+  background: -moz-linear-gradient(-45deg, #7c8b8c 0%, #b4bcc2 100%);
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, #7c8b8c), color-stop(100%, #b4bcc2));
+  background: -webkit-linear-gradient(-45deg, #7c8b8c 0%, #b4bcc2 100%);
+  background: -o-linear-gradient(-45deg, #7c8b8c 0%, #b4bcc2 100%);
+  background: -ms-linear-gradient(-45deg, #7c8b8c 0%, #b4bcc2 100%);
+  background: linear-gradient(135deg, #7c8b8c 0%, #b4bcc2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7c8b8c', endColorstr='#b4bcc2', GradientType=1);
+  display: block;
+}

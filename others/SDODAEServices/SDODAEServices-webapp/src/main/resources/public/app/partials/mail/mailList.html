@@ -1,0 +1,73 @@
+<form class="modal-component">
+
+    <fieldset>
+        <div class="row">
+            <div class="form-group col-md-6">
+
+                <label >DA</label>
+                <div class="input-group">
+                    <input
+                        uib-datepicker-popup="dd/MM/yyyy"
+                        type="text"
+                        class="form-control"
+                        is-open="dateDaOpened"
+                        datepicker-options="options"
+                        ng-model="filter.dataDa"
+                        placeholder="Inserisci data da"
+                        close-text="Chiudi"
+                        clear-text="Annulla"
+                        current-text="Oggi"
+                        alt-input-formats="altInputFormats"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary btn-calendar collapsed" type="button" ng-click="dateDaOpened = !dateDaOpened">
+                            <span class="sr-only"></span>
+                            <i class="fa fa-calendar-o"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <label >Destinatario</label>
+                <input name="destinatario" class="form-control" ng-model="filter.destinatario" placeholder="Destinatario"/>
+
+            </div>
+            <div class="form-group col-md-6">
+
+                <label >A</label>
+                <div class="input-group">
+                    <input
+                        uib-datepicker-popup="dd/MM/yyyy"
+                        type="text"
+                        class="form-control"
+                        is-open="dateAOpened"
+                        datepicker-options="options"
+                        ng-model="filter.dataA"
+                        placeholder="Inserisci data a"
+                        close-text="Chiudi"
+                        clear-text="Annulla"
+                        current-text="Oggi"
+                        alt-input-formats="altInputFormats"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary btn-calendar collapsed" type="button" ng-click="dateAOpened = !dateAOpened">
+                            <span class="sr-only"></span>
+                            <i class="fa fa-calendar-o"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="btn-container pull-right">
+            <div class="btn-group">
+                <button ng-click="search(filter)" class="btn btn-primary">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    Cerca</button>
+                <button ng-click="pulisci()" class="btn btn-danger">
+                    <i class="fa fa-undo" aria-hidden="true"></i>
+                    Pulisci</button>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Risultati: {{gridOptions.data.length}}</legend>
+        <div ui-grid="gridOptions" class="gridDAE"></div>
+    </fieldset>
+</form>

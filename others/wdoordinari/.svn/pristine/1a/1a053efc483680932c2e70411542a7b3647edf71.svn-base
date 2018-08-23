@@ -1,0 +1,58 @@
+import {
+    Input, Directive, OnChanges,
+    SimpleChanges, Optional, Self,
+    Inject, forwardRef, Output, EventEmitter, Provider
+} from '@angular/core';
+
+import {
+    NgControl, AbstractControl, FormControlDirective, FormControl,
+    Validator, ValidatorFn, AsyncValidator,
+    AsyncValidatorFn, ControlValueAccessor, ControlContainer,
+    FormGroup, NG_VALIDATORS, NG_ASYNC_VALIDATORS, NG_VALUE_ACCESSOR
+} from '@angular/forms';
+
+import { FormGroupGeneratorService } from '../service/form-group-generator.service';
+import { Config } from '../model/model';
+import { MASKEDINPUT_VALUE_ACCESSOR } from 'angular2-text-mask';
+
+export const controlNameBinding: Provider = {
+    provide: NgControl,
+    multi: true,
+    useExisting: forwardRef(() => ValidateDirective
+
+    )
+};
+
+@Directive({
+    selector: '[validate]',
+    providers: [controlNameBinding],
+    exportAs: 'ngForm'
+})
+export class ValidateDirective extends FormControlDirective {
+
+    @Input("validate") formName: string;
+
+    @Input('ngModel')
+    set model(model: any) {
+        this.model = model;
+    }
+    @Output('ngModelChange') update = this.update;
+
+    @Input('disabled')
+    set isDisabled(isDisabled: boolean) {
+        this.isDisabled = isDisabled;
+    }
+
+    constructor(
+        @Optional() @Self() @Inject(NG_VALIDATORS) validators: Array<Validator | ValidatorFn>,
+        @Optional() @Self() @Inject(NG_ASYNC_VALIDATORS) asyncValidators: Array<AsyncValidator | AsyncValidatorFn>,
+        @Optional() @Self() @Inject(NG_VALUE_ACCESSOR) valueAccessors: ControlValueAccessor[],
+        private fgs: FormGroupGeneratorService,
+        private controlContainer: ControlContainer
+    ) {
+        super(validators, asyncValidators, valueAccessors);
+        let c = <FormGroup>this.controlContainer.control;
+        this.form = this.fgs.getControl(this.formName, c);
+    }
+
+}

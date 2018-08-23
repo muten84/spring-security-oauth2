@@ -1,0 +1,39 @@
+<div class="login-page" [@routerTransition] *blockUI="'login-section'">
+    <section class="row justify-content-center align-items-center">
+        <div class="col-md-12">
+            <img src="assets/images/logo-login.png" class="user-avatar" />
+
+            <h1>EMS Mobile</h1>
+            <!--<form role="form">-->
+
+            <div [mdcElevation]="2" [animateTransition]="true" class="blox-elevation-surface form-content">
+                <p style="font-size: 2rem">Selezionare il territorio di riferimento e confermare per procedere</p>
+            </div>
+
+        </div>
+    </section>
+    <div [mdcElevation]="2" mdcCard class="custom-card--with-avatar">
+        <section class="sectionWrapper">
+            <!--<mat-icon>fingerprint</mat-icon> <span class="title">Inizio Turno</span>-->
+        </section>
+        <section mdcCardText>
+            <form class="checkin-form-container ">
+                <!--<mat-form-field class="example-full-width">
+                    <input id="inputItem" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric" ng-virtual-keyboard-placeholder="Digitare postazione da cercar e confermare con pulsante di spunta"
+                        (change)="onInputChange($event)" placeholder="" value="">
+                </mat-form-field>-->
+                <input #item id="hiddenItem" name="vkeyboardValue" type="hidden" readonly="true">
+            </form>
+            <div *ngIf="true">
+                <!--  <mat-grid-list cols="2" rowHeight="1:1">
+                    <mat-grid-tile [ngClass]="{'mat-grid-tile-active': selected?.name === item?.name}" (click)="selectItem(item)" *ngFor="let item of itemList">{{item.name}}</mat-grid-tile>
+                </mat-grid-list>-->
+                <app-list-item (itemSelected)="operativeAreaSelected($event)" [rowHeight]="'1.5:1'" [cols]="5" [itemList]="coList"></app-list-item>
+            </div>
+        </section>
+        <!-- [routerLink]="['/loader']" -->
+        <section mdcCardActions compact class="row h-100 justify-content-center align-items-center">
+            <button [disabled]="!selected" mdcButton [raised]="true" (click)="onLoggedin()">Conferma</button>
+        </section>
+    </div>
+</div>

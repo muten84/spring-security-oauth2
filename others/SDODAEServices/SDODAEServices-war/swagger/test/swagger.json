@@ -1,0 +1,87 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a sample for swagger-maven-plugin",
+    "version" : "v1",
+    "title" : "Swagger Maven Plugin Sample"
+  },
+  "host" : "localhost:8088",
+  "basePath" : "/rest",
+  "tags" : [ {
+    "name" : "documentService"
+  } ],
+  "schemes" : [ "http", "https" ],
+  "paths" : {
+    "/documentService/insertDocument" : {
+      "put" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Create a document",
+        "description" : "This can only be done by the logged in user.",
+        "operationId" : "insertDocument",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/BookingDocumentDTO"
+            }
+          }
+        }
+      }
+    },
+    "/documentService/test" : {
+      "get" : {
+        "tags" : [ "documentService" ],
+        "summary" : "Test operation for check purpose",
+        "description" : "",
+        "operationId" : "test",
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "BookingDocumentDTO" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string"
+        },
+        "bynaryData" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string",
+            "format" : "byte"
+          }
+        },
+        "state" : {
+          "type" : "string",
+          "enum" : [ "CREATED", "SENT", "OPENED", "CLOSED" ]
+        },
+        "parking" : {
+          "type" : "string"
+        },
+        "creationDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "openDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "closeDate" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+ 
+ALTER TABLE INTEGRATION_MAPPING
+   DROP PRIMARY KEY CASCADE;
+
+
+DROP INDEX INTEGRATION_MAPPING_PK;
+
+
+ALTER TABLE INTEGRATION_MAPPING
+ADD (weight NUMBER DEFAULT 0);
+
+ALTER TABLE INTEGRATION_MAPPING
+ADD (id VARCHAR2 (64 BYTE) );
+
+UPDATE INTEGRATION_MAPPING
+   SET id = wguid.NEXTVAL
+ WHERE id IS NULL;
+ 
+ ALTER TABLE INTEGRATION_MAPPING
+ ADD CONSTRAINT INTEGRATION_MAPPING_PK
+  PRIMARY KEY
+  (ID);
+
+
+INSERT INTO INTEGRATION_MAPPING (id,
+                                 INTEGRATION_TYPE,
+                                 SOURCETYPE,
+                                 DESTTYPE,
+                                 SOURCENAME,
+                                 DESTNAME,
+                                 DESTVALUE,
+                                 CONDITION,
+                                 DIRECTION,
+                                 weight)
+     VALUES ('TST',
+             'DAE',
+             'it.eng.area118.sdodae.service.model.DaeAlert',
+             'it.eng.area118.sdodae.service.model.v1.DaeEventAlert',
+             'frCategory',
+             'fr_category',
+             'SUPER_USER',
+             'getPathology().equals("TST")',
+             0,
+             5);
+
+
+
+COMMIT;

@@ -1,0 +1,39 @@
+$enable-rounded: true;
+// Start with assigning color names to specific hex values.
+$white: #fff !default;
+$black: #000 !default;
+$red: #eb1b4c !default;
+$orange: #f0ad4e !default;
+$yellow: #ffd500 !default;
+$green: #006b84 !default;
+$blue: #006b84 !default;
+$teal: #5bc0de !default;
+$pink: #ff5b77 !default;
+$purple: #613d7c !default;
+// Create grayscale
+$gray-dark: #292b2c !default;
+$gray: #464a4c !default;
+$gray-light: #636c72 !default;
+$gray-lighter: #eceeef !default;
+$gray-lightest: #f7f7f9 !default;
+// Reassign color vars to semantic color scheme
+$brand-primary: #006b84 !default;
+$brand-success: $green !default;
+$brand-info: $teal !default;
+$brand-warning: $orange !default;
+$brand-danger: $red !default;
+$brand-inverse: $gray-dark !default;
+// custom component class
+$topNavColor: #208398 !default;
+
+/*$body-color:#006b84*/
+
+$screen-sm-min: 200px;
+$screen-md-min: 500px;
+$screen-lg-min: 768px;
+
+$table-border-color: rgb(209, 212, 215);
+
+
+$dropdown-link-active-color:     darken($gray-dark, 5%) !default;
+$dropdown-link-active-bg:  		 $gray-lightest !default;

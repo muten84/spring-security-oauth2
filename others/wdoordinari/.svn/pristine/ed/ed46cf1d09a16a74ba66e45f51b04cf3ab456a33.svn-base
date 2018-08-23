@@ -1,0 +1,48 @@
+<div class="form-group row">
+    <div class="col-md-4">
+      <label class="mt-2 mr-sm-2 mb-0" for="data">Data Inizio</label>
+      <div class="input-group">
+        <input [inputMask]="'99/99/9999'" type="text"  id="fromDate"
+          class="form-control" placeholder="dd/mm/yyyy" name="dpdataDa" [(ngModel)]="initDateToSet"
+          ngbDatepicker #dpdataDa="ngbDatepicker" (ngModelChange)="dateSelected($event)">
+        <button  class="input-group-addon" (click)="dpdataDa.toggle()">
+          <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+        </button>
+      </div>
+      <div >
+      <label class="mt-2 mr-sm-2 mb-0" >Orario</label>
+      <input inputMask="99:99" class="form-control" placeholder="HH:MM" [(ngModel)]="filter.initTurnTime" tabindex="1">
+      </div>
+      
+    </div>
+
+
+    <div class="col-md-4">
+      <label class="mt-2 mr-sm-2 mb-0" for="vehicle">Mezzo</label>
+      <div style="width: 300px">
+        <ng-select [(ngModel)]="selectedVehicle" [allowClear]="true" [items]="vehicles | async" (refresh)="retrieveVehicle118ByCode($event)"
+        minChar="2" refreshDelay="500" textField="code" placeholder="Selezionare Mezzo..." (ngModelChange)="vehicleSelected($event)"> </ng-select>
+      </div>
+      <label class="mt-2 mr-sm-2 mb-0" for="parking">Postazione</label>
+      <div style="width: 300px">
+        <ng-select [(ngModel)]="filter.parkingCode" [allowClear]="true" [items]="parkingItems | async" (refresh)="updateParkingList($event)"
+        minChar="2" refreshDelay="500" textField="name" valueField="name" placeholder="Selezionare Postazione..." > </ng-select>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <label class="mt-2 mr-sm-2 mb-0" for="sanitaryCategory">Categ. Sanitaria</label>
+      <div style="width: 300px">
+          <ng-select tabindex="5" [(ngModel)]="selectedCatSanitary" allowClear="true" [items]="sanitaryCategories | async"
+          textField="description" placeholder="Selezionare Cat. Sanitaria..."
+          [queryLike]="false" (ngModelChange)="sanitaryCategorySelected($event)"> </ng-select>
+      </div>
+      <label class="mt-2 mr-sm-2 mb-0" for="convention">Convenzione</label>
+      <div style="width: 300px">
+        <ng-select [(ngModel)]="selectedConvention" allowClear="true" textField="description" [items]="conventions | async" placeholder="Selezionare Convenzione..."
+        tabindex="5" (ngModelChange)="conventionSelected($event)"> </ng-select>
+      </div>
+  </div>
+
+  </div>

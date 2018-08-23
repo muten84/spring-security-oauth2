@@ -1,0 +1,67 @@
+.label {
+    color: #006B84;
+    font-weight: bold;
+}
+
+.value-text {
+    color: #072C3F;
+    font-weight: bold;
+    width: 100%;
+}
+
+
+.mat-dialog-content {
+    font-size: 1.9rem
+}
+
+.content-justify{
+    display: inline-block !important;
+    text-align: justify !important;
+}
+
+.value-text{
+
+}
+
+.headers-align .mat-expansion-panel-header-title, 
+.headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mat-expansion-panel-header-title{
+    color: #03161f;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+
+.mat-expansion-panel-header-description, .mat-expansion-indicator::after {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.mat-table {    
+    font-weight: bold;
+    color: #03161f;
+    /* background: rgba(0, 151, 167, 0.17); */
+}
+
+.mat-button {
+    /* font-size: 25px; */
+    padding: 3rem;
+    font-size: 3rem;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.btn-xlg{
+    width: 47%;
+}
+
+.btn-value {
+    position: absolute; left: 21%; bottom: 23%; right: 20%;
+}

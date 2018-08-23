@@ -1,0 +1,89 @@
+<form name="gruppoForm" ng-submit="saveGruppo()" validate>
+  <div class="row form-group">
+    <div class="col-md-6">
+      <label-validated label="Nome" class="{'form-group': false, 'has-error':gruppo.nome.$invalid}" name="nome"></label-validated>
+      <input name="nome" class="form-control" ng-model="gruppo.nome" placeholder="Nome" ui-validate="{required: 'validate($value)'}"
+      />
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-4">
+      <label>Comune</label>
+      <ui-select reset-search-input="true" ng-model="gruppo.comune" theme="bootstrap">
+        <ui-select-match allow-clear placeholder="Comune">{{$select.selected.nomeComune}}</ui-select-match>
+        <ui-select-choices repeat="comune in comuni" refresh="refreshComune($select.search)" refresh-delay="500">
+          <div ng-bind-html="comune.nomeComune | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" ng-click="aggiungiComune()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Aggiungi Comune</button>
+    </div>
+
+    <div class="col-md-4">
+      <label>Provincia</label>
+      <ui-select reset-search-input="true" name="provincia" ng-model="gruppo.provincia" theme="bootstrap">
+        <ui-select-match allow-clear placeholder="Provincia">{{$select.selected.nomeProvincia}}</ui-select-match>
+        <ui-select-choices repeat="provincia in province | filter: { nomeProvincia: $select.search }">
+          <div ng-bind-html="provincia.nomeProvincia | highlight: $select.search"></div>
+        </ui-select-choices>
+      </ui-select>
+    </div>
+
+    <div class="col-md-2">
+      <label>&nbsp;</label>
+      <button type="button" class="btn btn-primary" ng-click="aggiungiProvincia()">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Aggiungi Provincia</button>
+    </div>
+
+  </div>
+
+  <h3>Comuni</h3>
+  <div class="row form-group" ng-repeat="comune in gruppo.comuni  track by $index">
+    <div class=" col-md-2">
+      <button type="button" class="btn btn-danger" ng-click="rimuoviComune(comune, $index)">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class=" col-md-6">
+      <h4>{{comune.nomeComune}}</h4>
+    </div>
+  </div>
+
+  <h3>Province</h3>
+  <div class="row form-group" ng-repeat="provincia in gruppo.province  track by $index">
+    <div class=" col-md-2">
+      <button type="button" class="btn btn-danger" ng-click="rimuoviProvincia(provincia, $index)">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class=" col-md-6">
+      <h4>{{provincia.nomeProvincia}}</h4>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class=" col-md-12">
+      <div class="btn-container pull-right">
+        <div class="btn-group">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            Salva</button>
+          <button type="button" class="btn btn-danger" ng-click="pulisci()">
+            <i class="fa fa-undo" aria-hidden="true"></i>
+            Pulisci</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<fieldset>
+  <legend>Gruppi</legend>
+  <div ui-grid="gridOptions" ui-grid-selection class="gridGruppi"></div>
+</fieldset>

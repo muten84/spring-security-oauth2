@@ -1,0 +1,46 @@
+<div id="menu" class="panel sideNavBar" [ngClass]="{'collapsed' : side}">
+  <div style="position: absolute; top: 0px; right: 0; left: 0; bottom: 50px; overflow: auto">
+    <nav class="menu-content" role="navigation">
+      <ul style="position: relative;" class="nav nav-pills nav-stacked flex-column">
+        <li *ngFor="let item of items" class="nav-side-item">
+          <a *ngIf="item.childItems && item.childItems.length >0 " style="cursor:pointer" data-parent="#menu" data-toggle="collapse"
+            [attr.data-target]="'#' + item.sectionId" aria-expanded="false" class="collapsed">
+            <i style="margin-top: 70%; width: 20px;" class="fa fa-chevron-down"></i>
+          </a>
+          <a id="a_{{item.name}}" class="nav-link" [routerLink]="[item.path]">
+            <span class="nav-icon">
+              <i class="{{item.iClass}}"></i>
+            </span>
+            <span *ngIf="!side" class="nav-label">{{item.name}}</span>
+
+          </a>
+
+          <!--data-target="#mc_{{item.sectionId}}"-->
+
+
+          <!--<li><a href="#/main/graph">Grafici</a></li>-->
+          <!--class="panel-collapse collapse in" -->
+          <!--<div [attr.id]="item.sectionId" class="menu-child panel-collapse collapse">-->
+          <ul [attr.id]="item.sectionId" class="menu-child panel-collapse collapse" role="menu" aria-labelledby="menu-Report" aria-expanded="true">
+            <!---->
+            <li *ngFor="let ci of item.childItems">
+              <a [routerLink]="[ci.path]" style="cursor:pointer">{{ci.name}}</a>
+            </li>
+            <!---->
+          </ul>
+          <!--</div>-->
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div id="bottom-menu">
+    <a class="js-collapse-menu" id="collapseMenuId" (click)="side = !side;updateMenu()" style="padding-left: 0; padding-right: 0; width: 200px!important; color: #fff">
+      <span class="nav-icon">
+        <i *ngIf="!side" class="fa fa-chevron-circle-left"></i>
+        <i class="fa fa-chevron-circle-right" *ngIf="side"></i>
+      </span>
+      <span *ngIf="!side" class="nav-label">Compatta Menu</span>
+
+    </a>
+  </div>
+</div>

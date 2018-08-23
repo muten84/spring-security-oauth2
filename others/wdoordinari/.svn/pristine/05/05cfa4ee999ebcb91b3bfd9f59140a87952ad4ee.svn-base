@@ -1,0 +1,163 @@
+<form [formGroup]="ciclicheFG" validationGroup>
+  <div class="row">
+    <div class="col-6">
+      <label class="label">Intervallo di creazione ciclica: dal giorno {{fromDateStr}} al giorno {{toDateStr}} </label>
+    </div>
+    <div class="col-6">
+      <label class="label">Intervallo effettivo: dal giorno {{fromDateEffStr}} al giorno {{toDateEffStr}} </label>
+    </div>
+  </div>
+  <hr/>
+
+
+
+  <div class="row" [hidden]="endAddressModify">
+    <div class="col-6">
+      <div class="row justify-content-md-center">
+        <div class="col-6">
+          <div class="btn-group">
+            <button mwlCalendarPreviousView [(viewDate)]="viewDate" [view]="view" class="btn btn-primary">
+              Mese Precedente
+            </button>
+            <button class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+              Oggi
+            </button>
+            <button mwlCalendarNextView [(viewDate)]="viewDate" [view]="view" class="btn btn-primary">
+              Mese Successivo
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-auto">
+          <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'): locale }}</h3>
+        </div>
+      </div>
+      <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+        [locale]="locale" [weekStartsOn]="weekStartsOn" [weekendDays]="weekendDays" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)"
+        (beforeViewRender)="beforeMonthViewRender($event)" (eventTimesChanged)="eventTimesChanged($event)">
+      </mwl-calendar-month-view>
+      <hr/>
+      <div class="row justify-content-md-center">
+        <div class="col-auto">
+          <div class="btn-group">
+            <button type="button" (click)="abilita( )" class="btn btn-primary" ngbTooltip="Abilita giorno/i della ciclica" [disabled]="!enableBtn">
+              <i class="fa fa-check" aria-hidden="true"></i> Abilita
+            </button>
+            <button type="button" (click)="disabilita( )" class="btn btn-primary" ngbTooltip="Disabilita giorno/i della ciclica" [disabled]="!disableBtn">
+              <i class="fa fa-undo" aria-hidden="true"></i> Disabilita
+            </button>
+            <button type="button" (click)="aggiungi( )" class="btn btn-primary" ngbTooltip="Aggiungi giorno alla ciclica" [disabled]="!addBtn">
+              <i class="fa fa-plus" aria-hidden="true"></i> Aggiungi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row justify-content-md-center">
+        <div class="col-auto">
+          <h3></h3>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="row" [hidden]="!listDaysInfoHistory">
+          <div class="col-12">
+            <core-table id="daysInfoHistoryTable" [config]="configDaysInfoHistoryTable" [rows]="listDaysInfoHistory" [columns]="columnsDaysInfoHistory"
+              [showTooltip]="true">
+            </core-table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="label col-form-label">Note modifica</label>
+            <textarea style="height: 60px !important" [inputMask]="'*{0,1024}'" rows="3" cols="30" class="form-control form-control-ta"
+              [(ngModel)]="noteModifica" [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label class="label col-form-label">Destinazione</label>
+            <span class="input-group">
+              <input class="form-control" type="text" [(ngModel)]="destinazione" [ngModelOptions]="{standalone: true}" [disabled]="true"
+              />
+              <div class="col-2">
+              <button (click)="searchAuthority('end')" [hidden]="endAddressModify" ngbTooltip="Modifica destinazione" class="btn btn btn-outline-primary input-group-append">
+                <i class="fa fa-pencil-square-o " aria-hidden="true"></i>
+              </button>
+              </div>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label class="label col-2 col-form-label" validationLabel="orario">Orario</label>
+            <input inputMask="99:99" class="form-control" placeholder="HH:MM" [(ngModel)]="orario" tabindex="1" [formControl]="getControl('orario')"
+              validationMessage>
+          </div>
+          <div class="col-6">
+            <label class="label col-2 col-form-label">Fase</label>
+            <ng-select [(ngModel)]="phase" [ngModelOptions]="{standalone: true}" allowClear="true" [items]="faseItems | async" valueField="compactDescription"
+              placeholder="Selezionare Fase..." [queryLike]="false"> </ng-select>
+          </div>
+        </div>
+        <div class="row  ">
+          <div class="col-6">
+            <label class="label col-2 col-form-label" validationLabel="intervalFrom">Intervallo temporale dal</label>
+            <div class="input-group" clickoff>
+              <input [inputMask]="'99/99/9999'" type="text" class="form-control" placeholder="dd/mm/aaaa" [(ngModel)]="intervalFrom" [(ngModel)]="data"
+                (ngModelChange)="dataChanged($event)" ngbDatepicker #dpdataDa="ngbDatepicker" [formControl]="getControl('intervalFrom')"
+                validationMessage>
+              <div class="input-group-append">
+                <button class="btn input-group-text" (click)="dpdataDa.toggle()">
+                  <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <label class="label col-2 col-form-label" validationLabel="intervalTo">al</label>
+            <div class="input-group" clickoff>
+              <input [inputMask]="'99/99/9999'" type="text" class="form-control" placeholder="dd/mm/aaaa" [(ngModel)]="intervalTo" [(ngModel)]="data"
+                (ngModelChange)="dataChanged($event)" ngbDatepicker #dpdataA="ngbDatepicker" [formControl]="getControl('intervalTo')"
+                validationMessage placement="bottom-right">
+              <div class="input-group-append">
+                <button class="btn input-group-text" (click)="dpdataA.toggle()">
+                  <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div [hidden]="endAddressModify" class="row justify-content-md-center">
+        <div class="col-auto">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" (click)="modifica( )" class="btn btn-primary" ngbTooltip="Modifica giorno/i della ciclica" [disabled]="!modifyBtn">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i> Modifica
+            </button>
+            <button type="button" (click)="cleanInfo( )" class="btn btn-primary" ngbTooltip="Pulisci dati nella maschera">
+              <i class="fa fa-eraser" aria-hidden="true"></i> Pulisci
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr/>
+  </div>
+
+
+
+
+
+  <div class="row " [hidden]="!endAddressModify">
+    <div class="col-8">
+      <!--<form [formGroup]="ciclicheFG" validationGroup>-->
+      <address-modify [fg]="ciclicheFG" [hidden]="!endAddressModify" [address]="clickedCiclicalDaysInfo.endAddress" (save)="saveAddress($event, 'end')"
+        (exit)="searchAuthority('end')" type="End"></address-modify>
+      <!--</form>-->
+    </div>
+  </div>
+</form>

@@ -1,0 +1,6 @@
+# avvia il job alle 9 di mattina di ogni giorno
+scadenze.semestrale.cron=0 0 9 * * *
+# avvia il job alle 9 di mattina di ogni giorno
+scadenze.manutenzione.cron=0 0 9 * * *
+
+

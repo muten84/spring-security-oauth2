@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>{{content}}</mat-dialog-content>
+<mat-dialog-actions class="align-items-center h-100 justify-content-center pull-center" style="margin-right: 25%;">
+     <button class="btn-xlg pull-left" style="background-color: #eb1b4c" mdcButton [raised]="true" mat-button [mat-dialog-close]="false">
+        <span class="btn-value">NO</span>
+    </button>
+    <button class="btn-xlg pull-right" mat-button mdcButton [raised]="true" [mat-dialog-close]="true">
+        <span class="btn-value">SI</span>
+    </button>
+</mat-dialog-actions>

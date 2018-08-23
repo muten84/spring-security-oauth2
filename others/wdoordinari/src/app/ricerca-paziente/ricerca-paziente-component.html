@@ -1,0 +1,181 @@
+<div [hidden]="showPatientRegistryList">
+  <div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!--    <div aria-expanded="true" id="searchResult" class="card-block to-check collpase show">-->
+
+
+    <div class="form-group">
+
+      <div class="row">
+        <div class="col-md-3">
+          <label class="label col-6 col-form-label">Cognome</label>
+          <input tabindex="111" [inputMask]="'A{0,16}'" class="form-control" type="text" [(ngModel)]="model.surname" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Nome</label>
+          <input tabindex="112" [inputMask]="'A{0,16}'" class="form-control" [(ngModel)]="model.name" type="text" />
+        </div>
+        <div class="col-md-3">
+          <label class="mt-2 mr-sm-2 mb-0" for="data">Data di Nascita</label>
+          <div class="input-group input-group-sm" clickoff>
+            <input tabindex="113" type="text" id="dataNascitaPazienteInRicercaPaziente" name="dataNascitaPazienteInRicercaPaziente" class="form-control"
+              placeholder="dd/mm/yyyy" [(ngModel)]="model.birthDateObj" ngbDatepicker [minDate]="minDate" [maxDate]="maxDate"
+              [startDate]="startDate" #dpBirthDate="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn input-group-text" (click)="dpBirthDate.toggle()">
+                <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Telefono</label>
+          <input tabindex="114" [inputMask]="'*{0,35}'" class="form-control" type="text" [(ngModel)]="model.telephone" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Luogo di nascita</label>
+          <input tabindex="115" [inputMask]="'A{0,50}'" class="form-control" [(ngModel)]="model.birthPlace" type="text" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Provincia</label>
+          <input tabindex="116" [inputMask]="'A{0,2}'" class="form-control" [(ngModel)]="model.birthProvince" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Codice Fiscale</label>
+          <input tabindex="117" [inputMask]="'a{6}9{2}a{1}9{2}a{1}9{3}a{1}'" class="form-control" [(ngModel)]="model.taxCode" type="text"
+          />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Tessera Sanitaria</label>
+          <input tabindex="118" [inputMask]="'*{0,16}'" class="form-control" [(ngModel)]="model.sanitaryCode" />
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-2">
+          <label class="label col-2 col-form-label">Sesso</label>
+          <div class="row">
+            <div class="col-md-3">
+              <ui-switch tabindex="119" [(ngModel)]="model.sex" value="M" [ngModelOptions]="{standalone: true}" size="small"></ui-switch>
+            </div>
+            <div class="col-md-3">
+              <label class="label col-form-label">M</label>
+            </div>
+            <div class="col-md-3">
+              <ui-switch tabindex="120" [(ngModel)]="model.sex" value="F" [ngModelOptions]="{standalone: true}" size="small"></ui-switch>
+            </div>
+            <div class="col-md-3">
+              <label class="label col-form-label">F</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1">
+          <label class="label col-2 col-form-label">Ticket</label>
+          <div class="row">
+            <div class="col-md-12">
+              <ui-switch tabindex="121" [(ngModel)]="model.ticket" [ngModelOptions]="{standalone: true}" size="small"></ui-switch>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Indirizzo</label>
+          <input tabindex="122" class="form-control" [inputMask]="'*{0,64}'" [(ngModel)]="model.streetName" type="text" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Civico</label>
+          <input tabindex="123" class="form-control" [(ngModel)]="model.houseNumber" [inputMask]="'*{0,12}'" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Localit&agrave;</label>
+          <input tabindex="124" class="form-control" [inputMask]="'A{0,50}'" [(ngModel)]="model.locality" type="text" />
+        </div>
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Comune</label>
+          <input tabindex="125" class="form-control" [inputMask]="'A{0,50}'" [(ngModel)]="model.municipality" type="text" />
+        </div>
+        <div class="col-md-1">
+          <label class="label col-2 col-form-label">Provincia</label>
+          <input tabindex="126" class="form-control" [(ngModel)]="model.province" [inputMask]="'A{0,2}'" />
+        </div>
+        <div class="col-md-2">
+          <label class="label col-2 col-form-label">Regione</label>
+          <input tabindex="127" class="form-control" [(ngModel)]="model.region" [inputMask]="'A{0,3}'" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Accessibilit&agrave;</label>
+          <input tabindex="128" class="form-control" [inputMask]="'*{0,64}'" [(ngModel)]="model.accessibility" type="text" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">ASL</label>
+          <input tabindex="129" class="form-control" [(ngModel)]="model.asl" [inputMask]="'*{0,64}'" />
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Dottore</label>
+          <input tabindex="130" class="form-control" [inputMask]="'A{0,64}'" [(ngModel)]="model.familyDoctor" type="text" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Telefono</label>
+          <input tabindex="131" class="form-control" [(ngModel)]="model.doctorTel" [inputMask]="'*{0,35}'" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Tutore</label>
+          <input tabindex="132" class="form-control" [inputMask]="'A{0,65}'" [(ngModel)]="model.guardian" type="text" />
+        </div>
+        <div class="col-md-3">
+          <label class="label col-2 col-form-label">Telefono</label>
+          <input tabindex="133" class="form-control" [(ngModel)]="model.guardianTel" [inputMask]="'A{0,64}'" [inputMask]="'*{0,35}'"
+          />
+        </div>
+      </div>
+
+    </div>
+
+    <core-table id="patientTable" [config]="configPatientTable" [rows]="patientList" [columns]="columnsPatientArchiveTable" (selected)="selectPatient($event.row)">
+    </core-table>
+
+    <!--</div>-->
+  </div>
+  <div class="modal-footer">
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-primary" (click)="confirm()" ngbTooltip="Conferma">
+        <i class="fa fa-check" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="searchPatientRegistry()" ngbTooltip="Valida il paziente dall'anagrafe assistibili">
+        <i class="fa fa-search-plus" aria-hidden="true"></i>
+      </button>
+      <button [hidden]="!ARCHIVIO_UTENTI_TRASPORTATI" type="button" class="btn btn-outline-primary" (click)="searchPatient()" ngbTooltip="Cerca in archivio">
+        <i class="fa fa-search" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="clean()" ngbTooltip="Pulisci">
+        <i class="fa fa-eraser" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="savePatient()" ngbTooltip="Salva">
+        <i class="fa fa-save" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="deletePatient()" ngbTooltip="Elimina">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</div>

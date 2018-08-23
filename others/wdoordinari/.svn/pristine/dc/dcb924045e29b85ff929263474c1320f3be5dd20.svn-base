@@ -1,0 +1,64 @@
+
+import { NgModule } from '@angular/core';
+import { Http, XHRBackend, RequestOptions } from '@angular/http';
+
+import { ExtendedHttpService } from '../app/service/extended-http.service'
+import { BASE_PATH } from './gen/variables';
+import * as services from './gen/api/api';
+
+export * from './gen/index';
+
+import { environment } from '../environments/environment';
+
+@NgModule({
+    declarations: [
+    ],
+    imports: [
+    ],
+    providers: [
+        services.AAAControllerApi,
+        services.AuthorityModuleServiceApi,
+        services.BookingModuleServiceApi,
+        services.ParkingServiceApi,
+        services.ChargeServiceApi,
+        services.CoreLayerModuleServiceApi,
+        services.MessageControllerApi,
+        services.PatientArchiveModuleServiceApi,
+        services.SecuredMessageControllerApi,
+        services.StreetMapServiceApi,
+        services.TransportModuleServiceApi,
+        services.VehicleServiceApi,
+        services.CiclicalModuleServiceApi,
+        services.TailReturnsServiceApi,
+        services.StormoModuleServiceApi,
+        services.TurnModuleServiceApi,
+        {
+            provide: Http,
+            useClass: ExtendedHttpService,
+            deps: [XHRBackend, RequestOptions]
+        },
+        {
+            provide: BASE_PATH, useFactory: BasePathGenerator
+        }],
+})
+
+
+
+
+export class ServicesModule {
+
+}
+export function BasePathGenerator(): String {
+
+    let a = window.location;
+    let ret = a.protocol + "//" + a.host + "";
+    if (environment.serviceURL) {
+        ret = a.protocol + "//" + environment.serviceURL;
+    }
+    /*ret += a.pathname + "/";*/
+    ret += "/ordinari-web/"
+    //ret += "api/secure/rest";
+    //console.log("injecting base path: " + ret);
+    return ret;
+
+}

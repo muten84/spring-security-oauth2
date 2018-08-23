@@ -1,0 +1,13 @@
+it\eng\areas\to\sdoto\docservice\delegate\configuration\DocServiceDelegateConfiguration.class
+it\eng\areas\to\sdoto\docservice\delegate\configuration\MailSenderConfiguration.class
+it\eng\areas\to\sdoto\docservice\delegate\model\BookingDocumentFilter.class
+it\eng\areas\to\sdoto\docservice\delegate\DocumentServiceDelegate.class
+it\eng\areas\to\sdoto\docservice\delegate\impl\DocumentServiceDelegateImplHelper.class
+it\eng\areas\to\sdoto\docservice\delegate\print\impl\PrintBookingServiceDelegateImpl.class
+it\eng\areas\to\sdoto\docservice\delegate\notify\NotifyServiceDelegate.class
+it\eng\areas\to\sdoto\docservice\delegate\print\model\BookingsPrintDataSource.class
+it\eng\areas\to\sdoto\docservice\delegate\model\User.class
+it\eng\areas\to\sdoto\docservice\delegate\impl\DocumentServiceDelegateImpl.class
+it\eng\areas\to\sdoto\docservice\delegate\model\BookingDocumentDTO.class
+it\eng\areas\to\sdoto\docservice\delegate\notify\impl\EmailNotificationServiceDelegate.class
+it\eng\areas\to\sdoto\docservice\delegate\print\PrintBookingsServiceDelegate.class

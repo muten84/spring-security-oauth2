@@ -1,0 +1,92 @@
+<div [@.disabled]="disableAnimation" [@routerTransition] class="checkin-section">
+    <div mdcCard class="custom-card--with-avatar">
+        <!-- <section mdcCardPrimary>
+            
+
+            <h1 mdcCardTitle>
+                <mat-icon>fingerprint</mat-icon>
+                Inizio turno
+            </h1>
+            
+        </section> -->
+        <section class="sectionWrapper">
+            <mat-icon>fingerprint</mat-icon>
+            <span class="title">Inizio Turno</span>
+            <!-- <div class="pull-right">
+            <button mdcButton [raised]="true" (click)="addNota()">  <i class="fa fa-pencil-square-o editIcon"></i>Aggiungi nota</button>      
+       </div>-->
+        </section>
+        <section class="center-section">
+
+            <form class="checkin-form-container ">
+
+                <section class="row sectionWrapperSearch" style="margin:0px">
+                    <div mdcRipple class="align-search" style="height:60px; width:60px;top:15px;">
+                        <a class="mdi mdi-magnify mdi-48px align-search" style="padding-left:5px"></a>
+                    </div>
+                    <mat-form-field class="example-full-width">
+
+
+                        <input id="inputItem" name="searchFilter" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="extendedConfirm"
+                            ng-virtual-keyboard-placeholder="Digitare il nome del mezzo e confermare con pulsante di spunta"
+                            (change)="onInputChange($event)" [(ngModel)]="searchFilter" (keyboardClosed)="onVKeyboardValue($event)"
+                            placeholder="Digitare il nome del mezzo da cercare">
+                    </mat-form-field>
+
+                    <input #item id="hiddenItem" name="vkeyboardValue" type="hidden" readonly="true" ng-virtual-keyboard ng-virtual-keyboard-layout="numeric"
+                        (change)="onVKeyboardValue(item.value)" [(ngModel)]="vkeyboardValue" (keyboardClosed)="onVKeyboardValue($event)"
+                        ng-virtual-keyboard-placeholder="Inserire numero ORE del turno">
+                    <div mdcRipple class="align-search" style="height:60px; width:60px;top:15px;">
+                        <a class="mdi mdi-close-circle-outline mdi-48px" style="padding-left:5px" (click)="clean()"></a>
+                    </div>
+                </section>
+
+                <!--       <form class="checkin-form-container ">
+
+
+                <mat-form-field class="example-full-width">
+                    <input id="inputItem" name="searchFilter" readonly="true" matInput ng-virtual-keyboard ng-virtual-keyboard-layout="alphanumeric"
+                        ng-virtual-keyboard-placeholder="Digitare il nome del mezzo da cercare e confermare con pulsante di spunta"
+                        (change)="onInputChange($event)" [(ngModel)]="searchFilter" (keyboardClosed)="onVKeyboardValue($event)">
+
+                </mat-form-field>
+
+                <input #item id="hiddenItem" name="vkeyboardValue" type="hidden" readonly="true" ng-virtual-keyboard ng-virtual-keyboard-layout="numeric"
+                    (change)="onVKeyboardValue(item.value)" [(ngModel)]="vkeyboardValue" (keyboardClosed)="onVKeyboardValue($event)"
+                    ng-virtual-keyboard-placeholder="Inserire la durata del turno">
+     -->
+            </form>
+
+            <div *ngIf="true">
+                <div [@fadeInOut] *ngIf="!parkingConfirmed">
+                    <app-list-item #parkingListContainer [rowHeight]="'2:1'" [cols]="5" [itemList]="parkingList | async" (itemSelected)="itemSelected('parking', $event)"></app-list-item>
+                </div>
+                <div [@fadeInOut] *ngIf="parkingConfirmed">
+                    <app-list-item [rowHeight]="'2:1'" [cols]="5" [itemList]="vehicleList | async" (itemSelected)="itemSelected('vehicle', $event)"></app-list-item>
+                </div>
+            </div>
+        </section>
+        <section mdcCardActions compact class="row h-30 justify-content-center align-items-center">
+            <button [disabled]="!prevEnabled" class="mdc-button-small" [hidden]="parkingConfirmed" mdcButton [raised]="true" (click)="toPrevPage('parking')">
+                <mat-icon>fast_rewind</mat-icon>
+            </button>
+            <button [disabled]="!prevEnabled" class="mdc-button-small" [hidden]="!parkingConfirmed" mdcButton [raised]="true" (click)="toPrevPage('vehicle')">
+                <mat-icon>fast_rewind</mat-icon>
+            </button>
+
+            <button [hidden]="parkingConfirmed" mdcButton [raised]="true" (click)="confirm('parking')">Conferma</button>
+            <button [hidden]="!parkingConfirmed" mdcButton color="warning" [raised]="true" (click)="turnDurationChoice()">Inizio Turno</button>
+            <button [hidden]="parkingConfirmed" mdcButton [raised]="true" (click)="resetCurrentChoice('parking')">Annulla</button>
+            <button [hidden]="!parkingConfirmed" mdcButton [raised]="true" (click)="resetCurrentChoice('vehicle')">Annulla</button>
+            <!--<button [hidden]="!parkingConfirmed" mdcButton color="warning" [raised]="true" (click)="reset()">Annulla</button>-->
+            <button [disabled]="!nextEnabled" class="mdc-button-small" [hidden]="parkingConfirmed" mdcButton [raised]="true" (click)="toNextPage('parking')">
+                <mat-icon>fast_forward</mat-icon>
+            </button>
+            <button [disabled]="!nextEnabled" class="mdc-button-small" [hidden]="!parkingConfirmed" mdcButton [raised]="true" (click)="toNextPage('vehicle')">
+                <mat-icon>fast_forward</mat-icon>
+            </button>
+
+            <!--<button mdcButton [raised]="true" (click)="action2()">Action 2</button>-->
+        </section>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+import { Injectable } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ValidatorFn } from '@angular/forms/src/directives/validators';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import { environment } from '../../../../environments/environment';
+import { Config, ConfigValidator } from '../model/model';
+import { CustomFormControl } from './custom-form-control';
+import { CustomValidators } from './custom-validators';
+
+
+export function FormGroupGeneratorServiceFactory(config: FormGroupGeneratorService): Function {
+  return () => config.loadConf(environment.validationURL);
+}
+
+@Injectable()
+export class FormGroupGeneratorService {
+  // Configurazioni caricate da JSON
+  configurations: Map<string, Array<Config>>;
+  // gruppi di validatori, uno per ogni Form
+  groups: Map<string, FormGroup> = new Map();
+
+  constructor(private fb: FormBuilder, private http: Http) { }
+
+  //restituisce la configuazione per un determinato Form
+  public getConfigurations(formGroupName: string): Array<Config> { return this.configurations[formGroupName]; }
+
+  //Restituisce un controllo per il campo dato in input
+  public getControl(name: string, formGroup: FormGroup): FormControl {
+    let fc: CustomFormControl;
+    fc = <CustomFormControl>formGroup.controls[name];
+    //se il controllo non ci sta 
+    if (!fc) {
+      fc = new CustomFormControl("", null, null);
+      formGroup.registerControl(name, fc);
+    }
+
+    return fc;
+  }
+
+
+  //Restituisce il form group per un dato Form
+  public getFormGroup(formGroupName: string): FormGroup {
+
+    if (!this.groups.get(formGroupName)) {
+      let g = this.generateFormGroup(formGroupName);
+      this.groups.set(formGroupName, g);
+    }
+
+    return this.groups.get(formGroupName);
+  }
+
+  private generateFormGroup(formGroupName: string): FormGroup {
+    let formGroupConfig = {};
+
+    let controls: { [key: string]: AbstractControl; } = {};
+
+    let confs = this.getConfigurations(formGroupName);
+    if (confs) {
+      confs.forEach(configuration => {
+
+        let validators = [];
+        if (configuration.validators) {
+          validators = configuration.validators.map(v => {
+            return confToValidator(v);
+          });
+        }
+        controls[configuration.name] = new CustomFormControl("", validators, null);
+      });
+    }
+    return new FormGroup(controls);
+  }
+
+  /*
+  metodo per caricare le configurazioni dal server
+  */
+  async  loadConf(jsonURL: string) {
+    this.configurations = await this.http
+      .get(jsonURL)
+      .toPromise()
+      .then(response => response.json());
+  }
+}
+
+
+function confToValidator(confV: ConfigValidator): ValidatorFn | undefined {
+  switch (confV.type) {
+    case "update":
+      return CustomValidators.updateForms(confV.value);
+    case "required":
+      return CustomValidators.required(confV.message);
+    case "notRequired":
+      return CustomValidators.notRequired(confV.message);
+    case "requiredTrue":
+      return CustomValidators.requiredTrue(confV.message);
+    case "pattern":
+      return CustomValidators.pattern(confV.value, confV.message);
+    case "maxvalue":
+      return CustomValidators.maxLength(confV.value, confV.message);
+    case "minvalue":
+      return CustomValidators.minLength(confV.value, confV.message);
+    case "notempty":
+      return CustomValidators.notEmpty(confV.message);
+    case "requiredFields":
+      return CustomValidators.requiredFields(confV.value, confV.message);
+    case "patternFields":
+      return CustomValidators.patternFields(confV.value, confV.pattern, confV.message);
+    case "and":
+      return CustomValidators.and(confV.validators.map(confToValidator));
+    case "or":
+      return CustomValidators.or(confV.validators.map(confToValidator));
+    case "date":
+      return CustomValidators.dateValidator(confV.pattern, confV.message);
+
+  }
+}

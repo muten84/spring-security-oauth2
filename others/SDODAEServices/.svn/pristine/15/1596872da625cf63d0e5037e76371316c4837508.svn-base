@@ -1,0 +1,166 @@
+<fieldset>
+  <div class="row ">
+    <div class="form-group col-md-6">
+      <label>Data DA</label>
+      <div class="input-group">
+        <input uib-datepicker-popup="dd/MM/yyyy"
+          type="text"
+          class="form-control"
+          is-open="dateFromPopupFrom"
+          datepicker-options="options"
+          ng-model="filter.from"
+          placeholder="Inserisci data da"
+          name="data"
+          close-text="Chiudi"
+          clear-text="Annulla"
+          current-text="Oggi"
+          alt-input-formats="altInputFormats" />
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-calendar collapsed"
+            type="button"
+            ng-click="dateFromPopupFrom = true">
+            <span class="sr-only"></span>
+            <i class="fa fa-calendar-o"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label>Data A</label>
+
+      <div class="input-group">
+        <input uib-datepicker-popup="dd/MM/yyyy"
+          type="text"
+          class="form-control"
+          is-open="dateToPopupFrom"
+          datepicker-options="options"
+          ng-model="filter.to"
+          placeholder="Inserisci data a"
+          name="data"
+          close-text="Chiudi"
+          clear-text="Annulla"
+          current-text="Oggi"
+          alt-input-formats="altInputFormats" />
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-calendar collapsed"
+            type="button"
+            ng-click="dateToPopupFrom = true">
+            <span class="sr-only"></span>
+            <i class="fa fa-calendar-o"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="btn-container pull-right">
+    <div class="btn-group">
+      <button ng-click="reload()"
+        class="btn btn-primary">
+        <i class="fa fa-refresh"
+          aria-hidden="true"></i>Aggiorna</button>
+    </div>
+  </div>
+</fieldset>
+
+<div uib-accordion>
+
+  <div uib-accordion-group
+    class="row "
+    is-open=true>
+    <uib-accordion-heading>
+      <i class="fa fa-bar-chart"></i>
+      <span class="areas-accordion-heading">Numero attivazioni per provincia</span>
+    </uib-accordion-heading>
+    <div class="panel-body">
+      <canvas class="chart chart-bar"
+        chart-data="activationProv.data"
+        chart-labels="activationProv.labels"
+        chart-series="activationProv.series"
+        chart-options="activationProv.options"></canvas>
+    </div>
+  </div>
+
+  <div uib-accordion-group
+    class="row ">
+    <uib-accordion-heading>
+      <i class="fa fa-bar-chart"></i>
+      <span class="areas-accordion-heading">Numero attivazioni per giorno</span>
+    </uib-accordion-heading>
+    <div class="panel-body">
+      <canvas class="chart chart-bar"
+        chart-data="activation.data"
+        chart-labels="activation.labels"
+        chart-series="activation.series"
+        chart-options="activation.options"></canvas>
+    </div>
+  </div>
+
+  <div uib-accordion-group
+    class="row ">
+    <uib-accordion-heading>
+      <i class="fa fa-bar-chart"></i>
+      <span class="areas-accordion-heading">Numero allertamenti accettate per categoria</span>
+    </uib-accordion-heading>
+    <div class="panel-body">
+      <canvas class="chart chart-bar"
+        chart-data="activationByType.data"
+        chart-labels="activationByType.labels"
+        chart-series="activationByType.series"
+        chart-options="activationByType.options"></canvas>
+    </div>
+  </div>
+
+  <div uib-accordion-group
+    class="row "
+    is-open=true>
+    <uib-accordion-heading>
+      <i class="fa fa-bar-chart"></i>
+      <span class="areas-accordion-heading">Numero Registrazioni First Responder</span>
+    </uib-accordion-heading>
+    <div class="panel-body">
+      <canvas class="chart chart-line"
+        chart-data="frRegistration.data"
+        chart-labels="frRegistration.labels"
+        chart-series="frRegistration.series"
+        chart-options="frRegistration.options">
+      </canvas>
+    </div>
+  </div>
+
+  <div uib-accordion-group
+    class="row "
+    is-open=true>
+    <uib-accordion-heading>
+      <i class="fa fa-bar-chart"></i>
+      <span class="areas-accordion-heading">Andamento registrazioni DAE</span>
+    </uib-accordion-heading>
+    <div class="panel-body">
+      <canvas class="chart chart-line"
+        chart-dataset-override="frDaeSubscriptions.datasetOverride"
+        chart-data="frDaeSubscriptions.data"
+        chart-labels="frDaeSubscriptions.labels"
+        chart-series="frDaeSubscriptions.series"
+        chart-colors="frDaeSubscriptions.colors"
+        chart-options="frDaeSubscriptions.options"></canvas>
+    </div>
+  </div>
+
+  <div uib-accordion-group
+    class="row "
+    is-open=true>
+    <uib-accordion-heading>
+      <i class="fa fa-bar-chart"></i>
+      <span class="areas-accordion-heading">Andamento validazioni DAE</span>
+    </uib-accordion-heading>
+    <div class="panel-body">
+      <canvas class="chart chart-line"
+        chart-dataset-override="daeValidation.datasetOverride"
+        chart-data="daeValidation.data"
+        chart-labels="daeValidation.labels"
+        chart-series="daeValidation.series"
+        chart-colors="daeValidation.colors"
+        chart-options="daeValidation.options"></canvas>
+    </div>
+  </div>
+</div>
