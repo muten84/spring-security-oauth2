@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -40,6 +41,9 @@ public class City implements Serializable {
 	@Column(nullable = false)
 	@NotNull
 	private String map;
+
+	@Transient
+	private int counter;
 
 	public City() {
 	}
@@ -87,6 +91,14 @@ public class City implements Serializable {
 
 	public void setMap(String map) {
 		this.map = map;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package it.luigibifulco.oauth2.poc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.context.request.RequestContextListener;
@@ -16,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableResourceServer
 @EnableSwagger2
 @SpringBootApplication
+@EnableFeignClients
 //https://github.com/Baeldung/spring-security-oauth/tree/master/oauth-authorization-server
 public class Sdooauth2PocApplication extends SpringBootServletInitializer {
 
