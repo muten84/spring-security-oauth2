@@ -36,9 +36,6 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 	@Qualifier("authenticationManagerBean")
 	private AuthenticationManager authenticationManager;
 
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-
 	@Override
 	public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
 		oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
@@ -46,33 +43,34 @@ public class OAuth2AuthorizationServerConfigJwt extends AuthorizationServerConfi
 
 	@Override
 	public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory().withClient("SampleClientId").secret(passwordEncoder.encode("secret"))
-			
+		clients.inMemory().withClient("SampleClientId").secret(passwordEncoder().encode("secret"))
+
 				.authorizedGrantTypes("client_credentials", "password", "authorization_code", "refresh_token") // insteadof
 																												// implicit
-				.scopes("read", "write", "foo", "bar").autoApprove(true).accessTokenValiditySeconds(3600)
-				// 1 hour
-				.refreshTokenValiditySeconds(2592000)
-				.redirectUris("https://www.getpostman.com/oauth2/callback", "http://localhost:8082/ui/login",
-						"http://localhost:8083/ui2/login", "http://localhost:8082/login")
-
-				.and().withClient("fooClientIdPassword").secret(passwordEncoder().encode("secret"))
-				.authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write")
+				.scopes("read", "write", "foo", "bar").resourceIds("cities").autoApprove(true)
 				.accessTokenValiditySeconds(3600)
 				// 1 hour
-				.refreshTokenValiditySeconds(2592000)
-				// 30 days
-				.redirectUris("xxx", "http://localhost:8089/")
+				.refreshTokenValiditySeconds(2592000).redirectUris("https://www.getpostman.com/oauth2/callback",
+						"http://localhost:8082/ui/login", "http://localhost:8083/ui2/login",
+						"http://localhost:8082/login");
 
-				.and().withClient("barClientIdPassword").secret(passwordEncoder().encode("secret"))
-				.authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write")
-				.accessTokenValiditySeconds(3600)
-				// 1 hour
-				.refreshTokenValiditySeconds(2592000) // 30 days
-
-				.and().withClient("testImplicitClientId").authorizedGrantTypes("implicit")
-				.scopes("read", "write", "foo", "bar").autoApprove(true)
-				.redirectUris("https://www.getpostman.com/oauth2/callback");
+//				.and().withClient("fooClientIdPassword").secret(passwordEncoder().encode("secret"))
+//				.authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("foo", "read", "write")
+//				.accessTokenValiditySeconds(3600)
+//				// 1 hour
+//				.refreshTokenValiditySeconds(2592000)
+//				// 30 days
+//				.redirectUris("xxx", "http://localhost:8089/")
+//
+//				.and().withClient("barClientIdPassword").secret(passwordEncoder().encode("secret"))
+//				.authorizedGrantTypes("password", "authorization_code", "refresh_token").scopes("bar", "read", "write")
+//				.accessTokenValiditySeconds(3600)
+//				// 1 hour
+//				.refreshTokenValiditySeconds(2592000) // 30 days
+//
+//				.and().withClient("testImplicitClientId").authorizedGrantTypes("implicit")
+//				.scopes("read", "write", "foo", "bar").autoApprove(true)
+//				.redirectUris("https://www.getpostman.com/oauth2/callback");
 
 	}
 

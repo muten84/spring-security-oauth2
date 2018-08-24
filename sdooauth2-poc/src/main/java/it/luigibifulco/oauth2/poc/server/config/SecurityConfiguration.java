@@ -4,18 +4,12 @@
 package it.luigibifulco.oauth2.poc.server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.access.channel.ChannelProcessingFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 /**
  * @author Bifulco Luigi
@@ -23,84 +17,29 @@ import org.springframework.web.filter.CorsFilter;
  */
 
 @Configuration
-@Order(1)
-// @EnableWebMvcSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-	// @Autowired
-	// DataSource dataSource;
+@EnableResourceServer
+public class SecurityConfiguration extends ResourceServerConfigurerAdapter {
 
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private ResourceServerTokenServices tokenServices;
+
+	private static final String RESOURCE_ID = "cities";
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception { // @formatter:off
-		http.addFilterBefore(corsFilter(), ChannelProcessingFilter.class);
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
-		http.csrf().disable().requestMatchers()
+	public void configure(ResourceServerSecurityConfigurer resources) {
+		resources.resourceId(RESOURCE_ID).stateless(false).tokenServices(tokenServices);
+	}
 
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
 				.antMatchers("/actuator/**", "/h2-console/**", "/index.html", "/login", "/oauth/authorize",
 						"/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources/**",
 						"/configuration/security", "/swagger-ui.html", "/webjars/**")
-				.and().authorizeRequests().anyRequest().authenticated().and().formLogin().permitAll();
+				.permitAll().and().requestMatchers()
 
-		/*
-		 * .antMatchers("/oauth/token/revokeById/**").permitAll()
-		 * .antMatchers("/tokens/**").permitAll();
-		 */
-	} // @formatter:on
-
-	@Bean
-	public CorsFilter corsFilter() {
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowCredentials(true);
-		config.addAllowedOrigin("*");
-		config.addAllowedHeader("*");
-		config.addAllowedMethod("OPTIONS");
-		config.addAllowedMethod("GET");
-		config.addAllowedMethod("POST");
-		config.addAllowedMethod("PUT");
-		config.addAllowedMethod("DELETE");
-		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
-	}
-
-//	@Autowired
-//	public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
-//		// @formatter:off
-//		auth.inMemoryAuthentication().withUser("john").password(passwordEncoder.encode("123")).roles("USER").and()
-//				.withUser("tom").password(passwordEncoder.encode("111")).roles("ADMIN").and().withUser("user1")
-//				.password(passwordEncoder.encode("pass")).roles("USER").and().withUser("admin")
-//				.password(passwordEncoder.encode("nimda")).roles("ADMIN");
-//	}// @formatter:on
-
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception { // @formatter:off
-		// JDBC AUTH
-		// auth.jdbcAuthentication().dataSource(dataSource)
-		// .usersByUsernameQuery(
-		// "select username,password, enabled from users where username=?")
-		// .authoritiesByUsernameQuery(
-		// "select username, role from user_roles where username=?");
-
-		auth.inMemoryAuthentication().withUser("john").password(passwordEncoder.encode("123")).roles("USER").and()
-				.withUser("tom").password(passwordEncoder.encode("111")).roles("ADMIN").and().withUser("user1")
-				.password(passwordEncoder.encode("pass")).roles("USER").and().withUser("admin")
-				.password(passwordEncoder.encode("nimda")).roles("ADMIN");
-
-	} // @formatter:on
-
-	@Override
-	@Bean
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
-
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+				.antMatchers("/secure/cities/**", "/secure/cities/**").and().authorizeRequests().anyRequest()
+				.access("#oauth2.hasScope('read')");
 	}
 
 }

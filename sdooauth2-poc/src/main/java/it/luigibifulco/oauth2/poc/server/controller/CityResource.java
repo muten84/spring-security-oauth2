@@ -33,7 +33,7 @@ import it.luigibifulco.oauth2.poc.server.controller.proxy.CounterServiceProxy;
 
 @RestController
 @RefreshScope
-@RequestMapping(path = "cities", produces = "application/it.luigibifulco.oauth2.app-v1+json", consumes = "application/it.luigibifulco.oauth2.app-v1+json")
+@RequestMapping(path = "/secure/cities", produces = "application/it.luigibifulco.oauth2.app-v1+json", consumes = "application/it.luigibifulco.oauth2.app-v1+json")
 public class CityResource {
 
 	@Autowired
