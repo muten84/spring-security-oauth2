@@ -5,10 +5,8 @@ spring:
   application:
     name: city-service
 counter-service:
-  ribbon:
-    listOfServers: http://localhost:9090,http://localhost:9091
   eureka:
-    enabled: false
+    enabled: true
 eureka:
   client:
     service-url:
