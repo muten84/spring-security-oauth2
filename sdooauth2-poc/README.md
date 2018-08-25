@@ -45,6 +45,28 @@ Per attivare i profili di maven e spring bisogna lanciare tutto da maven
 
 Il docker compose è: docer-compose -f file up -d per buttare giù docper-compose down
 
+
+Spring cloud componenti configurati:
+ - configuration server
+ 
+ - feign client
+ 
+ - ribbon
+  
+ - eureka server
+ 
+ - discovery
+ 
+ - sleuth
+ 
+ - zipkin
+ 
+ - rabbitmq
+ 
+ Per avviare rabbit mq lanciare rabbitmq-server dalla cartella /usr/local/sbin
+ Per avviare zipkin fare affidamento al porgetto openzipkin e avviare il jar:
+ RABBITQ_URI=amqp://localhost e lanciare java-jar zipkin.jar
+
 TODO: 
 il docker compose non ha un volume
 provare h2 console con mysql
