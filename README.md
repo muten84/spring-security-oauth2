@@ -12,3 +12,7 @@ https://reflectoring.io/event-messaging-with-spring-boot-and-rabbitmq/
 ### If you have am event driven flow of data to process in microservices:
 
 https://dzone.com/articles/orchestrating-event-driven-microservices-with-spri
+
+### if you need to orchestrate microservices with loose coupling about microservices calls:
+
+https://blog.croz.net/en/blog/bpm-microservices-world/
