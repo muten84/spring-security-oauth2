@@ -16,3 +16,7 @@ https://dzone.com/articles/orchestrating-event-driven-microservices-with-spri
 ### if you need to orchestrate microservices with loose coupling about microservices calls:
 
 https://blog.croz.net/en/blog/bpm-microservices-world/
+
+### if you want to know problems concerning microservices dependencies
+
+https://auth0.com/blog/introduction-to-microservices-part-4-dependencies/
