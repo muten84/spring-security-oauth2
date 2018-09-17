@@ -20,3 +20,8 @@ https://blog.croz.net/en/blog/bpm-microservices-world/
 ### if you want to know problems concerning microservices dependencies
 
 https://auth0.com/blog/introduction-to-microservices-part-4-dependencies/
+
+
+Rest service transactions:
+
+https://www.slideshare.net/kslisenko/distributed-transactions-in-soa-and-microservices
