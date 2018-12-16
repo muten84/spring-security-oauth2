@@ -1,9 +1,0 @@
-<!-- https://dzone.com/articles/spring-boot-as-a-windows-service-in-5-minutes -->
-<service>
-    <id>mobile-agent</id>
-    <name>mobile-agent</name>
-    <description>Mobile Agent Windows Service</description>
-    <executable>java</executable>
-    <arguments>@java_opts@ -cp .;..\lib\@batchJarName@.jar;@classpath@ it.eng.areas.ems.mobileagent.AgentApp @app_opts@</arguments>
-    <logmode>rotate</logmode>
-</service>

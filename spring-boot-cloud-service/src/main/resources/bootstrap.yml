@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: ms-cloud-service
+  cloud:
+    discovery:
+      enabled: true
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        register: true
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        serviceName: myprefix-${spring.application.name}
+      config:
+        enabled: true
+        prefix: config
+        defaultContext: application
+        data-key: data
+        profileSeparator: '::'
+        format: yaml
+      enabled: true
+logging:
+  level:
+    org.springframework.cloud.consul: DEBUG

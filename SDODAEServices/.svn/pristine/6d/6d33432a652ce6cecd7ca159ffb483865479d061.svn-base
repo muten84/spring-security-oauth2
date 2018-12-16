@@ -1,6 +1,0 @@
-<div style="min-height: 480px; min-width: 640px; margin-top: 10px; margin-left: 10px; margin-right:10px" class="">
-    <leaflet width="100%" height="{{mapHeight}}px"
-     markers="daeMarkers" center="center" 
-     bounds="daeBounds" controls="daeControls"
-     layers="layers"></leaflet>
-</div>

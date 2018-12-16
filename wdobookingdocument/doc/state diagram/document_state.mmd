@@ -1,8 +1,0 @@
-%% Document state diagram
-graph LR
-   A((_)) --> B[CREATED] 
-   B[CREATED] --Invia documento --> D[SENT]
-   B[CREATED] --Invia documento --> E[FAILED]
-   E[FAILED] --Reinvia documento --> D[SENT]
-   Q[SENT] -- Apre documento --> F[OPENED]
-   F[OPENED] -- Chiude documento --> H[CLOSED]

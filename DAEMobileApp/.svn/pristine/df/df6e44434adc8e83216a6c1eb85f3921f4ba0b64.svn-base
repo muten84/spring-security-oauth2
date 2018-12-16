@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="splash_window">#ea4425</color>
-    <style name="SplashTheme" parent="android:style/Theme.Black.NoTitleBar">
-        <item name="android:windowBackground">@color/splash_window</item>
-    </style>
-</resources>

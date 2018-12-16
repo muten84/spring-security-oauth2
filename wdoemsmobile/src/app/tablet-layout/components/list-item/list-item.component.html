@@ -1,3 +1,0 @@
-<mat-grid-list cols="{{cols}}" rowHeight="{{rowHeight}}">
-    <mat-grid-tile [ngClass]="{'mat-grid-tile-active': selected?.name === item?.name}" (click)="selectItem(item)" *ngFor="let item of itemList">{{item.name}}</mat-grid-tile>
-</mat-grid-list>

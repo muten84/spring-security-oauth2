@@ -1,3 +1,0 @@
-<banner [bannerModel]="bookingBanner"
-	(currentBookingCode)="onCurrentBookingCode($event)"></banner>
- 

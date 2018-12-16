@@ -1,9 +1,0 @@
-.hour-menu {
-  position: relative;
-  button.btn-sm,
-  button.btn {
-    border-left: 0 none transparent;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-}

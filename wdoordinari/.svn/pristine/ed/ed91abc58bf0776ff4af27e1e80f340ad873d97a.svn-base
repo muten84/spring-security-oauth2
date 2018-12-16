@@ -1,2 +1,0 @@
-call ng build --prod --aot=false --base-href app
-call ng build --prod --aot=false --base-href sinottico --app 1

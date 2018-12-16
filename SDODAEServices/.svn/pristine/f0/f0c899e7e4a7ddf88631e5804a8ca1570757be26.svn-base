@@ -1,6 +1,0 @@
-Insert into DAE_TEST.DAE_MAIL_TEMPLATE
-   (ID, NOME, DESCRIZIONE)
- Values
-   ('FR_ACCEPTED_EVENT',
-'First Responder Accettato', 'Mail inviata al FR dopo aver accettato un evento' );
-COMMIT;

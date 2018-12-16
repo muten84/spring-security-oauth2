@@ -1,1 +1,0 @@
-{"width": 1440, "height": 900, "alwaysOnTop": false, "fullscreen": true, "resizable": false, "movable": false, "frame": false, "kiosk": false, "node-integration": "iframe",  "webPreferences": {"nodeIntegration": false, "web-security": false}, "devMode": true }

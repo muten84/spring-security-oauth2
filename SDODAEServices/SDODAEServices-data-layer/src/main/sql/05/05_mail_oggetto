@@ -1,2 +1,0 @@
-ALTER TABLE DAE_MAIL_TEMPLATE
- ADD (oggetto  varchar2(1024));

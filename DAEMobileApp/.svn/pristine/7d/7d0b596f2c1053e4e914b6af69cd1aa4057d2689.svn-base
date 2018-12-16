@@ -1,2 +1,0 @@
-<md-icon md-font-icon="dae-docs" ng-click="to.onclick(model,options)" class="name"></md-icon>
-<input ng-click="to.onclick(model,options)" value="{{to.message}}" ng-model="model[options.key]" type="button">

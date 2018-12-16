@@ -1,7 +1,0 @@
-<div class="input-group">
-  <input [inputMask]="'99/99/9999'" type="text" [attr.id]="calendarId" [attr.name]="calendarName" class="form-control" placeholder="dd/mm/yyyy"
-    [(ngModel)]="value" [formControl]="getControl()" validationMessage ngbDatepicker #calendar="ngbDatepicker">
-  <div class="input-group-addon" (click)="calendar.toggle()">
-    <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-  </div>
-</div>
